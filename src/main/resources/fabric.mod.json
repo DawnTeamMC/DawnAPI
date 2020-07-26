@@ -1,0 +1,32 @@
+{
+	"name": "Dawn",
+	"id": "dawn",
+	"version": "${version}",
+	"icon": "assets/dawn/textures/icon.png",
+	"description": "Library mod.",
+	"authors": [
+		"Hugman"
+	],
+	"contact": {
+		"homepage": "https://github.com/Hugman76/Dawn",
+		"issues": "https://github.com/Hugman76/Dawn/issues"
+	},
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.hugman.dawn.Dawn"
+		],
+		"client": [
+		]
+	},
+	"mixins": [
+	],
+	"depends": {
+		"fabric": "*"
+	},
+	"custom": {
+		"modmenu:api": true
+	},
+	"license": "MIT",
+	"schemaVersion": 1
+}
