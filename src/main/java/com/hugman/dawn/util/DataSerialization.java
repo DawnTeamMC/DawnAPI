@@ -1,4 +1,4 @@
-package com.hugman.dawn.json;
+package com.hugman.dawn.util;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -15,12 +15,13 @@ public class DataSerialization {
 			.excludeFieldsWithoutExposeAnnotation()
 			.create();
 	public static final Gson PRETTY_GSON = new GsonBuilder()
+			.registerTypeAdapter(Identifier.class, new Identifier.Serializer())
 			.setPrettyPrinting()
 			.excludeFieldsWithoutExposeAnnotation()
 			.create();
 
 	public static <T> T loadFromFile(File f, Class<? extends T> clazz, Supplier<T> baseCase) {
-		return loadFromFile(RAW_GSON, f, clazz, baseCase);
+		return loadFromFile(PRETTY_GSON, f, clazz, baseCase);
 	}
 
 	public static <T> T loadFromFile(Gson gson, File f, Class<? extends T> clazz, Supplier<T> baseCase) {
@@ -40,7 +41,7 @@ public class DataSerialization {
 	}
 
 	public static <T> void saveToFile(File f, Class<? extends T> clazz, T obj) {
-		saveToFile(RAW_GSON, f, clazz, obj);
+		saveToFile(PRETTY_GSON, f, clazz, obj);
 	}
 
 	public static <T> void saveToFile(Gson gson, File f, Class<? extends T> clazz, T obj) {

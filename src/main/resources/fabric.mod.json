@@ -17,9 +17,14 @@
 			"com.hugman.dawn.Dawn"
 		],
 		"client": [
+			"com.hugman.dawn.DawnClient"
+		],
+		"server": [
+			"com.hugman.dawn.DawnServer"
 		]
 	},
 	"mixins": [
+		"mixins.json"
 	],
 	"depends": {
 		"fabric": "*"

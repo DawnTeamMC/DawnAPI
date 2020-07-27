@@ -1,0 +1,13 @@
+{
+	"required": true,
+	"package": "com.hugman.dawn.mixin",
+	"compatibilityLevel": "JAVA_8",
+	"mixins": [
+	],
+	"client": [
+		"TitleScreenMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

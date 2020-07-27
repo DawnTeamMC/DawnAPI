@@ -1,22 +1,28 @@
 package com.hugman.dawn;
 
-import com.hugman.dawn.json.DataWriter;
+import com.hugman.dawn.testing.DawnBlocks;
+import com.hugman.dawn.util.creator.Creator;
+import com.hugman.dawn.util.creator.CreatorHelper;
+import com.hugman.dawn.util.creator.CreatorRegister;
+import com.hugman.dawn.util.debug.EntryDebugWriter;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.loader.api.FabricLoader;
-import net.fabricmc.loader.api.ModContainer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.Collection;
 
 public class Dawn implements ModInitializer {
 	public static final Logger LOGGER = LogManager.getLogger();
 
 	@Override
 	public void onInitialize() {
-		Collection<ModContainer> mods = FabricLoader.getInstance().getAllMods();
-		for(ModContainer mod : mods) {
-			new DataWriter(mod.getMetadata());
+		new DawnBlocks("oui");
+		this.creatorRegisters();
+	}
+
+	private static void creatorRegisters() {
+		for(CreatorRegister creatorRegister : CreatorHelper.CREATOR_REGISTERS) {
+			for(Object creator : creatorRegister.getCreators()) {
+				((Creator<?>)creator).register(creatorRegister);
+			}
 		}
 	}
 }
