@@ -1,7 +1,7 @@
 package com.hugman.dawn.util.creator.item;
 
 import com.hugman.dawn.util.creator.Creator;
-import com.hugman.dawn.util.pack.ModData;
+import com.hugman.dawn.util.creator.ModData;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.item.Item;
 import net.minecraft.util.registry.Registry;

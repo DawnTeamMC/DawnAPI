@@ -48,7 +48,12 @@ public enum BlockGetter {
 	}
 
 	public String getSuffix() {
-		return suffix;
+		if(suffix.isEmpty()) {
+			return suffix;
+		}
+		else {
+			return "_" + suffix;
+		}
 	}
 
 	public ItemGroup getItemGroup() {

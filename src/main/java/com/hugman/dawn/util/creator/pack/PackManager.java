@@ -1,6 +1,4 @@
-package com.hugman.dawn.util.pack;
-
-import com.hugman.dawn.testing.ModdedPack;
+package com.hugman.dawn.util.creator.pack;
 
 import java.util.ArrayList;
 import java.util.List;

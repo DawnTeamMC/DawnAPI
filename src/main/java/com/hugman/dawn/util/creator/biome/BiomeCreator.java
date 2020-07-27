@@ -1,8 +1,7 @@
 package com.hugman.dawn.util.creator.biome;
 
 import com.hugman.dawn.util.creator.Creator;
-import com.hugman.dawn.util.pack.ModData;
-import com.hugman.dawn.util.pack.ModPack;
+import com.hugman.dawn.util.creator.ModData;
 import net.fabricmc.fabric.api.biomes.v1.FabricBiomes;
 import net.fabricmc.fabric.api.biomes.v1.NetherBiomes;
 import net.fabricmc.fabric.api.biomes.v1.OverworldBiomes;
@@ -21,8 +20,8 @@ public class BiomeCreator extends Creator<Biome> {
 
 	private final Biome.MixedNoisePoint noises;
 
-	private BiomeCreator(String name, Biome baseBiome, SpawnDimension spawnDimension, OverworldClimate climate, double weight, boolean isSpawnBiome, Biome.MixedNoisePoint noises) {
-		super(name);
+	private BiomeCreator(ModData modData, String name, Biome baseBiome, SpawnDimension spawnDimension, OverworldClimate climate, double weight, boolean isSpawnBiome, Biome.MixedNoisePoint noises) {
+		super(modData, name);
 		this.baseBiome = baseBiome;
 		this.spawnDimension = spawnDimension;
 		this.climate = climate;
@@ -32,7 +31,7 @@ public class BiomeCreator extends Creator<Biome> {
 	}
 
 	@Override
-	public Biome register(ModData modData) {
+	public Biome register() {
 		value = Registry.register(BuiltinRegistries.BIOME, modData.id(name), baseBiome);
 		switch(this.spawnDimension) {
 			case NONE:
@@ -51,9 +50,7 @@ public class BiomeCreator extends Creator<Biome> {
 		return value;
 	}
 
-	public static class Builder {
-		private final String name;
-		private final Biome baseBiome;
+	public static class Builder extends Creator.Builder<Biome> {
 		private SpawnDimension spawnDimension;
 
 		private OverworldClimate climate;
@@ -65,12 +62,11 @@ public class BiomeCreator extends Creator<Biome> {
 		/**
 		 * Creates a simple biome that won't spawn in any dimension.
 		 *
-		 * @param name      The name of the biome.
-		 * @param baseBiome The biome itself.
+		 * @param name  The name of the biome.
+		 * @param biome The biome itself.
 		 */
-		public Builder(String name, Biome baseBiome) {
-			this.name = name;
-			this.baseBiome = baseBiome;
+		public Builder(String name, Biome biome) {
+			super(name, biome);
 			this.spawnDimension = SpawnDimension.NONE;
 			this.climate = null;
 			this.weight = 0D;
@@ -106,7 +102,7 @@ public class BiomeCreator extends Creator<Biome> {
 		 * Builds the entry and registers the biome with all its settings.
 		 */
 		public BiomeCreator build() {
-			return new BiomeCreator(this.name, this.baseBiome, this.spawnDimension, this.climate, this.weight, this.isSpawnBiome, this.noises);
+			return new BiomeCreator(this.modData, this.name, this.value, this.spawnDimension, this.climate, this.weight, this.isSpawnBiome, this.noises);
 		}
 	}
 

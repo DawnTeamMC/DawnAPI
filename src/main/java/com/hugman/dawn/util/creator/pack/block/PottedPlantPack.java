@@ -1,14 +1,14 @@
-package com.hugman.dawn.util.pack.block;
+package com.hugman.dawn.util.creator.pack.block;
 
 import com.hugman.dawn.util.creator.block.BlockCreator;
 import com.hugman.dawn.util.creator.block.BlockCreator.Builder;
 import com.hugman.dawn.util.creator.block.BlockSettings;
-import com.hugman.dawn.util.pack.Pack;
+import com.hugman.dawn.util.creator.pack.Pack;
 import net.minecraft.block.Block;
 import net.minecraft.block.FlowerPotBlock;
 
 public class PottedPlantPack extends Pack.Builder<Block> {
-	private final Builder plantBuilder;
+	protected final Builder plantBuilder;
 
 	private BlockCreator plant;
 	private BlockCreator pottedPlant;

@@ -3,7 +3,7 @@ package com.hugman.dawn.util.creator.block;
 import com.hugman.dawn.util.StringUtil;
 import com.hugman.dawn.util.creator.Creator;
 import com.hugman.dawn.util.creator.CreatorHelper;
-import com.hugman.dawn.util.pack.ModData;
+import com.hugman.dawn.util.creator.ModData;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
@@ -128,8 +128,8 @@ public class BlockCreator extends Creator<Block> {
 		/**
 		 * Creates a block copying some properties from a getter and a block.
 		 *
-		 * @param prefix   The prefix of the block.
-		 * @param getter   The getter to copy properties from. (block class, name suffix)
+		 * @param prefix      The prefix of the block.
+		 * @param getter      The getter to copy properties from. (block class, name suffix)
 		 * @param copiedBlock The block to copy properties from. (render layer, item group, flammability, cook time)
 		 */
 		public Builder(String prefix, BlockGetter getter, Block copiedBlock) {

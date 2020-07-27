@@ -1,23 +1,22 @@
-package com.hugman.dawn.util.pack.block;
+package com.hugman.dawn.util.creator.pack.block;
 
 import com.hugman.dawn.object.item.AxeItem;
 import com.hugman.dawn.util.creator.block.BlockCreator;
 import com.hugman.dawn.util.creator.block.BlockCreator.Builder;
 import com.hugman.dawn.util.creator.block.BlockSettings;
-import com.hugman.dawn.util.pack.Pack;
+import com.hugman.dawn.util.creator.pack.Pack;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.Direction;
 
 public class LogsPack extends Pack.Builder<Block> {
-
-	private final String logSuffix;
-	private final String woodSuffix;
-	private final String suffix;
-	private final MaterialColor insideColor;
-	private final MaterialColor barkColor;
-	private final boolean isNether;
+	protected final String suffix;
+	protected final MaterialColor insideColor;
+	protected final MaterialColor barkColor;
+	protected final boolean isNether;
+	protected final String logSuffix;
+	protected final String woodSuffix;
 
 	private BlockCreator log;
 	private BlockCreator strippedLog;
@@ -36,17 +35,17 @@ public class LogsPack extends Pack.Builder<Block> {
 		this.suffix = suffix;
 		this.insideColor = insideColor;
 		this.barkColor = barkColor;
+		this.isNether = isNether;
 		this.logSuffix = isNether ? "_stem" : "_log";
 		this.woodSuffix = isNether ? "_hyphae" : "_wood";
-		this.isNether = isNether;
 	}
 
 	@Override
 	public Pack<Block> build() {
-		this.log = new Builder(suffix + logSuffix, createLog(insideColor, barkColor)).copy(isNether ? Blocks.CRIMSON_STEM : Blocks.OAK_LOG).build();
-		this.strippedLog = new Builder("stripped_" + suffix + logSuffix, createLog(insideColor)).copy(isNether ? Blocks.STRIPPED_CRIMSON_STEM : Blocks.STRIPPED_OAK_LOG).build();
-		this.wood = new Builder(suffix + woodSuffix, createLog(barkColor)).copy(isNether ? Blocks.CRIMSON_HYPHAE : Blocks.OAK_WOOD).build();
-		this.strippedWood = new Builder("stripped_" + suffix + woodSuffix, createLog(insideColor)).copy(isNether ? Blocks.STRIPPED_CRIMSON_HYPHAE : Blocks.STRIPPED_OAK_WOOD).build();
+		this.log = add(new Builder(suffix + logSuffix, createLog(insideColor, barkColor)).copy(isNether ? Blocks.CRIMSON_STEM : Blocks.OAK_LOG));
+		this.strippedLog = add(new Builder("stripped_" + suffix + logSuffix, createLog(insideColor)).copy(isNether ? Blocks.STRIPPED_CRIMSON_STEM : Blocks.STRIPPED_OAK_LOG));
+		this.wood = add(new Builder(suffix + woodSuffix, createLog(barkColor)).copy(isNether ? Blocks.CRIMSON_HYPHAE : Blocks.OAK_WOOD));
+		this.strippedWood = add(new Builder("stripped_" + suffix + woodSuffix, createLog(insideColor)).copy(isNether ? Blocks.STRIPPED_CRIMSON_HYPHAE : Blocks.STRIPPED_OAK_WOOD));
 		AxeItem.BLOCK_STRIPPING_MAP.put(getLog(), getStrippedLog());
 		AxeItem.BLOCK_STRIPPING_MAP.put(getWood(), getStrippedWood());
 		return super.build();

@@ -1,17 +1,20 @@
-package com.hugman.dawn.util.pack.block;
+package com.hugman.dawn.util.creator.pack.block;
 
-import com.google.common.collect.ImmutableMap;
 import com.hugman.dawn.util.creator.block.BlockGetter;
-import com.hugman.dawn.util.pack.Pack;
+import com.hugman.dawn.util.creator.pack.Pack;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.util.DyeColor;
-import net.minecraft.util.Pair;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class MSCBlockPack extends Pack.Builder<Block> {
-	private final Map<Pair<BlockGetter, DyeColor>, Block> blockMap;
+	protected final String prefix;
+	protected final FabricBlockSettings settings;
+	protected final BlockGetter[] getters;
+
+	private final Map<BlockGetter, MCBlockPack> packMap = new HashMap<>();
 
 	/**
 	 * Creates a creator pack containing blocks having different getters as base in 16 colors.
@@ -21,22 +24,21 @@ public class MSCBlockPack extends Pack.Builder<Block> {
 	 * @param getters  The getters to use for the shapes to create.
 	 */
 	public MSCBlockPack(String prefix, FabricBlockSettings settings, BlockGetter... getters) {
-		ImmutableMap.Builder mapBuilder = new ImmutableMap.Builder<>();
-		for(BlockGetter getter : getters) {
-			MCBlockPack pack = new MCBlockPack(prefix, getter, settings);
-			for(DyeColor color : DyeColor.values()) {
-				mapBuilder.put(new Pair(getter, color), pack.getBlock(color));
-			}
-			add(pack);
-		}
-		blockMap = mapBuilder.build();
+		this.prefix = prefix;
+		this.settings = settings;
+		this.getters = getters;
 	}
 
-	@Override public <P extends Pack<Block>> P build() {
+	@Override
+	public Pack<Block> build() {
+		for(BlockGetter getter : getters) {
+			MCBlockPack pack = new MCBlockPack(prefix, getter, settings);
+			packMap.put(getter, (MCBlockPack) add(pack));
+		}
 		return super.build();
 	}
 
 	public Block getBlock(BlockGetter getter, DyeColor color) {
-		return blockMap.get(new Pair(getter, color));
+		return packMap.get(getter).getBlock(color);
 	}
 }

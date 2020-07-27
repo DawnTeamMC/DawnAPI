@@ -1,7 +1,5 @@
 package com.hugman.dawn.util.creator;
 
-import com.hugman.dawn.util.pack.ModData;
-
 public abstract class Creator<V> {
 	protected final String name;
 	protected V value;

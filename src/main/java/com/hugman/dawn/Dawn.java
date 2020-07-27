@@ -2,7 +2,7 @@ package com.hugman.dawn;
 
 import com.hugman.dawn.testing.DawnBlockPack;
 import com.hugman.dawn.testing.DawnItemPack;
-import com.hugman.dawn.util.pack.ModData;
+import com.hugman.dawn.util.creator.ModData;
 import net.fabricmc.api.ModInitializer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,7 +13,7 @@ public class Dawn implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		new DawnBlockPack(MOD_DATA);
 		new DawnItemPack(MOD_DATA);
-		//new DawnBlockPack(MOD_DATA);
 	}
 }

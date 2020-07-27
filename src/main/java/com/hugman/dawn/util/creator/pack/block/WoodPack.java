@@ -1,27 +1,27 @@
-package com.hugman.dawn.util.pack.block;
+package com.hugman.dawn.util.creator.pack.block;
 
 import com.hugman.dawn.util.creator.block.BlockCreator;
 import com.hugman.dawn.util.creator.block.BlockGetter;
-import com.hugman.dawn.util.pack.Pack;
+import com.hugman.dawn.util.creator.pack.Pack;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.MaterialColor;
 
 public class WoodPack extends Pack.Builder<Block> {
-	private final String name;
-	private final MaterialColor planksColor;
-	private final MaterialColor insideColor;
-	private final MaterialColor barkColor;
-	private final boolean isNether;
+	protected final String suffix;
+	protected final MaterialColor planksColor;
+	protected final MaterialColor insideColor;
+	protected final MaterialColor barkColor;
+	protected final boolean isNether;
 
 	private BlockCreator planks;
-	private Pack<Block> logsPack;
+	private LogsPack logsPack;
 	private MSBlockPack woodenBlocksPack;
 	private MSBlockPack barkBlocksPack;
 
-	public WoodPack(String name, MaterialColor planksColor, MaterialColor insideColor, MaterialColor barkColor, boolean isNether) {
-		this.name = name;
+	public WoodPack(String suffix, MaterialColor planksColor, MaterialColor insideColor, MaterialColor barkColor, boolean isNether) {
+		this.suffix = suffix;
 		this.planksColor = planksColor;
 		this.insideColor = insideColor;
 		this.barkColor = barkColor;
@@ -31,9 +31,9 @@ public class WoodPack extends Pack.Builder<Block> {
 	@Override
 	public Pack<Block> build() {
 		FabricBlockSettings settings = FabricBlockSettings.copyOf(isNether ? Blocks.CRIMSON_PLANKS : Blocks.OAK_PLANKS).materialColor(planksColor);
-		this.planks = add(new BlockCreator.Builder(name, BlockGetter.PLANKS, settings));
-		this.logsPack = add(new LogsPack(name, insideColor, barkColor, isNether));
-		this.woodenBlocksPack = add(new MSBlockPack(name, settings, this.getPlanks(),
+		this.planks = add(new BlockCreator.Builder(suffix, BlockGetter.PLANKS, settings));
+		this.logsPack = (LogsPack) add(new LogsPack(suffix, insideColor, barkColor, isNether));
+		this.woodenBlocksPack = (MSBlockPack) add(new MSBlockPack(suffix, settings, this.getPlanks(),
 				BlockGetter.STAIRS,
 				BlockGetter.SLAB,
 				BlockGetter.VERTICAL_SLAB,
@@ -43,7 +43,7 @@ public class WoodPack extends Pack.Builder<Block> {
 				BlockGetter.FENCE,
 				BlockGetter.FENCE_GATE,
 				BlockGetter.DOOR));
-		this.barkBlocksPack = add(new MSBlockPack(name + logsPack.getWoodSuffix(), settings.materialColor(barkColor), logsPack.getWood(),
+		this.barkBlocksPack = (MSBlockPack) add(new MSBlockPack(suffix + logsPack.getWoodSuffix(), settings.materialColor(barkColor), logsPack.getWood(),
 				BlockGetter.STAIRS,
 				BlockGetter.SLAB,
 				BlockGetter.VERTICAL_SLAB,

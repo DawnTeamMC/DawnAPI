@@ -1,4 +1,4 @@
-package com.hugman.dawn.util.pack;
+package com.hugman.dawn.util.creator;
 
 import net.minecraft.util.Identifier;
 

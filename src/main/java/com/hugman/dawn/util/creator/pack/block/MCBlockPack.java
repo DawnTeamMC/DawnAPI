@@ -1,18 +1,24 @@
-package com.hugman.dawn.util.pack.block;
+package com.hugman.dawn.util.creator.pack.block;
 
-import com.google.common.collect.ImmutableMap;
 import com.hugman.dawn.util.creator.block.BlockCreator;
 import com.hugman.dawn.util.creator.block.BlockGetter;
-import com.hugman.dawn.util.pack.Pack;
+import com.hugman.dawn.util.creator.pack.Pack;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.DyeColor;
 
+import java.util.HashMap;
 import java.util.Map;
 
-public class MCBlockPack extends Pack<Block> {
-	private final Map<DyeColor, BlockCreator> blockMap;
+public class MCBlockPack extends Pack.Builder<Block> {
+	protected final String prefix;
+	protected final BlockGetter getter;
+	protected final FabricBlockSettings settings;
+	protected final ItemGroup itemGroup;
+	protected final BlockCreator.Render render;
+
+	private final Map<DyeColor, BlockCreator> blockMap = new HashMap<>();
 
 	/**
 	 * Creates a creator pack containing blocks of 16 different colors.
@@ -23,12 +29,11 @@ public class MCBlockPack extends Pack<Block> {
 	 * @param render    The render layer of the blocks.
 	 */
 	public MCBlockPack(String prefix, BlockGetter getter, FabricBlockSettings settings, ItemGroup itemGroup, BlockCreator.Render render) {
-		ImmutableMap.Builder mapBuilder = new ImmutableMap.Builder<DyeColor, Block>();
-		for(DyeColor color : DyeColor.values()) {
-			BlockCreator entry = add(new BlockCreator.Builder(color.getName() + prefix, getter, settings.materialColor(color.getMaterialColor())).setRender(render).setItemGroup(itemGroup).build());
-			mapBuilder.put(color, entry);
-		}
-		blockMap = mapBuilder.build();
+		this.prefix = prefix;
+		this.getter = getter;
+		this.settings = settings;
+		this.itemGroup = itemGroup;
+		this.render = render;
 	}
 
 	/**
@@ -50,6 +55,15 @@ public class MCBlockPack extends Pack<Block> {
 	 */
 	public MCBlockPack(String prefix, BlockGetter getter, FabricBlockSettings settings) {
 		this(prefix, getter, settings, null);
+	}
+
+	@Override
+	public Pack<Block> build() {
+		for(DyeColor color : DyeColor.values()) {
+			BlockCreator.Builder entry = new BlockCreator.Builder(color.getName() + prefix, getter, settings.materialColor(color.getMaterialColor())).setRender(render).setItemGroup(itemGroup);
+			blockMap.put(color, add(entry));
+		}
+		return super.build();
 	}
 
 	public Block getBlock(DyeColor color) {

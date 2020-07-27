@@ -1,9 +1,7 @@
-package com.hugman.dawn.testing;
+package com.hugman.dawn.util.creator.pack;
 
 import com.hugman.dawn.util.creator.Creator;
-import com.hugman.dawn.util.pack.ModData;
-import com.hugman.dawn.util.pack.Pack;
-import com.hugman.dawn.util.pack.PackManager;
+import com.hugman.dawn.util.creator.ModData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,16 +19,16 @@ public abstract class ModdedPack<V> {
 		return creators;
 	}
 
-	public final <C extends Creator<V>> V add(C.Builder builder) {
-		C creator = (C) builder.setModData(modData).build();
+	public final <B extends Creator.Builder<V>> V add(B builder) {
+		Creator<V> creator = builder.setModData(modData).build();
 		creator.register();
 		creators.add(creator);
 		return creator.getValue();
 	}
 
-	public final <P extends Pack<V>> P add(P.Builder builder) {
-		P pack = (P) builder.setModData(modData).build();
+	public final <B extends Pack.Builder<V>> B add(B builder) {
+		Pack<V> pack = builder.setModData(modData).build();
 		pack.getCreators().forEach(creator -> creators.add(creator));
-		return pack;
+		return builder;
 	}
 }

@@ -1,4 +1,4 @@
-package com.hugman.dawn.util.pack.block;
+package com.hugman.dawn.util.creator.pack.block;
 
 import com.hugman.dawn.object.block.FungusBlock;
 import com.hugman.dawn.util.creator.block.BlockCreator.Builder;
@@ -17,7 +17,7 @@ public class FungusPack extends PottedPlantPack {
 	 * @param supplier The supplier for the huge fungus feature.
 	 */
 	public FungusPack(String suffix, Supplier<ConfiguredFeature<HugeFungusFeatureConfig, ?>> supplier) {
-		super(new Builder(suffix + "_fungus", new FungusBlock(BlockSettings.FUNGUS, supplier)).build());
+		super(new Builder(suffix + "_fungus", new FungusBlock(BlockSettings.FUNGUS, supplier)));
 	}
 
 	public Block getFungus() {
