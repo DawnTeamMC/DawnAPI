@@ -18,9 +18,8 @@ import java.util.List;
 import java.util.Map;
 
 public class EntryDebugWriter {
-	protected static final Map<Identifier, EntryData> map = new HashMap<>();
-
 	public static final void init() {
+		Map<Identifier, EntryData> map = new HashMap<>();
 		for(Registry<?> registry : Registry.REGISTRIES) {
 			for(Identifier entryID : registry.getIds()) {
 				EntryData data;

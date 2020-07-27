@@ -1,20 +1,20 @@
 package com.hugman.dawn;
 
+import com.hugman.dawn.testing.ModdedPack;
 import com.hugman.dawn.util.creator.Creator;
-import com.hugman.dawn.util.creator.CreatorHelper;
-import com.hugman.dawn.util.creator.CreatorRegister;
+import com.hugman.dawn.util.pack.PackManager;
 import net.fabricmc.api.ClientModInitializer;
 
 public class DawnClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
-		this.creatorRegisters();
+		creatorRegisters();
 	}
 
 	public static void creatorRegisters() {
-		for(CreatorRegister creatorRegister : CreatorHelper.CREATOR_REGISTERS) {
-			for(Object creator : creatorRegister.getCreators()) {
-				((Creator<?>)creator).clientRegister(creatorRegister);
+		for(ModdedPack moddedPack : PackManager.MODDED_PACKS) {
+			for(Object creator : moddedPack.getCreators()) {
+				((Creator<?>) creator).clientRegister();
 			}
 		}
 	}

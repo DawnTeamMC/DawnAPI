@@ -1,5 +1,8 @@
-package com.hugman.dawn.util.creator;
+package com.hugman.dawn.util.creator.biome;
 
+import com.hugman.dawn.util.creator.Creator;
+import com.hugman.dawn.util.pack.ModData;
+import com.hugman.dawn.util.pack.ModPack;
 import net.fabricmc.fabric.api.biomes.v1.FabricBiomes;
 import net.fabricmc.fabric.api.biomes.v1.NetherBiomes;
 import net.fabricmc.fabric.api.biomes.v1.OverworldBiomes;
@@ -29,8 +32,8 @@ public class BiomeCreator extends Creator<Biome> {
 	}
 
 	@Override
-	public Biome register(CreatorRegister creatorRegister) {
-		value = Registry.register(BuiltinRegistries.BIOME, creatorRegister.id(name), baseBiome);
+	public Biome register(ModData modData) {
+		value = Registry.register(BuiltinRegistries.BIOME, modData.id(name), baseBiome);
 		switch(this.spawnDimension) {
 			case NONE:
 			default:

@@ -1,13 +1,17 @@
-package com.hugman.dawn.util.creator;
+package com.hugman.dawn.util.creator.block;
 
+import com.hugman.dawn.util.StringUtil;
+import com.hugman.dawn.util.creator.Creator;
+import com.hugman.dawn.util.creator.CreatorHelper;
+import com.hugman.dawn.util.pack.ModData;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
-import net.minecraft.block.MaterialColor;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.RenderLayers;
 import net.minecraft.item.BlockItem;
@@ -25,37 +29,21 @@ public class BlockCreator extends Creator<Block> {
 	protected final boolean noItem;
 	protected final Block copiedBlock;
 
-	private BlockCreator(String name, Block baseBlock, Render render, ItemGroup itemGroup, int flammabilityBurn, int flammabilitySpread, int cookTime, boolean noItem, Block copiedBlock) {
-		super(name);
+	private BlockCreator(ModData modData, String name, Block baseBlock, Render render, ItemGroup itemGroup, int flammabilityBurn, int flammabilitySpread, int cookTime, boolean noItem, Block copiedBlock) {
+		super(modData, name);
 		this.baseBlock = baseBlock;
 		this.render = render;
-		if(itemGroup == null && copiedBlock != null) {
-			this.itemGroup = copiedBlock.asItem().getGroup();
-		}
-		else {
-			this.itemGroup = itemGroup;
-		}
-		if(flammabilityBurn == 0 && flammabilitySpread == 0 && copiedBlock != null) {
-			this.flammabilityBurn = CreatorHelper.getFlammabilityBurn(copiedBlock);
-			this.flammabilitySpread = CreatorHelper.getFlammabilityBurn(copiedBlock);
-		}
-		else {
-			this.flammabilityBurn = flammabilityBurn;
-			this.flammabilitySpread = flammabilitySpread;
-		}
-		if(cookTime == 0 && copiedBlock != null) {
-			this.cookTime = CreatorHelper.getCookTime(copiedBlock);
-		}
-		else {
-			this.cookTime = cookTime;
-		}
+		this.itemGroup = itemGroup;
+		this.flammabilityBurn = flammabilityBurn;
+		this.flammabilitySpread = flammabilitySpread;
+		this.cookTime = cookTime;
 		this.noItem = noItem;
 		this.copiedBlock = copiedBlock;
 	}
 
 	@Override
-	public Block register(CreatorRegister creatorRegister) {
-		value = Registry.register(Registry.BLOCK, creatorRegister.id(name), baseBlock);
+	public Block register() {
+		value = Registry.register(Registry.BLOCK, modData.id(name), baseBlock);
 		FlammableBlockRegistry.getDefaultInstance().add(value, flammabilityBurn, flammabilitySpread);
 		if(!noItem) {
 			Item item = Registry.register(Registry.ITEM, Registry.BLOCK.getId(value), new BlockItem(value, new Item.Settings().group(itemGroup)));
@@ -67,7 +55,7 @@ public class BlockCreator extends Creator<Block> {
 
 	@Override
 	@Environment(EnvType.CLIENT)
-	public void clientRegister(CreatorRegister creatorRegister) {
+	public void clientRegister() {
 		RenderLayer renderLayer;
 		if(render == null && copiedBlock != null) {
 			renderLayer = RenderLayers.getBlockLayer(copiedBlock.getDefaultState());
@@ -102,9 +90,7 @@ public class BlockCreator extends Creator<Block> {
 		TRANSLUCENT
 	}
 
-	public static class Builder {
-		protected String name;
-		protected Block baseBlock;
+	public static class Builder extends Creator.Builder<Block> {
 		protected Render render;
 		protected ItemGroup itemGroup;
 		protected int flammabilityBurn;
@@ -115,13 +101,9 @@ public class BlockCreator extends Creator<Block> {
 
 		/**
 		 * Creates a simple block with an item but no item group, flammability or cook time and is rendered has a solid block.
-		 *
-		 * @param name  The name of the block.
-		 * @param block The block itself.
 		 */
 		public Builder(String name, Block block) {
-			this.name = name;
-			this.baseBlock = block;
+			super(name, block);
 			this.render = null;
 			this.itemGroup = null;
 			this.flammabilityBurn = 0;
@@ -133,52 +115,26 @@ public class BlockCreator extends Creator<Block> {
 
 		/**
 		 * Creates a block copying some properties from a getter and a block.
-		 * <p>Template -> (block class, render layer, item group)
-		 * <p>Block -> (block settings, flammability, cook time)
 		 *
-		 * @param name   The name of the block.
-		 * @param getter The getter to copy properties from.
+		 * @param prefix   The prefix of the block.
+		 * @param getter   The getter to copy properties from. (block class, name suffix, render layer, item group)
+		 * @param settings The block settings.
 		 */
-		public Builder(String name, BlockGetter getter, FabricBlockSettings settings) {
-			this(name, getter.getBlock(settings));
+		public Builder(String prefix, BlockGetter getter, AbstractBlock.Settings settings) {
+			this(StringUtil.fixShapePrefix(prefix, getter) + getter.getSuffix(), getter.getBlock(settings));
+			copy(getter);
 		}
 
 		/**
 		 * Creates a block copying some properties from a getter and a block.
-		 * <p>Template -> (block class, render layer, item group)
-		 * <p>Block -> (block settings, flammability, cook time)</p>
 		 *
-		 * @param name        The name of the block.
-		 * @param getter      The getter to copy properties from.
-		 * @param copiedBlock The block to copy properties from.
+		 * @param prefix   The prefix of the block.
+		 * @param getter   The getter to copy properties from. (block class, name suffix)
+		 * @param copiedBlock The block to copy properties from. (render layer, item group, flammability, cook time)
 		 */
-		public Builder(String name, BlockGetter getter, Block copiedBlock) {
-			this(name, getter, FabricBlockSettings.copyOf(copiedBlock));
-			this.copiedBlock = copiedBlock;
-		}
-
-		/**
-		 * Creates a block copying some properties from a getter and a block. This constructor also allows for a custom material color.
-		 * <p>Template -> (block class, render layer, item group)
-		 * <p>Block -> (block settings, flammability, cook time)
-		 *
-		 * @param name        The name of the block.
-		 * @param getter      The getter to copy properties from.
-		 * @param copiedBlock The block to copy properties from.
-		 * @param color       The material color of the block.
-		 */
-		public Builder(String name, BlockGetter getter, Block copiedBlock, MaterialColor color) {
-			this(name, getter, FabricBlockSettings.copyOf(copiedBlock).materialColor(color));
-			this.copiedBlock = copiedBlock;
-		}
-
-		public Builder setName(String name) {
-			this.name = name;
-			return this;
-		}
-
-		public String getName() {
-			return name;
+		public Builder(String prefix, BlockGetter getter, Block copiedBlock) {
+			this(prefix, getter, FabricBlockSettings.copyOf(copiedBlock));
+			copy(copiedBlock);
 		}
 
 		public Builder setRender(Render render) {
@@ -211,9 +167,16 @@ public class BlockCreator extends Creator<Block> {
 		}
 
 		/**
+		 * Copies some properties from a getter. (render layer, item group)
+		 */
+		public Builder copy(BlockGetter getter) {
+			setItemGroup(getter.getItemGroup());
+			setRender(getter.getRender());
+			return this;
+		}
+
+		/**
 		 * Copies some properties from a block. (render layer, item group, flammability, cook time)
-		 *
-		 * @param copiedBlock The block to copy properties from.
 		 */
 		public Builder copy(Block copiedBlock) {
 			this.copiedBlock = copiedBlock;
@@ -224,7 +187,17 @@ public class BlockCreator extends Creator<Block> {
 		 * Builds the entry and registers the block with all its settings.
 		 */
 		public BlockCreator build() {
-			return new BlockCreator(this.name, this.baseBlock, this.render, this.itemGroup, this.flammabilityBurn, this.flammabilitySpread, this.cookTime, this.noItem, this.copiedBlock);
+			if(itemGroup == null && copiedBlock != null) {
+				this.itemGroup = copiedBlock.asItem().getGroup();
+			}
+			if(flammabilityBurn == 0 && flammabilitySpread == 0 && copiedBlock != null) {
+				this.flammabilityBurn = CreatorHelper.getFlammabilityBurn(copiedBlock);
+				this.flammabilitySpread = CreatorHelper.getFlammabilityBurn(copiedBlock);
+			}
+			if(cookTime == 0 && copiedBlock != null) {
+				//this.cookTime = CreatorHelper.getCookTime(copiedBlock);
+			}
+			return new BlockCreator(this.modData, this.name, this.value, this.render, this.itemGroup, this.flammabilityBurn, this.flammabilitySpread, this.cookTime, this.noItem, this.copiedBlock);
 		}
 	}
 }
