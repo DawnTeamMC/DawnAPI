@@ -1,0 +1,19 @@
+{
+	"variants": {
+		"type=north": {
+			"model": "dawn:block/nether_brick_vertical_slab/north"
+		},
+		"type=south": {
+			"model": "dawn:block/nether_brick_vertical_slab/south"
+		},
+		"type=east": {
+			"model": "dawn:block/nether_brick_vertical_slab/east"
+		},
+		"type=west": {
+			"model": "dawn:block/nether_brick_vertical_slab/west"
+		},
+		"type=double": {
+			"model": "minecraft:block/nether_bricks"
+		}
+	}
+}

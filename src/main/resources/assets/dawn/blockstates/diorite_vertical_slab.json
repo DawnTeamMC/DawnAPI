@@ -1,0 +1,19 @@
+{
+	"variants": {
+		"type=north": {
+			"model": "dawn:block/diorite_vertical_slab/north"
+		},
+		"type=south": {
+			"model": "dawn:block/diorite_vertical_slab/south"
+		},
+		"type=east": {
+			"model": "dawn:block/diorite_vertical_slab/east"
+		},
+		"type=west": {
+			"model": "dawn:block/diorite_vertical_slab/west"
+		},
+		"type=double": {
+			"model": "minecraft:block/diorite"
+		}
+	}
+}

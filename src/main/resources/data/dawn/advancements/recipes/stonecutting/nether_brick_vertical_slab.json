@@ -1,0 +1,32 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards": {
+		"recipes": [
+			"dawn:stonecutting/nether_brick_vertical_slab"
+		]
+	},
+	"criteria": {
+		"has_nether_bricks": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "minecraft:nether_bricks"
+					}
+				]
+			}
+		},
+		"has_the_recipe": {
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions": {
+				"recipe": "dawn:stonecutting/nether_brick_vertical_slab"
+			}
+		}
+	},
+	"requirements": [
+		[
+			"has_nether_bricks",
+			"has_the_recipe"
+		]
+	]
+}

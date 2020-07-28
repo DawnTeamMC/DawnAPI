@@ -1,0 +1,6 @@
+{
+	"parent": "dawn:block/vertical_slab/east",
+	"textures": {
+		"block": "minecraft:block/spruce_planks"
+	}
+}

@@ -1,0 +1,11 @@
+{
+	"replace": false,
+	"values": [
+		"dawn:oak_leaf_pile",
+		"dawn:spruce_leaf_pile",
+		"dawn:birch_leaf_pile",
+		"dawn:jungle_leaf_pile",
+		"dawn:acacia_leaf_pile",
+		"dawn:dark_oak_leaf_pile"
+	]
+}

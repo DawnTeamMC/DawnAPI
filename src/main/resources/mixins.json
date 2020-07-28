@@ -1,12 +1,11 @@
 {
 	"required": true,
-	"package": "com.hugman.dawn.mixin",
+	"package": "com.hugman.dawn.api.mixin",
 	"compatibilityLevel": "JAVA_8",
 	"mixins": [
 		"AxeItemMixin"
 	],
 	"client": [
-		"TitleScreenMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

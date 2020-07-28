@@ -18,9 +18,6 @@
 		],
 		"client": [
 			"com.hugman.dawn.DawnClient"
-		],
-		"server": [
-			"com.hugman.dawn.DawnServer"
 		]
 	},
 	"mixins": [

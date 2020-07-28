@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"#",
+		"#",
+		"#"
+	],
+	"key": {
+		"#": {
+			"item": "minecraft:diorite"
+		}
+	},
+	"result": {
+		"item": "dawn:diorite_vertical_slab",
+		"count": 6
+	}
+}

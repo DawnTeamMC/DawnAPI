@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "leaf_pile",
+	"pattern": [
+		"##"
+	],
+	"key": {
+		"#": {
+			"item": "minecraft:spruce_leaves"
+		}
+	},
+	"result": {
+		"item": "dawn:spruce_leaf_pile",
+		"count": 2
+	}
+}

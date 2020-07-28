@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"#",
+		"#",
+		"#"
+	],
+	"key": {
+		"#": {
+			"item": "minecraft:polished_granite"
+		}
+	},
+	"result": {
+		"item": "dawn:polished_granite_vertical_slab",
+		"count": 6
+	}
+}

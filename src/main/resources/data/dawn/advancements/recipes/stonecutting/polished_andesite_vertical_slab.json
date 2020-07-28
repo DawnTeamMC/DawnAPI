@@ -1,0 +1,43 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards": {
+		"recipes": [
+			"dawn:stonecutting/polished_andesite_vertical_slab"
+		]
+	},
+	"criteria": {
+		"has_andesite": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "minecraft:andesite"
+					}
+				]
+			}
+		},
+		"has_polished_andesite": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "minecraft:polished_andesite"
+					}
+				]
+			}
+		},
+		"has_the_recipe": {
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions": {
+				"recipe": "dawn:stonecutting/polished_andesite_vertical_slab"
+			}
+		}
+	},
+	"requirements": [
+		[
+			"has_andesite",
+			"has_polished_andesite",
+			"has_the_recipe"
+		]
+	]
+}

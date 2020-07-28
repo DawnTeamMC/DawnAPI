@@ -1,0 +1,22 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"#",
+		"#",
+		"#"
+	],
+	"key": {
+		"#": [
+			{
+				"item": "minecraft:sandstone"
+			},
+			{
+				"item": "minecraft:chiseled_sandstone"
+			}
+		]
+	},
+	"result": {
+		"item": "dawn:sandstone_vertical_slab",
+		"count": 6
+	}
+}

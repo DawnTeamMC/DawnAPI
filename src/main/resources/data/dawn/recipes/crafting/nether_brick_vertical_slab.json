@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"#",
+		"#",
+		"#"
+	],
+	"key": {
+		"#": {
+			"item": "minecraft:nether_bricks"
+		}
+	},
+	"result": {
+		"item": "dawn:nether_brick_vertical_slab",
+		"count": 6
+	}
+}

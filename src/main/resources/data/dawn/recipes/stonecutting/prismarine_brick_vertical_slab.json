@@ -1,0 +1,8 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient": {
+		"item": "minecraft:prismarine_bricks"
+	},
+	"result": "dawn:prismarine_brick_vertical_slab",
+	"count": 2
+}
