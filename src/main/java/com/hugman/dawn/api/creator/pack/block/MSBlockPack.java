@@ -28,12 +28,12 @@ public class MSBlockPack extends Pack {
 		/**
 		 * Creates a creator pack containing blocks having different getters as base.
 		 *
-		 * @param prefix   The prefix for the created blocks.
+		 * @param name   The name for the created blocks. (ex: <code>bricks</code>)
 		 * @param settings The block settings.
 		 * @param getters  The getters to use for the shapes to create.
 		 */
-		public Builder(String prefix, FabricBlockSettings settings, BlockGetter... getters) {
-			this.prefix = prefix;
+		public Builder(String name, FabricBlockSettings settings, BlockGetter... getters) {
+			this.prefix = name;
 			this.settings = settings;
 			this.copiedBlock = null;
 			this.getters = getters;

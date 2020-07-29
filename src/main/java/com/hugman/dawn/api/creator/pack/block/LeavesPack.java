@@ -23,10 +23,10 @@ public class LeavesPack extends Pack {
 		/**
 		 * Creates an entry pack containing a leaves entry and its leaf pile variant.
 		 *
-		 * @param suffix The suffix of the leaves.
+		 * @param name The name of the leaves. (ex: <code>oak</code>)
 		 */
-		public Builder(String suffix) {
-			this.suffix = suffix;
+		public Builder(String name) {
+			this.suffix = name;
 		}
 
 		public LeavesPack build(ModData modData) {

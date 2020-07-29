@@ -46,8 +46,8 @@ public class BlockCreator extends Creator<Block> {
 		value = Registry.register(Registry.BLOCK, modData.id(name), baseBlock);
 		CreatorHelper.setFlammability(value, flammabilityBurn, flammabilitySpread);
 		if(!noItem) {
-			Item item = Registry.register(Registry.ITEM, Registry.BLOCK.getId(value), new BlockItem(value, new Item.Settings().group(itemGroup)));
-			((BlockItem) item).appendBlocks(Item.BLOCK_ITEMS, item);
+			BlockItem blockItem = Registry.register(Registry.ITEM, Registry.BLOCK.getId(value), new BlockItem(value, new Item.Settings().group(itemGroup)));
+			blockItem.appendBlocks(Item.BLOCK_ITEMS, blockItem);
 		}
 		return value;
 	}
@@ -105,7 +105,7 @@ public class BlockCreator extends Creator<Block> {
 
 	public static class Builder implements SimpleBuilder {
 		private final String name;
-		private final Block block;
+		private final Block baseBlock;
 		protected Render render;
 
 		protected ItemGroup itemGroup;
@@ -119,9 +119,9 @@ public class BlockCreator extends Creator<Block> {
 		/**
 		 * Creates a simple block with an item but no item group, flammability or cook time and is rendered has a solid block.
 		 */
-		public Builder(String name, Block block) {
+		public Builder(String name, Block baseBlock) {
 			this.name = name;
-			this.block = block;
+			this.baseBlock = baseBlock;
 			this.render = null;
 			this.itemGroup = null;
 			this.flammabilityBurn = 0;
@@ -218,7 +218,7 @@ public class BlockCreator extends Creator<Block> {
 				this.flammabilityBurn = CreatorHelper.getFlammabilityBurn(copiedBlock);
 				this.flammabilitySpread = CreatorHelper.getFlammabilityBurn(copiedBlock);
 			}
-			return new BlockCreator(this.name, this.block, this.render, this.itemGroup, this.flammabilityBurn, this.flammabilitySpread, this.noItem, this.cookTime, this.compostingChance, this.copiedBlock);
+			return new BlockCreator(this.name, this.baseBlock, this.render, this.itemGroup, this.flammabilityBurn, this.flammabilitySpread, this.noItem, this.cookTime, this.compostingChance, this.copiedBlock);
 		}
 
 	}

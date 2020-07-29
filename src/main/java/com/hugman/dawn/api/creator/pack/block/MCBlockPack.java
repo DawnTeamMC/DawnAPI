@@ -31,12 +31,12 @@ public class MCBlockPack extends Pack {
 		/**
 		 * Creates a creator pack containing blocks of 16 different colors.
 		 *
-		 * @param prefix   The prefix of the blocks. (ex: <code>bricks</code>)
+		 * @param name   The name of the blocks. (ex: <code>bricks</code>)
 		 * @param getter   The getter to use to build the blocks.
 		 * @param settings The block settings.
 		 */
-		public Builder(String prefix, BlockGetter getter, FabricBlockSettings settings) {
-			this.prefix = prefix;
+		public Builder(String name, BlockGetter getter, FabricBlockSettings settings) {
+			this.prefix = name;
 			this.getter = getter;
 			this.settings = settings;
 			this.itemGroup = null;

@@ -13,11 +13,11 @@ public class FungusPack {
 		/**
 		 * Creates an entry pack containing a fungus entry and its potted variant.
 		 *
-		 * @param suffix             The suffix of the fungus plant.
+		 * @param name             The name of the fungus plant. (ex: <code>crimson</code>)
 		 * @param hugeFungusSupplier The supplier for the huge fungus feature.
 		 */
-		public Builder(String suffix, Supplier<ConfiguredFeature<HugeFungusFeatureConfig, ?>> hugeFungusSupplier) {
-			super(new BlockCreator.Builder(suffix + "_fungus", new FungusBlock(BlockSettings.FUNGUS, hugeFungusSupplier)));
+		public Builder(String name, Supplier<ConfiguredFeature<HugeFungusFeatureConfig, ?>> hugeFungusSupplier) {
+			super(new BlockCreator.Builder(name + "_fungus", new FungusBlock(BlockSettings.FUNGUS, hugeFungusSupplier)));
 		}
 	}
 }

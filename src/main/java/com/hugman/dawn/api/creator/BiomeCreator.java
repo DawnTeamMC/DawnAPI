@@ -10,7 +10,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 
 public class BiomeCreator extends Creator<Biome> {
-	private final Biome biome;
+	private final Biome baseBiome;
 	private final SpawnDimension spawnDimension;
 
 	private final OverworldClimate climate;
@@ -19,9 +19,9 @@ public class BiomeCreator extends Creator<Biome> {
 
 	private final Biome.MixedNoisePoint noises;
 
-	private BiomeCreator(String name, Biome biome, SpawnDimension spawnDimension, OverworldClimate climate, double weight, boolean isSpawnBiome, Biome.MixedNoisePoint noises) {
+	private BiomeCreator(String name, Biome baseBiome, SpawnDimension spawnDimension, OverworldClimate climate, double weight, boolean isSpawnBiome, Biome.MixedNoisePoint noises) {
 		super(name);
-		this.biome = biome;
+		this.baseBiome = baseBiome;
 		this.spawnDimension = spawnDimension;
 		this.climate = climate;
 		this.weight = weight;
@@ -31,7 +31,7 @@ public class BiomeCreator extends Creator<Biome> {
 
 	@Override
 	public Biome register(ModData modData) {
-		value = Registry.register(BuiltinRegistries.BIOME, modData.id(name), biome);
+		value = Registry.register(BuiltinRegistries.BIOME, modData.id(name), baseBiome);
 		switch(this.spawnDimension) {
 			case NONE:
 			default:
@@ -51,7 +51,7 @@ public class BiomeCreator extends Creator<Biome> {
 
 	public static class Builder implements SimpleBuilder {
 		private final String name;
-		private final Biome biome;
+		private final Biome baseBiome;
 		private SpawnDimension spawnDimension;
 
 		private OverworldClimate climate;
@@ -64,11 +64,11 @@ public class BiomeCreator extends Creator<Biome> {
 		 * Creates a simple biome that won't spawn in any dimension.
 		 *
 		 * @param name  The name of the biome.
-		 * @param biome The biome itself.
+		 * @param baseBiome The biome itself.
 		 */
-		public Builder(String name, Biome biome) {
+		public Builder(String name, Biome baseBiome) {
 			this.name = name;
-			this.biome = biome;
+			this.baseBiome = baseBiome;
 			this.spawnDimension = SpawnDimension.NONE;
 			this.climate = null;
 			this.weight = 0D;
@@ -104,7 +104,7 @@ public class BiomeCreator extends Creator<Biome> {
 		 * Builds the entry and registers the biome with all its settings.
 		 */
 		public BiomeCreator build() {
-			return new BiomeCreator(this.name, this.biome, this.spawnDimension, this.climate, this.weight, this.isSpawnBiome, this.noises);
+			return new BiomeCreator(this.name, this.baseBiome, this.spawnDimension, this.climate, this.weight, this.isSpawnBiome, this.noises);
 		}
 	}
 
