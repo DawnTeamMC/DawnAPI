@@ -1,5 +1,6 @@
 package com.hugman.dawn.api.creator;
 
+import com.hugman.dawn.api.util.SimpleBuilder;
 import com.hugman.dawn.api.util.StringUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -27,8 +28,8 @@ public class BlockCreator extends Creator<Block> {
 	protected final float compostingChance;
 	protected final Block copiedBlock;
 
-	private BlockCreator(ModData modData, String name, Block baseBlock, Render render, ItemGroup itemGroup, int flammabilityBurn, int flammabilitySpread, boolean noItem, int cookTime, float compostingChance, Block copiedBlock) {
-		super(modData, name);
+	private BlockCreator(String name, Block baseBlock, Render render, ItemGroup itemGroup, int flammabilityBurn, int flammabilitySpread, boolean noItem, int cookTime, float compostingChance, Block copiedBlock) {
+		super(name);
 		this.baseBlock = baseBlock;
 		this.render = render;
 		this.itemGroup = itemGroup;
@@ -41,7 +42,7 @@ public class BlockCreator extends Creator<Block> {
 	}
 
 	@Override
-	public Block register() {
+	public Block register(ModData modData) {
 		value = Registry.register(Registry.BLOCK, modData.id(name), baseBlock);
 		CreatorHelper.setFlammability(value, flammabilityBurn, flammabilitySpread);
 		if(!noItem) {
@@ -102,7 +103,9 @@ public class BlockCreator extends Creator<Block> {
 		}
 	}
 
-	public static class Builder extends Creator.Builder<Block> {
+	public static class Builder implements SimpleBuilder {
+		private final String name;
+		private final Block block;
 		protected Render render;
 
 		protected ItemGroup itemGroup;
@@ -117,7 +120,8 @@ public class BlockCreator extends Creator<Block> {
 		 * Creates a simple block with an item but no item group, flammability or cook time and is rendered has a solid block.
 		 */
 		public Builder(String name, Block block) {
-			super(name, block);
+			this.name = name;
+			this.block = block;
 			this.render = null;
 			this.itemGroup = null;
 			this.flammabilityBurn = 0;
@@ -206,7 +210,7 @@ public class BlockCreator extends Creator<Block> {
 		/**
 		 * Builds the entry and registers the block with all its settings.
 		 */
-		public BlockCreator build(ModData modData) {
+		public BlockCreator build() {
 			if(itemGroup == null && copiedBlock != null) {
 				this.itemGroup = copiedBlock.asItem().getGroup();
 			}
@@ -214,7 +218,7 @@ public class BlockCreator extends Creator<Block> {
 				this.flammabilityBurn = CreatorHelper.getFlammabilityBurn(copiedBlock);
 				this.flammabilitySpread = CreatorHelper.getFlammabilityBurn(copiedBlock);
 			}
-			return new BlockCreator(modData, this.name, this.value, this.render, this.itemGroup, this.flammabilityBurn, this.flammabilitySpread, this.noItem, this.cookTime, this.compostingChance, this.copiedBlock);
+			return new BlockCreator(this.name, this.block, this.render, this.itemGroup, this.flammabilityBurn, this.flammabilitySpread, this.noItem, this.cookTime, this.compostingChance, this.copiedBlock);
 		}
 
 	}

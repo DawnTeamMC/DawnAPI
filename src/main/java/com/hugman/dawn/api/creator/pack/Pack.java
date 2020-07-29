@@ -2,31 +2,31 @@ package com.hugman.dawn.api.creator.pack;
 
 import com.hugman.dawn.api.creator.Creator;
 import com.hugman.dawn.api.creator.ModData;
+import com.hugman.dawn.api.util.SimpleBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Pack<V> {
-	protected ModData modData;
-	protected final List<Creator<V>> builders = new ArrayList<>();
+public abstract class Pack {
+	protected static List<Creator<?>> creators = new ArrayList<>();
 
-	public void setModData(ModData modData) {
-		this.modData = modData;
+	protected static <V, C extends Creator<V>, B extends SimpleBuilder<C>> V add(B creatorBuilder, ModData modData) {
+		C creator = creatorBuilder.build();
+		creators.add(creator);
+		return creator.register(modData);
 	}
 
-	public <C extends Creator<V>> C add(C.Builder<V> creatorBuilder) {
-		C creator = creatorBuilder.build(modData);
-		builders.add(creator);
-		return creator;
-	}
-
-	public <P extends Pack<V>> P add(P pack) {
-		pack.setModData(modData);
-		pack.getCreators().forEach(creator -> builders.add(creator));
+	protected static <P extends Pack> P add(P.Builder packBuilder, ModData modData) {
+		P pack = packBuilder.build(modData);
+		creators.addAll(pack.getCreators());
 		return pack;
 	}
 
-	public List<Creator<V>> getCreators() {
-		return builders;
+	public List<Creator<?>> getCreators() {
+		return creators;
+	}
+
+	public static abstract class Builder {
+		public abstract <P extends Pack> P build(ModData modData);
 	}
 }

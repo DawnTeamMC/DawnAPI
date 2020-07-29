@@ -1,11 +1,11 @@
 package com.hugman.dawn;
 
-import com.hugman.dawn.init.DawnBlockPack;
 import com.hugman.dawn.api.creator.Creator;
 import com.hugman.dawn.api.creator.ModData;
-import com.hugman.dawn.api.creator.pack.ModdedPack;
+import com.hugman.dawn.api.creator.pack.Pack;
 import com.hugman.dawn.api.creator.pack.PackManager;
 import com.hugman.dawn.api.util.debug.EntryDebugWriter;
+import com.hugman.dawn.init.DawnBlockPack;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.server.MinecraftServer;
@@ -21,11 +21,13 @@ public class Dawn implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		ServerLifecycleEvents.SERVER_STARTED.register(minecraftServer -> onServerLoad(minecraftServer));
-		new DawnBlockPack(MOD_DATA);
+		PackManager.addModdedPack(new DawnBlockPack());
+		// TODO add tab creator, block entities, ...
+		// TODO add tab for creative items
 	}
 
 	public void onServerLoad(MinecraftServer minecraftServer) {
-		for(ModdedPack moddedPack : PackManager.MODDED_PACKS) {
+		for(Pack moddedPack : PackManager.MODDED_PACKS) {
 			for(Object creator : moddedPack.getCreators()) {
 				((Creator<?>) creator).serverRegister(minecraftServer.isDedicated());
 			}

@@ -4,5 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PackManager {
-	public static final List<ModdedPack> MODDED_PACKS = new ArrayList<>();
+	public static final List<Pack> MODDED_PACKS = new ArrayList<>();
+
+	public static void addModdedPack(Pack pack) {
+		MODDED_PACKS.add(pack);
+	}
 }
