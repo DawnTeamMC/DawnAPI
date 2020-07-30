@@ -16,14 +16,14 @@ import java.util.Map;
 public class MCBlockPack extends Pack {
 	private final Map<DyeColor, Block> blockMap = new HashMap<>();
 
-	protected MCBlockPack(ModData modData, String prefix, BlockGetter getter, FabricBlockSettings settings, Block copiedBlock, ItemGroup itemGroup, BlockCreator.Render render) {
+	protected MCBlockPack(ModData modData, String name, BlockGetter getter, FabricBlockSettings settings, Block copiedBlock, ItemGroup itemGroup, BlockCreator.Render render) {
 		for(DyeColor color : DyeColor.values()) {
-			blockMap.put(color, add(new BlockCreator.Builder(color.getName() + prefix, getter, settings.materialColor(color.getMaterialColor())).copy(copiedBlock).setRender(render).setItemGroup(itemGroup), modData));
+			blockMap.put(color, add(new BlockCreator.Builder(color.getName() + name, getter, settings.materialColor(color.getMaterialColor())).copy(copiedBlock).setRender(render).setItemGroup(itemGroup), modData));
 		}
 	}
 
 	public static class Builder implements PackBuilder {
-		private final String prefix;
+		private final String name;
 		private final BlockGetter getter;
 		private final FabricBlockSettings settings;
 		private Block copiedBlock;
@@ -50,7 +50,7 @@ public class MCBlockPack extends Pack {
 		 * @param settings The block settings.
 		 */
 		public Builder(String name, BlockGetter getter, FabricBlockSettings settings) {
-			this.prefix = name;
+			this.name = name;
 			this.getter = getter;
 			this.settings = settings;
 		}
@@ -74,7 +74,7 @@ public class MCBlockPack extends Pack {
 		}
 
 		public MCBlockPack build(ModData modData) {
-			return new MCBlockPack(modData, prefix, getter, settings, copiedBlock, itemGroup, render);
+			return new MCBlockPack(modData, name, getter, settings, copiedBlock, itemGroup, render);
 		}
 	}
 

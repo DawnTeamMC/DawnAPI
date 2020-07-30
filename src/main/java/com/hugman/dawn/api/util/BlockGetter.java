@@ -7,7 +7,10 @@ import net.minecraft.item.ItemGroup;
 
 public interface BlockGetter {
 	String getSuffix();
+
 	ItemGroup getItemGroup();
+
 	BlockCreator.Render getRender();
+
 	Block getBlock(AbstractBlock.Settings settings);
 }

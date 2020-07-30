@@ -21,8 +21,8 @@ public class Dawn implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		ServerLifecycleEvents.SERVER_STARTED.register(minecraftServer -> onServerLoad(minecraftServer));
-		PackManager.addModdedPack(new DawnBlockPack());
-		PackManager.addModdedPack(new DawnMiscPack());
+		new DawnBlockPack();
+		new DawnMiscPack();
 	}
 
 	public void onServerLoad(MinecraftServer minecraftServer) {

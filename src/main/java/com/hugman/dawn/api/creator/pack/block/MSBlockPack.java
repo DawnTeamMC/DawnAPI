@@ -14,14 +14,14 @@ import java.util.Map;
 public class MSBlockPack extends Pack {
 	private final Map<BlockGetter, Block> blockMap = new HashMap<>();
 
-	protected MSBlockPack(ModData modData, String prefix, FabricBlockSettings settings, Block copiedBlock, BlockGetter... getters) {
+	protected MSBlockPack(ModData modData, String name, FabricBlockSettings settings, Block copiedBlock, BlockGetter... getters) {
 		for(BlockGetter getter : getters) {
-			blockMap.put(getter, add(new BlockCreator.Builder(prefix, getter, settings).copy(copiedBlock), modData));
+			blockMap.put(getter, add(new BlockCreator.Builder(name, getter, settings).copy(copiedBlock), modData));
 		}
 	}
 
 	public static class Builder implements PackBuilder {
-		private final String prefix;
+		private final String name;
 		private final FabricBlockSettings settings;
 		private Block copiedBlock;
 		private final BlockGetter[] getters;
@@ -46,7 +46,7 @@ public class MSBlockPack extends Pack {
 		 * @param getters  The getters to use for the shapes to create.
 		 */
 		public Builder(String name, FabricBlockSettings settings, BlockGetter... getters) {
-			this.prefix = name;
+			this.name = name;
 			this.settings = settings;
 			this.getters = getters;
 		}
@@ -60,7 +60,7 @@ public class MSBlockPack extends Pack {
 		}
 
 		public MSBlockPack build(ModData modData) {
-			return new MSBlockPack(modData, prefix, settings, copiedBlock, getters);
+			return new MSBlockPack(modData, name, settings, copiedBlock, getters);
 		}
 	}
 
