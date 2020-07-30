@@ -1,4 +1,7 @@
 {
+	"comment": "CREATIVE TABS",
+	"//itemGroup.dawn.creative_tools": "Creative Tools",
+
 	"comment": "BLOCKS",
 	"//block.dawn.oak_vertical_slab": "Oak Vertical Slab",
 	"//block.dawn.spruce_vertical_slab": "Spruce Vertical Slab",

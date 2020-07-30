@@ -1,4 +1,7 @@
 {
+	"comment": "CREATIVE TABS",
+	"//itemGroup.dawn.creative_tools": "Creative Tools",
+
 	"comment": "BLOCKS",
 	"block.dawn.oak_vertical_slab": "Eikenhouten plaat verticaal",
 	"block.dawn.spruce_vertical_slab": "Sparrehouten plaat verticaal",

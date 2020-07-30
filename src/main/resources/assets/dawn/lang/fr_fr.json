@@ -1,4 +1,7 @@
 {
+	"comment": "CREATIVE TABS",
+	"itemGroup.dawn.creative_tools": "Outils de créatif",
+
 	"comment": "BLOCKS",
 	"block.dawn.oak_vertical_slab": "Dalle verticale de chêne",
 	"block.dawn.spruce_vertical_slab": "Dalle verticale de sapin",
