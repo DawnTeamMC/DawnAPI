@@ -4,11 +4,15 @@ import com.hugman.dawn.Dawn;
 import com.hugman.dawn.api.creator.BlockCreator;
 import com.hugman.dawn.api.creator.pack.Pack;
 import com.hugman.dawn.api.creator.pack.PackBuilder;
+import com.hugman.dawn.api.creator.pack.block.MCBlockPack;
 import com.hugman.dawn.api.util.BlockSettings;
 import com.hugman.dawn.api.util.CreatorBuilder;
 import com.hugman.dawn.api.util.DefaultBlockGetter;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.Material;
+import net.minecraft.sound.BlockSoundGroup;
 
 public class DawnBlockPack extends Pack {
 	protected static <V, B extends CreatorBuilder> V register(B creatorBuilder) {
@@ -18,6 +22,8 @@ public class DawnBlockPack extends Pack {
 	protected static <P extends Pack, B extends PackBuilder> P register(B packBuilder) {
 		return add(packBuilder, Dawn.MOD_DATA);
 	}
+
+	public static final MCBlockPack CLOUD_BLOCKS = register(new MCBlockPack.Builder("", DefaultBlockGetter.FENCE_GATE, FabricBlockSettings.of(Material.LEAVES).sounds(BlockSoundGroup.WOOL).hardness(0f).noCollision()));
 
 	public static final Block OAK_VERTICAL_SLAB = register(new BlockCreator.Builder("oak", DefaultBlockGetter.VERTICAL_SLAB, Blocks.OAK_SLAB));
 	public static final Block SPRUCE_VERTICAL_SLAB = register(new BlockCreator.Builder("spruce", DefaultBlockGetter.VERTICAL_SLAB, Blocks.SPRUCE_SLAB));

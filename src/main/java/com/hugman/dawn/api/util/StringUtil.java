@@ -24,11 +24,14 @@ public class StringUtil {
 	}
 
 	public static String getShapedName(String s, BlockGetter getter) {
+		if(s.endsWith("_")) {
+			s = s.substring(0, s.length() - 1);
+		}
 		if(!getter.getSuffix().isEmpty() && s.endsWith("bricks")) {
-			return s.substring(0, s.length() - 1) + getter.getSuffix();
+			return s.substring(0, s.length() - 1) + "_" + getter.getSuffix();
 		}
 		else {
-			return s + getter.getSuffix();
+			return s + "_" + getter.getSuffix();
 		}
 	}
 }

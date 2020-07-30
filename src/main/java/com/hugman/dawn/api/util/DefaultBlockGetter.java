@@ -49,12 +49,7 @@ public enum DefaultBlockGetter implements BlockGetter {
 	}
 
 	public String getSuffix() {
-		if(suffix.isEmpty()) {
-			return suffix;
-		}
-		else {
-			return "_" + suffix;
-		}
+		return suffix;
 	}
 
 	public ItemGroup getItemGroup() {
