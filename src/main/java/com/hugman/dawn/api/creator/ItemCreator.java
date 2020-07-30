@@ -1,6 +1,6 @@
 package com.hugman.dawn.api.creator;
 
-import com.hugman.dawn.api.util.SimpleBuilder;
+import com.hugman.dawn.api.util.CreatorBuilder;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.item.Item;
@@ -48,7 +48,7 @@ public class ItemCreator extends Creator<Item> {
 		}
 	}
 
-	public static class Builder implements SimpleBuilder {
+	public static class Builder implements CreatorBuilder {
 		protected final String name;
 		protected final Item baseItem;
 		protected int cookTime;

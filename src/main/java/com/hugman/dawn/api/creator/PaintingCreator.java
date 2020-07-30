@@ -1,6 +1,6 @@
 package com.hugman.dawn.api.creator;
 
-import com.hugman.dawn.api.util.SimpleBuilder;
+import com.hugman.dawn.api.util.CreatorBuilder;
 import net.minecraft.entity.decoration.painting.PaintingMotive;
 import net.minecraft.util.registry.Registry;
 
@@ -20,7 +20,7 @@ public class PaintingCreator extends Creator<PaintingMotive> {
 		return value;
 	}
 
-	public static class Builder implements SimpleBuilder {
+	public static class Builder implements CreatorBuilder {
 		protected final String name;
 		protected final int width;
 		protected final int height;

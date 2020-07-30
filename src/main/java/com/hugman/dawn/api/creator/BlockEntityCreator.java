@@ -1,6 +1,6 @@
 package com.hugman.dawn.api.creator;
 
-import com.hugman.dawn.api.util.SimpleBuilder;
+import com.hugman.dawn.api.util.CreatorBuilder;
 import com.mojang.datafixers.types.Type;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
@@ -23,7 +23,7 @@ public class BlockEntityCreator extends Creator<BlockEntityType<? extends BlockE
 		return value;
 	}
 
-	public static class Builder implements SimpleBuilder<BlockEntityCreator> {
+	public static class Builder implements CreatorBuilder {
 		protected final String name;
 		protected final BlockEntityType.Builder<? extends BlockEntity> builder;
 

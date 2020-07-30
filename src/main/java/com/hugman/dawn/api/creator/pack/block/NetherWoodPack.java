@@ -1,7 +1,7 @@
 package com.hugman.dawn.api.creator.pack.block;
 
 import com.hugman.dawn.api.creator.ModData;
-import com.hugman.dawn.api.creator.pack.Pack;
+import com.hugman.dawn.api.creator.pack.PackBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.MaterialColor;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
@@ -17,7 +17,7 @@ public class NetherWoodPack extends WoodPack {
 		this.fungusPack = add(new FungusPack.Builder(suffix, hugeFungusSupplier), modData);
 	}
 
-	public static class Builder extends Pack.Builder {
+	public static class Builder implements PackBuilder {
 		private final String suffix;
 		private final Supplier<ConfiguredFeature<HugeFungusFeatureConfig, ?>> hugeFungusSupplier;
 		private final MaterialColor planksColor;

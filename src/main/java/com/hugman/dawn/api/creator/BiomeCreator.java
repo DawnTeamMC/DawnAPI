@@ -1,6 +1,6 @@
 package com.hugman.dawn.api.creator;
 
-import com.hugman.dawn.api.util.SimpleBuilder;
+import com.hugman.dawn.api.util.CreatorBuilder;
 import net.fabricmc.fabric.api.biomes.v1.FabricBiomes;
 import net.fabricmc.fabric.api.biomes.v1.NetherBiomes;
 import net.fabricmc.fabric.api.biomes.v1.OverworldBiomes;
@@ -49,7 +49,7 @@ public class BiomeCreator extends Creator<Biome> {
 		return value;
 	}
 
-	public static class Builder implements SimpleBuilder {
+	public static class Builder implements CreatorBuilder {
 		private final String name;
 		private final Biome baseBiome;
 		private SpawnDimension spawnDimension;

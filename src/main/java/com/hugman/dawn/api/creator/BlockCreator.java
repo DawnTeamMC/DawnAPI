@@ -1,8 +1,8 @@
 package com.hugman.dawn.api.creator;
 
 import com.hugman.dawn.api.util.BlockGetter;
+import com.hugman.dawn.api.util.CreatorBuilder;
 import com.hugman.dawn.api.util.CreatorHelper;
-import com.hugman.dawn.api.util.SimpleBuilder;
 import com.hugman.dawn.api.util.StringUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -105,7 +105,7 @@ public class BlockCreator extends Creator<Block> {
 		}
 	}
 
-	public static class Builder implements SimpleBuilder {
+	public static class Builder implements CreatorBuilder {
 		private final String name;
 		private final Block baseBlock;
 		protected Render render;

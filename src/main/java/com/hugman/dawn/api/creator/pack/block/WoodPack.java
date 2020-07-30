@@ -3,6 +3,7 @@ package com.hugman.dawn.api.creator.pack.block;
 import com.hugman.dawn.api.creator.BlockCreator;
 import com.hugman.dawn.api.creator.ModData;
 import com.hugman.dawn.api.creator.pack.Pack;
+import com.hugman.dawn.api.creator.pack.PackBuilder;
 import com.hugman.dawn.api.util.BlockGetter;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
@@ -36,7 +37,7 @@ public class WoodPack extends Pack {
 				BlockGetter.WOOD_BUTTON).copy(logs.getWood()), modData);
 	}
 
-	public static class Builder extends Pack.Builder {
+	public static class Builder implements PackBuilder {
 		private final String name;
 		private final MaterialColor planksColor;
 		private final MaterialColor insideColor;

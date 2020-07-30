@@ -3,6 +3,7 @@ package com.hugman.dawn.api.creator.pack.block;
 import com.hugman.dawn.api.creator.BlockCreator;
 import com.hugman.dawn.api.creator.ModData;
 import com.hugman.dawn.api.creator.pack.Pack;
+import com.hugman.dawn.api.creator.pack.PackBuilder;
 import com.hugman.dawn.api.util.BlockGetter;
 import com.hugman.dawn.api.util.BlockSettings;
 import net.minecraft.block.Block;
@@ -17,7 +18,7 @@ public class LeavesPack extends Pack {
 		this.leafPile = add(new BlockCreator.Builder(suffix, BlockGetter.LEAF_PILE, BlockSettings.LEAF_PILE).copy(Blocks.OAK_LEAVES), modData);
 	}
 
-	public static class Builder extends Pack.Builder {
+	public static class Builder implements PackBuilder {
 		private final String suffix;
 
 		/**

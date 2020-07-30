@@ -1,6 +1,6 @@
 package com.hugman.dawn.api.creator;
 
-import com.hugman.dawn.api.util.SimpleBuilder;
+import com.hugman.dawn.api.util.CreatorBuilder;
 import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerType;
@@ -19,7 +19,7 @@ public class ScreenHandlerCreator extends Creator<ScreenHandlerType<? extends Sc
 		return value;
 	}
 
-	public static class Builder implements SimpleBuilder<ScreenHandlerCreator> {
+	public static class Builder implements CreatorBuilder {
 		protected final String name;
 		protected final ScreenHandlerRegistry.SimpleClientHandlerFactory<? extends ScreenHandler> factory;
 

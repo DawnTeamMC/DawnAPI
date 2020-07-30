@@ -1,7 +1,7 @@
 package com.hugman.dawn.api.creator;
 
 import com.hugman.dawn.Dawn;
-import com.hugman.dawn.api.util.SimpleBuilder;
+import com.hugman.dawn.api.util.CreatorBuilder;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
@@ -26,7 +26,7 @@ public class ItemGroupCreator extends Creator<ItemGroup> {
 		return value;
 	}
 
-	public static class Builder implements SimpleBuilder {
+	public static class Builder implements CreatorBuilder {
 		protected final String name;
 		protected final Item baseItem;
 		protected final DefaultedList<ItemStack> stacks = DefaultedList.of();

@@ -3,6 +3,7 @@ package com.hugman.dawn.api.creator.pack.block;
 import com.hugman.dawn.api.creator.BlockCreator;
 import com.hugman.dawn.api.creator.ModData;
 import com.hugman.dawn.api.creator.pack.Pack;
+import com.hugman.dawn.api.creator.pack.PackBuilder;
 import com.hugman.dawn.api.object.item.AxeItem;
 import com.hugman.dawn.api.util.BlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -48,7 +49,7 @@ public class LogsPack extends Pack {
 		}).strength(2.0F).sounds(isNether ? BlockSoundGroup.NETHER_STEM : BlockSoundGroup.WOOD));
 	}
 
-	public static class Builder extends Pack.Builder {
+	public static class Builder implements PackBuilder {
 		private final String name;
 		private final MaterialColor insideColor;
 		private final MaterialColor barkColor;
