@@ -4,15 +4,11 @@ import com.hugman.dawn.Dawn;
 import com.hugman.dawn.api.creator.BlockCreator;
 import com.hugman.dawn.api.creator.pack.Pack;
 import com.hugman.dawn.api.creator.pack.PackBuilder;
-import com.hugman.dawn.api.creator.pack.block.MCBlockPack;
 import com.hugman.dawn.api.util.BlockSettings;
 import com.hugman.dawn.api.util.CreatorBuilder;
 import com.hugman.dawn.api.util.DefaultBlockGetter;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.Material;
-import net.minecraft.sound.BlockSoundGroup;
 
 public class DawnBlockPack extends Pack {
 	protected static <V, B extends CreatorBuilder> V register(B creatorBuilder) {

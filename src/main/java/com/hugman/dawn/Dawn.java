@@ -28,6 +28,8 @@ public class Dawn implements ModInitializer {
 		for(Creator<?> creator : PackManager.CREATORS) {
 			creator.serverRegister(minecraftServer.isDedicated());
 		}
-		DEBUG_WRITER.load();
+		if(minecraftServer.isDedicated()) {
+			DEBUG_WRITER.load();
+		}
 	}
 }

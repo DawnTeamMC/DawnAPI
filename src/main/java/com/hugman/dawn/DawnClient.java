@@ -1,7 +1,6 @@
 package com.hugman.dawn;
 
 import com.hugman.dawn.api.creator.Creator;
-import com.hugman.dawn.api.creator.pack.Pack;
 import com.hugman.dawn.api.creator.pack.PackManager;
 import com.hugman.dawn.init.client.DawnColorMaps;
 import net.fabricmc.api.ClientModInitializer;
