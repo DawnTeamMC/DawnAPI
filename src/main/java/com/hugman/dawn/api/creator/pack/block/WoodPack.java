@@ -4,7 +4,7 @@ import com.hugman.dawn.api.creator.BlockCreator;
 import com.hugman.dawn.api.creator.ModData;
 import com.hugman.dawn.api.creator.pack.Pack;
 import com.hugman.dawn.api.creator.pack.PackBuilder;
-import com.hugman.dawn.api.util.BlockGetter;
+import com.hugman.dawn.api.util.DefaultBlockGetter;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -18,23 +18,23 @@ public class WoodPack extends Pack {
 
 	protected WoodPack(ModData modData, String name, MaterialColor planksColor, MaterialColor insideColor, MaterialColor barkColor, boolean isNether) {
 		FabricBlockSettings settings = FabricBlockSettings.copyOf(isNether ? Blocks.CRIMSON_PLANKS : Blocks.OAK_PLANKS).materialColor(planksColor);
-		this.planks = add(new BlockCreator.Builder(name, BlockGetter.PLANKS, settings), modData);
+		this.planks = add(new BlockCreator.Builder(name, DefaultBlockGetter.PLANKS, settings), modData);
 		this.logs = add(new LogsPack.Builder(name, insideColor, barkColor, isNether), modData);
 		this.woodenBlocks = add(new MSBlockPack.Builder(name, settings,
-				BlockGetter.STAIRS,
-				BlockGetter.SLAB,
-				BlockGetter.VERTICAL_SLAB,
-				BlockGetter.TRAPDOOR,
-				BlockGetter.WOOD_PRESSURE_PLATE,
-				BlockGetter.WOOD_BUTTON,
-				BlockGetter.FENCE,
-				BlockGetter.FENCE_GATE,
-				BlockGetter.DOOR).copy(planks), modData);
+				DefaultBlockGetter.STAIRS,
+				DefaultBlockGetter.SLAB,
+				DefaultBlockGetter.VERTICAL_SLAB,
+				DefaultBlockGetter.TRAPDOOR,
+				DefaultBlockGetter.WOOD_PRESSURE_PLATE,
+				DefaultBlockGetter.WOOD_BUTTON,
+				DefaultBlockGetter.FENCE,
+				DefaultBlockGetter.FENCE_GATE,
+				DefaultBlockGetter.DOOR).copy(planks), modData);
 		this.barkBlocks = add(new MSBlockPack.Builder(name + logs.getWoodName(), settings.materialColor(barkColor),
-				BlockGetter.STAIRS,
-				BlockGetter.SLAB,
-				BlockGetter.VERTICAL_SLAB,
-				BlockGetter.WOOD_BUTTON).copy(logs.getWood()), modData);
+				DefaultBlockGetter.STAIRS,
+				DefaultBlockGetter.SLAB,
+				DefaultBlockGetter.VERTICAL_SLAB,
+				DefaultBlockGetter.WOOD_BUTTON).copy(logs.getWood()), modData);
 	}
 
 	public static class Builder implements PackBuilder {
@@ -87,54 +87,54 @@ public class WoodPack extends Pack {
 	}
 
 	public Block getWoodStairs() {
-		return barkBlocks.getBlock(BlockGetter.STAIRS);
+		return barkBlocks.getBlock(DefaultBlockGetter.STAIRS);
 	}
 
 	public Block getWoodSlab() {
-		return barkBlocks.getBlock(BlockGetter.SLAB);
+		return barkBlocks.getBlock(DefaultBlockGetter.SLAB);
 	}
 
 	public Block getWoodVerticalSlab() {
-		return barkBlocks.getBlock(BlockGetter.VERTICAL_SLAB);
+		return barkBlocks.getBlock(DefaultBlockGetter.VERTICAL_SLAB);
 	}
 
 	public Block getWoodButton() {
-		return barkBlocks.getBlock(BlockGetter.WOOD_BUTTON);
+		return barkBlocks.getBlock(DefaultBlockGetter.WOOD_BUTTON);
 	}
 
 	public Block getPressurePlate() {
-		return woodenBlocks.getBlock(BlockGetter.WOOD_PRESSURE_PLATE);
+		return woodenBlocks.getBlock(DefaultBlockGetter.WOOD_PRESSURE_PLATE);
 	}
 
 	public Block getTrapdoor() {
-		return woodenBlocks.getBlock(BlockGetter.TRAPDOOR);
+		return woodenBlocks.getBlock(DefaultBlockGetter.TRAPDOOR);
 	}
 
 	public Block getButton() {
-		return woodenBlocks.getBlock(BlockGetter.WOOD_BUTTON);
+		return woodenBlocks.getBlock(DefaultBlockGetter.WOOD_BUTTON);
 	}
 
 	public Block getStairs() {
-		return woodenBlocks.getBlock(BlockGetter.STAIRS);
+		return woodenBlocks.getBlock(DefaultBlockGetter.STAIRS);
 	}
 
 	public Block getSlab() {
-		return woodenBlocks.getBlock(BlockGetter.SLAB);
+		return woodenBlocks.getBlock(DefaultBlockGetter.SLAB);
 	}
 
 	public Block getVerticalSlab() {
-		return woodenBlocks.getBlock(BlockGetter.VERTICAL_SLAB);
+		return woodenBlocks.getBlock(DefaultBlockGetter.VERTICAL_SLAB);
 	}
 
 	public Block getFenceGate() {
-		return woodenBlocks.getBlock(BlockGetter.FENCE_GATE);
+		return woodenBlocks.getBlock(DefaultBlockGetter.FENCE_GATE);
 	}
 
 	public Block getFence() {
-		return woodenBlocks.getBlock(BlockGetter.FENCE);
+		return woodenBlocks.getBlock(DefaultBlockGetter.FENCE);
 	}
 
 	public Block getDoor() {
-		return woodenBlocks.getBlock(BlockGetter.DOOR);
+		return woodenBlocks.getBlock(DefaultBlockGetter.DOOR);
 	}
 }

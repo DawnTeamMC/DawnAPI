@@ -1,6 +1,5 @@
 package com.hugman.dawn.api.creator;
 
-import com.hugman.dawn.Dawn;
 import com.hugman.dawn.api.util.CreatorBuilder;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.item.Item;
@@ -21,7 +20,6 @@ public class ItemGroupCreator extends Creator<ItemGroup> {
 
 	@Override
 	public ItemGroup register(ModData modData) {
-		Dawn.LOGGER.info(stacks);
 		value = FabricItemGroupBuilder.create(modData.id(name)).icon(() -> new ItemStack(baseItem)).appendItems(itemStacks -> itemStacks.addAll(stacks)).build();
 		return value;
 	}

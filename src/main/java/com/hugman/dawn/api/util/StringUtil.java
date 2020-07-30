@@ -24,7 +24,7 @@ public class StringUtil {
 	}
 
 	public static String fixShapePrefix(String s, BlockGetter getter) {
-		if(getter != BlockGetter.CUBE && s.endsWith("bricks")) {
+		if(!getter.getSuffix().isEmpty() && s.endsWith("bricks")) {
 			return s.substring(0, s.length() - 1);
 		}
 		else {
