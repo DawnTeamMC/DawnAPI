@@ -22,7 +22,7 @@ public class DawnBlockPack extends Pack {
 	protected static <P extends Pack, B extends PackBuilder> P register(B packBuilder) {
 		return add(packBuilder, Dawn.MOD_DATA);
 	}
-	
+
 	public static final Block OAK_VERTICAL_SLAB = register(new BlockCreator.Builder("oak", DefaultBlockGetter.VERTICAL_SLAB, Blocks.OAK_SLAB));
 	public static final Block SPRUCE_VERTICAL_SLAB = register(new BlockCreator.Builder("spruce", DefaultBlockGetter.VERTICAL_SLAB, Blocks.SPRUCE_SLAB));
 	public static final Block BIRCH_VERTICAL_SLAB = register(new BlockCreator.Builder("birch", DefaultBlockGetter.VERTICAL_SLAB, Blocks.BIRCH_SLAB));
