@@ -23,12 +23,12 @@ public class StringUtil {
 		}
 	}
 
-	public static String fixShapePrefix(String s, BlockGetter getter) {
+	public static String getShapedName(String s, BlockGetter getter) {
 		if(!getter.getSuffix().isEmpty() && s.endsWith("bricks")) {
-			return s.substring(0, s.length() - 1);
+			return s.substring(0, s.length() - 1) + getter.getSuffix();
 		}
 		else {
-			return s;
+			return s + getter.getSuffix();
 		}
 	}
 }

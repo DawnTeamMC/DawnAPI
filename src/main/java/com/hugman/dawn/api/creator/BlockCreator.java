@@ -137,7 +137,7 @@ public class BlockCreator extends Creator<Block> {
 		 * @param settings The block settings.
 		 */
 		public Builder(String prefix, BlockGetter getter, AbstractBlock.Settings settings) {
-			this(StringUtil.fixShapePrefix(prefix, getter) + getter.getSuffix(), getter.getBlock(settings));
+			this(StringUtil.getShapedName(prefix, getter), getter.getBlock(settings));
 			copy(getter);
 		}
 
