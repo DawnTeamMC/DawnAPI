@@ -2,7 +2,6 @@ package com.hugman.dawn;
 
 import com.hugman.dawn.api.creator.Creator;
 import com.hugman.dawn.api.creator.ModData;
-import com.hugman.dawn.api.creator.pack.Pack;
 import com.hugman.dawn.api.creator.pack.PackManager;
 import com.hugman.dawn.api.util.debug.EntryDebugWriter;
 import com.hugman.dawn.init.DawnBlockPack;
@@ -26,10 +25,8 @@ public class Dawn implements ModInitializer {
 	}
 
 	public void onServerLoad(MinecraftServer minecraftServer) {
-		for(Pack moddedPack : PackManager.MODDED_PACKS) {
-			for(Object creator : moddedPack.getCreators()) {
-				((Creator<?>) creator).serverRegister(minecraftServer.isDedicated());
-			}
+		for(Creator<?> creator : PackManager.CREATORS) {
+			creator.serverRegister(minecraftServer.isDedicated());
 		}
 		DEBUG_WRITER.load();
 	}

@@ -2,7 +2,6 @@ package com.hugman.dawn.init;
 
 import com.hugman.dawn.Dawn;
 import com.hugman.dawn.api.creator.BlockCreator;
-import com.hugman.dawn.api.creator.pack.ModdedPack;
 import com.hugman.dawn.api.creator.pack.Pack;
 import com.hugman.dawn.api.creator.pack.PackBuilder;
 import com.hugman.dawn.api.util.BlockSettings;
@@ -11,7 +10,7 @@ import com.hugman.dawn.api.util.DefaultBlockGetter;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 
-public class DawnBlockPack extends ModdedPack {
+public class DawnBlockPack extends Pack {
 	protected static <V, B extends CreatorBuilder> V register(B creatorBuilder) {
 		return add(creatorBuilder, Dawn.MOD_DATA);
 	}

@@ -19,10 +19,8 @@ public class DawnClient implements ClientModInitializer {
 	}
 
 	public void onClientLoad(MinecraftClient minecraftClient) {
-		for(Pack moddedPack : PackManager.MODDED_PACKS) {
-			for(Object creator : moddedPack.getCreators()) {
-				((Creator<?>) creator).clientRegister();
-			}
+		for(Creator<?> creator : PackManager.CREATORS) {
+			creator.clientRegister();
 		}
 		Dawn.DEBUG_WRITER.load();
 	}
