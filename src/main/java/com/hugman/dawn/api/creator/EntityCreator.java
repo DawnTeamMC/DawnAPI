@@ -2,7 +2,6 @@ package com.hugman.dawn.api.creator;
 
 import com.hugman.dawn.api.util.SimpleBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -34,9 +33,9 @@ public class EntityCreator extends Creator<EntityType<? extends Entity>> {
 		protected DefaultAttributeContainer.Builder attributeBuilder;
 
 		/**
-		 * Creates a simple item with no cook time.
+		 * Creates an entity type.
 		 *
-		 * @param name     The name of the item.
+		 * @param name           The name of the entity type.
 		 * @param baseEntityType The entity type itself.
 		 */
 		public Builder(String name, EntityType<? extends Entity> baseEntityType) {
@@ -50,9 +49,6 @@ public class EntityCreator extends Creator<EntityType<? extends Entity>> {
 			return this;
 		}
 
-		/**
-		 * Builds the entry and registers the item with all its settings.
-		 */
 		public EntityCreator build() {
 			return new EntityCreator(this.name, this.baseEntityType, this.attributeBuilder);
 		}

@@ -61,9 +61,9 @@ public class BiomeCreator extends Creator<Biome> {
 		private Biome.MixedNoisePoint noises;
 
 		/**
-		 * Creates a simple biome that won't spawn in any dimension.
+		 * Creates a biome.
 		 *
-		 * @param name  The name of the biome.
+		 * @param name      The name of the biome.
 		 * @param baseBiome The biome itself.
 		 */
 		public Builder(String name, Biome baseBiome) {
@@ -100,9 +100,6 @@ public class BiomeCreator extends Creator<Biome> {
 			return this;
 		}
 
-		/**
-		 * Builds the entry and registers the biome with all its settings.
-		 */
 		public BiomeCreator build() {
 			return new BiomeCreator(this.name, this.baseBiome, this.spawnDimension, this.climate, this.weight, this.isSpawnBiome, this.noises);
 		}

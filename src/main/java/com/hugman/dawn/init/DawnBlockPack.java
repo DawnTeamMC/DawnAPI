@@ -1,21 +1,22 @@
 package com.hugman.dawn.init;
 
 import com.hugman.dawn.Dawn;
-import com.hugman.dawn.api.creator.*;
+import com.hugman.dawn.api.creator.BlockCreator;
+import com.hugman.dawn.api.creator.BlockGetter;
+import com.hugman.dawn.api.creator.BlockSettings;
+import com.hugman.dawn.api.creator.Creator;
 import com.hugman.dawn.api.creator.pack.Pack;
 import com.hugman.dawn.api.util.SimpleBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 
 public class DawnBlockPack extends Pack {
-	protected static final ModData modData = Dawn.MOD_DATA;
-
 	protected static <V, C extends Creator<V>, B extends SimpleBuilder<C>> V register(B creatorBuilder) {
-		return add(creatorBuilder, modData);
+		return add(creatorBuilder, Dawn.MOD_DATA);
 	}
 
 	protected static <P extends Pack> P register(Pack.Builder packBuilder) {
-		return add(packBuilder, modData);
+		return add(packBuilder, Dawn.MOD_DATA);
 	}
 
 	public static final Block OAK_VERTICAL_SLAB = register(new BlockCreator.Builder("oak", BlockGetter.VERTICAL_SLAB, Blocks.OAK_SLAB));

@@ -2,13 +2,12 @@ package com.hugman.dawn.api.creator;
 
 import com.hugman.dawn.Dawn;
 import com.hugman.dawn.api.util.SimpleBuilder;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemConvertible;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.collection.DefaultedList;
-
-import java.util.logging.Logger;
 
 public class ItemGroupCreator extends Creator<ItemGroup> {
 	protected final Item baseItem;

@@ -1,5 +1,8 @@
 package com.hugman.dawn.api.creator;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+
 public abstract class Creator<V> {
 	protected final String name;
 	protected V value;
@@ -10,6 +13,7 @@ public abstract class Creator<V> {
 
 	public abstract V register(ModData modData);
 
+	@Environment(EnvType.CLIENT)
 	public void clientRegister() {
 	}
 

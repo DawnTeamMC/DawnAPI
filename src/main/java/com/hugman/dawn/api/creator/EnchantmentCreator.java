@@ -1,9 +1,7 @@
 package com.hugman.dawn.api.creator;
 
 import com.hugman.dawn.api.util.SimpleBuilder;
-import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.item.Item;
 import net.minecraft.util.registry.Registry;
 
 public class EnchantmentCreator extends Creator<Enchantment> {
@@ -25,9 +23,9 @@ public class EnchantmentCreator extends Creator<Enchantment> {
 		protected final Enchantment baseEnchantment;
 
 		/**
-		 * Creates a simple item with no cook time.
+		 * Creates an enchantment.
 		 *
-		 * @param name     The name of the item.
+		 * @param name            The name of the enchantment.
 		 * @param baseEnchantment The enchantment itself.
 		 */
 		public Builder(String name, Enchantment baseEnchantment) {
@@ -35,9 +33,6 @@ public class EnchantmentCreator extends Creator<Enchantment> {
 			this.baseEnchantment = baseEnchantment;
 		}
 
-		/**
-		 * Builds the entry and registers the item with all its settings.
-		 */
 		public EnchantmentCreator build() {
 			return new EnchantmentCreator(this.name, this.baseEnchantment);
 		}

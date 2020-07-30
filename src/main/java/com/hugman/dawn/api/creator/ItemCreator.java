@@ -56,7 +56,7 @@ public class ItemCreator extends Creator<Item> {
 		protected Item copiedItem;
 
 		/**
-		 * Creates a simple item with no cook time.
+		 * Creates an item.
 		 *
 		 * @param name     The name of the item.
 		 * @param baseItem The item itself.
@@ -85,9 +85,6 @@ public class ItemCreator extends Creator<Item> {
 			return this;
 		}
 
-		/**
-		 * Builds the entry and registers the item with all its settings.
-		 */
 		public ItemCreator build() {
 			return new ItemCreator(this.name, this.baseItem, this.cookTime, this.compostingChance, this.copiedItem);
 		}

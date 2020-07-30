@@ -31,7 +31,7 @@ public class MCBlockPack extends Pack {
 		/**
 		 * Creates a creator pack containing blocks of 16 different colors.
 		 *
-		 * @param name   The name of the blocks. (ex: <code>bricks</code>)
+		 * @param name     The name of the blocks. (ex: <code>bricks</code>)
 		 * @param getter   The getter to use to build the blocks.
 		 * @param settings The block settings.
 		 */

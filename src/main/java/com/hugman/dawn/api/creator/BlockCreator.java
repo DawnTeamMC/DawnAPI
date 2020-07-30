@@ -118,6 +118,9 @@ public class BlockCreator extends Creator<Block> {
 
 		/**
 		 * Creates a simple block with an item but no item group, flammability or cook time and is rendered has a solid block.
+		 *
+		 * @param name      The name of the block.
+		 * @param baseBlock The block itself.
 		 */
 		public Builder(String name, Block baseBlock) {
 			this.name = name;
@@ -207,9 +210,6 @@ public class BlockCreator extends Creator<Block> {
 			return this;
 		}
 
-		/**
-		 * Builds the entry and registers the block with all its settings.
-		 */
 		public BlockCreator build() {
 			if(itemGroup == null && copiedBlock != null) {
 				this.itemGroup = copiedBlock.asItem().getGroup();

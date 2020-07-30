@@ -28,7 +28,7 @@ public class MSBlockPack extends Pack {
 		/**
 		 * Creates a creator pack containing blocks having different getters as base.
 		 *
-		 * @param name   The name for the created blocks. (ex: <code>bricks</code>)
+		 * @param name     The name for the created blocks. (ex: <code>bricks</code>)
 		 * @param settings The block settings.
 		 * @param getters  The getters to use for the shapes to create.
 		 */

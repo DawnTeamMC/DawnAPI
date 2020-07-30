@@ -13,7 +13,7 @@ public class FungusPack {
 		/**
 		 * Creates an entry pack containing a fungus entry and its potted variant.
 		 *
-		 * @param name             The name of the fungus plant. (ex: <code>crimson</code>)
+		 * @param name               The name of the fungus plant. (ex: <code>crimson</code>)
 		 * @param hugeFungusSupplier The supplier for the huge fungus feature.
 		 */
 		public Builder(String name, Supplier<ConfiguredFeature<HugeFungusFeatureConfig, ?>> hugeFungusSupplier) {
