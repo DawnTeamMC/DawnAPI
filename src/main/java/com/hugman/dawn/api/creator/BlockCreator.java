@@ -1,5 +1,7 @@
 package com.hugman.dawn.api.creator;
 
+import com.hugman.dawn.api.util.BlockGetter;
+import com.hugman.dawn.api.util.CreatorHelper;
 import com.hugman.dawn.api.util.SimpleBuilder;
 import com.hugman.dawn.api.util.StringUtil;
 import net.fabricmc.api.EnvType;
@@ -125,14 +127,6 @@ public class BlockCreator extends Creator<Block> {
 		public Builder(String name, Block baseBlock) {
 			this.name = name;
 			this.baseBlock = baseBlock;
-			this.render = null;
-			this.itemGroup = null;
-			this.flammabilityBurn = 0;
-			this.flammabilitySpread = 0;
-			this.cookTime = 0;
-			this.compostingChance = 0;
-			this.noItem = false;
-			this.copiedBlock = null;
 		}
 
 		/**

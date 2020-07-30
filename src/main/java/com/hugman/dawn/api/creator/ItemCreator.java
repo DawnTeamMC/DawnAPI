@@ -64,7 +64,6 @@ public class ItemCreator extends Creator<Item> {
 		public Builder(String name, Item baseItem) {
 			this.name = name;
 			this.baseItem = baseItem;
-			this.cookTime = 0;
 		}
 
 		public Builder setCookTime(int cookTime) {

@@ -2,10 +2,10 @@ package com.hugman.dawn.init;
 
 import com.hugman.dawn.Dawn;
 import com.hugman.dawn.api.creator.BlockCreator;
-import com.hugman.dawn.api.creator.BlockGetter;
-import com.hugman.dawn.api.creator.BlockSettings;
 import com.hugman.dawn.api.creator.Creator;
 import com.hugman.dawn.api.creator.pack.Pack;
+import com.hugman.dawn.api.util.BlockGetter;
+import com.hugman.dawn.api.util.BlockSettings;
 import com.hugman.dawn.api.util.SimpleBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;

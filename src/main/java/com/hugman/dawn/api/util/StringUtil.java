@@ -1,7 +1,5 @@
 package com.hugman.dawn.api.util;
 
-import com.hugman.dawn.api.creator.BlockGetter;
-
 public class StringUtil {
 	public static String[] cutAtLast(String s, String separatorChar) {
 		int i = s.lastIndexOf(separatorChar);

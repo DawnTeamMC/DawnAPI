@@ -41,7 +41,6 @@ public class EntityCreator extends Creator<EntityType<? extends Entity>> {
 		public Builder(String name, EntityType<? extends Entity> baseEntityType) {
 			this.name = name;
 			this.baseEntityType = baseEntityType;
-			this.attributeBuilder = null;
 		}
 
 		public Builder attributes(DefaultAttributeContainer.Builder attributeBuilder) {

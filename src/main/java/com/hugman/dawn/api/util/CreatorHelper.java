@@ -1,4 +1,4 @@
-package com.hugman.dawn.api.creator;
+package com.hugman.dawn.api.util;
 
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;

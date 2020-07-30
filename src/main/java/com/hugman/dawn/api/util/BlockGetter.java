@@ -1,5 +1,6 @@
-package com.hugman.dawn.api.creator;
+package com.hugman.dawn.api.util;
 
+import com.hugman.dawn.api.creator.BlockCreator;
 import com.hugman.dawn.api.object.block.DoorBlock;
 import com.hugman.dawn.api.object.block.MushroomPlantBlock;
 import com.hugman.dawn.api.object.block.PressurePlateBlock;

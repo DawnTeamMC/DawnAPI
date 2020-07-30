@@ -1,10 +1,10 @@
 package com.hugman.dawn.api.creator.pack.block;
 
 import com.hugman.dawn.api.creator.BlockCreator;
-import com.hugman.dawn.api.creator.BlockSettings;
 import com.hugman.dawn.api.creator.ModData;
 import com.hugman.dawn.api.creator.pack.Pack;
 import com.hugman.dawn.api.object.block.SaplingBlock;
+import com.hugman.dawn.api.util.BlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.MaterialColor;
 import net.minecraft.block.sapling.SaplingGenerator;

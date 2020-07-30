@@ -70,10 +70,6 @@ public class BiomeCreator extends Creator<Biome> {
 			this.name = name;
 			this.baseBiome = baseBiome;
 			this.spawnDimension = SpawnDimension.NONE;
-			this.climate = null;
-			this.weight = 0D;
-			this.isSpawnBiome = false;
-			this.noises = null;
 		}
 
 		/**

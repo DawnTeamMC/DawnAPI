@@ -1,9 +1,9 @@
 package com.hugman.dawn.api.creator.pack.block;
 
 import com.hugman.dawn.api.creator.BlockCreator;
-import com.hugman.dawn.api.creator.BlockGetter;
 import com.hugman.dawn.api.creator.ModData;
 import com.hugman.dawn.api.creator.pack.Pack;
+import com.hugman.dawn.api.util.BlockGetter;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 
@@ -28,6 +28,18 @@ public class MSBlockPack extends Pack {
 		/**
 		 * Creates a creator pack containing blocks having different getters as base.
 		 *
+		 * @param name        The name for the created blocks. (ex: <code>bricks</code>)
+		 * @param copiedBlock The block to be copied.
+		 * @param getters     The getters to use for the shapes to create.
+		 */
+		public Builder(String name, Block copiedBlock, BlockGetter... getters) {
+			this(name, FabricBlockSettings.copyOf(copiedBlock), getters);
+			copy(copiedBlock);
+		}
+
+		/**
+		 * Creates a creator pack containing blocks having different getters as base.
+		 *
 		 * @param name     The name for the created blocks. (ex: <code>bricks</code>)
 		 * @param settings The block settings.
 		 * @param getters  The getters to use for the shapes to create.
@@ -35,7 +47,6 @@ public class MSBlockPack extends Pack {
 		public Builder(String name, FabricBlockSettings settings, BlockGetter... getters) {
 			this.prefix = name;
 			this.settings = settings;
-			this.copiedBlock = null;
 			this.getters = getters;
 		}
 

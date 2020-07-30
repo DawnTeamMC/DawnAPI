@@ -1,4 +1,4 @@
-package com.hugman.dawn.api.creator;
+package com.hugman.dawn.api.util;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;

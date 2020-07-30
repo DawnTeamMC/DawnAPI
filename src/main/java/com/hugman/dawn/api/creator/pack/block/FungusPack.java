@@ -1,8 +1,8 @@
 package com.hugman.dawn.api.creator.pack.block;
 
 import com.hugman.dawn.api.creator.BlockCreator;
-import com.hugman.dawn.api.creator.BlockSettings;
 import com.hugman.dawn.api.object.block.FungusBlock;
+import com.hugman.dawn.api.util.BlockSettings;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.HugeFungusFeatureConfig;
 
