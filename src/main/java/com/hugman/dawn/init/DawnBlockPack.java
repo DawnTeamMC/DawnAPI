@@ -56,9 +56,9 @@ public class DawnBlockPack extends Pack {
 	public static final Block PRISMARINE_BRICK_VERTICAL_SLAB = register(new BlockCreator.Builder("prismarine_brick", DefaultBlockGetter.VERTICAL_SLAB, Blocks.PRISMARINE_BRICK_SLAB));
 	public static final Block DARK_PRISMARINE_VERTICAL_SLAB = register(new BlockCreator.Builder("dark_prismarine", DefaultBlockGetter.VERTICAL_SLAB, Blocks.DARK_PRISMARINE_SLAB));
 	public static final Block BLACKSTONE_VERTICAL_SLAB = register(new BlockCreator.Builder("blackstone", DefaultBlockGetter.VERTICAL_SLAB, Blocks.BLACKSTONE_SLAB));
+	public static final Block POLISHED_BLACKSTONE_VERTICAL_SLAB = register(new BlockCreator.Builder("polished_blackstone", DefaultBlockGetter.VERTICAL_SLAB, Blocks.POLISHED_BLACKSTONE_SLAB));
 	public static final Block POLISHED_BLACKSTONE_BRICK_VERTICAL_SLAB = register(new BlockCreator.Builder("polished_blackstone_brick", DefaultBlockGetter.VERTICAL_SLAB, Blocks.POLISHED_BLACKSTONE_BRICK_SLAB));
 
-	public static final Block POLISHED_BLACKSTONE_SLAB = register(new BlockCreator.Builder("polished_blackstone", DefaultBlockGetter.VERTICAL_SLAB, Blocks.POLISHED_BLACKSTONE_SLAB));
 	public static final Block DARK_PRISMARINE_WALL = register(new BlockCreator.Builder("dark_prismarine", DefaultBlockGetter.WALL, Blocks.DARK_PRISMARINE));
 
 	public static final Block OAK_LEAF_PILE = register(new BlockCreator.Builder("oak", DefaultBlockGetter.LEAF_PILE, BlockSettings.LEAF_PILE).copy(Blocks.OAK_LEAVES));
