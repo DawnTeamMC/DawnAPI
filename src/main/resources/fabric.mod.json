@@ -8,8 +8,8 @@
 		"Hugman"
 	],
 	"contact": {
-		"homepage": "https://github.com/Hugman76/DawnAPI",
-		"issues": "https://github.com/Hugman76/DawnAPI/issues"
+		"homepage": "https://github.com/DawnTeamMC/DawnAPI",
+		"issues": "https://github.com/DawnTeamMC/DawnAPI/issues"
 	},
 	"environment": "*",
 	"entrypoints": {
