@@ -8,11 +8,14 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.collection.DefaultedList;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ItemGroupCreator extends Creator<ItemGroup> {
 	protected final Item baseItem;
-	protected final DefaultedList<ItemStack> stacks;
+	protected final List<ItemStack> stacks;
 
-	private ItemGroupCreator(String name, Item baseItem, DefaultedList<ItemStack> stacks) {
+	private ItemGroupCreator(String name, Item baseItem, List<ItemStack> stacks) {
 		super(name);
 		this.baseItem = baseItem;
 		this.stacks = stacks;
@@ -20,14 +23,17 @@ public class ItemGroupCreator extends Creator<ItemGroup> {
 
 	@Override
 	public ItemGroup register(ModData modData) {
-		value = FabricItemGroupBuilder.create(modData.id(name)).icon(() -> new ItemStack(baseItem)).appendItems(itemStacks -> itemStacks.addAll(stacks)).build();
+		FabricItemGroupBuilder builder = FabricItemGroupBuilder.create(modData.id(name));
+		builder.icon(() -> new ItemStack(baseItem));
+		if(!stacks.isEmpty()) builder.appendItems(itemStacks -> itemStacks.addAll(stacks));
+		value = builder.build();
 		return value;
 	}
 
 	public static class Builder implements CreatorBuilder {
 		protected final String name;
 		protected final Item baseItem;
-		protected final DefaultedList<ItemStack> stacks = DefaultedList.of();
+		protected final List<ItemStack> stacks = new ArrayList<>();
 
 		/**
 		 * Creates an item group.
