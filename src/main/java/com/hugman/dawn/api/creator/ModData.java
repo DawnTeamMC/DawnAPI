@@ -3,10 +3,14 @@ package com.hugman.dawn.api.creator;
 import net.minecraft.util.Identifier;
 
 public class ModData {
-	public final String modName;
+	private final String modName;
 
 	public ModData(String modName) {
 		this.modName = modName;
+	}
+
+	public String getModName() {
+		return modName;
 	}
 
 	public Identifier id(String s) {
