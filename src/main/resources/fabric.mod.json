@@ -3,12 +3,12 @@
 	"id": "dawn",
 	"version": "${version}",
 	"icon": "assets/dawn/textures/logo.png",
-	"description": "Library mod.",
+	"description": "API that facilitates the creation of features.",
 	"authors": [
 		"Hugman"
 	],
 	"contact": {
-		"homepage": "https://www.curseforge.com/minecraft/mc-mods/dawn-api",
+		"homepage": "https://www.curseforge.com/minecraft/mc-mods/dawn",
 		"sources": "https://github.com/DawnTeamMC/DawnAPI",
 		"issues": "https://github.com/DawnTeamMC/DawnAPI/issues"
 	},

@@ -1,4 +1,4 @@
-[![Dawn API](https://raw.githubusercontent.com/DawnTeamMC/DawnTeamMC/master/dawn_api/header.png)](https://www.curseforge.com/minecraft/mc-mods/dawn-api)
+[![Dawn API](https://raw.githubusercontent.com/DawnTeamMC/DawnTeamMC/master/dawn_api/header.png)](https://www.curseforge.com/minecraft/mc-mods/dawn)
 
 <p align="center">
 The Dawn API for Minecraft 1.16 facilitates the creation of features for other mods. It also adds some concrete features such as vertical slabs, leaves piles, as well as a new creative tab.
@@ -22,7 +22,7 @@ Join the Dawn Town discord for support or to chat about the mods: <a href="https
 * Dark Prismarine Wall
 * Creative Tools tab (containing creative-only items)
 
-##### Images of the added features can be found on the CurseForge [Images page](https://www.curseforge.com/minecraft/mc-mods/dawn-api/screenshots).
+##### Images of the added features can be found on the CurseForge [Images page](https://www.curseforge.com/minecraft/mc-mods/dawn/screenshots).
 
 
 #### Other Mods by the Dawn Team:
