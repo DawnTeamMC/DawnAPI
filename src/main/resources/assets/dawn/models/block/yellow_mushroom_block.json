@@ -1,0 +1,7 @@
+{
+	"parent": "dawn:block/mushroom_block",
+	"textures": {
+		"block": "dawn:block/yellow_mushroom_block"
+	}
+}
+}

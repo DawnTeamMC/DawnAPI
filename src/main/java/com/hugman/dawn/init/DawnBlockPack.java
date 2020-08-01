@@ -4,11 +4,15 @@ import com.hugman.dawn.Dawn;
 import com.hugman.dawn.api.creator.BlockCreator;
 import com.hugman.dawn.api.creator.pack.Pack;
 import com.hugman.dawn.api.creator.pack.PackBuilder;
+import com.hugman.dawn.api.creator.pack.block.PottedPlantPack;
+import com.hugman.dawn.api.object.block.FertilizableMushroomPlantBlock;
 import com.hugman.dawn.api.util.BlockSettings;
 import com.hugman.dawn.api.util.CreatorBuilder;
 import com.hugman.dawn.api.util.DefaultBlockGetter;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.util.DyeColor;
 
 public class DawnBlockPack extends Pack {
 	protected static <V, B extends CreatorBuilder> V register(B creatorBuilder) {
@@ -67,4 +71,33 @@ public class DawnBlockPack extends Pack {
 	public static final Block JUNGLE_LEAF_PILE = register(new BlockCreator.Builder("jungle", DefaultBlockGetter.LEAF_PILE, BlockSettings.LEAF_PILE).copy(Blocks.OAK_LEAVES));
 	public static final Block ACACIA_LEAF_PILE = register(new BlockCreator.Builder("acacia", DefaultBlockGetter.LEAF_PILE, BlockSettings.LEAF_PILE).copy(Blocks.OAK_LEAVES));
 	public static final Block DARK_OAK_LEAF_PILE = register(new BlockCreator.Builder("dark_oak", DefaultBlockGetter.LEAF_PILE, BlockSettings.LEAF_PILE).copy(Blocks.OAK_LEAVES));
+
+	public static final Block WHITE_MUSHROOM_BLOCK = register(new BlockCreator.Builder("white", DefaultBlockGetter.MUSHROOM_BLOCK, BlockSettings.MUSHROOM_BLOCK.materialColor(DyeColor.WHITE)));
+	public static final Block LIGHT_GRAY_MUSHROOM_BLOCK = register(new BlockCreator.Builder("light_gray", DefaultBlockGetter.MUSHROOM_BLOCK, BlockSettings.MUSHROOM_BLOCK.materialColor(DyeColor.LIGHT_GRAY)));
+	public static final Block GRAY_MUSHROOM_BLOCK = register(new BlockCreator.Builder("gray", DefaultBlockGetter.MUSHROOM_BLOCK, BlockSettings.MUSHROOM_BLOCK.materialColor(DyeColor.GRAY)));
+	public static final Block BLACK_MUSHROOM_BLOCK = register(new BlockCreator.Builder("black", DefaultBlockGetter.MUSHROOM_BLOCK, BlockSettings.MUSHROOM_BLOCK.materialColor(DyeColor.BLACK)));
+	public static final Block ORANGE_MUSHROOM_BLOCK = register(new BlockCreator.Builder("orange", DefaultBlockGetter.MUSHROOM_BLOCK, BlockSettings.MUSHROOM_BLOCK.materialColor(DyeColor.ORANGE)));
+	public static final Block YELLOW_MUSHROOM_BLOCK = register(new BlockCreator.Builder("yellow", DefaultBlockGetter.MUSHROOM_BLOCK, BlockSettings.MUSHROOM_BLOCK.materialColor(DyeColor.YELLOW)));
+	public static final Block LIME_MUSHROOM_BLOCK = register(new BlockCreator.Builder("lime", DefaultBlockGetter.MUSHROOM_BLOCK, BlockSettings.MUSHROOM_BLOCK.materialColor(DyeColor.LIME)));
+	public static final Block GREEN_MUSHROOM_BLOCK = register(new BlockCreator.Builder("green", DefaultBlockGetter.MUSHROOM_BLOCK, BlockSettings.MUSHROOM_BLOCK.materialColor(DyeColor.GREEN)));
+	public static final Block CYAN_MUSHROOM_BLOCK = register(new BlockCreator.Builder("cyan", DefaultBlockGetter.MUSHROOM_BLOCK, BlockSettings.MUSHROOM_BLOCK.materialColor(DyeColor.CYAN)));
+	public static final Block LIGHT_BLUE_MUSHROOM_BLOCK = register(new BlockCreator.Builder("light_blue", DefaultBlockGetter.MUSHROOM_BLOCK, BlockSettings.MUSHROOM_BLOCK.materialColor(DyeColor.LIGHT_BLUE)));
+	public static final Block BLUE_MUSHROOM_BLOCK = register(new BlockCreator.Builder("blue", DefaultBlockGetter.MUSHROOM_BLOCK, BlockSettings.MUSHROOM_BLOCK.materialColor(DyeColor.BLUE)));
+	public static final Block PURPLE_MUSHROOM_BLOCK = register(new BlockCreator.Builder("purple", DefaultBlockGetter.MUSHROOM_BLOCK, BlockSettings.MUSHROOM_BLOCK.materialColor(DyeColor.PURPLE)));
+	public static final Block MAGENTA_MUSHROOM_BLOCK = register(new BlockCreator.Builder("magenta", DefaultBlockGetter.MUSHROOM_BLOCK, BlockSettings.MUSHROOM_BLOCK.materialColor(DyeColor.MAGENTA)));
+	public static final Block PINK_MUSHROOM_BLOCK = register(new BlockCreator.Builder("pink", DefaultBlockGetter.MUSHROOM_BLOCK, BlockSettings.MUSHROOM_BLOCK.materialColor(DyeColor.PINK)));
+	public static final PottedPlantPack WHITE_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("white_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, WHITE_MUSHROOM_BLOCK)).setItemGroup(ItemGroup.DECORATIONS).setRender(BlockCreator.Render.CUTOUT)));
+	public static final PottedPlantPack LIGHT_GRAY_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("light_gray_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, LIGHT_GRAY_MUSHROOM_BLOCK)).setItemGroup(ItemGroup.DECORATIONS).setRender(BlockCreator.Render.CUTOUT)));
+	public static final PottedPlantPack GRAY_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("gray_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, GRAY_MUSHROOM_BLOCK)).setItemGroup(ItemGroup.DECORATIONS).setRender(BlockCreator.Render.CUTOUT)));
+	public static final PottedPlantPack BLACK_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("black_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, BLACK_MUSHROOM_BLOCK)).setItemGroup(ItemGroup.DECORATIONS).setRender(BlockCreator.Render.CUTOUT)));
+	public static final PottedPlantPack ORANGE_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("orange_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, ORANGE_MUSHROOM_BLOCK)).setItemGroup(ItemGroup.DECORATIONS).setRender(BlockCreator.Render.CUTOUT)));
+	public static final PottedPlantPack YELLOW_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("yellow_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, YELLOW_MUSHROOM_BLOCK)).setItemGroup(ItemGroup.DECORATIONS).setRender(BlockCreator.Render.CUTOUT)));
+	public static final PottedPlantPack LIME_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("lime_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, LIME_MUSHROOM_BLOCK)).setItemGroup(ItemGroup.DECORATIONS).setRender(BlockCreator.Render.CUTOUT)));
+	public static final PottedPlantPack GREEN_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("green_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, GREEN_MUSHROOM_BLOCK)).setItemGroup(ItemGroup.DECORATIONS).setRender(BlockCreator.Render.CUTOUT)));
+	public static final PottedPlantPack CYAN_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("cyan_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, CYAN_MUSHROOM_BLOCK)).setItemGroup(ItemGroup.DECORATIONS).setRender(BlockCreator.Render.CUTOUT)));
+	public static final PottedPlantPack LIGHT_BLUE_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("light_blue_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, LIGHT_BLUE_MUSHROOM_BLOCK)).setItemGroup(ItemGroup.DECORATIONS).setRender(BlockCreator.Render.CUTOUT)));
+	public static final PottedPlantPack BLUE_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("blue_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, BLUE_MUSHROOM_BLOCK)).setItemGroup(ItemGroup.DECORATIONS).setRender(BlockCreator.Render.CUTOUT)));
+	public static final PottedPlantPack PURPLE_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("purple_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, PURPLE_MUSHROOM_BLOCK)).setItemGroup(ItemGroup.DECORATIONS).setRender(BlockCreator.Render.CUTOUT)));
+	public static final PottedPlantPack MAGENTA_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("magenta_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, MAGENTA_MUSHROOM_BLOCK)).setItemGroup(ItemGroup.DECORATIONS).setRender(BlockCreator.Render.CUTOUT)));
+	public static final PottedPlantPack PINK_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("pink_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, PINK_MUSHROOM_BLOCK)).setItemGroup(ItemGroup.DECORATIONS).setRender(BlockCreator.Render.CUTOUT)));
 }

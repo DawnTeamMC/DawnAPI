@@ -1,0 +1,7 @@
+{
+	"parent": "block/cross",
+	"textures": {
+		"cross": "dawn:block/white_mushroom"
+	}
+}
+}

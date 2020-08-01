@@ -1,0 +1,7 @@
+{
+	"parent": "block/cube_all",
+	"textures": {
+		"all": "dawn:block/gray_mushroom_block"
+	}
+}
+}
