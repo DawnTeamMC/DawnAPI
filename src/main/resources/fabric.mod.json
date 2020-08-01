@@ -1,14 +1,15 @@
 {
-	"name": "Dawn",
+	"name": "Dawn API",
 	"id": "dawn",
 	"version": "${version}",
-	"icon": "assets/dawn/textures/icon.png",
+	"icon": "assets/dawn/textures/logo.png",
 	"description": "Library mod.",
 	"authors": [
 		"Hugman"
 	],
 	"contact": {
-		"homepage": "https://github.com/DawnTeamMC/DawnAPI",
+		"homepage": "https://www.curseforge.com/minecraft/mc-mods/dawn-api",
+		"sources": "https://github.com/DawnTeamMC/DawnAPI",
 		"issues": "https://github.com/DawnTeamMC/DawnAPI/issues"
 	},
 	"environment": "*",
@@ -27,7 +28,11 @@
 		"fabric": "*"
 	},
 	"custom": {
-		"modmenu:api": true
+		"modmenu:api": true,
+		"modupdater": {
+			"strategy": "curseforge",
+			"projectID": 399309
+		}
 	},
 	"license": "MIT",
 	"schemaVersion": 1
