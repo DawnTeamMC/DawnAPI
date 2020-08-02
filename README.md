@@ -1,8 +1,8 @@
 [![Dawn API](https://raw.githubusercontent.com/DawnTeamMC/DawnTeamMC/master/dawn_api/header.png)](https://www.curseforge.com/minecraft/mc-mods/dawn)
 
 <p align="center">
-	The Dawn API for Minecraft 1.16 facilitates the creation of features for other mods. It also adds some concrete features such as vertical slabs, leaves piles, as well as a new creative tab.<br>
-	<a href="https://www.curseforge.com/minecraft/mc-mods/fabric-api"><img title="Requires Fabric API" height="50" src="https://raw.githubusercontent.com/DawnTeamMC/DawnTeamMC/master/fabric_api/required.png"></a><br>
+	The Dawn API for Minecraft 1.16 facilitates the creation of features for other mods. It also adds some concrete features such as vertical slabs, leaves piles, as well as a new creative tab.<br><br>
+	<a href="https://www.curseforge.com/minecraft/mc-mods/fabric-api"><img title="Requires Fabric API" height="50" src="https://raw.githubusercontent.com/DawnTeamMC/DawnTeamMC/master/fabric_api/required.png"></a>
 </p>
 
 <h5 align="center">
