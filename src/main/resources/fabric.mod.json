@@ -22,7 +22,7 @@
 		]
 	},
 	"mixins": [
-		"mixins.json"
+		"dawn.mixins.json"
 	],
 	"depends": {
 		"fabric": "*"

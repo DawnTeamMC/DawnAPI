@@ -5,8 +5,6 @@
 	"mixins": [
 		"AxeItemMixin"
 	],
-	"client": [
-	],
 	"injectors": {
 		"defaultRequire": 1
 	}
