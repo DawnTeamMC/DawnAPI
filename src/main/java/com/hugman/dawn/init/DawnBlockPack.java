@@ -63,8 +63,6 @@ public class DawnBlockPack extends Pack {
 	public static final Block POLISHED_BLACKSTONE_VERTICAL_SLAB = register(new BlockCreator.Builder("polished_blackstone", DefaultBlockGetter.VERTICAL_SLAB, Blocks.POLISHED_BLACKSTONE_SLAB));
 	public static final Block POLISHED_BLACKSTONE_BRICK_VERTICAL_SLAB = register(new BlockCreator.Builder("polished_blackstone_brick", DefaultBlockGetter.VERTICAL_SLAB, Blocks.POLISHED_BLACKSTONE_BRICK_SLAB));
 
-	public static final Block DARK_PRISMARINE_WALL = register(new BlockCreator.Builder("dark_prismarine", DefaultBlockGetter.WALL, Blocks.DARK_PRISMARINE));
-
 	public static final Block OAK_LEAF_PILE = register(new BlockCreator.Builder("oak", DefaultBlockGetter.LEAF_PILE, BlockSettings.LEAF_PILE).copy(Blocks.OAK_LEAVES));
 	public static final Block SPRUCE_LEAF_PILE = register(new BlockCreator.Builder("spruce", DefaultBlockGetter.LEAF_PILE, BlockSettings.LEAF_PILE).copy(Blocks.OAK_LEAVES));
 	public static final Block BIRCH_LEAF_PILE = register(new BlockCreator.Builder("birch", DefaultBlockGetter.LEAF_PILE, BlockSettings.LEAF_PILE).copy(Blocks.OAK_LEAVES));
