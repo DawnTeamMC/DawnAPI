@@ -1,10 +1,6 @@
 package com.hugman.dawn.api.creator;
 
 import com.hugman.dawn.api.util.CreatorBuilder;
-import net.fabricmc.fabric.api.biomes.v1.FabricBiomes;
-import net.fabricmc.fabric.api.biomes.v1.NetherBiomes;
-import net.fabricmc.fabric.api.biomes.v1.OverworldBiomes;
-import net.fabricmc.fabric.api.biomes.v1.OverworldClimate;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
@@ -13,17 +9,17 @@ public class BiomeCreator extends Creator<Biome> {
 	private final Biome baseBiome;
 	private final SpawnDimension spawnDimension;
 
-	private final OverworldClimate climate;
+	//private final OverworldClimate climate;
 	private final double weight;
 	private final boolean isSpawnBiome;
 
 	private final Biome.MixedNoisePoint noises;
 
-	private BiomeCreator(String name, Biome baseBiome, SpawnDimension spawnDimension, OverworldClimate climate, double weight, boolean isSpawnBiome, Biome.MixedNoisePoint noises) {
+	private BiomeCreator(String name, Biome baseBiome, SpawnDimension spawnDimension/*, OverworldClimate climate */, double weight, boolean isSpawnBiome, Biome.MixedNoisePoint noises) {
 		super(name);
 		this.baseBiome = baseBiome;
 		this.spawnDimension = spawnDimension;
-		this.climate = climate;
+		//this.climate = climate;
 		this.weight = weight;
 		this.isSpawnBiome = isSpawnBiome;
 		this.noises = noises;
@@ -32,6 +28,7 @@ public class BiomeCreator extends Creator<Biome> {
 	@Override
 	public Biome register(ModData modData) {
 		value = Registry.register(BuiltinRegistries.BIOME, modData.id(name), baseBiome);
+		/*
 		switch(this.spawnDimension) {
 			case NONE:
 			default:
@@ -46,6 +43,8 @@ public class BiomeCreator extends Creator<Biome> {
 				NetherBiomes.addNetherBiome(value, noises);
 				break;
 		}
+
+		 */
 		return value;
 	}
 
@@ -54,7 +53,7 @@ public class BiomeCreator extends Creator<Biome> {
 		private final Biome baseBiome;
 		private SpawnDimension spawnDimension;
 
-		private OverworldClimate climate;
+		//private OverworldClimate climate;
 		private double weight;
 		private boolean isSpawnBiome;
 
@@ -79,9 +78,9 @@ public class BiomeCreator extends Creator<Biome> {
 		 * @param weight       The biome weight.
 		 * @param isSpawnBiome Defines if the player should be able to naturally spawn in the biome.
 		 */
-		public Builder addToOverworldContinental(OverworldClimate climate, double weight, boolean isSpawnBiome) {
+		public Builder addToOverworldContinental(/*OverworldClimate climate,*/ double weight, boolean isSpawnBiome) {
 			this.spawnDimension = SpawnDimension.OVERWORLD_CONTINENTAL;
-			this.climate = climate;
+			//this.climate = climate;
 			this.weight = weight;
 			this.isSpawnBiome = isSpawnBiome;
 			return this;
@@ -97,7 +96,7 @@ public class BiomeCreator extends Creator<Biome> {
 		}
 
 		public BiomeCreator build() {
-			return new BiomeCreator(this.name, this.baseBiome, this.spawnDimension, this.climate, this.weight, this.isSpawnBiome, this.noises);
+			return new BiomeCreator(this.name, this.baseBiome, this.spawnDimension/*, this.climate*/, this.weight, this.isSpawnBiome, this.noises);
 		}
 	}
 
