@@ -29,12 +29,12 @@ public class WoodPack extends Pack {
 				DefaultBlockGetter.WOOD_BUTTON,
 				DefaultBlockGetter.FENCE,
 				DefaultBlockGetter.FENCE_GATE,
-				DefaultBlockGetter.DOOR).copy(planks), modData);
+				DefaultBlockGetter.DOOR), modData);
 		this.barkBlocks = add(new MSBlockPack.Builder(name + logs.getWoodName(), settings.materialColor(barkColor),
 				DefaultBlockGetter.STAIRS,
 				DefaultBlockGetter.SLAB,
 				DefaultBlockGetter.VERTICAL_SLAB,
-				DefaultBlockGetter.WOOD_BUTTON).copy(logs.getWood()), modData);
+				DefaultBlockGetter.WOOD_BUTTON), modData);
 	}
 
 	public static class Builder implements PackBuilder {

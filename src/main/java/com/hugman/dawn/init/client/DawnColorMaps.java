@@ -16,24 +16,24 @@ public class DawnColorMaps {
 	}
 
 	private static void registerBlockColors() {
-		ColorProviderRegistry.BLOCK.register((block, pos, world, layer) ->
-		{
-			return FoliageColors.getSpruceColor();
-		}, DawnBlockPack.SPRUCE_LEAF_PILE);
-		ColorProviderRegistry.BLOCK.register((block, pos, world, layer) ->
-		{
-			return FoliageColors.getBirchColor();
-		}, DawnBlockPack.BIRCH_LEAF_PILE);
-		ColorProviderRegistry.BLOCK.register((block, pos, world, layer) ->
-		{
-			return pos != null && world != null ? BiomeColors.getFoliageColor(pos, world) : FoliageColors.getDefaultColor();
-		}, DawnBlockPack.OAK_LEAF_PILE, DawnBlockPack.JUNGLE_LEAF_PILE, DawnBlockPack.ACACIA_LEAF_PILE, DawnBlockPack.DARK_OAK_LEAF_PILE);
+		ColorProviderRegistry.BLOCK.register((block, pos, world, layer) -> FoliageColors.getSpruceColor(),
+				DawnBlockPack.SPRUCE_LEAF_PILE);
+		ColorProviderRegistry.BLOCK.register((block, pos, world, layer) -> FoliageColors.getBirchColor(),
+				DawnBlockPack.BIRCH_LEAF_PILE);
+		ColorProviderRegistry.BLOCK.register((block, pos, world, layer) -> pos != null && world != null ? BiomeColors.getFoliageColor(pos, world) : FoliageColors.getDefaultColor(),
+				DawnBlockPack.OAK_LEAF_PILE,
+				DawnBlockPack.JUNGLE_LEAF_PILE,
+				DawnBlockPack.ACACIA_LEAF_PILE,
+				DawnBlockPack.DARK_OAK_LEAF_PILE);
 	}
 
 	private static void registerItemColors() {
-		ColorProviderRegistry.ITEM.register((item, layer) ->
-		{
-			return GrassColors.getColor(0.5D, 1.0D);
-		}, DawnBlockPack.OAK_LEAF_PILE, DawnBlockPack.SPRUCE_LEAF_PILE, DawnBlockPack.BIRCH_LEAF_PILE, DawnBlockPack.JUNGLE_LEAF_PILE, DawnBlockPack.ACACIA_LEAF_PILE, DawnBlockPack.DARK_OAK_LEAF_PILE);
+		ColorProviderRegistry.ITEM.register((item, layer) -> GrassColors.getColor(0.5D, 1.0D),
+				DawnBlockPack.OAK_LEAF_PILE,
+				DawnBlockPack.SPRUCE_LEAF_PILE,
+				DawnBlockPack.BIRCH_LEAF_PILE,
+				DawnBlockPack.JUNGLE_LEAF_PILE,
+				DawnBlockPack.ACACIA_LEAF_PILE,
+				DawnBlockPack.DARK_OAK_LEAF_PILE);
 	}
 }

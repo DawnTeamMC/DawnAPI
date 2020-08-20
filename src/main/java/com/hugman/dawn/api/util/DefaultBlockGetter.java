@@ -7,7 +7,6 @@ import com.hugman.dawn.api.object.block.PressurePlateBlock;
 import com.hugman.dawn.api.object.block.StairsBlock;
 import com.hugman.dawn.api.object.block.StoneButtonBlock;
 import com.hugman.dawn.api.object.block.TrapdoorBlock;
-import com.hugman.dawn.api.object.block.WoodButtonBlock;
 import com.hugman.dawn.api.object.block.*;
 import net.minecraft.block.*;
 import net.minecraft.block.PressurePlateBlock.ActivationRule;

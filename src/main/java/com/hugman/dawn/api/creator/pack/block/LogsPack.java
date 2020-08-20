@@ -29,10 +29,11 @@ public class LogsPack extends Pack {
 		this.insideColor = insideColor;
 		this.barkColor = barkColor;
 		this.isNether = isNether;
-		this.log = add(new BlockCreator.Builder(name + logName, createLog()).copy(isNether ? Blocks.CRIMSON_STEM : Blocks.OAK_LOG), modData);
-		this.strippedLog = add(new BlockCreator.Builder("stripped_" + name + logName, createLog(false)).copy(isNether ? Blocks.STRIPPED_CRIMSON_STEM : Blocks.STRIPPED_OAK_LOG), modData);
-		this.wood = add(new BlockCreator.Builder(name + woodName, createLog(true)).copy(isNether ? Blocks.CRIMSON_HYPHAE : Blocks.OAK_WOOD), modData);
-		this.strippedWood = add(new BlockCreator.Builder("stripped_" + name + woodName, createLog(false)).copy(isNether ? Blocks.STRIPPED_CRIMSON_HYPHAE : Blocks.STRIPPED_OAK_WOOD), modData);
+		int flammability = isNether ? 0 : 5;
+		this.log = add(new BlockCreator.Builder(name + logName, createLog()).flammability(flammability), modData);
+		this.strippedLog = add(new BlockCreator.Builder("stripped_" + name + logName, createLog(false)).flammability(flammability), modData);
+		this.wood = add(new BlockCreator.Builder(name + woodName, createLog(true)).flammability(flammability), modData);
+		this.strippedWood = add(new BlockCreator.Builder("stripped_" + name + woodName, createLog(false)).flammability(flammability), modData);
 		AxeItem.BLOCK_STRIPPING_MAP.put(getLog(), getStrippedLog());
 		AxeItem.BLOCK_STRIPPING_MAP.put(getWood(), getStrippedWood());
 

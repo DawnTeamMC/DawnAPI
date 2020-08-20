@@ -14,9 +14,9 @@ import java.util.Map;
 public class MSCBlockPack extends Pack {
 	private final Map<BlockGetter, MCBlockPack> packMap = new HashMap<>();
 
-	protected MSCBlockPack(ModData modData, String name, FabricBlockSettings settings, Block copiedBlock, BlockGetter... getters) {
+	protected MSCBlockPack(ModData modData, String name, FabricBlockSettings settings, BlockGetter... getters) {
 		for(BlockGetter getter : getters) {
-			packMap.put(getter, add(new MCBlockPack.Builder(name, getter, settings).copy(copiedBlock), modData));
+			packMap.put(getter, add(new MCBlockPack.Builder(name, getter, settings), modData));
 		}
 	}
 
@@ -60,7 +60,7 @@ public class MSCBlockPack extends Pack {
 		}
 
 		public MSCBlockPack build(ModData modData) {
-			return new MSCBlockPack(modData, name, settings, copiedBlock, getters);
+			return new MSCBlockPack(modData, name, settings, getters);
 		}
 	}
 

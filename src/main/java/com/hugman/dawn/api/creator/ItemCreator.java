@@ -10,14 +10,12 @@ public class ItemCreator extends Creator<Item> {
 	protected final Item baseItem;
 	protected final int cookTime;
 	protected final float compostingChance;
-	protected final Item copiedItem;
 
-	private ItemCreator(String name, Item baseItem, int cookTime, float compostingChance, Item copiedItem) {
+	private ItemCreator(String name, Item baseItem, int cookTime, float compostingChance) {
 		super(name);
 		this.baseItem = baseItem;
 		this.cookTime = cookTime;
 		this.compostingChance = compostingChance;
-		this.copiedItem = copiedItem;
 	}
 
 	@Override
@@ -33,15 +31,8 @@ public class ItemCreator extends Creator<Item> {
 	public void serverRegister(boolean isDedicated) {
 		int cookTimeF = cookTime;
 		float compostingChanceF = compostingChance;
-		if(cookTime == 0 && copiedItem != null) {
-			// TODO
-			// cookTimeF = FuelRegistry.INSTANCE.get(copiedItem);
-		}
 		if(cookTime != 0) {
 			FuelRegistry.INSTANCE.add(value, cookTimeF);
-		}
-		if(compostingChance == 0 && copiedItem != null) {
-			compostingChanceF = CompostingChanceRegistry.INSTANCE.get(copiedItem);
 		}
 		if(compostingChance != 0) {
 			CompostingChanceRegistry.INSTANCE.add(value, compostingChanceF);
@@ -53,7 +44,6 @@ public class ItemCreator extends Creator<Item> {
 		protected final Item baseItem;
 		protected int cookTime;
 		protected float compostingChance;
-		protected Item copiedItem;
 
 		/**
 		 * Creates an item.
@@ -76,16 +66,8 @@ public class ItemCreator extends Creator<Item> {
 			return this;
 		}
 
-		/**
-		 * Copies some properties from an item. (cook time)
-		 */
-		public Builder copy(Item copiedItem) {
-			this.copiedItem = copiedItem;
-			return this;
-		}
-
 		public ItemCreator build() {
-			return new ItemCreator(this.name, this.baseItem, this.cookTime, this.compostingChance, this.copiedItem);
+			return new ItemCreator(this.name, this.baseItem, this.cookTime, this.compostingChance);
 		}
 	}
 }

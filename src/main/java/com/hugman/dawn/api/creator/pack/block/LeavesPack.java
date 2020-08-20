@@ -7,15 +7,14 @@ import com.hugman.dawn.api.creator.pack.PackBuilder;
 import com.hugman.dawn.api.util.BlockSettings;
 import com.hugman.dawn.api.util.DefaultBlockGetter;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 
 public class LeavesPack extends Pack {
 	private final Block leaves;
 	private final Block leafPile;
 
 	protected LeavesPack(ModData modData, String suffix) {
-		this.leaves = add(new BlockCreator.Builder(suffix, DefaultBlockGetter.LEAVES, BlockSettings.LEAVES).copy(Blocks.OAK_LEAVES), modData);
-		this.leafPile = add(new BlockCreator.Builder(suffix, DefaultBlockGetter.LEAF_PILE, BlockSettings.LEAF_PILE).copy(Blocks.OAK_LEAVES), modData);
+		this.leaves = add(new BlockCreator.Builder(suffix, DefaultBlockGetter.LEAVES, BlockSettings.LEAVES).flammability(30, 60), modData);
+		this.leafPile = add(new BlockCreator.Builder(suffix, DefaultBlockGetter.LEAF_PILE, BlockSettings.LEAF_PILE).flammability(30, 60), modData);
 	}
 
 	public static class Builder implements PackBuilder {
