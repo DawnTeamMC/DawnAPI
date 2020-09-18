@@ -75,6 +75,7 @@ public class BiomeCreator extends Creator<Biome> {
 		 */
 		public Builder addToOverworldContinental(OverworldClimate climate, double weight) {
 			this.spawnDimension = SpawnDimension.OVERWORLD_CONTINENTAL;
+			this.climate = climate;
 			this.weight = weight;
 			return this;
 		}
