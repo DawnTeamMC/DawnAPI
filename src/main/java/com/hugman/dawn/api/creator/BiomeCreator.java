@@ -1,50 +1,47 @@
 package com.hugman.dawn.api.creator;
 
 import com.hugman.dawn.api.util.CreatorBuilder;
+import net.fabricmc.fabric.api.biome.v1.NetherBiomes;
+import net.fabricmc.fabric.api.biome.v1.OverworldBiomes;
+import net.fabricmc.fabric.api.biome.v1.OverworldClimate;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
 
 public class BiomeCreator extends Creator<Biome> {
 	private final Biome baseBiome;
 	private final SpawnDimension spawnDimension;
 
-	//private final OverworldClimate climate;
+	private final OverworldClimate climate;
 	private final double weight;
-	private final boolean isSpawnBiome;
 
 	private final Biome.MixedNoisePoint noises;
 
-	private BiomeCreator(String name, Biome baseBiome, SpawnDimension spawnDimension/*, OverworldClimate climate */, double weight, boolean isSpawnBiome, Biome.MixedNoisePoint noises) {
+	private BiomeCreator(String name, Biome baseBiome, SpawnDimension spawnDimension, OverworldClimate climate, double weight, Biome.MixedNoisePoint noises) {
 		super(name);
 		this.baseBiome = baseBiome;
 		this.spawnDimension = spawnDimension;
-		//this.climate = climate;
+		this.climate = climate;
 		this.weight = weight;
-		this.isSpawnBiome = isSpawnBiome;
 		this.noises = noises;
 	}
 
 	@Override
 	public Biome register(ModData modData) {
 		value = Registry.register(BuiltinRegistries.BIOME, modData.id(name), baseBiome);
-		/*
+		RegistryKey<Biome> key = RegistryKey.of(Registry.BIOME_KEY, modData.id(name));
 		switch(this.spawnDimension) {
 			case NONE:
 			default:
 				break;
 			case OVERWORLD_CONTINENTAL:
-				OverworldBiomes.addContinentalBiome(value, climate, weight);
-				if(isSpawnBiome) {
-					FabricBiomes.addSpawnBiome(value);
-				}
+				OverworldBiomes.addContinentalBiome(key, climate, weight);
 				break;
 			case THE_NETHER:
-				NetherBiomes.addNetherBiome(value, noises);
+				NetherBiomes.addNetherBiome(key, noises);
 				break;
 		}
-
-		 */
 		return value;
 	}
 
@@ -53,9 +50,8 @@ public class BiomeCreator extends Creator<Biome> {
 		private final Biome baseBiome;
 		private SpawnDimension spawnDimension;
 
-		//private OverworldClimate climate;
+		private OverworldClimate climate;
 		private double weight;
-		private boolean isSpawnBiome;
 
 		private Biome.MixedNoisePoint noises;
 
@@ -74,15 +70,12 @@ public class BiomeCreator extends Creator<Biome> {
 		/**
 		 * Adds the biome to the overworld continental generation.
 		 *
-		 * @param climate      The biome climate.
-		 * @param weight       The biome weight.
-		 * @param isSpawnBiome Defines if the player should be able to naturally spawn in the biome.
+		 * @param climate The biome climate.
+		 * @param weight  The biome weight.
 		 */
-		public Builder addToOverworldContinental(/*OverworldClimate climate,*/ double weight, boolean isSpawnBiome) {
+		public Builder addToOverworldContinental(OverworldClimate climate, double weight) {
 			this.spawnDimension = SpawnDimension.OVERWORLD_CONTINENTAL;
-			//this.climate = climate;
 			this.weight = weight;
-			this.isSpawnBiome = isSpawnBiome;
 			return this;
 		}
 
@@ -96,7 +89,7 @@ public class BiomeCreator extends Creator<Biome> {
 		}
 
 		public BiomeCreator build() {
-			return new BiomeCreator(this.name, this.baseBiome, this.spawnDimension/*, this.climate*/, this.weight, this.isSpawnBiome, this.noises);
+			return new BiomeCreator(this.name, this.baseBiome, this.spawnDimension, this.climate, this.weight, this.noises);
 		}
 	}
 

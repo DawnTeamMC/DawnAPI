@@ -30,8 +30,7 @@ public class AxeItemMixin {
 			if(!world.isClient) {
 				world.setBlockState(pos, block.getDefaultState().with(PillarBlock.AXIS, state.get(PillarBlock.AXIS)), 11);
 				if(player != null) {
-					context.getStack().damage(1, player, (p) ->
-					{
+					context.getStack().damage(1, player, (p) -> {
 						p.sendToolBreakStatus(context.getHand());
 					});
 				}

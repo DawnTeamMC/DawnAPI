@@ -85,18 +85,46 @@ public class DawnBlockPack extends Pack {
 	public static final Block PURPLE_MUSHROOM_BLOCK = register(new BlockCreator.Builder("purple", DefaultBlockGetter.MUSHROOM_BLOCK, BlockSettings.MUSHROOM_BLOCK.materialColor(DyeColor.PURPLE)));
 	public static final Block MAGENTA_MUSHROOM_BLOCK = register(new BlockCreator.Builder("magenta", DefaultBlockGetter.MUSHROOM_BLOCK, BlockSettings.MUSHROOM_BLOCK.materialColor(DyeColor.MAGENTA)));
 	public static final Block PINK_MUSHROOM_BLOCK = register(new BlockCreator.Builder("pink", DefaultBlockGetter.MUSHROOM_BLOCK, BlockSettings.MUSHROOM_BLOCK.materialColor(DyeColor.PINK)));
-	public static final PottedPlantPack WHITE_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("white_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, WHITE_MUSHROOM_BLOCK)).itemGroup(ItemGroup.DECORATIONS).render(BlockCreator.Render.CUTOUT).compostingChance(0.65F)));
-	public static final PottedPlantPack LIGHT_GRAY_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("light_gray_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, LIGHT_GRAY_MUSHROOM_BLOCK)).itemGroup(ItemGroup.DECORATIONS).render(BlockCreator.Render.CUTOUT).compostingChance(0.65F)));
-	public static final PottedPlantPack GRAY_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("gray_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, GRAY_MUSHROOM_BLOCK)).itemGroup(ItemGroup.DECORATIONS).render(BlockCreator.Render.CUTOUT).compostingChance(0.65F)));
-	public static final PottedPlantPack BLACK_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("black_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, BLACK_MUSHROOM_BLOCK)).itemGroup(ItemGroup.DECORATIONS).render(BlockCreator.Render.CUTOUT).compostingChance(0.65F)));
-	public static final PottedPlantPack ORANGE_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("orange_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, ORANGE_MUSHROOM_BLOCK)).itemGroup(ItemGroup.DECORATIONS).render(BlockCreator.Render.CUTOUT).compostingChance(0.65F)));
-	public static final PottedPlantPack YELLOW_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("yellow_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, YELLOW_MUSHROOM_BLOCK)).itemGroup(ItemGroup.DECORATIONS).render(BlockCreator.Render.CUTOUT).compostingChance(0.65F)));
-	public static final PottedPlantPack LIME_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("lime_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, LIME_MUSHROOM_BLOCK)).itemGroup(ItemGroup.DECORATIONS).render(BlockCreator.Render.CUTOUT).compostingChance(0.65F)));
-	public static final PottedPlantPack GREEN_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("green_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, GREEN_MUSHROOM_BLOCK)).itemGroup(ItemGroup.DECORATIONS).render(BlockCreator.Render.CUTOUT).compostingChance(0.65F)));
-	public static final PottedPlantPack CYAN_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("cyan_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, CYAN_MUSHROOM_BLOCK)).itemGroup(ItemGroup.DECORATIONS).render(BlockCreator.Render.CUTOUT).compostingChance(0.65F)));
-	public static final PottedPlantPack LIGHT_BLUE_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("light_blue_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, LIGHT_BLUE_MUSHROOM_BLOCK)).itemGroup(ItemGroup.DECORATIONS).render(BlockCreator.Render.CUTOUT).compostingChance(0.65F)));
-	public static final PottedPlantPack BLUE_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("blue_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, BLUE_MUSHROOM_BLOCK)).itemGroup(ItemGroup.DECORATIONS).render(BlockCreator.Render.CUTOUT).compostingChance(0.65F)));
-	public static final PottedPlantPack PURPLE_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("purple_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, PURPLE_MUSHROOM_BLOCK)).itemGroup(ItemGroup.DECORATIONS).render(BlockCreator.Render.CUTOUT).compostingChance(0.65F)));
-	public static final PottedPlantPack MAGENTA_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("magenta_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, MAGENTA_MUSHROOM_BLOCK)).itemGroup(ItemGroup.DECORATIONS).render(BlockCreator.Render.CUTOUT).compostingChance(0.65F)));
-	public static final PottedPlantPack PINK_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("pink_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, PINK_MUSHROOM_BLOCK)).itemGroup(ItemGroup.DECORATIONS).render(BlockCreator.Render.CUTOUT).compostingChance(0.65F)));
+	public static final PottedPlantPack WHITE_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("white_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, WHITE_MUSHROOM_BLOCK)).itemGroup(ItemGroup.DECORATIONS)
+																																																						  .render(BlockCreator.Render.CUTOUT)
+																																																						  .compostingChance(0.65F)));
+	public static final PottedPlantPack LIGHT_GRAY_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("light_gray_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, LIGHT_GRAY_MUSHROOM_BLOCK)).itemGroup(ItemGroup.DECORATIONS)
+																																																										 .render(BlockCreator.Render.CUTOUT)
+																																																										 .compostingChance(0.65F)));
+	public static final PottedPlantPack GRAY_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("gray_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, GRAY_MUSHROOM_BLOCK)).itemGroup(ItemGroup.DECORATIONS)
+																																																					   .render(BlockCreator.Render.CUTOUT)
+																																																					   .compostingChance(0.65F)));
+	public static final PottedPlantPack BLACK_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("black_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, BLACK_MUSHROOM_BLOCK)).itemGroup(ItemGroup.DECORATIONS)
+																																																						  .render(BlockCreator.Render.CUTOUT)
+																																																						  .compostingChance(0.65F)));
+	public static final PottedPlantPack ORANGE_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("orange_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, ORANGE_MUSHROOM_BLOCK)).itemGroup(ItemGroup.DECORATIONS)
+																																																							 .render(BlockCreator.Render.CUTOUT)
+																																																							 .compostingChance(0.65F)));
+	public static final PottedPlantPack YELLOW_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("yellow_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, YELLOW_MUSHROOM_BLOCK)).itemGroup(ItemGroup.DECORATIONS)
+																																																							 .render(BlockCreator.Render.CUTOUT)
+																																																							 .compostingChance(0.65F)));
+	public static final PottedPlantPack LIME_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("lime_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, LIME_MUSHROOM_BLOCK)).itemGroup(ItemGroup.DECORATIONS)
+																																																					   .render(BlockCreator.Render.CUTOUT)
+																																																					   .compostingChance(0.65F)));
+	public static final PottedPlantPack GREEN_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("green_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, GREEN_MUSHROOM_BLOCK)).itemGroup(ItemGroup.DECORATIONS)
+																																																						  .render(BlockCreator.Render.CUTOUT)
+																																																						  .compostingChance(0.65F)));
+	public static final PottedPlantPack CYAN_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("cyan_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, CYAN_MUSHROOM_BLOCK)).itemGroup(ItemGroup.DECORATIONS)
+																																																					   .render(BlockCreator.Render.CUTOUT)
+																																																					   .compostingChance(0.65F)));
+	public static final PottedPlantPack LIGHT_BLUE_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("light_blue_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, LIGHT_BLUE_MUSHROOM_BLOCK)).itemGroup(ItemGroup.DECORATIONS)
+																																																										 .render(BlockCreator.Render.CUTOUT)
+																																																										 .compostingChance(0.65F)));
+	public static final PottedPlantPack BLUE_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("blue_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, BLUE_MUSHROOM_BLOCK)).itemGroup(ItemGroup.DECORATIONS)
+																																																					   .render(BlockCreator.Render.CUTOUT)
+																																																					   .compostingChance(0.65F)));
+	public static final PottedPlantPack PURPLE_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("purple_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, PURPLE_MUSHROOM_BLOCK)).itemGroup(ItemGroup.DECORATIONS)
+																																																							 .render(BlockCreator.Render.CUTOUT)
+																																																							 .compostingChance(0.65F)));
+	public static final PottedPlantPack MAGENTA_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("magenta_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, MAGENTA_MUSHROOM_BLOCK)).itemGroup(ItemGroup.DECORATIONS)
+																																																								.render(BlockCreator.Render.CUTOUT)
+																																																								.compostingChance(0.65F)));
+	public static final PottedPlantPack PINK_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("pink_mushroom", new FertilizableMushroomPlantBlock(BlockSettings.MUSHROOM, PINK_MUSHROOM_BLOCK)).itemGroup(ItemGroup.DECORATIONS)
+																																																					   .render(BlockCreator.Render.CUTOUT)
+																																																					   .compostingChance(0.65F)));
 }

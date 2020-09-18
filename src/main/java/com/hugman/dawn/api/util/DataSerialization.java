@@ -10,15 +10,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.function.Supplier;
 
 public class DataSerialization {
-	public static final Gson RAW_GSON = new GsonBuilder()
-			.registerTypeAdapter(Identifier.class, new Identifier.Serializer())
-			.excludeFieldsWithoutExposeAnnotation()
-			.create();
-	public static final Gson PRETTY_GSON = new GsonBuilder()
-			.registerTypeAdapter(Identifier.class, new Identifier.Serializer())
-			.setPrettyPrinting()
-			.excludeFieldsWithoutExposeAnnotation()
-			.create();
+	public static final Gson RAW_GSON = new GsonBuilder().registerTypeAdapter(Identifier.class, new Identifier.Serializer()).excludeFieldsWithoutExposeAnnotation().create();
+	public static final Gson PRETTY_GSON = new GsonBuilder().registerTypeAdapter(Identifier.class, new Identifier.Serializer()).setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
 
 	public static <T> T loadFromFile(File f, Class<? extends T> clazz, Supplier<T> baseCase) {
 		return loadFromFile(PRETTY_GSON, f, clazz, baseCase);
