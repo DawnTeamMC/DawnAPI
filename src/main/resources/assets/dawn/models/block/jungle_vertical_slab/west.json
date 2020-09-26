@@ -1,6 +1,0 @@
-{
-	"parent": "dawn:block/vertical_slab/west",
-	"textures": {
-		"block": "minecraft:block/jungle_planks"
-	}
-}

@@ -1,8 +1,0 @@
-{
-	"type": "minecraft:stonecutting",
-	"ingredient": {
-		"item": "minecraft:stone"
-	},
-	"result": "dawn:stone_vertical_slab",
-	"count": 2
-}

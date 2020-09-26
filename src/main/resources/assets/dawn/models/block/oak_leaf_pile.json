@@ -1,6 +1,0 @@
-{
-	"parent": "dawn:block/pile",
-	"textures": {
-		"pile": "minecraft:block/oak_leaves"
-	}
-}

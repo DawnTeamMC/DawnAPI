@@ -1,6 +1,0 @@
-{
-	"parent": "dawn:block/vertical_slab/south",
-	"textures": {
-		"block": "minecraft:block/red_sandstone_top"
-	}
-}

@@ -1,8 +1,0 @@
-{
-	"parent": "dawn:block/vertical_slab/east",
-	"textures": {
-		"bottom": "block/red_sandstone_top",
-		"top": "block/red_sandstone_top",
-		"block": "block/cut_red_sandstone"
-	}
-}

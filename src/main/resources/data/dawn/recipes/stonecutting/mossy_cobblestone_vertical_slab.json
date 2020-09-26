@@ -1,8 +1,0 @@
-{
-	"type": "minecraft:stonecutting",
-	"ingredient": {
-		"item": "minecraft:mossy_cobblestone"
-	},
-	"result": "dawn:mossy_cobblestone_vertical_slab",
-	"count": 2
-}

@@ -1,8 +1,0 @@
-{
-	"type": "minecraft:stonecutting",
-	"ingredient": {
-		"item": "minecraft:smooth_stone"
-	},
-	"result": "dawn:smooth_stone_vertical_slab",
-	"count": 2
-}
