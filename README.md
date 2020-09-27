@@ -1,7 +1,7 @@
 [![Dawn API](https://raw.githubusercontent.com/DawnTeamMC/DawnTeamMC/master/dawn_api/header.png)](https://www.curseforge.com/minecraft/mc-mods/dawn)
 
 <p align="center">
-	The Dawn API for Minecraft 1.16 facilitates the creation of features for other mods. It also adds some concrete features such as vertical slabs, leaves piles, as well as a new creative tab.<br><br>
+	The Dawn API for Minecraft 1.16 facilitates the creation of features for other mods. It also is bundled with a debug writer that outputs all IDs from all mods into a debug folder within the game's main folder.<br><br>
 	<a href="https://www.curseforge.com/minecraft/mc-mods/fabric-api"><img title="Requires Fabric API" height="50" src="https://raw.githubusercontent.com/DawnTeamMC/DawnTeamMC/master/fabric_api/required.png"></a>
 </p>
 
@@ -12,10 +12,8 @@
 
 #### Features:
 
-* Vertical Slabs (for every vanilla slab)
-* Leaf Piles (for every vanilla leaves)
-* Dark Prismarine Wall
 * Creative Tools tab (containing creative-only items)
+* Other than that, it is just codebase to work on for other mods
 
 ##### Images of the added features can be found on the CurseForge [Images page](https://www.curseforge.com/minecraft/mc-mods/dawn/screenshots).
 
