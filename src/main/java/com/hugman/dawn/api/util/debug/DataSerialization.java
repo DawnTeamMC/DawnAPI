@@ -1,4 +1,4 @@
-package com.hugman.dawn.api.util;
+package com.hugman.dawn.api.util.debug;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

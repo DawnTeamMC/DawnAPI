@@ -1,70 +1,39 @@
 package com.hugman.dawn.api.util.debug;
 
-import com.google.gson.annotations.Expose;
 import com.hugman.dawn.Dawn;
-import com.hugman.dawn.api.util.DataSerialization;
 import com.hugman.dawn.api.util.FileUtil;
+import com.hugman.dawn.api.util.debug.data.BlockEntryData;
+import com.hugman.dawn.api.util.debug.data.SimpleEntryData;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.LinkedHashSet;
 import java.util.Map;
 
 public class EntryDebugWriter {
-	protected Map<Identifier, EntryData> map = new HashMap<>();
-	protected final File entriesPath = new File("debug/entries");
-
 	public final void load() {
 		for(Registry<?> registry : Registry.REGISTRIES) {
+			Map<String, LinkedHashSet<Identifier>> entryDataList = new HashMap<>();
 			for(Identifier entryID : registry.getIds()) {
-				EntryData data;
-				Identifier registryID = new Identifier(entryID.getNamespace(), registry.getKey().getValue().getPath());
-				if(map.containsKey(registryID)) {
-					data = map.get(registryID);
+				LinkedHashSet<Identifier> set = entryDataList.get(entryID.getNamespace());
+				if(set != null) {
+					set.add(entryID);
 				}
 				else {
-					data = new EntryData(registryID);
-					map.put(registryID, data);
+					LinkedHashSet<Identifier> newSet = new LinkedHashSet<>();
+					newSet.add(entryID);
+					entryDataList.put(entryID.getNamespace(), newSet);
 				}
-				data.add(entryID);
+			}
+			if(registry.getKey().getValue().equals(Registry.BLOCK.getKey().getValue())) {
+				entryDataList.forEach((namespace, identifiers) -> new BlockEntryData(namespace, identifiers).save());
+			}
+			else {
+				entryDataList.forEach((namespace, identifiers) -> new SimpleEntryData(namespace, registry, identifiers).save());
 			}
 		}
 		Dawn.LOGGER.info("Created debug entry files");
-	}
-
-	private static final File getFile(String filePath) {
-		FileUtil.createDirectories(FileUtil.getParentPath(filePath));
-		return new File(filePath);
-	}
-
-	public final class EntryData {
-		private final File file;
-		@Expose
-		protected int count;
-		@Expose
-		protected List<String> values = new ArrayList<>();
-
-		protected EntryData(Identifier registryID) {
-			String path = entriesPath.getPath() + "/" + registryID.getNamespace() + "/" + registryID.getPath() + ".json";
-			this.file = getFile(path);
-
-		}
-
-		public void add(Identifier identifier) {
-			values.add(identifier.toString());
-			count++;
-			this.save();
-		}
-
-		public void save() {
-			DataSerialization.saveToFile(file, EntryData.class, this);
-		}
-
-		public void delete() {
-			file.delete();
-		}
 	}
 }
