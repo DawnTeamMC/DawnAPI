@@ -1,0 +1,30 @@
+{
+	"comment": "CREATIVE TABS",
+	"//itemGroup.dawn.creative_tools": "Creative Tools",
+
+	"comment": "ENCHANTMENTS",
+	"enchantment.dawn.telekinesis": "Telecinese",
+	"//enchantment.dawn.ignorance_curse": "Curse of Ignorance",
+
+	"comment": "EFFECTS",
+	"//effect.dawn.heaviness": "Heaviness",
+	"//effect.dawn.hiccup": "Hiccup",
+
+	"comment": "COMMANDS",
+	"commands.foodbar.add.food.success.single": "Deu %s pontos de comida para %s",
+	"commands.foodbar.add.food.success.multiple": "Deu %s pontos de comida para %s entidades",
+	"commands.foodbar.set.food.success.single": "Definiu %s pontos de comida em %s",
+	"commands.foodbar.set.food.success.multiple": "Definiu %s pontos de comida em %s entidades",
+	"commands.foodbar.add.saturation.success.single": "Deu %s pontos de saturação para %s",
+	"commands.foodbar.add.saturation.success.multiple": "Deu %s pontos de saturação para %s entidades",
+	"commands.foodbar.set.saturation.success.single": "Definiu %s pontos de saturação em %s",
+	"commands.foodbar.set.saturation.success.multiple": "Definiu %s pontos de saturação em %s entidades",
+	"commands.health.add.success.single": "Deu %s pontos de saúde para %s",
+	"commands.health.add.success.multiple": "Deu %s pontos de saúde para %s entidades",
+	"commands.health.set.success.single": "Definiu %s pontos de saúde em %s",
+	"commands.health.set.success.multiple": "Definiu %s pontos de saúde em %s entidades",
+	"commands.motion.add.success.single": "Adicionado %s, %s, %s ao movimente de %s",
+	"commands.motion.add.success.multiple": "Adicionado %s, %s, %s ao movimente de %s entidades",
+	"commands.motion.set.success.single": "Definiu %s, %s, %s para o movimento de %s",
+	"commands.motion.set.success.multiple": "Definiu %s, %s, %s para o movimento de %s entidades"
+}

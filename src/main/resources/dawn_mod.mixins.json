@@ -1,0 +1,15 @@
+{
+	"required": true,
+	"package": "com.hugman.dawn.mod.mixin",
+	"compatibilityLevel": "JAVA_8",
+	"mixins": [
+		"LivingEntityMixin"
+	],
+	"client": [
+		"client.ItemRendererMixin",
+		"client.ItemStackMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

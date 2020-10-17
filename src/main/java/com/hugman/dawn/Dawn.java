@@ -4,7 +4,10 @@ import com.hugman.dawn.api.creator.Creator;
 import com.hugman.dawn.api.creator.ModData;
 import com.hugman.dawn.api.creator.pack.PackManager;
 import com.hugman.dawn.api.util.debug.EntryDebugWriter;
-import com.hugman.dawn.init.DawnItemGroups;
+import com.hugman.dawn.mod.init.DawnCommands;
+import com.hugman.dawn.mod.init.DawnEffectPack;
+import com.hugman.dawn.mod.init.DawnEnchantmentPack;
+import com.hugman.dawn.mod.init.DawnItemGroups;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.server.MinecraftServer;
@@ -19,7 +22,10 @@ public class Dawn implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		ServerLifecycleEvents.SERVER_STARTED.register(this::onServerLoad);
+		new DawnEffectPack();
+		new DawnEnchantmentPack();
 		new DawnItemGroups();
+		DawnCommands.init();
 	}
 
 	public void onServerLoad(MinecraftServer minecraftServer) {

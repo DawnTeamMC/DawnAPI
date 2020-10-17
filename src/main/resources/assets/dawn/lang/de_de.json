@@ -1,0 +1,30 @@
+{
+	"comment": "CREATIVE TABS",
+	"//itemGroup.dawn.creative_tools": "Creative Tools",
+
+	"comment": "ENCHANTMENTS",
+	"enchantment.dawn.telekinesis": "Telekinese",
+	"//enchantment.dawn.ignorance_curse": "Curse of Ignorance",
+
+	"comment": "EFFECTS",
+	"effect.dawn.heaviness": "Schwere",
+	"effect.dawn.hiccup": "Schluckauf",
+
+	"comment": "COMMANDS",
+	"commands.foodbar.add.food.success.single": "Gebe %s Nahrungspunkt(e) an %s",
+	"commands.foodbar.add.food.success.multiple": "Gebe %s Nahrungspunkt(e) an %s Wesen",
+	"commands.foodbar.set.food.success.single": "Nahrungspunkt(e) auf %s setzen bei %s",
+	"commands.foodbar.set.food.success.multiple": "Nahrungspunkt(e) auf %s setzen bei %s Wesen",
+	"commands.foodbar.add.saturation.success.single": "Gebe %s Sättigungspunkt(e) an %s",
+	"commands.foodbar.add.saturation.success.multiple": "Gebe %s Sättigungspunkt(e) an %s Wesen",
+	"commands.foodbar.set.saturation.success.single": "Sättigungspunkt(e) auf %s setzen bei %s",
+	"commands.foodbar.set.saturation.success.multiple": "Sättigungspunkt(e) auf %s setzen bei %s Wesen",
+	"commands.health.add.success.single": "Gebe %s Lebenspunkt(e) an %s",
+	"commands.health.add.success.multiple": "Gebe %s Lebenspunkt(e) an %s Wesen",
+	"commands.health.set.success.single": "Lebenspunkte auf %s setzen bei %s",
+	"commands.health.set.success.multiple": "Lebenspunkte auf %s setzen bei %s Wesen",
+	"//commands.motion.add.success.single": "Added %s, %s, %s to the motion of %s",
+	"//commands.motion.add.success.multiple": "Added %s, %s, %s to the motion of %s entities",
+	"//commands.motion.set.success.single": "Set %s, %s, %s to the motion of %s",
+	"//commands.motion.set.success.multiple": "Set %s, %s, %s to the motion of %s entities"
+}

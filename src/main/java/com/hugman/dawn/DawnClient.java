@@ -1,5 +1,6 @@
 package com.hugman.dawn;
 
+import com.hugman.dawn.Dawn;
 import com.hugman.dawn.api.creator.Creator;
 import com.hugman.dawn.api.creator.pack.PackManager;
 import net.fabricmc.api.ClientModInitializer;

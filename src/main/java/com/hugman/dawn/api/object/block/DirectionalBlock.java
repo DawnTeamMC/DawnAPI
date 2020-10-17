@@ -11,8 +11,6 @@ import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.Direction;
 
 public class DirectionalBlock extends FacingBlock {
-	/* Extension for internal publicity
-	 * + Missing features */
 	public DirectionalBlock(AbstractBlock.Settings builder) {
 		super(builder);
 		this.setDefaultState(this.stateManager.getDefaultState().with(FACING, Direction.UP));

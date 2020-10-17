@@ -1,13 +1,11 @@
 package com.hugman.dawn.api.util.debug;
 
 import com.hugman.dawn.Dawn;
-import com.hugman.dawn.api.util.FileUtil;
 import com.hugman.dawn.api.util.debug.data.BlockEntryData;
 import com.hugman.dawn.api.util.debug.data.SimpleEntryData;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -27,7 +25,7 @@ public class EntryDebugWriter {
 					entryDataList.put(entryID.getNamespace(), newSet);
 				}
 			}
-			if(registry.getKey().getValue().equals(Registry.BLOCK.getKey().getValue())) {
+			if(/*registry.getKey().getValue().equals(Registry.BLOCK.getKey().getValue())*/ false) {
 				entryDataList.forEach((namespace, identifiers) -> new BlockEntryData(namespace, identifiers).save());
 			}
 			else {

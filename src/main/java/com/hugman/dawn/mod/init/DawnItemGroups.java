@@ -1,4 +1,4 @@
-package com.hugman.dawn.init;
+package com.hugman.dawn.mod.init;
 
 import com.hugman.dawn.Dawn;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;

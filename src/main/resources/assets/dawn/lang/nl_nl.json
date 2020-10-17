@@ -1,4 +1,30 @@
 {
 	"comment": "CREATIVE TABS",
-	"itemGroup.dawn.creative_tools": "Creatiefwerktuigen"
+	"itemGroup.dawn.creative_tools": "Creatiefwerktuigen",
+
+	"comment": "ENCHANTMENTS",
+	"enchantment.dawn.telekinesis": "Afstandelijke Voorwerpbeweging",
+	"enchantment.dawn.ignorance_curse": "Vloek der Ontwetendheid",
+
+	"comment": "EFFECTS",
+	"effect.dawn.heaviness": "Zwaarte",
+	"effect.dawn.hiccup": "Hik",
+
+	"comment": "COMMANDS",
+	"commands.foodbar.add.food.success.single": "Heb %s voetselpunt(en) toegevoegd aan %s",
+	"commands.foodbar.add.food.success.multiple": "Heb %s voetselpunt(en) toegevoegd aan %s entiteiten",
+	"commands.foodbar.set.food.success.single": "Heb voetselpunten naar %s gezet voor %s",
+	"commands.foodbar.set.food.success.multiple": "Heb voetselpunten naar %s gezet voor %s entiteiten",
+	"commands.foodbar.add.saturation.success.single": "Heb %s saturatiepunt(en) toegevoegd aan %s",
+	"commands.foodbar.add.saturation.success.multiple": "Heb %s saturatiepunt(en) toegevoegd aan %s entiteiten",
+	"commands.foodbar.set.saturation.success.single": "Heb saturatiepunten naar %s gezet voor %s",
+	"commands.foodbar.set.saturation.success.multiple": "Heb saturatiepunten naar %s gezet voor %s entiteiten",
+	"commands.health.add.success.single": "Heb %s levelspunt(en) toegevoegd aan %s",
+	"commands.health.add.success.multiple": "Heb %s levelspunt(en) toegevoegd aan %s entiteiten",
+	"commands.health.set.success.single": "Heb levelspunten naar %s gezet voor %s",
+	"commands.health.set.success.multiple": "Heb levelspunten naar %s gezet voor %s entiteiten",
+	"commands.motion.add.success.single": "Heb %s, %s, %s toegevoegd aan de beweging van %s",
+	"commands.motion.add.success.multiple": "Heb %s, %s, %s toegevoegd aan de beweging van %s entiteiten",
+	"commands.motion.set.success.single": "Heb beweging naar %s, %s, %s gezet voor %s",
+	"commands.motion.set.success.multiple": "Heb beweging naar %s, %s, %s gezet voor %s entiteiten"
 }
