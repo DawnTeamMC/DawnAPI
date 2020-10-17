@@ -29,13 +29,11 @@ public class ItemCreator extends Creator<Item> {
 
 	@Override
 	public void serverRegister(boolean isDedicated) {
-		int cookTimeF = cookTime;
-		float compostingChanceF = compostingChance;
 		if(cookTime != 0) {
-			FuelRegistry.INSTANCE.add(value, cookTimeF);
+			FuelRegistry.INSTANCE.add(value, cookTime);
 		}
 		if(compostingChance != 0) {
-			CompostingChanceRegistry.INSTANCE.add(value, compostingChanceF);
+			CompostingChanceRegistry.INSTANCE.add(value, compostingChance);
 		}
 	}
 
@@ -56,12 +54,12 @@ public class ItemCreator extends Creator<Item> {
 			this.baseItem = baseItem;
 		}
 
-		public Builder setCookTime(int cookTime) {
+		public Builder cookTime(int cookTime) {
 			this.cookTime = cookTime;
 			return this;
 		}
 
-		public Builder setCompostingChance(float compostingChance) {
+		public Builder compostingChance(float compostingChance) {
 			this.compostingChance = compostingChance;
 			return this;
 		}

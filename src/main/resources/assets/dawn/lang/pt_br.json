@@ -9,6 +9,10 @@
 	"comment": "EFFECTS",
 	"//effect.dawn.heaviness": "Heaviness",
 	"//effect.dawn.hiccup": "Hiccup",
+	"//effect.dawn.foresight": "Foresight",
+	"//effect.dawn.fulfillment": "Fulfillment",
+	"//effect.dawn.guard": "Guard",
+	"//effect.dawn.poison_resistance": "Poison Resistance",
 
 	"comment": "COMMANDS",
 	"commands.foodbar.add.food.success.single": "Deu %s pontos de comida para %s",

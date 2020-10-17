@@ -21,11 +21,11 @@ public class Dawn implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		ServerLifecycleEvents.SERVER_STARTED.register(this::onServerLoad);
 		new DawnEffectPack();
 		new DawnEnchantmentPack();
 		new DawnItemGroups();
 		DawnCommands.init();
+		ServerLifecycleEvents.SERVER_STARTED.register(this::onServerLoad);
 	}
 
 	public void onServerLoad(MinecraftServer minecraftServer) {

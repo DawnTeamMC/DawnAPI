@@ -6,7 +6,7 @@ import com.hugman.dawn.api.util.CreatorBuilder;
 
 public abstract class Pack {
 	protected static <V, C extends Creator<V>, B extends CreatorBuilder> V add(B creatorBuilder, ModData modData) {
-		C creator = creatorBuilder.build();
+		C creator = (C) creatorBuilder.build();
 		PackManager.CREATORS.add(creator);
 		return creator.register(modData);
 	}

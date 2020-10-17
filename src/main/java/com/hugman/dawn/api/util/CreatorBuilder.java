@@ -1,5 +1,7 @@
 package com.hugman.dawn.api.util;
 
-public interface CreatorBuilder {
-	<V> V build();
+import com.hugman.dawn.api.creator.Creator;
+
+public interface CreatorBuilder<V> {
+	<C extends Creator<V>> C build();
 }

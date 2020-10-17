@@ -9,6 +9,10 @@
 	"comment": "EFFECTS",
 	"effect.dawn.heaviness": "Schwere",
 	"effect.dawn.hiccup": "Schluckauf",
+	"effect.dawn.foresight": "Vooruitziendheid",
+	"effect.dawn.fulfillment": "Voldoening",
+	"effect.dawn.guard": "Besherming",
+	"effect.dawn.poison_resistance": "Gifbescherming",
 
 	"comment": "COMMANDS",
 	"commands.foodbar.add.food.success.single": "Gebe %s Nahrungspunkt(e) an %s",

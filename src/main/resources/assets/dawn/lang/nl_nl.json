@@ -9,6 +9,10 @@
 	"comment": "EFFECTS",
 	"effect.dawn.heaviness": "Zwaarte",
 	"effect.dawn.hiccup": "Hik",
+	"//effect.dawn.foresight": "Foresight",
+	"//effect.dawn.fulfillment": "Fulfillment",
+	"//effect.dawn.guard": "Guard",
+	"//effect.dawn.poison_resistance": "Poison Resistance",
 
 	"comment": "COMMANDS",
 	"commands.foodbar.add.food.success.single": "Heb %s voetselpunt(en) toegevoegd aan %s",

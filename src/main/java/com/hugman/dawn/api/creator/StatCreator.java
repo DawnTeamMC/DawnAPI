@@ -33,7 +33,7 @@ public class StatCreator extends Creator<Identifier> {
 			this.formatter = StatFormatter.DEFAULT;
 		}
 
-		public Builder setFormatter(StatFormatter formatter) {
+		public Builder formatter(StatFormatter formatter) {
 			this.formatter = formatter;
 			return this;
 		}

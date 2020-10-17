@@ -9,6 +9,10 @@
 	"comment": "EFFECTS",
 	"effect.dawn.heaviness": "Lourdeur",
 	"effect.dawn.hiccup": "Hoquet",
+	"effect.dawn.foresight": "Regard précis",
+	"effect.dawn.fulfillment": "Remplissage",
+	"effect.dawn.guard": "Défense",
+	"effect.dawn.poison_resistance": "Résistance au poison",
 
 	"comment": "COMMANDS",
 	"commands.foodbar.add.food.success.single": "Don de %s points de nourriture à %s",
