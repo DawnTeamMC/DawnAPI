@@ -39,15 +39,17 @@ public class MCBlockPack extends Pack {
 		public Builder(String name, BlockGetter getter, FabricBlockSettings settings) {
 			this.name = name;
 			this.getter = getter;
+			this.itemGroup = getter.getItemGroup();
+			this.render = getter.getRender();
 			this.settings = settings;
 		}
 
-		public Builder setItemGroup(ItemGroup itemGroup) {
+		public Builder itemGroup(ItemGroup itemGroup) {
 			this.itemGroup = itemGroup;
 			return this;
 		}
 
-		public Builder setRender(BlockCreator.Render render) {
+		public Builder render(BlockCreator.Render render) {
 			this.render = render;
 			return this;
 		}
