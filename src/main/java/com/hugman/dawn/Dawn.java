@@ -8,6 +8,11 @@ import com.hugman.dawn.mod.init.DawnCommands;
 import com.hugman.dawn.mod.init.DawnEffectPack;
 import com.hugman.dawn.mod.init.DawnEnchantmentPack;
 import com.hugman.dawn.mod.init.DawnItemGroups;
+import com.hugman.dawn.mod.init.config.DawnConfig;
+import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
+import me.sargunvohra.mcmods.autoconfig1u.ConfigHolder;
+import me.sargunvohra.mcmods.autoconfig1u.serializer.GsonConfigSerializer;
+import me.sargunvohra.mcmods.autoconfig1u.serializer.PartitioningSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.server.MinecraftServer;
@@ -17,13 +22,17 @@ import org.apache.logging.log4j.Logger;
 public class Dawn implements ModInitializer {
 	public static final ModData MOD_DATA = new ModData("dawn");
 	public static final Logger LOGGER = LogManager.getLogger();
+	public static DawnConfig CONFIG;
 	public static final EntryDebugWriter DEBUG_WRITER = new EntryDebugWriter();
 
 	@Override
 	public void onInitialize() {
+		ConfigHolder<DawnConfig> configHolder = AutoConfig.register(DawnConfig.class, PartitioningSerializer.wrap(GsonConfigSerializer::new));
+		CONFIG = configHolder.getConfig();
+
 		new DawnEffectPack();
 		new DawnEnchantmentPack();
-		new DawnItemGroups();
+		DawnItemGroups.init();
 		DawnCommands.init();
 		ServerLifecycleEvents.SERVER_STARTED.register(this::onServerLoad);
 	}

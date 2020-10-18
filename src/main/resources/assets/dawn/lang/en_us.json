@@ -30,5 +30,11 @@
 	"commands.motion.add.success.single": "Added %s, %s, %s to the motion of %s",
 	"commands.motion.add.success.multiple": "Added %s, %s, %s to the motion of %s entities",
 	"commands.motion.set.success.single": "Set %s, %s, %s to the motion of %s",
-	"commands.motion.set.success.multiple": "Set %s, %s, %s to the motion of %s entities"
+	"commands.motion.set.success.multiple": "Set %s, %s, %s to the motion of %s entities",
+
+	"comment": "CONFIG",
+	"text.autoconfig.dawn.title": "Dawn API Configuration",
+	"text.autoconfig.dawn.category.debug": "Debug",
+	"text.autoconfig.dawn.option.debug.generateRegistryEntries": "Generate registry entries",
+	"text.autoconfig.dawn.option.debug.generateRegistryEntries.@Tooltip": "Outputs every ID for all the registered entries"
 }

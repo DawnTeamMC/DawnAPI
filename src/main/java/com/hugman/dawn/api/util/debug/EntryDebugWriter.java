@@ -12,26 +12,28 @@ import java.util.Map;
 
 public class EntryDebugWriter {
 	public final void load() {
-		for(Registry<?> registry : Registry.REGISTRIES) {
-			Map<String, LinkedHashSet<Identifier>> entryDataList = new HashMap<>();
-			for(Identifier entryID : registry.getIds()) {
-				LinkedHashSet<Identifier> set = entryDataList.get(entryID.getNamespace());
-				if(set != null) {
-					set.add(entryID);
+		if(Dawn.CONFIG.debug.generateRegistryEntries) {
+			for(Registry<?> registry : Registry.REGISTRIES) {
+				Map<String, LinkedHashSet<Identifier>> entryDataList = new HashMap<>();
+				for(Identifier entryID : registry.getIds()) {
+					LinkedHashSet<Identifier> set = entryDataList.get(entryID.getNamespace());
+					if(set != null) {
+						set.add(entryID);
+					}
+					else {
+						LinkedHashSet<Identifier> newSet = new LinkedHashSet<>();
+						newSet.add(entryID);
+						entryDataList.put(entryID.getNamespace(), newSet);
+					}
+				}
+				if(/*registry.getKey().getValue().equals(Registry.BLOCK.getKey().getValue())*/ false) {
+					entryDataList.forEach((namespace, identifiers) -> new BlockEntryData(namespace, identifiers).save());
 				}
 				else {
-					LinkedHashSet<Identifier> newSet = new LinkedHashSet<>();
-					newSet.add(entryID);
-					entryDataList.put(entryID.getNamespace(), newSet);
+					entryDataList.forEach((namespace, identifiers) -> new SimpleEntryData(namespace, registry, identifiers).save());
 				}
 			}
-			if(/*registry.getKey().getValue().equals(Registry.BLOCK.getKey().getValue())*/ false) {
-				entryDataList.forEach((namespace, identifiers) -> new BlockEntryData(namespace, identifiers).save());
-			}
-			else {
-				entryDataList.forEach((namespace, identifiers) -> new SimpleEntryData(namespace, registry, identifiers).save());
-			}
+			Dawn.LOGGER.info("Created debug entry files");
 		}
-		Dawn.LOGGER.info("Created debug entry files");
 	}
 }
