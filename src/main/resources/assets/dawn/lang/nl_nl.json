@@ -30,5 +30,19 @@
 	"commands.motion.add.success.single": "Heb %s, %s, %s toegevoegd aan de beweging van %s",
 	"commands.motion.add.success.multiple": "Heb %s, %s, %s toegevoegd aan de beweging van %s entiteiten",
 	"commands.motion.set.success.single": "Heb beweging naar %s, %s, %s gezet voor %s",
-	"commands.motion.set.success.multiple": "Heb beweging naar %s, %s, %s gezet voor %s entiteiten"
+	"commands.motion.set.success.multiple": "Heb beweging naar %s, %s, %s gezet voor %s entiteiten",
+
+	"comment": "CONFIG",
+	"//text.autoconfig.dawn.title": "Dawn API Configuration",
+	"//text.autoconfig.dawn.category.features": "Features",
+	"//text.autoconfig.dawn.category.debug": "Debug",
+	"//text.autoconfig.dawn.option.features.creativeToolsTab": "Enable Creative Tools tab",
+	"//text.autoconfig.dawn.option.features.healthCommand": "Enable /health",
+	"//text.autoconfig.dawn.option.features.motionCommand": "Enable /motion",
+	"//text.autoconfig.dawn.option.features.foodbarCommand": "Enable /foodbar",
+	"//text.autoconfig.dawn.option.debug.writeIds.@PrefixText": "The writing process only fires once, when the game loads",
+	"//text.autoconfig.dawn.option.debug.writeIds": "Write IDs",
+	"//text.autoconfig.dawn.option.debug.writeIds.@Tooltip": "Writes every registered IDs in .json files",
+	"//text.autoconfig.dawn.option.debug.expandedInfo": "Expanded ID info",
+	"//text.autoconfig.dawn.option.debug.expandedInfo.@Tooltip": "Gives more information about the properties of each ID"
 }

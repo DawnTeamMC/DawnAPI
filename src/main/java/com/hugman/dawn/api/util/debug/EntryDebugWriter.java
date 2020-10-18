@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class EntryDebugWriter {
 	public final void load() {
-		if(Dawn.CONFIG.debug.generateRegistryEntries) {
+		if(Dawn.CONFIG.debug.writeIds) {
 			for(Registry<?> registry : Registry.REGISTRIES) {
 				Map<String, LinkedHashSet<Identifier>> entryDataList = new HashMap<>();
 				for(Identifier entryID : registry.getIds()) {
@@ -26,8 +26,13 @@ public class EntryDebugWriter {
 						entryDataList.put(entryID.getNamespace(), newSet);
 					}
 				}
-				if(/*registry.getKey().getValue().equals(Registry.BLOCK.getKey().getValue())*/ false) {
-					entryDataList.forEach((namespace, identifiers) -> new BlockEntryData(namespace, identifiers).save());
+				if(Dawn.CONFIG.debug.expandedInfo) {
+					if(registry.getKey().getValue().equals(Registry.BLOCK.getKey().getValue())) {
+						entryDataList.forEach((namespace, identifiers) -> new BlockEntryData(namespace, identifiers).save());
+					}
+					else {
+						entryDataList.forEach((namespace, identifiers) -> new SimpleEntryData(namespace, registry, identifiers).save());
+					}
 				}
 				else {
 					entryDataList.forEach((namespace, identifiers) -> new SimpleEntryData(namespace, registry, identifiers).save());

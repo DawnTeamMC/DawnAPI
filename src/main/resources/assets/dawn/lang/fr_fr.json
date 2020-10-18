@@ -30,5 +30,19 @@
 	"commands.motion.add.success.single": "Ajout des valeurs %s, %s, %s au vecteur de mouvement de %s",
 	"commands.motion.add.success.multiple": "Ajout des valeurs %s, %s, %s au vecteur de mouvement de %s entités",
 	"commands.motion.set.success.single": "Valeurs %s, %s, %s attribuées au vecteur de mouvement de %s",
-	"commands.motion.set.success.multiple": "Valeurs %s, %s, %s attribuées au vecteur de mouvement de %s entités"
+	"commands.motion.set.success.multiple": "Valeurs %s, %s, %s attribuées au vecteur de mouvement de %s entités",
+
+	"comment": "CONFIG",
+	"text.autoconfig.dawn.title": "Configuration de la Dawn API",
+	"text.autoconfig.dawn.category.features": "Fonctionnalités",
+	"text.autoconfig.dawn.category.debug": "Débogue",
+	"text.autoconfig.dawn.option.features.creativeToolsTab": "Activer la page Outils de créatifs",
+	"text.autoconfig.dawn.option.features.healthCommand": "Activer /health",
+	"text.autoconfig.dawn.option.features.motionCommand": "Activer /motion",
+	"text.autoconfig.dawn.option.features.foodbarCommand": "Activer /foodbar",
+	"text.autoconfig.dawn.option.debug.writeIds.@PrefixText": "Le processus d'écriture ne se déclenche qu'au lancement du jeu",
+	"text.autoconfig.dawn.option.debug.writeIds": "Écrire les IDs",
+	"text.autoconfig.dawn.option.debug.writeIds.@Tooltip": "Écrit tous les IDs enregistrés dans des fichiers .json",
+	"text.autoconfig.dawn.option.debug.expandedInfo": "Information détaillée sur les IDs",
+	"text.autoconfig.dawn.option.debug.expandedInfo.@Tooltip": "Donne plus de détails sur les propriétés de chaque ID"
 }

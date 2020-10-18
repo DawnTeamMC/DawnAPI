@@ -6,7 +6,7 @@ import me.sargunvohra.mcmods.autoconfig1u.annotation.ConfigEntry;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.PartitioningSerializer;
 
 @Config(name = "dawn")
-@Config.Gui.CategoryBackground(category = "features", background = "minecraft:textures/block/green_concrete.png")
+@Config.Gui.CategoryBackground(category = "features", background = "minecraft:textures/block/light_blue_concrete.png")
 @Config.Gui.CategoryBackground(category = "debug", background = "minecraft:textures/block/gray_concrete.png")
 public class DawnConfig extends PartitioningSerializer.GlobalData {
 	@ConfigEntry.Category("features")
@@ -19,15 +19,22 @@ public class DawnConfig extends PartitioningSerializer.GlobalData {
 
 	@Config(name = "features")
 	public static class FeaturesCategory implements ConfigData {
+		@ConfigEntry.Gui.RequiresRestart
 		public boolean creativeToolsTab = true;
+		@ConfigEntry.Gui.RequiresRestart
 		public boolean healthCommand = true;
+		@ConfigEntry.Gui.RequiresRestart
 		public boolean motionCommand = true;
+		@ConfigEntry.Gui.RequiresRestart
 		public boolean foodbarCommand = true;
 	}
 
 	@Config(name = "debug")
 	public static class DebugCategory implements ConfigData {
+		@ConfigEntry.Gui.PrefixText
 		@ConfigEntry.Gui.Tooltip
-		public boolean generateRegistryEntries = false;
+		public boolean writeIds = false;
+		@ConfigEntry.Gui.Tooltip
+		public boolean expandedInfo = false;
 	}
 }
