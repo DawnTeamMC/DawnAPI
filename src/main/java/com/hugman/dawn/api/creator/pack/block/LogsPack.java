@@ -8,6 +8,7 @@ import com.hugman.dawn.api.object.item.AxeItem;
 import com.hugman.dawn.api.util.BlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.Direction;
 
@@ -30,10 +31,10 @@ public class LogsPack extends Pack {
 		this.barkColor = barkColor;
 		this.isNether = isNether;
 		int flammability = isNether ? 0 : 5;
-		this.log = add(new BlockCreator.Builder(name + logName, createLog()).flammability(flammability), modData);
-		this.strippedLog = add(new BlockCreator.Builder("stripped_" + name + logName, createLog(false)).flammability(flammability), modData);
-		this.wood = add(new BlockCreator.Builder(name + woodName, createLog(true)).flammability(flammability), modData);
-		this.strippedWood = add(new BlockCreator.Builder("stripped_" + name + woodName, createLog(false)).flammability(flammability), modData);
+		this.log = add(new BlockCreator.Builder(name + logName, createLog()).itemGroup(ItemGroup.BUILDING_BLOCKS).flammability(flammability), modData);
+		this.strippedLog = add(new BlockCreator.Builder("stripped_" + name + logName, createLog(false)).itemGroup(ItemGroup.BUILDING_BLOCKS).flammability(flammability), modData);
+		this.wood = add(new BlockCreator.Builder(name + woodName, createLog(true)).itemGroup(ItemGroup.BUILDING_BLOCKS).flammability(flammability), modData);
+		this.strippedWood = add(new BlockCreator.Builder("stripped_" + name + woodName, createLog(false)).itemGroup(ItemGroup.BUILDING_BLOCKS).flammability(flammability), modData);
 		AxeItem.BLOCK_STRIPPING_MAP.put(getLog(), getStrippedLog());
 		AxeItem.BLOCK_STRIPPING_MAP.put(getWood(), getStrippedWood());
 
@@ -45,9 +46,7 @@ public class LogsPack extends Pack {
 	}
 
 	private Block createLog() {
-		return new PillarBlock(AbstractBlock.Settings.of(isNether ? Material.NETHER_WOOD : Material.WOOD, (blockState) -> {
-			return blockState.get(PillarBlock.AXIS) == Direction.Axis.Y ? insideColor : barkColor;
-		}).strength(2.0F).sounds(isNether ? BlockSoundGroup.NETHER_STEM : BlockSoundGroup.WOOD));
+		return new PillarBlock(AbstractBlock.Settings.of(isNether ? Material.NETHER_WOOD : Material.WOOD, (blockState) -> blockState.get(PillarBlock.AXIS) == Direction.Axis.Y ? insideColor : barkColor).strength(2.0F).sounds(isNether ? BlockSoundGroup.NETHER_STEM : BlockSoundGroup.WOOD));
 	}
 
 	public static class Builder implements PackBuilder {

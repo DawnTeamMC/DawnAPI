@@ -5,7 +5,7 @@ import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerType;
 
-public class ScreenHandlerCreator extends Creator<ScreenHandlerType<? extends ScreenHandler>> {
+public class ScreenHandlerCreator<T extends ScreenHandler> extends Creator<ScreenHandlerType<T>> {
 	protected final ScreenHandlerRegistry.SimpleClientHandlerFactory<? extends ScreenHandler> factory;
 
 	private ScreenHandlerCreator(String name, ScreenHandlerRegistry.SimpleClientHandlerFactory<? extends ScreenHandler> factory) {
@@ -14,14 +14,14 @@ public class ScreenHandlerCreator extends Creator<ScreenHandlerType<? extends Sc
 	}
 
 	@Override
-	public ScreenHandlerType<? extends ScreenHandler> register(ModData modData) {
-		value = ScreenHandlerRegistry.registerSimple(modData.id(name), factory);
+	public ScreenHandlerType<T> register(ModData modData) {
+		value = (ScreenHandlerType<T>) ScreenHandlerRegistry.registerSimple(modData.id(name), factory);
 		return value;
 	}
 
-	public static class Builder implements CreatorBuilder {
+	public static class Builder<T extends ScreenHandler> implements CreatorBuilder {
 		protected final String name;
-		protected final ScreenHandlerRegistry.SimpleClientHandlerFactory<? extends ScreenHandler> factory;
+		protected final ScreenHandlerRegistry.SimpleClientHandlerFactory<T> factory;
 
 		/**
 		 * Creates a screen handler.
@@ -29,13 +29,13 @@ public class ScreenHandlerCreator extends Creator<ScreenHandlerType<? extends Sc
 		 * @param name    The name of the screen handler.
 		 * @param factory The screen handler factory. (ex: <code>FurnaceScreenHandler::new</code>)
 		 */
-		public Builder(String name, ScreenHandlerRegistry.SimpleClientHandlerFactory<? extends ScreenHandler> factory) {
+		public Builder(String name, ScreenHandlerRegistry.SimpleClientHandlerFactory<T> factory) {
 			this.name = name;
 			this.factory = factory;
 		}
 
-		public ScreenHandlerCreator build() {
-			return new ScreenHandlerCreator(this.name, this.factory);
+		public ScreenHandlerCreator<T> build() {
+			return new ScreenHandlerCreator<>(this.name, this.factory);
 		}
 	}
 }

@@ -17,7 +17,6 @@ public enum DefaultBlockGetter implements BlockGetter {
 	PLANKS("planks", ItemGroup.BUILDING_BLOCKS),
 	STAIRS("stairs", ItemGroup.BUILDING_BLOCKS),
 	SLAB("slab", ItemGroup.BUILDING_BLOCKS),
-	VERTICAL_SLAB("vertical_slab", ItemGroup.BUILDING_BLOCKS),
 	WALL("wall", ItemGroup.DECORATIONS),
 	STONE_BUTTON("button", ItemGroup.REDSTONE),
 	WOOD_BUTTON("button", ItemGroup.REDSTONE),
@@ -68,8 +67,6 @@ public enum DefaultBlockGetter implements BlockGetter {
 				return new SlabBlock(settings);
 			case STAIRS:
 				return new StairsBlock(settings);
-			case VERTICAL_SLAB:
-				return new VerticalSlabBlock(settings);
 			case WALL:
 				return new WallBlock(settings);
 			case STONE_PRESSURE_PLATE:

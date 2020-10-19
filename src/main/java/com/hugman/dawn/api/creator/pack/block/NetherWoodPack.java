@@ -82,10 +82,6 @@ public class NetherWoodPack extends WoodPack {
 		return getWoodSlab();
 	}
 
-	public Block getHyphaeVerticalSlab() {
-		return getWoodVerticalSlab();
-	}
-
 	public Block getHyphaeButton() {
 		return getWoodButton();
 	}

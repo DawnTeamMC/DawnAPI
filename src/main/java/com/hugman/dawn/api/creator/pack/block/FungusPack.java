@@ -3,6 +3,7 @@ package com.hugman.dawn.api.creator.pack.block;
 import com.hugman.dawn.api.creator.BlockCreator;
 import com.hugman.dawn.api.object.block.FungusBlock;
 import com.hugman.dawn.api.util.BlockSettings;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.HugeFungusFeatureConfig;
 
@@ -17,7 +18,7 @@ public class FungusPack {
 		 * @param hugeFungusSupplier The supplier for the huge fungus feature.
 		 */
 		public Builder(String name, Supplier<ConfiguredFeature<HugeFungusFeatureConfig, ?>> hugeFungusSupplier) {
-			super(new BlockCreator.Builder(name + "_fungus", new FungusBlock(BlockSettings.FUNGUS, hugeFungusSupplier)));
+			super(new BlockCreator.Builder(name + "_fungus", new FungusBlock(BlockSettings.FUNGUS, hugeFungusSupplier)).compostingChance(0.65F).itemGroup(ItemGroup.DECORATIONS).render(BlockCreator.Render.CUTOUT_MIPPED));
 		}
 	}
 }

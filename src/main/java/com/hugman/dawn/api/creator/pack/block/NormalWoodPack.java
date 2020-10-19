@@ -8,6 +8,7 @@ import com.hugman.dawn.api.util.BlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.MaterialColor;
 import net.minecraft.block.sapling.SaplingGenerator;
+import net.minecraft.item.ItemGroup;
 
 public class NormalWoodPack extends WoodPack {
 	private final PottedPlantPack saplingPack;
@@ -15,7 +16,7 @@ public class NormalWoodPack extends WoodPack {
 
 	protected NormalWoodPack(ModData modData, String suffix, SaplingGenerator saplingGenerator, MaterialColor planksColor, MaterialColor insideColor, MaterialColor barkColor) {
 		super(modData, suffix, planksColor, insideColor, barkColor, false);
-		this.saplingPack = add(new PottedPlantPack.Builder(new BlockCreator.Builder(suffix + "_sapling", new SaplingBlock(saplingGenerator, BlockSettings.SAPLING))), modData);
+		this.saplingPack = add(new PottedPlantPack.Builder(new BlockCreator.Builder(suffix + "_sapling", new SaplingBlock(saplingGenerator, BlockSettings.SAPLING)).itemGroup(ItemGroup.DECORATIONS).render(BlockCreator.Render.CUTOUT_MIPPED)), modData);
 		this.leavesPack = add(new LeavesPack.Builder(suffix), modData);
 	}
 

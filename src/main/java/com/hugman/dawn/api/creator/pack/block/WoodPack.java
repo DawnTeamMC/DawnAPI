@@ -20,8 +20,8 @@ public class WoodPack extends Pack {
 		FabricBlockSettings settings = FabricBlockSettings.copyOf(isNether ? Blocks.CRIMSON_PLANKS : Blocks.OAK_PLANKS).materialColor(planksColor);
 		this.planks = add(new BlockCreator.Builder(name, DefaultBlockGetter.PLANKS, settings), modData);
 		this.logs = add(new LogsPack.Builder(name, insideColor, barkColor, isNether), modData);
-		this.woodenBlocks = add(new MSBlockPack.Builder(name, settings, DefaultBlockGetter.STAIRS, DefaultBlockGetter.SLAB, DefaultBlockGetter.VERTICAL_SLAB, DefaultBlockGetter.TRAPDOOR, DefaultBlockGetter.WOOD_PRESSURE_PLATE, DefaultBlockGetter.WOOD_BUTTON, DefaultBlockGetter.FENCE, DefaultBlockGetter.FENCE_GATE, DefaultBlockGetter.DOOR), modData);
-		this.barkBlocks = add(new MSBlockPack.Builder(name + logs.getWoodName(), settings.materialColor(barkColor), DefaultBlockGetter.STAIRS, DefaultBlockGetter.SLAB, DefaultBlockGetter.VERTICAL_SLAB, DefaultBlockGetter.WOOD_BUTTON), modData);
+		this.woodenBlocks = add(new MSBlockPack.Builder(name, settings, DefaultBlockGetter.STAIRS, DefaultBlockGetter.SLAB, DefaultBlockGetter.TRAPDOOR, DefaultBlockGetter.WOOD_PRESSURE_PLATE, DefaultBlockGetter.WOOD_BUTTON, DefaultBlockGetter.FENCE, DefaultBlockGetter.FENCE_GATE, DefaultBlockGetter.DOOR), modData);
+		this.barkBlocks = add(new MSBlockPack.Builder(name + logs.getWoodName(), settings.materialColor(barkColor), DefaultBlockGetter.STAIRS, DefaultBlockGetter.SLAB, DefaultBlockGetter.WOOD_BUTTON), modData);
 	}
 
 	public static class Builder implements PackBuilder {
@@ -81,10 +81,6 @@ public class WoodPack extends Pack {
 		return barkBlocks.getBlock(DefaultBlockGetter.SLAB);
 	}
 
-	public Block getWoodVerticalSlab() {
-		return barkBlocks.getBlock(DefaultBlockGetter.VERTICAL_SLAB);
-	}
-
 	public Block getWoodButton() {
 		return barkBlocks.getBlock(DefaultBlockGetter.WOOD_BUTTON);
 	}
@@ -107,10 +103,6 @@ public class WoodPack extends Pack {
 
 	public Block getSlab() {
 		return woodenBlocks.getBlock(DefaultBlockGetter.SLAB);
-	}
-
-	public Block getVerticalSlab() {
-		return woodenBlocks.getBlock(DefaultBlockGetter.VERTICAL_SLAB);
 	}
 
 	public Block getFenceGate() {
