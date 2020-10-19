@@ -9,7 +9,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
 
-public class BiomeCreator extends Creator<Biome> {
+public class BiomeCreator extends Creator<RegistryKey<Biome>> {
 	private final Biome baseBiome;
 	private final SpawnDimension spawnDimension;
 
@@ -28,18 +28,18 @@ public class BiomeCreator extends Creator<Biome> {
 	}
 
 	@Override
-	public Biome register(ModData modData) {
-		value = Registry.register(BuiltinRegistries.BIOME, modData.id(name), baseBiome);
-		RegistryKey<Biome> key = RegistryKey.of(Registry.BIOME_KEY, modData.id(name));
+	public RegistryKey<Biome> register(ModData modData) {
+		Registry.register(BuiltinRegistries.BIOME, modData.id(name), baseBiome);
+		value = RegistryKey.of(Registry.BIOME_KEY, modData.id(name));
 		switch(this.spawnDimension) {
 			case NONE:
 			default:
 				break;
 			case OVERWORLD_CONTINENTAL:
-				OverworldBiomes.addContinentalBiome(key, climate, weight);
+				OverworldBiomes.addContinentalBiome(value, climate, weight);
 				break;
 			case THE_NETHER:
-				NetherBiomes.addNetherBiome(key, noises);
+				NetherBiomes.addNetherBiome(value, noises);
 				break;
 		}
 		return value;

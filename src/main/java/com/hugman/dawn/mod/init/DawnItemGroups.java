@@ -12,28 +12,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DawnItemGroups {
-	protected static final List<ItemConvertible> CREATIVE_ITEMS = new ArrayList<>();
+	public static ItemGroup CREATIVE_TOOLS;
 
 	public static void init() {
+		FabricItemGroupBuilder CREATIVE_TOOLS_BUILDER = FabricItemGroupBuilder.create(Dawn.MOD_DATA.id("creative_tools")).icon(() -> new ItemStack(Blocks.COMMAND_BLOCK)).appendItems(list -> {
+			list.add(new ItemStack(Blocks.COMMAND_BLOCK));
+			list.add(new ItemStack(Blocks.CHAIN_COMMAND_BLOCK));
+			list.add(new ItemStack(Blocks.REPEATING_COMMAND_BLOCK));
+			list.add(new ItemStack(Items.COMMAND_BLOCK_MINECART));
+			list.add(new ItemStack(Items.STRUCTURE_BLOCK));
+			list.add(new ItemStack(Items.STRUCTURE_VOID));
+			list.add(new ItemStack(Items.JIGSAW));
+			list.add(new ItemStack(Items.DEBUG_STICK));
+			list.add(new ItemStack(Blocks.BARRIER));
+			list.add(new ItemStack(Blocks.SPAWNER));
+			list.add(new ItemStack(Blocks.DRAGON_EGG));
+		});
 		if(Dawn.CONFIG.features.creativeToolsTab) {
-			CREATIVE_ITEMS.add(Blocks.COMMAND_BLOCK);
-			CREATIVE_ITEMS.add(Blocks.CHAIN_COMMAND_BLOCK);
-			CREATIVE_ITEMS.add(Blocks.REPEATING_COMMAND_BLOCK);
-			CREATIVE_ITEMS.add(Items.COMMAND_BLOCK_MINECART);
-			CREATIVE_ITEMS.add(Items.STRUCTURE_BLOCK);
-			CREATIVE_ITEMS.add(Items.STRUCTURE_VOID);
-			CREATIVE_ITEMS.add(Items.JIGSAW);
-			CREATIVE_ITEMS.add(Items.DEBUG_STICK);
-			CREATIVE_ITEMS.add(Blocks.BARRIER);
-			CREATIVE_ITEMS.add(Blocks.SPAWNER);
-			CREATIVE_ITEMS.add(Blocks.DRAGON_EGG);
-			CREATIVE_TOOLS.build();
+			CREATIVE_TOOLS = CREATIVE_TOOLS_BUILDER.build();
 		}
 	}
-
-	public static final FabricItemGroupBuilder CREATIVE_TOOLS = FabricItemGroupBuilder.create(Dawn.MOD_DATA.id("creative_tools")).icon(() -> new ItemStack(Blocks.COMMAND_BLOCK)).appendItems(itemStacks -> {
-		for(ItemConvertible item : CREATIVE_ITEMS) {
-			itemStacks.add(new ItemStack(item));
-		}
-	});
 }
