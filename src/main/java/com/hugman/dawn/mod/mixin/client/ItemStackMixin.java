@@ -1,7 +1,7 @@
 package com.hugman.dawn.mod.mixin.client;
 
 import com.hugman.dawn.api.util.EnchantmentUtil;
-import com.hugman.dawn.mod.init.DawnEnchantmentPack;
+import com.hugman.dawn.mod.init.DawnEnchantments;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -25,14 +25,14 @@ public class ItemStackMixin {
 	@Redirect(method = "getTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;appendEnchantments(" + List + ListTag + ")V"))
 	public void mubble_appendEnchantments(List<Text> tooltip, ListTag enchantments, @Nullable PlayerEntity playerEntity, TooltipContext context) {
 		ItemStack stack = (ItemStack) (Object) this;
-		if(EnchantmentUtil.hasEnchantment(DawnEnchantmentPack.IGNORANCE_CURSE, stack)) {
+		if(EnchantmentUtil.hasEnchantment(DawnEnchantments.IGNORANCE_CURSE, stack)) {
 			if(playerEntity != null) {
 				if(playerEntity.isCreative()) {
 					ItemStack.appendEnchantments(tooltip, enchantments);
 					return;
 				}
 			}
-			tooltip.add(DawnEnchantmentPack.IGNORANCE_CURSE.getName(EnchantmentHelper.getLevel(DawnEnchantmentPack.IGNORANCE_CURSE, stack)));
+			tooltip.add(DawnEnchantments.IGNORANCE_CURSE.getName(EnchantmentHelper.getLevel(DawnEnchantments.IGNORANCE_CURSE, stack)));
 		}
 		else {
 			ItemStack.appendEnchantments(tooltip, enchantments);
@@ -42,7 +42,7 @@ public class ItemStackMixin {
 	@Redirect(method = "getTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isDamaged()Z"))
 	public boolean mubble_isDamaged(ItemStack stack) {
 		ClientPlayerEntity clientPlayerEntity = MinecraftClient.getInstance().player;
-		if(EnchantmentUtil.hasEnchantment(DawnEnchantmentPack.IGNORANCE_CURSE, stack) && !clientPlayerEntity.isCreative()) {
+		if(EnchantmentUtil.hasEnchantment(DawnEnchantments.IGNORANCE_CURSE, stack) && !clientPlayerEntity.isCreative()) {
 			return false;
 		}
 		return stack.isDamaged();

@@ -6,7 +6,7 @@ import com.hugman.dawn.mod.object.enchantment.TelekinesisEnchantment;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EquipmentSlot;
 
-public class DawnEnchantmentPack extends DawnPack {
+public class DawnEnchantments extends DawnPack {
 	public static final Enchantment TELEKINESIS = register(new EnchantmentCreator.Builder("telekinesis", new TelekinesisEnchantment(Enchantment.Rarity.VERY_RARE, EquipmentSlot.MAINHAND)));
 	public static final Enchantment IGNORANCE_CURSE = register(new EnchantmentCreator.Builder("ignorance_curse", new IgnoranceCurseEnchantment(Enchantment.Rarity.VERY_RARE, EquipmentSlot.values())));
 }

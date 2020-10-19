@@ -1,7 +1,7 @@
 package com.hugman.dawn.mod.mixin.client;
 
 import com.hugman.dawn.api.util.EnchantmentUtil;
-import com.hugman.dawn.mod.init.DawnEnchantmentPack;
+import com.hugman.dawn.mod.init.DawnEnchantments;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.item.ItemRenderer;
@@ -19,7 +19,7 @@ public class ItemRendererMixin {
 	@Redirect(method = "renderGuiItemOverlay(" + TextRenderer + ItemStack + "II" + String + ")V", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isDamaged()Z"))
 	public boolean mubble_appearsDamaged(ItemStack stack) {
 		ClientPlayerEntity clientPlayerEntity = MinecraftClient.getInstance().player;
-		if(EnchantmentUtil.hasEnchantment(DawnEnchantmentPack.IGNORANCE_CURSE, stack) && !clientPlayerEntity.isCreative()) {
+		if(EnchantmentUtil.hasEnchantment(DawnEnchantments.IGNORANCE_CURSE, stack) && !clientPlayerEntity.isCreative()) {
 			return false;
 		}
 		return stack.isDamaged();

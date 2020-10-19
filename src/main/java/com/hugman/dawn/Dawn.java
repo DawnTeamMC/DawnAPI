@@ -5,8 +5,8 @@ import com.hugman.dawn.api.creator.ModData;
 import com.hugman.dawn.api.creator.pack.PackManager;
 import com.hugman.dawn.api.util.debug.EntryDebugWriter;
 import com.hugman.dawn.mod.init.DawnCommands;
-import com.hugman.dawn.mod.init.DawnEffectPack;
-import com.hugman.dawn.mod.init.DawnEnchantmentPack;
+import com.hugman.dawn.mod.init.DawnEffects;
+import com.hugman.dawn.mod.init.DawnEnchantments;
 import com.hugman.dawn.mod.init.DawnItemGroups;
 import com.hugman.dawn.mod.init.config.DawnConfig;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
@@ -30,8 +30,8 @@ public class Dawn implements ModInitializer {
 		ConfigHolder<DawnConfig> configHolder = AutoConfig.register(DawnConfig.class, PartitioningSerializer.wrap(GsonConfigSerializer::new));
 		CONFIG = configHolder.getConfig();
 
-		new DawnEffectPack();
-		new DawnEnchantmentPack();
+		new DawnEffects();
+		new DawnEnchantments();
 		DawnItemGroups.init();
 		DawnCommands.init();
 		ServerLifecycleEvents.SERVER_STARTED.register(this::onServerLoad);

@@ -1,8 +1,8 @@
 package com.hugman.dawn.mod.mixin;
 
 import com.hugman.dawn.api.util.EnchantmentUtil;
-import com.hugman.dawn.mod.init.DawnEffectPack;
-import com.hugman.dawn.mod.init.DawnEnchantmentPack;
+import com.hugman.dawn.mod.init.DawnEffects;
+import com.hugman.dawn.mod.init.DawnEnchantments;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
@@ -23,9 +23,9 @@ public abstract class LivingEntityMixin {
 	@Inject(method = "jump", at = @At(value = "TAIL"), cancellable = true)
 	private void mubble_jump(CallbackInfo info) {
 		LivingEntity entity = (LivingEntity) (Object) this;
-		if(entity.hasStatusEffect(DawnEffectPack.HEAVINESS)) {
+		if(entity.hasStatusEffect(DawnEffects.HEAVINESS)) {
 			Vec3d vec3d = entity.getVelocity();
-			entity.setVelocity(vec3d.x, vec3d.y - (float) (entity.getStatusEffect(DawnEffectPack.HEAVINESS).getAmplifier() + 1) * 0.05F, vec3d.z);
+			entity.setVelocity(vec3d.x, vec3d.y - (float) (entity.getStatusEffect(DawnEffects.HEAVINESS).getAmplifier() + 1) * 0.05F, vec3d.z);
 		}
 	}
 
@@ -37,7 +37,7 @@ public abstract class LivingEntityMixin {
 			PlayerEntity player = (PlayerEntity) source.getAttacker();
 			LootTable lootTable = world.getServer().getLootManager().getTable(entity.getLootTable());
 			LootContext.Builder builder = this.getLootContextBuilder(true, source);
-			if(EnchantmentUtil.hasEnchantment(DawnEnchantmentPack.TELEKINESIS, player.getMainHandStack())) {
+			if(EnchantmentUtil.hasEnchantment(DawnEnchantments.TELEKINESIS, player.getMainHandStack())) {
 				for(ItemStack stack : lootTable.generateLoot(builder.build(LootContextTypes.ENTITY))) {
 					player.inventory.insertStack(stack);
 				}
@@ -53,7 +53,7 @@ public abstract class LivingEntityMixin {
 		if(attacker instanceof PlayerEntity) {
 			PlayerEntity player = (PlayerEntity) attacker;
 			if(!player.getMainHandStack().isEmpty()) {
-				if(EnchantmentUtil.hasEnchantment(DawnEnchantmentPack.TELEKINESIS, player.getMainHandStack())) {
+				if(EnchantmentUtil.hasEnchantment(DawnEnchantments.TELEKINESIS, player.getMainHandStack())) {
 					player.addExperience(this.getCurrentExperience(player));
 					info.cancel();
 				}
