@@ -7,7 +7,7 @@ import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.util.registry.Registry;
 
-public class RecipeSerializerCreator<S extends RecipeSerializer<T>, T extends Recipe<?>> extends Creator<S> {
+public class RecipeSerializerCreator<S extends RecipeSerializer<? extends Recipe<?>>> extends Creator<S> {
 	protected final S serializer;
 
 	private RecipeSerializerCreator(String name, S serializer) {
@@ -21,7 +21,7 @@ public class RecipeSerializerCreator<S extends RecipeSerializer<T>, T extends Re
 		return value;
 	}
 
-	public class Builder implements CreatorBuilder {
+	public static class Builder<S extends RecipeSerializer<? extends Recipe<?>>> implements CreatorBuilder {
 		protected final String name;
 		protected final S serializer;
 
@@ -36,7 +36,7 @@ public class RecipeSerializerCreator<S extends RecipeSerializer<T>, T extends Re
 			this.serializer = serializer;
 		}
 
-		public RecipeSerializerCreator<S, T> build() {
+		public RecipeSerializerCreator<S> build() {
 			return new RecipeSerializerCreator<>(this.name, this.serializer);
 		}
 	}
