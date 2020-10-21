@@ -1,7 +1,8 @@
-package com.hugman.dawn.api.creator;
+package com.hugman.dawn.api.util;
 
 import net.minecraft.util.Identifier;
 
+// TODO move package
 public class ModData {
 	private final String modName;
 

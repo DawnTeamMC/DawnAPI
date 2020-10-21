@@ -1,7 +1,7 @@
 package com.hugman.dawn.api.creator;
 
 import com.hugman.dawn.api.util.CreatorBuilder;
-import com.mojang.datafixers.types.Type;
+import com.hugman.dawn.api.util.ModData;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.datafixer.TypeReferences;
@@ -9,21 +9,16 @@ import net.minecraft.util.Util;
 import net.minecraft.util.registry.Registry;
 
 public class BlockEntityCreator extends Creator<BlockEntityType<? extends BlockEntity>> {
-	protected final BlockEntityType.Builder<? extends BlockEntity> builder;
-
-	private BlockEntityCreator(String name, BlockEntityType.Builder<? extends BlockEntity> builder) {
-		super(name);
-		this.builder = builder;
+	private BlockEntityCreator(String name, BlockEntityType.Builder<? extends BlockEntity> builder, ModData modData) {
+		super(modData, name, builder.build(Util.getChoiceType(TypeReferences.BLOCK_ENTITY, name)));
 	}
 
 	@Override
-	public BlockEntityType<? extends BlockEntity> register(ModData modData) {
-		Type<?> type = Util.getChoiceType(TypeReferences.BLOCK_ENTITY, name);
-		value = Registry.register(Registry.BLOCK_ENTITY_TYPE, modData.id(name), builder.build(type));
-		return value;
+	public void register() {
+		Registry.register(Registry.BLOCK_ENTITY_TYPE, modData.id(name), value);
 	}
 
-	public static class Builder implements CreatorBuilder {
+	public static class Builder implements CreatorBuilder<BlockEntityType<? extends BlockEntity>> {
 		protected final String name;
 		protected final BlockEntityType.Builder<? extends BlockEntity> builder;
 
@@ -38,8 +33,8 @@ public class BlockEntityCreator extends Creator<BlockEntityType<? extends BlockE
 			this.builder = builder;
 		}
 
-		public BlockEntityCreator build() {
-			return new BlockEntityCreator(this.name, this.builder);
+		public BlockEntityCreator build(ModData modData) {
+			return new BlockEntityCreator(this.name, this.builder, modData);
 		}
 	}
 }

@@ -3,7 +3,8 @@
 	"package": "com.hugman.dawn.api.mixin",
 	"compatibilityLevel": "JAVA_8",
 	"mixins": [
-		"AxeItemMixin"
+		"AxeItemMixin",
+		"TreeFeatureMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

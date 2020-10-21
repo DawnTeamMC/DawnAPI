@@ -1,14 +1,11 @@
 package com.hugman.dawn;
 
+import com.hugman.dawn.config.DawnConfig;
 import com.hugman.dawn.api.creator.Creator;
-import com.hugman.dawn.api.creator.ModData;
 import com.hugman.dawn.api.creator.pack.PackManager;
+import com.hugman.dawn.api.util.ModData;
 import com.hugman.dawn.api.util.debug.EntryDebugWriter;
-import com.hugman.dawn.mod.init.DawnCommands;
-import com.hugman.dawn.mod.init.DawnEffects;
-import com.hugman.dawn.mod.init.DawnEnchantments;
-import com.hugman.dawn.mod.init.DawnItemGroups;
-import com.hugman.dawn.mod.config.DawnConfig;
+import com.hugman.dawn.mod.init.*;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.GsonConfigSerializer;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.PartitioningSerializer;
@@ -26,10 +23,15 @@ public class Dawn implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		DawnFeatures.init();
 		DawnEffects.init();
 		DawnEnchantments.init();
 		DawnItemGroups.init();
 		DawnCommands.init();
+		for(Creator<?> creator : PackManager.CREATORS) {
+			creator.register();
+		}
+
 		ServerLifecycleEvents.SERVER_STARTED.register(this::onServerLoad);
 	}
 

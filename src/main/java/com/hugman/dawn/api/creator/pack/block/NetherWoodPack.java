@@ -1,6 +1,6 @@
 package com.hugman.dawn.api.creator.pack.block;
 
-import com.hugman.dawn.api.creator.ModData;
+import com.hugman.dawn.api.util.ModData;
 import com.hugman.dawn.api.creator.pack.PackBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.MaterialColor;

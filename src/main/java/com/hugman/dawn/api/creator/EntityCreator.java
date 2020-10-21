@@ -1,6 +1,7 @@
 package com.hugman.dawn.api.creator;
 
 import com.hugman.dawn.api.util.CreatorBuilder;
+import com.hugman.dawn.api.util.ModData;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -9,25 +10,22 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.util.registry.Registry;
 
 public class EntityCreator extends Creator<EntityType<? extends Entity>> {
-	protected final EntityType<? extends Entity> baseEntityType;
 	protected final DefaultAttributeContainer.Builder attributeBuilder;
 
-	private EntityCreator(String name, EntityType<? extends Entity> baseEntityType, DefaultAttributeContainer.Builder attributeBuilder) {
-		super(name);
-		this.baseEntityType = baseEntityType;
+	private EntityCreator(ModData modData, String name, EntityType<? extends Entity> entityType, DefaultAttributeContainer.Builder attributeBuilder) {
+		super(modData, name, entityType);
 		this.attributeBuilder = attributeBuilder;
 	}
 
 	@Override
-	public EntityType<? extends Entity> register(ModData modData) {
-		value = Registry.register(Registry.ENTITY_TYPE, modData.id(name), baseEntityType);
+	public void register() {
+		Registry.register(Registry.ENTITY_TYPE, modData.id(name), value);
 		if(attributeBuilder != null) {
 			FabricDefaultAttributeRegistry.register((EntityType<? extends LivingEntity>) value, attributeBuilder);
 		}
-		return value;
 	}
 
-	public static class Builder implements CreatorBuilder {
+	public static class Builder implements CreatorBuilder<EntityType<? extends Entity>> {
 		protected final String name;
 		protected final EntityType<? extends Entity> baseEntityType;
 		protected DefaultAttributeContainer.Builder attributeBuilder;
@@ -48,8 +46,8 @@ public class EntityCreator extends Creator<EntityType<? extends Entity>> {
 			return this;
 		}
 
-		public EntityCreator build() {
-			return new EntityCreator(this.name, this.baseEntityType, this.attributeBuilder);
+		public EntityCreator build(ModData modData) {
+			return new EntityCreator(modData, this.name, this.baseEntityType, this.attributeBuilder);
 		}
 	}
 }

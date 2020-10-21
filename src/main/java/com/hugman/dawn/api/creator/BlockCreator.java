@@ -2,6 +2,7 @@ package com.hugman.dawn.api.creator;
 
 import com.hugman.dawn.api.util.BlockGetter;
 import com.hugman.dawn.api.util.CreatorBuilder;
+import com.hugman.dawn.api.util.ModData;
 import com.hugman.dawn.api.util.StringUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -18,7 +19,6 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.util.registry.Registry;
 
 public class BlockCreator extends Creator<Block> {
-	protected final Block baseBlock;
 	protected final Render render;
 	protected final ItemGroup itemGroup;
 	protected final int flammabilityBurn;
@@ -27,9 +27,8 @@ public class BlockCreator extends Creator<Block> {
 	protected final int cookTime;
 	protected final float compostingChance;
 
-	private BlockCreator(String name, Block baseBlock, Render render, ItemGroup itemGroup, int flammabilityBurn, int flammabilitySpread, boolean noItem, int cookTime, float compostingChance) {
-		super(name);
-		this.baseBlock = baseBlock;
+	private BlockCreator(ModData modData, String name, Block block, Render render, ItemGroup itemGroup, int flammabilityBurn, int flammabilitySpread, boolean noItem, int cookTime, float compostingChance) {
+		super(modData, name, block);
 		this.render = render;
 		this.itemGroup = itemGroup;
 		this.flammabilityBurn = flammabilityBurn;
@@ -40,14 +39,13 @@ public class BlockCreator extends Creator<Block> {
 	}
 
 	@Override
-	public Block register(ModData modData) {
-		value = Registry.register(Registry.BLOCK, modData.id(name), baseBlock);
+	public void register() {
+		Registry.register(Registry.BLOCK, modData.id(name), value);
 		FlammableBlockRegistry.getDefaultInstance().add(value, flammabilityBurn, flammabilitySpread);
 		if(!noItem) {
 			BlockItem blockItem = Registry.register(Registry.ITEM, Registry.BLOCK.getId(value), new BlockItem(value, new Item.Settings().group(itemGroup)));
 			blockItem.appendBlocks(Item.BLOCK_ITEMS, blockItem);
 		}
-		return value;
 	}
 
 	@Override
@@ -91,9 +89,9 @@ public class BlockCreator extends Creator<Block> {
 		}
 	}
 
-	public static class Builder implements CreatorBuilder {
+	public static class Builder implements CreatorBuilder<Block> {
 		private final String name;
-		private final Block baseBlock;
+		private final Block block;
 		protected Render render;
 
 		protected ItemGroup itemGroup;
@@ -107,11 +105,11 @@ public class BlockCreator extends Creator<Block> {
 		 * Creates a simple block with an item but no item group, flammability or cook time and is rendered has a solid block.
 		 *
 		 * @param name      The name of the block.
-		 * @param baseBlock The block itself.
+		 * @param block The block itself.
 		 */
-		public Builder(String name, Block baseBlock) {
+		public Builder(String name, Block block) {
 			this.name = name;
-			this.baseBlock = baseBlock;
+			this.block = block;
 		}
 
 		/**
@@ -175,8 +173,8 @@ public class BlockCreator extends Creator<Block> {
 			return this;
 		}
 
-		public BlockCreator build() {
-			return new BlockCreator(this.name, this.baseBlock, this.render, this.itemGroup, this.flammabilityBurn, this.flammabilitySpread, this.noItem, this.cookTime, this.compostingChance);
+		public BlockCreator build(ModData modData) {
+			return new BlockCreator(modData, this.name, this.block, this.render, this.itemGroup, this.flammabilityBurn, this.flammabilitySpread, this.noItem, this.cookTime, this.compostingChance);
 		}
 
 	}

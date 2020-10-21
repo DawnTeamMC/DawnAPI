@@ -1,30 +1,28 @@
 package com.hugman.dawn.api.creator;
 
 import com.hugman.dawn.api.util.CreatorBuilder;
+import com.hugman.dawn.api.util.ModData;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.item.Item;
 import net.minecraft.util.registry.Registry;
 
 public class ItemCreator extends Creator<Item> {
-	protected final Item baseItem;
 	protected final int cookTime;
 	protected final float compostingChance;
 
-	private ItemCreator(String name, Item baseItem, int cookTime, float compostingChance) {
-		super(name);
-		this.baseItem = baseItem;
+	private ItemCreator(String name, Item item, ModData modData, int cookTime, float compostingChance) {
+		super(modData, name, item);
 		this.cookTime = cookTime;
 		this.compostingChance = compostingChance;
 	}
 
 	@Override
-	public Item register(ModData modData) {
-		value = Registry.register(Registry.ITEM, modData.id(name), baseItem);
+	public void register() {
+		Registry.register(Registry.ITEM, modData.id(name), value);
 		if(cookTime != 0) {
 			FuelRegistry.INSTANCE.add(value, cookTime);
 		}
-		return value;
 	}
 
 	@Override
@@ -37,9 +35,9 @@ public class ItemCreator extends Creator<Item> {
 		}
 	}
 
-	public static class Builder implements CreatorBuilder {
+	public static class Builder implements CreatorBuilder<Item> {
 		protected final String name;
-		protected final Item baseItem;
+		protected final Item item;
 		protected int cookTime;
 		protected float compostingChance;
 
@@ -47,11 +45,11 @@ public class ItemCreator extends Creator<Item> {
 		 * Creates an item.
 		 *
 		 * @param name     The name of the item.
-		 * @param baseItem The item itself.
+		 * @param item The item itself.
 		 */
-		public Builder(String name, Item baseItem) {
+		public Builder(String name, Item item) {
 			this.name = name;
-			this.baseItem = baseItem;
+			this.item = item;
 		}
 
 		public Builder cookTime(int cookTime) {
@@ -64,8 +62,8 @@ public class ItemCreator extends Creator<Item> {
 			return this;
 		}
 
-		public ItemCreator build() {
-			return new ItemCreator(this.name, this.baseItem, this.cookTime, this.compostingChance);
+		public ItemCreator build(ModData modData) {
+			return new ItemCreator(this.name, this.item, modData, this.cookTime, this.compostingChance);
 		}
 	}
 }

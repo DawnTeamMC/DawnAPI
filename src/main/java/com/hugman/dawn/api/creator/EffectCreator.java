@@ -1,40 +1,37 @@
 package com.hugman.dawn.api.creator;
 
 import com.hugman.dawn.api.util.CreatorBuilder;
+import com.hugman.dawn.api.util.ModData;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.util.registry.Registry;
 
 public class EffectCreator extends Creator<StatusEffect> {
-	protected final StatusEffect baseEffect;
-
-	private EffectCreator(String name, StatusEffect baseEffect) {
-		super(name);
-		this.baseEffect = baseEffect;
+	private EffectCreator(ModData modData, String name, StatusEffect effect) {
+		super(modData, name, effect);
 	}
 
 	@Override
-	public StatusEffect register(ModData modData) {
-		value = Registry.register(Registry.STATUS_EFFECT, modData.id(name), baseEffect);
-		return value;
+	public void register() {
+		Registry.register(Registry.STATUS_EFFECT, modData.id(name), value);
 	}
 
-	public static class Builder implements CreatorBuilder {
+	public static class Builder implements CreatorBuilder<StatusEffect> {
 		protected final String name;
-		protected final StatusEffect baseEffect;
+		protected final StatusEffect effect;
 
 		/**
 		 * Creates an effect.
 		 *
 		 * @param name       The name of the effect.
-		 * @param baseEffect The effect itself.
+		 * @param effect The effect itself.
 		 */
-		public Builder(String name, StatusEffect baseEffect) {
+		public Builder(String name, StatusEffect effect) {
 			this.name = name;
-			this.baseEffect = baseEffect;
+			this.effect = effect;
 		}
 
-		public EffectCreator build() {
-			return new EffectCreator(this.name, this.baseEffect);
+		public EffectCreator build(ModData modData) {
+			return new EffectCreator(modData, this.name, this.effect);
 		}
 	}
 }

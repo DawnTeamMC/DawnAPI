@@ -1,17 +1,22 @@
 package com.hugman.dawn.api.creator;
 
+import com.hugman.dawn.api.util.ModData;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
 public abstract class Creator<V> {
+	protected final ModData modData;
 	protected final String name;
-	protected V value;
+	protected final V value;
 
-	protected Creator(String name) {
+	protected Creator(ModData modData, String name, V value) {
+		this.modData = modData;
 		this.name = name;
+		this.value = value;
 	}
 
-	public abstract V register(ModData modData);
+	public void register() {
+	}
 
 	@Environment(EnvType.CLIENT)
 	public void clientRegister() {
@@ -20,7 +25,15 @@ public abstract class Creator<V> {
 	public void serverRegister(boolean isDedicated) {
 	}
 
+	public ModData getModData() {
+		return modData;
+	}
+
 	public String getName() {
 		return name;
+	}
+
+	public V getValue() {
+		return value;
 	}
 }

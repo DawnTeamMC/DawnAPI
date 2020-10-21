@@ -1,25 +1,27 @@
 package com.hugman.dawn.api.creator;
 
 import com.hugman.dawn.api.util.CreatorBuilder;
+import com.hugman.dawn.api.util.ModData;
 import net.minecraft.stat.StatFormatter;
+import net.minecraft.stat.Stats;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class StatCreator extends Creator<Identifier> {
 	protected final StatFormatter formatter;
 
-	private StatCreator(String name, StatFormatter formatter) {
-		super(name);
+	private StatCreator(ModData modData, String name, StatFormatter formatter) {
+		super(modData, name, modData.id(name));
 		this.formatter = formatter;
 	}
 
 	@Override
-	public Identifier register(ModData modData) {
-		value = Registry.register(Registry.CUSTOM_STAT, modData.id(name), modData.id(name));
-		return value;
+	public void register() {
+		Registry.register(Registry.CUSTOM_STAT, modData.id(name), value);
+		Stats.CUSTOM.getOrCreateStat(value, formatter);
 	}
 
-	public static class Builder implements CreatorBuilder {
+	public static class Builder implements CreatorBuilder<Identifier> {
 		protected final String name;
 		protected StatFormatter formatter;
 
@@ -38,8 +40,8 @@ public class StatCreator extends Creator<Identifier> {
 			return this;
 		}
 
-		public StatCreator build() {
-			return new StatCreator(this.name, this.formatter);
+		public StatCreator build(ModData modData) {
+			return new StatCreator(modData, this.name, this.formatter);
 		}
 	}
 }

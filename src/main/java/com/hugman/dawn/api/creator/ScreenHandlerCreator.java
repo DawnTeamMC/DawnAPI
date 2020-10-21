@@ -1,25 +1,17 @@
 package com.hugman.dawn.api.creator;
 
 import com.hugman.dawn.api.util.CreatorBuilder;
+import com.hugman.dawn.api.util.ModData;
 import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerType;
 
 public class ScreenHandlerCreator<T extends ScreenHandler> extends Creator<ScreenHandlerType<T>> {
-	protected final ScreenHandlerRegistry.SimpleClientHandlerFactory<? extends ScreenHandler> factory;
-
-	private ScreenHandlerCreator(String name, ScreenHandlerRegistry.SimpleClientHandlerFactory<? extends ScreenHandler> factory) {
-		super(name);
-		this.factory = factory;
+	private ScreenHandlerCreator(ModData modData, String name, ScreenHandlerRegistry.SimpleClientHandlerFactory<T> factory) {
+		super(modData, name, ScreenHandlerRegistry.registerSimple(modData.id(name), factory));
 	}
 
-	@Override
-	public ScreenHandlerType<T> register(ModData modData) {
-		value = (ScreenHandlerType<T>) ScreenHandlerRegistry.registerSimple(modData.id(name), factory);
-		return value;
-	}
-
-	public static class Builder<T extends ScreenHandler> implements CreatorBuilder {
+	public static class Builder<T extends ScreenHandler> implements CreatorBuilder<ScreenHandlerType<T>> {
 		protected final String name;
 		protected final ScreenHandlerRegistry.SimpleClientHandlerFactory<T> factory;
 
@@ -34,8 +26,8 @@ public class ScreenHandlerCreator<T extends ScreenHandler> extends Creator<Scree
 			this.factory = factory;
 		}
 
-		public ScreenHandlerCreator<T> build() {
-			return new ScreenHandlerCreator<>(this.name, this.factory);
+		public ScreenHandlerCreator<T> build(ModData modData) {
+			return new ScreenHandlerCreator<>(modData, this.name, this.factory);
 		}
 	}
 }

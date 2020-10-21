@@ -1,6 +1,7 @@
 package com.hugman.dawn.api.creator;
 
 import com.hugman.dawn.api.util.CreatorBuilder;
+import com.hugman.dawn.api.util.ModData;
 import net.fabricmc.fabric.api.biome.v1.NetherBiomes;
 import net.fabricmc.fabric.api.biome.v1.OverworldBiomes;
 import net.fabricmc.fabric.api.biome.v1.OverworldClimate;
@@ -10,7 +11,7 @@ import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
 
 public class BiomeCreator extends Creator<RegistryKey<Biome>> {
-	private final Biome baseBiome;
+	private final Biome biome;
 	private final SpawnDimension spawnDimension;
 
 	private final OverworldClimate climate;
@@ -18,9 +19,9 @@ public class BiomeCreator extends Creator<RegistryKey<Biome>> {
 
 	private final Biome.MixedNoisePoint noises;
 
-	private BiomeCreator(String name, Biome baseBiome, SpawnDimension spawnDimension, OverworldClimate climate, double weight, Biome.MixedNoisePoint noises) {
-		super(name);
-		this.baseBiome = baseBiome;
+	private BiomeCreator(ModData modData, String name, Biome biome, SpawnDimension spawnDimension, OverworldClimate climate, double weight, Biome.MixedNoisePoint noises) {
+		super(modData, name, RegistryKey.of(Registry.BIOME_KEY, modData.id(name)));
+		this.biome = biome;
 		this.spawnDimension = spawnDimension;
 		this.climate = climate;
 		this.weight = weight;
@@ -28,9 +29,8 @@ public class BiomeCreator extends Creator<RegistryKey<Biome>> {
 	}
 
 	@Override
-	public RegistryKey<Biome> register(ModData modData) {
-		Registry.register(BuiltinRegistries.BIOME, modData.id(name), baseBiome);
-		value = RegistryKey.of(Registry.BIOME_KEY, modData.id(name));
+	public void register() {
+		Registry.register(BuiltinRegistries.BIOME, modData.id(name), biome);
 		switch(this.spawnDimension) {
 			case NONE:
 			default:
@@ -42,12 +42,11 @@ public class BiomeCreator extends Creator<RegistryKey<Biome>> {
 				NetherBiomes.addNetherBiome(value, noises);
 				break;
 		}
-		return value;
 	}
 
-	public static class Builder implements CreatorBuilder {
+	public static class Builder implements CreatorBuilder<RegistryKey<Biome>> {
 		private final String name;
-		private final Biome baseBiome;
+		private final Biome biome;
 		private SpawnDimension spawnDimension;
 
 		private OverworldClimate climate;
@@ -59,11 +58,11 @@ public class BiomeCreator extends Creator<RegistryKey<Biome>> {
 		 * Creates a biome.
 		 *
 		 * @param name      The name of the biome.
-		 * @param baseBiome The biome itself.
+		 * @param biome The biome itself.
 		 */
-		public Builder(String name, Biome baseBiome) {
+		public Builder(String name, Biome biome) {
 			this.name = name;
-			this.baseBiome = baseBiome;
+			this.biome = biome;
 			this.spawnDimension = SpawnDimension.NONE;
 		}
 
@@ -89,8 +88,8 @@ public class BiomeCreator extends Creator<RegistryKey<Biome>> {
 			return this;
 		}
 
-		public BiomeCreator build() {
-			return new BiomeCreator(this.name, this.baseBiome, this.spawnDimension, this.climate, this.weight, this.noises);
+		public BiomeCreator build(ModData modData) {
+			return new BiomeCreator(modData, this.name, this.biome, this.spawnDimension, this.climate, this.weight, this.noises);
 		}
 	}
 

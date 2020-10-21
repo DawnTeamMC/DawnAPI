@@ -1,6 +1,6 @@
 package com.hugman.dawn.api.creator.pack.block;
 
-import com.hugman.dawn.api.creator.ModData;
+import com.hugman.dawn.api.util.ModData;
 import com.hugman.dawn.api.creator.pack.Pack;
 import com.hugman.dawn.api.creator.pack.PackBuilder;
 import com.hugman.dawn.api.util.BlockGetter;

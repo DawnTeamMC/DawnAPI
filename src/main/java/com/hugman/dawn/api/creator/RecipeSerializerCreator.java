@@ -1,27 +1,22 @@
 package com.hugman.dawn.api.creator;
 
 import com.hugman.dawn.api.util.CreatorBuilder;
-import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
+import com.hugman.dawn.api.util.ModData;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeSerializer;
-import net.minecraft.screen.ScreenHandler;
 import net.minecraft.util.registry.Registry;
 
 public class RecipeSerializerCreator<S extends RecipeSerializer<? extends Recipe<?>>> extends Creator<S> {
-	protected final S serializer;
-
-	private RecipeSerializerCreator(String name, S serializer) {
-		super(name);
-		this.serializer = serializer;
+	private RecipeSerializerCreator(ModData modData, String name, S serializer) {
+		super(modData, name, serializer);
 	}
 
 	@Override
-	public S register(ModData modData) {
-		value = Registry.register(Registry.RECIPE_SERIALIZER, modData.id(name), serializer);
-		return value;
+	public void register() {
+		Registry.register(Registry.RECIPE_SERIALIZER, modData.id(name), value);
 	}
 
-	public static class Builder<S extends RecipeSerializer<? extends Recipe<?>>> implements CreatorBuilder {
+	public static class Builder<S extends RecipeSerializer<? extends Recipe<?>>> implements CreatorBuilder<S> {
 		protected final String name;
 		protected final S serializer;
 
@@ -36,8 +31,8 @@ public class RecipeSerializerCreator<S extends RecipeSerializer<? extends Recipe
 			this.serializer = serializer;
 		}
 
-		public RecipeSerializerCreator<S> build() {
-			return new RecipeSerializerCreator<>(this.name, this.serializer);
+		public RecipeSerializerCreator<S> build(ModData modData) {
+			return new RecipeSerializerCreator<>(modData, this.name, this.serializer);
 		}
 	}
 }
