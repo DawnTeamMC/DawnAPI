@@ -15,7 +15,7 @@ public class PottedPlantPack extends Pack {
 
 	protected PottedPlantPack(ModData modData, BlockCreator.Builder builder) {
 		this.plant = add(builder, modData);
-		this.pottedPlant = add(new BlockCreator.Builder("potted_" + Registry.BLOCK.getId(plant).getPath(), new FlowerPotBlock(getPlant(), BlockSettings.POTTED_PLANT.lightLevel(getPlant().getDefaultState().getLuminance()))).render(BlockCreator.Render.CUTOUT).noItem(), modData);
+		this.pottedPlant = add(new BlockCreator.Builder("potted_" + builder.getName(), new FlowerPotBlock(getPlant(), BlockSettings.POTTED_PLANT.lightLevel(getPlant().getDefaultState().getLuminance()))).render(BlockCreator.Render.CUTOUT).noItem(), modData);
 	}
 
 	public static class Builder implements PackBuilder {

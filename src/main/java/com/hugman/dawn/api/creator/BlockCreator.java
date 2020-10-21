@@ -175,6 +175,9 @@ public class BlockCreator extends Creator<Block> {
 			return new BlockCreator(modData, this.name, this.block, this.render, this.itemGroup, this.flammabilityBurn, this.flammabilitySpread, this.noItem, this.cookTime, this.compostingChance);
 		}
 
+		public String getName() {
+			return name;
+		}
 	}
 
 	public enum Render {
