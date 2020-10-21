@@ -21,7 +21,7 @@
 			"com.hugman.dawn.DawnClient"
 		],
 		"modmenu": [
-			"com.hugman.dawn.mod.init.config.DawnModMenuIntegration"
+			"com.hugman.dawn.mod.config.DawnModMenuIntegration"
 		]
 	},
 	"mixins": [

@@ -1,4 +1,4 @@
-package com.hugman.dawn.mod.init.config;
+package com.hugman.dawn.mod.config;
 
 import io.github.prospector.modmenu.api.ConfigScreenFactory;
 import io.github.prospector.modmenu.api.ModMenuApi;
