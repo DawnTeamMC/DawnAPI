@@ -78,13 +78,11 @@ public class BlockCreator extends Creator<Block> {
 	@Override
 	public void serverRegister(boolean isDedicated) {
 		if(!noItem) {
-			int cookTimeF = cookTime;
-			float compostingChanceF = compostingChance;
 			if(cookTime != 0) {
-				FuelRegistry.INSTANCE.add(value, cookTimeF);
+				FuelRegistry.INSTANCE.add(value, cookTime);
 			}
 			if(compostingChance != 0) {
-				CompostingChanceRegistry.INSTANCE.add(value, compostingChanceF);
+				CompostingChanceRegistry.INSTANCE.add(value, compostingChance);
 			}
 		}
 	}
