@@ -23,7 +23,7 @@ public class RecipeSerializerCreator<S extends RecipeSerializer<? extends Recipe
 		/**
 		 * Creates a screen handler.
 		 *
-		 * @param name    The name of the screen handler.
+		 * @param name       The name of the screen handler.
 		 * @param serializer The serializer. (ex: <code>new SpecialRecipeSerializer<>(FireworkRocketRecipe::new)</code>)
 		 */
 		public Builder(String name, S serializer) {

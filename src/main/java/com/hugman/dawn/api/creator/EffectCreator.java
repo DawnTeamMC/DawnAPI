@@ -22,7 +22,7 @@ public class EffectCreator extends Creator<StatusEffect> {
 		/**
 		 * Creates an effect.
 		 *
-		 * @param name       The name of the effect.
+		 * @param name   The name of the effect.
 		 * @param effect The effect itself.
 		 */
 		public Builder(String name, StatusEffect effect) {

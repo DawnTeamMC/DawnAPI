@@ -57,7 +57,7 @@ public class BiomeCreator extends Creator<RegistryKey<Biome>> {
 		/**
 		 * Creates a biome.
 		 *
-		 * @param name      The name of the biome.
+		 * @param name  The name of the biome.
 		 * @param biome The biome itself.
 		 */
 		public Builder(String name, Biome biome) {

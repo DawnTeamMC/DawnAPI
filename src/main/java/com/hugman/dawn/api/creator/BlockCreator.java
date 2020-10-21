@@ -104,7 +104,7 @@ public class BlockCreator extends Creator<Block> {
 		/**
 		 * Creates a simple block with an item but no item group, flammability or cook time and is rendered has a solid block.
 		 *
-		 * @param name      The name of the block.
+		 * @param name  The name of the block.
 		 * @param block The block itself.
 		 */
 		public Builder(String name, Block block) {

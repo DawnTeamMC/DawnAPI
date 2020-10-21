@@ -16,12 +16,12 @@ import java.util.Collection;
 public class MotionCommand {
 	public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
 		dispatcher.register(LiteralArgumentBuilder.<ServerCommandSource>literal("motion").requires((source) -> source.hasPermissionLevel(2))
-																						 .then(CommandManager.literal("add")
-																											 .then(CommandManager.argument("targets", EntityArgumentType.entities())
-																																 .then(CommandManager.argument("x", DoubleArgumentType.doubleArg()).then(CommandManager.argument("y", DoubleArgumentType.doubleArg()).then(CommandManager.argument("z", DoubleArgumentType.doubleArg()).executes((source) -> setMotion(source.getSource(), EntityArgumentType.getEntities(source, "targets"), DoubleArgumentType.getDouble(source, "x"), DoubleArgumentType.getDouble(source, "y"), DoubleArgumentType.getDouble(source, "z"), true)))))))
-																						 .then(CommandManager.literal("set")
-																											 .then(CommandManager.argument("targets", EntityArgumentType.entities())
-																																 .then(CommandManager.argument("x", DoubleArgumentType.doubleArg()).then(CommandManager.argument("y", DoubleArgumentType.doubleArg()).then(CommandManager.argument("z", DoubleArgumentType.doubleArg()).executes((source) -> setMotion(source.getSource(), EntityArgumentType.getEntities(source, "targets"), DoubleArgumentType.getDouble(source, "x"), DoubleArgumentType.getDouble(source, "y"), DoubleArgumentType.getDouble(source, "z"), false))))))));
+				.then(CommandManager.literal("add")
+						.then(CommandManager.argument("targets", EntityArgumentType.entities())
+								.then(CommandManager.argument("x", DoubleArgumentType.doubleArg()).then(CommandManager.argument("y", DoubleArgumentType.doubleArg()).then(CommandManager.argument("z", DoubleArgumentType.doubleArg()).executes((source) -> setMotion(source.getSource(), EntityArgumentType.getEntities(source, "targets"), DoubleArgumentType.getDouble(source, "x"), DoubleArgumentType.getDouble(source, "y"), DoubleArgumentType.getDouble(source, "z"), true)))))))
+				.then(CommandManager.literal("set")
+						.then(CommandManager.argument("targets", EntityArgumentType.entities())
+								.then(CommandManager.argument("x", DoubleArgumentType.doubleArg()).then(CommandManager.argument("y", DoubleArgumentType.doubleArg()).then(CommandManager.argument("z", DoubleArgumentType.doubleArg()).executes((source) -> setMotion(source.getSource(), EntityArgumentType.getEntities(source, "targets"), DoubleArgumentType.getDouble(source, "x"), DoubleArgumentType.getDouble(source, "y"), DoubleArgumentType.getDouble(source, "z"), false))))))));
 	}
 
 	private static int setMotion(ServerCommandSource source, Collection<? extends Entity> targets, double x, double y, double z, boolean sum) {

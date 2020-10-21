@@ -2,6 +2,7 @@ package com.hugman.dawn.api.util.debug;
 
 import com.hugman.dawn.Dawn;
 import com.hugman.dawn.api.util.debug.data.BlockEntryData;
+import com.hugman.dawn.api.util.debug.data.ItemEntryData;
 import com.hugman.dawn.api.util.debug.data.SimpleEntryData;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -29,6 +30,9 @@ public class EntryDebugWriter {
 				if(Dawn.CONFIG.debug.expandedInfo) {
 					if(registry.getKey().getValue().equals(Registry.BLOCK.getKey().getValue())) {
 						entryDataList.forEach((namespace, identifiers) -> new BlockEntryData(namespace, identifiers).save());
+					}
+					else if(registry.getKey().getValue().equals(Registry.ITEM.getKey().getValue())) {
+						entryDataList.forEach((namespace, identifiers) -> new ItemEntryData(namespace, identifiers).save());
 					}
 					else {
 						entryDataList.forEach((namespace, identifiers) -> new SimpleEntryData(namespace, registry, identifiers).save());

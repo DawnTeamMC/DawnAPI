@@ -44,7 +44,7 @@ public class ItemCreator extends Creator<Item> {
 		/**
 		 * Creates an item.
 		 *
-		 * @param name     The name of the item.
+		 * @param name The name of the item.
 		 * @param item The item itself.
 		 */
 		public Builder(String name, Item item) {

@@ -16,8 +16,8 @@ import java.util.Collection;
 public class HealthCommand {
 	public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
 		dispatcher.register(LiteralArgumentBuilder.<ServerCommandSource>literal("health").requires((source) -> source.hasPermissionLevel(2))
-																						 .then(CommandManager.literal("add").then(CommandManager.argument("targets", EntityArgumentType.entities()).then(CommandManager.argument("amount", FloatArgumentType.floatArg()).executes((source) -> setHealth(source.getSource(), EntityArgumentType.getEntities(source, "targets"), FloatArgumentType.getFloat(source, "amount"), true)))))
-																						 .then(CommandManager.literal("set").then(CommandManager.argument("targets", EntityArgumentType.entities()).then(CommandManager.argument("amount", FloatArgumentType.floatArg(0.0f)).executes((source) -> setHealth(source.getSource(), EntityArgumentType.getEntities(source, "targets"), FloatArgumentType.getFloat(source, "amount"), false))))));
+				.then(CommandManager.literal("add").then(CommandManager.argument("targets", EntityArgumentType.entities()).then(CommandManager.argument("amount", FloatArgumentType.floatArg()).executes((source) -> setHealth(source.getSource(), EntityArgumentType.getEntities(source, "targets"), FloatArgumentType.getFloat(source, "amount"), true)))))
+				.then(CommandManager.literal("set").then(CommandManager.argument("targets", EntityArgumentType.entities()).then(CommandManager.argument("amount", FloatArgumentType.floatArg(0.0f)).executes((source) -> setHealth(source.getSource(), EntityArgumentType.getEntities(source, "targets"), FloatArgumentType.getFloat(source, "amount"), false))))));
 	}
 
 	private static int setHealth(ServerCommandSource source, Collection<? extends Entity> targets, float amount, boolean sum) {

@@ -23,7 +23,7 @@ public class EnchantmentCreator extends Creator<Enchantment> {
 		/**
 		 * Creates an enchantment.
 		 *
-		 * @param name            The name of the enchantment.
+		 * @param name        The name of the enchantment.
 		 * @param enchantment The enchantment itself.
 		 */
 		public Builder(String name, Enchantment enchantment) {

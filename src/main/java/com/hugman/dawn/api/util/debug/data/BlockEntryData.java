@@ -56,15 +56,30 @@ public class BlockEntryData extends EntryData {
 			@Expose
 			@SerializedName("velocity_multiplier")
 			protected float velocityMultiplier;
+			@Expose
+			@SerializedName("dynamic_bounds")
+			protected boolean dynamicBounds;
+			@Expose
+			protected boolean opaque;
+			@Expose
+			@SerializedName("is_air")
+			protected boolean isAir;
+			@Expose
+			@SerializedName("is_tool_required")
+			protected boolean isToolRequired;
 
 			public Properties(Block block) {
-				AbstractBlockSettingsAccessor settings = (AbstractBlockSettingsAccessor)((AbstractBlockAccessor)block).getSettings();
+				AbstractBlockSettingsAccessor settings = (AbstractBlockSettingsAccessor) ((AbstractBlockAccessor) block).getSettings();
 				this.material = new MaterialProperties(settings.getMaterial());
 				this.hardness = settings.getHardness();
 				this.blastResistance = settings.getResistance();
 				this.randomlyTicks = settings.getRandomTicks();
 				this.slipperiness = settings.getSlipperiness();
 				this.velocityMultiplier = settings.getVelocityMultiplier();
+				this.dynamicBounds = settings.getDynamicBounds();
+				this.opaque = settings.getOpaque();
+				this.isAir = settings.getIsAir();
+				this.isToolRequired = settings.isToolRequired();
 			}
 
 			public class MaterialProperties {
@@ -89,6 +104,8 @@ public class BlockEntryData extends EntryData {
 				@Expose
 				@SerializedName("piston_behavior")
 				protected PistonBehavior pistonBehavior;
+				@Expose
+				protected int color;
 
 				public MaterialProperties(Material material) {
 					this.isLiquid = material.isLiquid();
@@ -98,8 +115,8 @@ public class BlockEntryData extends EntryData {
 					this.isReplaceable = material.isReplaceable();
 					this.blocksLight = material.blocksLight();
 					this.pistonBehavior = material.getPistonBehavior();
+					this.color = material.getColor().color;
 				}
-
 			}
 		}
 	}
