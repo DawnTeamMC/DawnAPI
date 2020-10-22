@@ -21,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
 	@Inject(method = "jump", at = @At(value = "TAIL"), cancellable = true)
-	private void mubble_jump(CallbackInfo info) {
+	private void dawn_jump(CallbackInfo info) {
 		LivingEntity entity = (LivingEntity) (Object) this;
 		if(entity.hasStatusEffect(DawnEffects.HEAVINESS)) {
 			Vec3d vec3d = entity.getVelocity();
@@ -30,7 +30,7 @@ public abstract class LivingEntityMixin {
 	}
 
 	@Inject(method = "dropLoot", at = @At(value = "HEAD"), cancellable = true)
-	private void mubble_dropLoot(DamageSource source, boolean causedByPlayer, CallbackInfo info) {
+	private void dawn_dropLoot(DamageSource source, boolean causedByPlayer, CallbackInfo info) {
 		LivingEntity entity = (LivingEntity) (Object) this;
 		World world = entity.getEntityWorld();
 		if(causedByPlayer && source.getAttacker() instanceof PlayerEntity) {
@@ -47,7 +47,7 @@ public abstract class LivingEntityMixin {
 	}
 
 	@Inject(method = "dropXp", at = @At(value = "HEAD"), cancellable = true)
-	private void mubble_dropXp(CallbackInfo info) {
+	private void dawn_dropXp(CallbackInfo info) {
 		LivingEntity entity = (LivingEntity) (Object) this;
 		LivingEntity attacker = entity.getAttacker();
 		if(attacker instanceof PlayerEntity) {

@@ -17,7 +17,21 @@ public class HealthCommand {
 	public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
 		dispatcher.register(LiteralArgumentBuilder.<ServerCommandSource>literal("health").requires((source) -> source.hasPermissionLevel(2))
 				.then(CommandManager.literal("add").then(CommandManager.argument("targets", EntityArgumentType.entities()).then(CommandManager.argument("amount", FloatArgumentType.floatArg()).executes((source) -> setHealth(source.getSource(), EntityArgumentType.getEntities(source, "targets"), FloatArgumentType.getFloat(source, "amount"), true)))))
-				.then(CommandManager.literal("set").then(CommandManager.argument("targets", EntityArgumentType.entities()).then(CommandManager.argument("amount", FloatArgumentType.floatArg(0.0f)).executes((source) -> setHealth(source.getSource(), EntityArgumentType.getEntities(source, "targets"), FloatArgumentType.getFloat(source, "amount"), false))))));
+				.then(CommandManager.literal("set").then(CommandManager.argument("targets", EntityArgumentType.entities()).then(CommandManager.argument("amount", FloatArgumentType.floatArg(0.0f)).executes((source) -> setHealth(source.getSource(), EntityArgumentType.getEntities(source, "targets"), FloatArgumentType.getFloat(source, "amount"), false)))))
+				.then(CommandManager.literal("query").then(CommandManager.argument("target", EntityArgumentType.entity()).executes((source) -> queryHealth(source.getSource(), EntityArgumentType.getEntity(source, "target"))))));
+	}
+
+	private static int queryHealth(ServerCommandSource source, Entity target) {
+		if(target instanceof LivingEntity) {
+			LivingEntity livingEntity = (LivingEntity) target;
+			float health = livingEntity.getHealth();
+			source.sendFeedback(new TranslatableText("commands.health.query.success", target.getDisplayName(), health), false);
+			return (int) health;
+		}
+		else {
+			source.sendFeedback(new TranslatableText("commands.health.query.failed"), false);
+			return 0;
+		}
 	}
 
 	private static int setHealth(ServerCommandSource source, Collection<? extends Entity> targets, float amount, boolean sum) {

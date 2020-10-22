@@ -3,7 +3,9 @@
 	"package": "com.hugman.dawn.mod.mixin",
 	"compatibilityLevel": "JAVA_8",
 	"mixins": [
+		"HungerManagerAccessor",
 		"LivingEntityMixin",
+		"PlayerEntityMixin",
 		"StatusEffectInstanceMixin"
 	],
 	"client": [

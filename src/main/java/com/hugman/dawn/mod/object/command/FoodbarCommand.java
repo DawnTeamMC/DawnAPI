@@ -1,5 +1,6 @@
 package com.hugman.dawn.mod.object.command;
 
+import com.hugman.dawn.mod.mixin.HungerManagerAccessor;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.FloatArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
@@ -17,16 +18,31 @@ public class FoodbarCommand {
 	public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
 		dispatcher.register(LiteralArgumentBuilder.<ServerCommandSource>literal("foodbar").requires((source) -> source.hasPermissionLevel(2))
 				.then(CommandManager.literal("add")
-						.then(CommandManager.literal("food").then(CommandManager.argument("targets", EntityArgumentType.players()).then(CommandManager.argument("amount", IntegerArgumentType.integer()).executes((source) -> setFood(source.getSource(), EntityArgumentType.getPlayers(source, "targets"), IntegerArgumentType.getInteger(source, "amount"), true)))))
-						.then(CommandManager.literal("saturation").then(CommandManager.argument("targets", EntityArgumentType.players()).then(CommandManager.argument("amount", FloatArgumentType.floatArg()).executes((source) -> setSaturation(source.getSource(), EntityArgumentType.getPlayers(source, "targets"), FloatArgumentType.getFloat(source, "amount"), true))))))
+						.then(CommandManager.literal("food").then(CommandManager.argument("targets", EntityArgumentType.players()).then(CommandManager.argument("amount", IntegerArgumentType.integer()).executes(source -> setFood(source.getSource(), EntityArgumentType.getPlayers(source, "targets"), IntegerArgumentType.getInteger(source, "amount"), true)))))
+						.then(CommandManager.literal("saturation").then(CommandManager.argument("targets", EntityArgumentType.players()).then(CommandManager.argument("amount", FloatArgumentType.floatArg()).executes(source -> setSaturation(source.getSource(), EntityArgumentType.getPlayers(source, "targets"), FloatArgumentType.getFloat(source, "amount"), true))))))
 				.then(CommandManager.literal("set")
-						.then(CommandManager.literal("food").then(CommandManager.argument("targets", EntityArgumentType.players()).then(CommandManager.argument("amount", IntegerArgumentType.integer(0, 20)).executes((source) -> setFood(source.getSource(), EntityArgumentType.getPlayers(source, "targets"), IntegerArgumentType.getInteger(source, "amount"), false)))))
-						.then(CommandManager.literal("saturation").then(CommandManager.argument("targets", EntityArgumentType.players()).then(CommandManager.argument("amount", FloatArgumentType.floatArg(0.0f)).executes((source) -> setSaturation(source.getSource(), EntityArgumentType.getPlayers(source, "targets"), FloatArgumentType.getFloat(source, "amount"), false)))))));
+						.then(CommandManager.literal("food").then(CommandManager.argument("targets", EntityArgumentType.players()).then(CommandManager.argument("amount", IntegerArgumentType.integer(0, 20)).executes(source -> setFood(source.getSource(), EntityArgumentType.getPlayers(source, "targets"), IntegerArgumentType.getInteger(source, "amount"), false)))))
+						.then(CommandManager.literal("saturation").then(CommandManager.argument("targets", EntityArgumentType.players()).then(CommandManager.argument("amount", FloatArgumentType.floatArg(0.0f)).executes(source -> setSaturation(source.getSource(), EntityArgumentType.getPlayers(source, "targets"), FloatArgumentType.getFloat(source, "amount"), false))))))
+				.then(CommandManager.literal("query")
+						.then(CommandManager.literal("food").then(CommandManager.argument("target", EntityArgumentType.player()).executes(source -> queryFood(source.getSource(), EntityArgumentType.getPlayer(source, "target")))))
+						.then(CommandManager.literal("saturation").then(CommandManager.argument("target", EntityArgumentType.player()).executes(source -> querySaturation(source.getSource(), EntityArgumentType.getPlayer(source, "target")))))));
+	}
+
+	private static int queryFood(ServerCommandSource source, ServerPlayerEntity target) {
+		int foodLevel = target.getHungerManager().getFoodLevel();
+		source.sendFeedback(new TranslatableText("commands.foodbar.query.food", target.getDisplayName(), foodLevel), false);
+		return foodLevel;
+	}
+
+	private static int querySaturation(ServerCommandSource source, ServerPlayerEntity target) {
+		float saturationLevel = target.getHungerManager().getSaturationLevel();
+		source.sendFeedback(new TranslatableText("commands.foodbar.query.saturation", target.getDisplayName(), saturationLevel), false);
+		return (int) saturationLevel;
 	}
 
 	private static int setFood(ServerCommandSource source, Collection<ServerPlayerEntity> targets, int amount, boolean sum) {
-		for(ServerPlayerEntity entity : targets) {
-			HungerManager stats = entity.getHungerManager();
+		for(ServerPlayerEntity player : targets) {
+			HungerManager stats = player.getHungerManager();
 			if(sum) {
 				stats.setFoodLevel(amount + stats.getFoodLevel());
 			}
@@ -54,10 +70,10 @@ public class FoodbarCommand {
 		for(ServerPlayerEntity entity : targets) {
 			HungerManager stats = entity.getHungerManager();
 			if(sum) {
-				stats.setSaturationLevelClient(amount + stats.getFoodLevel());
+				((HungerManagerAccessor) stats).setFoodSaturationLevel(amount + stats.getSaturationLevel());
 			}
 			else {
-				stats.setSaturationLevelClient(amount);
+				((HungerManagerAccessor) stats).setFoodSaturationLevel(amount);
 			}
 		}
 		final String parameter;

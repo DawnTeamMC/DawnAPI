@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(StatusEffectInstance.class)
 public class StatusEffectInstanceMixin {
 	@Redirect(method = "update", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/effect/StatusEffect;canApplyUpdateEffect(II)Z"))
-	public boolean dawn_damage(StatusEffect effect, int duration, int amplifier, LivingEntity entity, Runnable overwriteCallback) {
+	public boolean dawn_canApplyUpdateEffect(StatusEffect effect, int duration, int amplifier, LivingEntity entity, Runnable overwriteCallback) {
 		if(effect == StatusEffects.POISON || effect == StatusEffects.WITHER) {
 			StatusEffectInstance poisonResistanceInstance = entity.getStatusEffect(DawnEffects.POISON_RESISTANCE);
 			if(poisonResistanceInstance != null) {
