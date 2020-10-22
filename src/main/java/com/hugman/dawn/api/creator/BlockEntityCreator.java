@@ -18,7 +18,7 @@ public class BlockEntityCreator<E extends BlockEntity> extends Creator<BlockEnti
 		Registry.register(Registry.BLOCK_ENTITY_TYPE, modData.id(name), value);
 	}
 
-	public static class Builder<E extends BlockEntity> implements CreatorBuilder<E> {
+	public static class Builder<E extends BlockEntity> implements CreatorBuilder<BlockEntityType<E>> {
 		protected final String name;
 		protected final BlockEntityType.Builder<E> builder;
 
