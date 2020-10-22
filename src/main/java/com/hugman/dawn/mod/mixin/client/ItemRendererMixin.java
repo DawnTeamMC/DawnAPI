@@ -12,12 +12,8 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(ItemRenderer.class)
 public class ItemRendererMixin {
-	private static final String ItemStack = "Lnet/minecraft/item/ItemStack;";
-	private static final String TextRenderer = "Lnet/minecraft/client/font/TextRenderer;";
-	private static final String String = "Ljava/lang/String;";
-
-	@Redirect(method = "renderGuiItemOverlay(" + TextRenderer + ItemStack + "II" + String + ")V", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isDamaged()Z"))
-	public boolean mubble_appearsDamaged(ItemStack stack) {
+	@Redirect(method = "renderGuiItemOverlay(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/item/ItemStack;IILjava/lang/String;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isDamaged()Z"))
+	public boolean dawn_appearsDamaged(ItemStack stack) {
 		ClientPlayerEntity clientPlayerEntity = MinecraftClient.getInstance().player;
 		if(EnchantmentUtil.hasEnchantment(DawnEnchantments.IGNORANCE_CURSE, stack) && !clientPlayerEntity.isCreative()) {
 			return false;

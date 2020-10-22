@@ -3,7 +3,8 @@
 	"package": "com.hugman.dawn.mod.mixin",
 	"compatibilityLevel": "JAVA_8",
 	"mixins": [
-		"LivingEntityMixin"
+		"LivingEntityMixin",
+		"StatusEffectInstanceMixin"
 	],
 	"client": [
 		"client.ItemRendererMixin",

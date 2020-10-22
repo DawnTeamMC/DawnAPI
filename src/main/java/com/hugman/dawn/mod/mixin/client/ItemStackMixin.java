@@ -19,11 +19,8 @@ import java.util.List;
 
 @Mixin(ItemStack.class)
 public class ItemStackMixin {
-	private static final String List = "Ljava/util/List;";
-	private static final String ListTag = "Lnet/minecraft/nbt/ListTag;";
-
-	@Redirect(method = "getTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;appendEnchantments(" + List + ListTag + ")V"))
-	public void mubble_appendEnchantments(List<Text> tooltip, ListTag enchantments, @Nullable PlayerEntity playerEntity, TooltipContext context) {
+	@Redirect(method = "getTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;appendEnchantments(Ljava/util/List;Lnet/minecraft/nbt/ListTag;)V"))
+	public void dawn_appendEnchantments(List<Text> tooltip, ListTag enchantments, @Nullable PlayerEntity playerEntity, TooltipContext context) {
 		ItemStack stack = (ItemStack) (Object) this;
 		if(EnchantmentUtil.hasEnchantment(DawnEnchantments.IGNORANCE_CURSE, stack)) {
 			if(playerEntity != null) {
@@ -40,7 +37,7 @@ public class ItemStackMixin {
 	}
 
 	@Redirect(method = "getTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isDamaged()Z"))
-	public boolean mubble_isDamaged(ItemStack stack) {
+	public boolean dawn_isDamaged(ItemStack stack) {
 		ClientPlayerEntity clientPlayerEntity = MinecraftClient.getInstance().player;
 		if(EnchantmentUtil.hasEnchantment(DawnEnchantments.IGNORANCE_CURSE, stack) && !clientPlayerEntity.isCreative()) {
 			return false;
