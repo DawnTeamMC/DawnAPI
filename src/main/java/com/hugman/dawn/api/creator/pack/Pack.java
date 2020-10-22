@@ -1,8 +1,8 @@
 package com.hugman.dawn.api.creator.pack;
 
 import com.hugman.dawn.api.creator.Creator;
-import com.hugman.dawn.api.util.ModData;
 import com.hugman.dawn.api.util.CreatorBuilder;
+import com.hugman.dawn.api.util.ModData;
 
 public abstract class Pack {
 	protected static <V, C extends Creator<V>, B extends CreatorBuilder<V>> V add(B creatorBuilder, ModData modData) {

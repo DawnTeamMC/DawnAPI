@@ -1,13 +1,12 @@
 package com.hugman.dawn.api.creator.pack.block;
 
 import com.hugman.dawn.api.creator.BlockCreator;
-import com.hugman.dawn.api.util.ModData;
 import com.hugman.dawn.api.creator.pack.Pack;
 import com.hugman.dawn.api.creator.pack.PackBuilder;
 import com.hugman.dawn.api.util.BlockSettings;
+import com.hugman.dawn.api.util.ModData;
 import net.minecraft.block.Block;
 import net.minecraft.block.FlowerPotBlock;
-import net.minecraft.util.registry.Registry;
 
 public class PottedPlantPack extends Pack {
 	private final Block plant;
@@ -16,6 +15,14 @@ public class PottedPlantPack extends Pack {
 	protected PottedPlantPack(ModData modData, BlockCreator.Builder builder) {
 		this.plant = add(builder, modData);
 		this.pottedPlant = add(new BlockCreator.Builder("potted_" + builder.getName(), new FlowerPotBlock(getPlant(), BlockSettings.POTTED_PLANT.lightLevel(getPlant().getDefaultState().getLuminance()))).render(BlockCreator.Render.CUTOUT).noItem(), modData);
+	}
+
+	public Block getPlant() {
+		return this.plant;
+	}
+
+	public Block getPottedPlant() {
+		return this.pottedPlant;
 	}
 
 	public static class Builder implements PackBuilder {
@@ -33,13 +40,5 @@ public class PottedPlantPack extends Pack {
 		public PottedPlantPack build(ModData modData) {
 			return new PottedPlantPack(modData, builder);
 		}
-	}
-
-	public Block getPlant() {
-		return this.plant;
-	}
-
-	public Block getPottedPlant() {
-		return this.pottedPlant;
 	}
 }

@@ -1,7 +1,6 @@
 package com.hugman.dawn.mod.init;
 
 import com.hugman.dawn.Dawn;
-import com.hugman.dawn.api.creator.Creator;
 import com.hugman.dawn.api.creator.pack.Pack;
 import com.hugman.dawn.api.creator.pack.PackBuilder;
 import com.hugman.dawn.api.util.CreatorBuilder;

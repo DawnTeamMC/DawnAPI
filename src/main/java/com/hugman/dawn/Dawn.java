@@ -1,10 +1,10 @@
 package com.hugman.dawn;
 
-import com.hugman.dawn.config.DawnConfig;
 import com.hugman.dawn.api.creator.Creator;
 import com.hugman.dawn.api.creator.pack.PackManager;
 import com.hugman.dawn.api.util.ModData;
 import com.hugman.dawn.api.util.debug.EntryDebugWriter;
+import com.hugman.dawn.config.DawnConfig;
 import com.hugman.dawn.mod.init.*;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.GsonConfigSerializer;

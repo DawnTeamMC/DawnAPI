@@ -6,8 +6,6 @@ import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.carver.CarverConfig;
 import net.minecraft.world.gen.carver.ConfiguredCarver;
-import net.minecraft.world.gen.surfacebuilder.ConfiguredSurfaceBuilder;
-import net.minecraft.world.gen.surfacebuilder.SurfaceConfig;
 
 public class ConfiguredCarverCreator<CC extends CarverConfig> extends Creator<ConfiguredCarver<CC>> {
 	private ConfiguredCarverCreator(ModData modData, String name, ConfiguredCarver<CC> feature) {

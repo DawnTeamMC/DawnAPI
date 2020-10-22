@@ -1,7 +1,7 @@
 package com.hugman.dawn.api.creator.pack.block;
 
-import com.hugman.dawn.api.util.ModData;
 import com.hugman.dawn.api.creator.pack.PackBuilder;
+import com.hugman.dawn.api.util.ModData;
 import net.minecraft.block.Block;
 import net.minecraft.block.MaterialColor;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
@@ -15,6 +15,42 @@ public class NetherWoodPack extends WoodPack {
 	protected NetherWoodPack(ModData modData, String suffix, Supplier<ConfiguredFeature<HugeFungusFeatureConfig, ?>> hugeFungusSupplier, MaterialColor planksColor, MaterialColor insideColor, MaterialColor barkColor) {
 		super(modData, suffix, planksColor, insideColor, barkColor, true);
 		this.fungusPack = add(new FungusPack.Builder(suffix, hugeFungusSupplier), modData);
+	}
+
+	public Block getStem() {
+		return getLog();
+	}
+
+	public Block getStrippedStem() {
+		return getStrippedLog();
+	}
+
+	public Block getHyphae() {
+		return getWood();
+	}
+
+	public Block getStrippedHyphae() {
+		return getStrippedWood();
+	}
+
+	public Block getHyphaeStairs() {
+		return getWoodStairs();
+	}
+
+	public Block getHyphaeSlab() {
+		return getWoodSlab();
+	}
+
+	public Block getHyphaeButton() {
+		return getWoodButton();
+	}
+
+	public Block getFungus() {
+		return fungusPack.getPlant();
+	}
+
+	public Block getPottedFungus() {
+		return fungusPack.getPottedPlant();
 	}
 
 	public static class Builder implements PackBuilder {
@@ -56,41 +92,5 @@ public class NetherWoodPack extends WoodPack {
 		public NetherWoodPack build(ModData modData) {
 			return new NetherWoodPack(modData, suffix, hugeFungusSupplier, planksColor, insideColor, barkColor);
 		}
-	}
-
-	public Block getStem() {
-		return getLog();
-	}
-
-	public Block getStrippedStem() {
-		return getStrippedLog();
-	}
-
-	public Block getHyphae() {
-		return getWood();
-	}
-
-	public Block getStrippedHyphae() {
-		return getStrippedWood();
-	}
-
-	public Block getHyphaeStairs() {
-		return getWoodStairs();
-	}
-
-	public Block getHyphaeSlab() {
-		return getWoodSlab();
-	}
-
-	public Block getHyphaeButton() {
-		return getWoodButton();
-	}
-
-	public Block getFungus() {
-		return fungusPack.getPlant();
-	}
-
-	public Block getPottedFungus() {
-		return fungusPack.getPottedPlant();
 	}
 }

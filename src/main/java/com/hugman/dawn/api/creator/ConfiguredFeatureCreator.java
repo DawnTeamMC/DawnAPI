@@ -5,7 +5,6 @@ import com.hugman.dawn.api.util.ModData;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
 
 public class ConfiguredFeatureCreator<FC extends FeatureConfig> extends Creator<ConfiguredFeature<FC, ?>> {

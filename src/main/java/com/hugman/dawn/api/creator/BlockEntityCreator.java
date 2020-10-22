@@ -5,8 +5,6 @@ import com.hugman.dawn.api.util.ModData;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.datafixer.TypeReferences;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
 import net.minecraft.util.Util;
 import net.minecraft.util.registry.Registry;
 

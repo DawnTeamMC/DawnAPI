@@ -1,10 +1,10 @@
 package com.hugman.dawn.api.creator.pack.block;
 
 import com.hugman.dawn.api.creator.BlockCreator;
-import com.hugman.dawn.api.util.ModData;
 import com.hugman.dawn.api.creator.pack.Pack;
 import com.hugman.dawn.api.creator.pack.PackBuilder;
 import com.hugman.dawn.api.util.DefaultBlockGetter;
+import com.hugman.dawn.api.util.ModData;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -22,35 +22,6 @@ public class WoodPack extends Pack {
 		this.logs = add(new LogsPack.Builder(name, insideColor, barkColor, isNether), modData);
 		this.woodenBlocks = add(new MSBlockPack.Builder(name, settings, DefaultBlockGetter.STAIRS, DefaultBlockGetter.SLAB, DefaultBlockGetter.TRAPDOOR, DefaultBlockGetter.WOOD_PRESSURE_PLATE, DefaultBlockGetter.WOOD_BUTTON, DefaultBlockGetter.FENCE, DefaultBlockGetter.FENCE_GATE, DefaultBlockGetter.DOOR), modData);
 		this.barkBlocks = add(new MSBlockPack.Builder(name + logs.getWoodName(), settings.materialColor(barkColor), DefaultBlockGetter.STAIRS, DefaultBlockGetter.SLAB, DefaultBlockGetter.WOOD_BUTTON), modData);
-	}
-
-	public static class Builder implements PackBuilder {
-		private final String name;
-		private final MaterialColor planksColor;
-		private final MaterialColor insideColor;
-		private final MaterialColor barkColor;
-		private final boolean isNether;
-
-		/**
-		 * Creates an entry pack containing blocks for basic wood types.
-		 *
-		 * @param name        The name of the wood type. (ex: <code>oak</code>)
-		 * @param planksColor The material color of the planks.
-		 * @param insideColor The material color of the inside of logs.
-		 * @param barkColor   The material color of the bark side of logs.
-		 * @param isNether    Defines if the wood type comes from the nether. (changes the name, sounds and materials)
-		 */
-		public Builder(String name, MaterialColor planksColor, MaterialColor insideColor, MaterialColor barkColor, boolean isNether) {
-			this.name = name;
-			this.planksColor = planksColor;
-			this.insideColor = insideColor;
-			this.barkColor = barkColor;
-			this.isNether = isNether;
-		}
-
-		public WoodPack build(ModData modData) {
-			return new WoodPack(modData, name, planksColor, insideColor, barkColor, isNether);
-		}
 	}
 
 	public Block getPlanks() {
@@ -115,5 +86,34 @@ public class WoodPack extends Pack {
 
 	public Block getDoor() {
 		return woodenBlocks.getBlock(DefaultBlockGetter.DOOR);
+	}
+
+	public static class Builder implements PackBuilder {
+		private final String name;
+		private final MaterialColor planksColor;
+		private final MaterialColor insideColor;
+		private final MaterialColor barkColor;
+		private final boolean isNether;
+
+		/**
+		 * Creates an entry pack containing blocks for basic wood types.
+		 *
+		 * @param name        The name of the wood type. (ex: <code>oak</code>)
+		 * @param planksColor The material color of the planks.
+		 * @param insideColor The material color of the inside of logs.
+		 * @param barkColor   The material color of the bark side of logs.
+		 * @param isNether    Defines if the wood type comes from the nether. (changes the name, sounds and materials)
+		 */
+		public Builder(String name, MaterialColor planksColor, MaterialColor insideColor, MaterialColor barkColor, boolean isNether) {
+			this.name = name;
+			this.planksColor = planksColor;
+			this.insideColor = insideColor;
+			this.barkColor = barkColor;
+			this.isNether = isNether;
+		}
+
+		public WoodPack build(ModData modData) {
+			return new WoodPack(modData, name, planksColor, insideColor, barkColor, isNether);
+		}
 	}
 }

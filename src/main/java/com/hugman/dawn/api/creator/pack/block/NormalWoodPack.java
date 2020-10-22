@@ -1,10 +1,10 @@
 package com.hugman.dawn.api.creator.pack.block;
 
 import com.hugman.dawn.api.creator.BlockCreator;
-import com.hugman.dawn.api.util.ModData;
 import com.hugman.dawn.api.creator.pack.PackBuilder;
 import com.hugman.dawn.api.object.block.SaplingBlock;
 import com.hugman.dawn.api.util.BlockSettings;
+import com.hugman.dawn.api.util.ModData;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.MaterialColor;
@@ -21,6 +21,22 @@ public class NormalWoodPack extends WoodPack {
 		super(modData, suffix, planksColor, insideColor, barkColor, false);
 		this.saplingPack = add(new PottedPlantPack.Builder(new BlockCreator.Builder(suffix + "_sapling", new SaplingBlock(saplingGenerator, saplingSoilPredicate, BlockSettings.SAPLING)).itemGroup(ItemGroup.DECORATIONS).render(BlockCreator.Render.CUTOUT_MIPPED)), modData);
 		this.leavesPack = add(new LeavesPack.Builder(suffix), modData);
+	}
+
+	public Block getSapling() {
+		return saplingPack.getPlant();
+	}
+
+	public Block getPottedSapling() {
+		return saplingPack.getPottedPlant();
+	}
+
+	public Block getLeaves() {
+		return leavesPack.getLeaves();
+	}
+
+	public Block getLeafPile() {
+		return leavesPack.getLeafPile();
 	}
 
 	public static class Builder implements PackBuilder {
@@ -73,21 +89,5 @@ public class NormalWoodPack extends WoodPack {
 		public NormalWoodPack build(ModData modData) {
 			return new NormalWoodPack(modData, suffix, saplingGenerator, saplingSoilPredicate, planksColor, insideColor, barkColor);
 		}
-	}
-
-	public Block getSapling() {
-		return saplingPack.getPlant();
-	}
-
-	public Block getPottedSapling() {
-		return saplingPack.getPottedPlant();
-	}
-
-	public Block getLeaves() {
-		return leavesPack.getLeaves();
-	}
-
-	public Block getLeafPile() {
-		return leavesPack.getLeafPile();
 	}
 }

@@ -44,6 +44,13 @@ public class BiomeCreator extends Creator<RegistryKey<Biome>> {
 		}
 	}
 
+	public enum SpawnDimension {
+		NONE,
+		OVERWORLD_CONTINENTAL,
+		THE_NETHER,
+		THE_END
+	}
+
 	public static class Builder implements CreatorBuilder<RegistryKey<Biome>> {
 		private final String name;
 		private final Biome biome;
@@ -91,12 +98,5 @@ public class BiomeCreator extends Creator<RegistryKey<Biome>> {
 		public BiomeCreator build(ModData modData) {
 			return new BiomeCreator(modData, this.name, this.biome, this.spawnDimension, this.climate, this.weight, this.noises);
 		}
-	}
-
-	public enum SpawnDimension {
-		NONE,
-		OVERWORLD_CONTINENTAL,
-		THE_NETHER,
-		THE_END
 	}
 }

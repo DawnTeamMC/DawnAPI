@@ -1,10 +1,10 @@
 package com.hugman.dawn.api.creator.pack.block;
 
 import com.hugman.dawn.api.creator.BlockCreator;
-import com.hugman.dawn.api.util.ModData;
 import com.hugman.dawn.api.creator.pack.Pack;
 import com.hugman.dawn.api.creator.pack.PackBuilder;
 import com.hugman.dawn.api.util.BlockGetter;
+import com.hugman.dawn.api.util.ModData;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 
@@ -18,6 +18,10 @@ public class MSBlockPack extends Pack {
 		for(BlockGetter getter : getters) {
 			blockMap.put(getter, add(new BlockCreator.Builder(name, getter, settings), modData));
 		}
+	}
+
+	public Block getBlock(BlockGetter getter) {
+		return blockMap.get(getter);
 	}
 
 	public static class Builder implements PackBuilder {
@@ -41,9 +45,5 @@ public class MSBlockPack extends Pack {
 		public MSBlockPack build(ModData modData) {
 			return new MSBlockPack(modData, name, settings, getters);
 		}
-	}
-
-	public Block getBlock(BlockGetter getter) {
-		return blockMap.get(getter);
 	}
 }

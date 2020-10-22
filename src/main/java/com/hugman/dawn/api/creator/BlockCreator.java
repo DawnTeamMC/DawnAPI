@@ -87,6 +87,13 @@ public class BlockCreator extends Creator<Block> {
 		}
 	}
 
+	public enum Render {
+		SOLID,
+		CUTOUT,
+		CUTOUT_MIPPED,
+		TRANSLUCENT
+	}
+
 	public static class Builder implements CreatorBuilder<Block> {
 		private final String name;
 		private final Block block;
@@ -178,13 +185,6 @@ public class BlockCreator extends Creator<Block> {
 		public String getName() {
 			return name;
 		}
-	}
-
-	public enum Render {
-		SOLID,
-		CUTOUT,
-		CUTOUT_MIPPED,
-		TRANSLUCENT
 	}
 }
 

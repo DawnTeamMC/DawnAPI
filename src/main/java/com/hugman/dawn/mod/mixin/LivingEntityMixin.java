@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
-	@Inject(method = "jump", at = @At(value = "TAIL"), cancellable = true)
+	@Inject(method = "jump", at = @At("TAIL"))
 	private void dawn_jump(CallbackInfo info) {
 		LivingEntity entity = (LivingEntity) (Object) this;
 		if(entity.hasStatusEffect(DawnEffects.HEAVINESS)) {

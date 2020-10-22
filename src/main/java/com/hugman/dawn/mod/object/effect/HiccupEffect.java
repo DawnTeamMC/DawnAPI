@@ -1,10 +1,11 @@
 package com.hugman.dawn.mod.object.effect;
 
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectType;
 import net.minecraft.util.math.Vec3d;
 
-public class HiccupEffect extends SimpleEffect {
+public class HiccupEffect extends StatusEffect {
 	public HiccupEffect(StatusEffectType typeIn, int liquidColorIn) {
 		super(typeIn, liquidColorIn);
 	}

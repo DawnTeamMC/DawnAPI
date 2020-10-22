@@ -1,9 +1,9 @@
 package com.hugman.dawn.api.creator.pack.block;
 
-import com.hugman.dawn.api.util.ModData;
 import com.hugman.dawn.api.creator.pack.Pack;
 import com.hugman.dawn.api.creator.pack.PackBuilder;
 import com.hugman.dawn.api.util.BlockGetter;
+import com.hugman.dawn.api.util.ModData;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.util.DyeColor;
@@ -18,6 +18,10 @@ public class MSCBlockPack extends Pack {
 		for(BlockGetter getter : getters) {
 			packMap.put(getter, add(new MCBlockPack.Builder(name, getter, settings), modData));
 		}
+	}
+
+	public Block getBlock(BlockGetter getter, DyeColor color) {
+		return packMap.get(getter).getBlock(color);
 	}
 
 	public static class Builder implements PackBuilder {
@@ -41,9 +45,5 @@ public class MSCBlockPack extends Pack {
 		public MSCBlockPack build(ModData modData) {
 			return new MSCBlockPack(modData, name, settings, getters);
 		}
-	}
-
-	public Block getBlock(BlockGetter getter, DyeColor color) {
-		return packMap.get(getter).getBlock(color);
 	}
 }

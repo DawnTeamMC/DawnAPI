@@ -1,11 +1,11 @@
 package com.hugman.dawn.api.creator.pack.block;
 
 import com.hugman.dawn.api.creator.BlockCreator;
-import com.hugman.dawn.api.util.ModData;
 import com.hugman.dawn.api.creator.pack.Pack;
 import com.hugman.dawn.api.creator.pack.PackBuilder;
 import com.hugman.dawn.api.object.item.AxeItem;
 import com.hugman.dawn.api.util.BlockSettings;
+import com.hugman.dawn.api.util.ModData;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.item.ItemGroup;
@@ -49,6 +49,30 @@ public class LogsPack extends Pack {
 		return new PillarBlock(AbstractBlock.Settings.of(isNether ? Material.NETHER_WOOD : Material.WOOD, (blockState) -> blockState.get(PillarBlock.AXIS) == Direction.Axis.Y ? insideColor : barkColor).strength(2.0F).sounds(isNether ? BlockSoundGroup.NETHER_STEM : BlockSoundGroup.WOOD));
 	}
 
+	public Block getLog() {
+		return log;
+	}
+
+	public Block getStrippedLog() {
+		return strippedLog;
+	}
+
+	public Block getWood() {
+		return wood;
+	}
+
+	public Block getStrippedWood() {
+		return strippedWood;
+	}
+
+	protected String getLogName() {
+		return logName;
+	}
+
+	protected String getWoodName() {
+		return woodName;
+	}
+
 	public static class Builder implements PackBuilder {
 		private final String name;
 		private final MaterialColor insideColor;
@@ -73,29 +97,5 @@ public class LogsPack extends Pack {
 		public LogsPack build(ModData modData) {
 			return new LogsPack(modData, name, insideColor, barkColor, isNether);
 		}
-	}
-
-	public Block getLog() {
-		return log;
-	}
-
-	public Block getStrippedLog() {
-		return strippedLog;
-	}
-
-	public Block getWood() {
-		return wood;
-	}
-
-	public Block getStrippedWood() {
-		return strippedWood;
-	}
-
-	protected String getLogName() {
-		return logName;
-	}
-
-	protected String getWoodName() {
-		return woodName;
 	}
 }

@@ -1,10 +1,10 @@
 package com.hugman.dawn.api.creator.pack.block;
 
 import com.hugman.dawn.api.creator.BlockCreator;
-import com.hugman.dawn.api.util.ModData;
 import com.hugman.dawn.api.creator.pack.Pack;
 import com.hugman.dawn.api.creator.pack.PackBuilder;
 import com.hugman.dawn.api.util.BlockGetter;
+import com.hugman.dawn.api.util.ModData;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemGroup;
@@ -20,6 +20,10 @@ public class MCBlockPack extends Pack {
 		for(DyeColor color : DyeColor.values()) {
 			blockMap.put(color, add(new BlockCreator.Builder(color.getName() + "_" + name, getter, settings.materialColor(color.getMaterialColor())).render(render).itemGroup(itemGroup), modData));
 		}
+	}
+
+	public Block getBlock(DyeColor color) {
+		return blockMap.get(color);
 	}
 
 	public static class Builder implements PackBuilder {
@@ -57,9 +61,5 @@ public class MCBlockPack extends Pack {
 		public MCBlockPack build(ModData modData) {
 			return new MCBlockPack(modData, name, getter, settings, itemGroup, render);
 		}
-	}
-
-	public Block getBlock(DyeColor color) {
-		return blockMap.get(color);
 	}
 }

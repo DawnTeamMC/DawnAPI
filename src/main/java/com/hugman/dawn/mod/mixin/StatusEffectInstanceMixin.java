@@ -2,7 +2,6 @@ package com.hugman.dawn.mod.mixin;
 
 import com.hugman.dawn.mod.init.DawnEffects;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -19,7 +18,7 @@ public class StatusEffectInstanceMixin {
 			if(poisonResistanceInstance != null) {
 				int seconds = (effect == StatusEffects.POISON ? 25 : 40) * (poisonResistanceInstance.getAmplifier() + 2);
 				int j = seconds >> amplifier;
-				if (j > 0) {
+				if(j > 0) {
 					return duration % j == 0;
 				}
 				return true;
