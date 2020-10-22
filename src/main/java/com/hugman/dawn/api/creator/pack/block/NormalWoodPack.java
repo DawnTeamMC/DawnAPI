@@ -6,17 +6,20 @@ import com.hugman.dawn.api.creator.pack.PackBuilder;
 import com.hugman.dawn.api.object.block.SaplingBlock;
 import com.hugman.dawn.api.util.BlockSettings;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.MaterialColor;
 import net.minecraft.block.sapling.SaplingGenerator;
 import net.minecraft.item.ItemGroup;
+
+import java.util.function.Predicate;
 
 public class NormalWoodPack extends WoodPack {
 	private final PottedPlantPack saplingPack;
 	private final LeavesPack leavesPack;
 
-	protected NormalWoodPack(ModData modData, String suffix, SaplingGenerator saplingGenerator, MaterialColor planksColor, MaterialColor insideColor, MaterialColor barkColor) {
+	protected NormalWoodPack(ModData modData, String suffix, SaplingGenerator saplingGenerator, Predicate<BlockState> saplingSoilPredicate, MaterialColor planksColor, MaterialColor insideColor, MaterialColor barkColor) {
 		super(modData, suffix, planksColor, insideColor, barkColor, false);
-		this.saplingPack = add(new PottedPlantPack.Builder(new BlockCreator.Builder(suffix + "_sapling", new SaplingBlock(saplingGenerator, BlockSettings.SAPLING)).itemGroup(ItemGroup.DECORATIONS).render(BlockCreator.Render.CUTOUT_MIPPED)), modData);
+		this.saplingPack = add(new PottedPlantPack.Builder(new BlockCreator.Builder(suffix + "_sapling", new SaplingBlock(saplingGenerator, saplingSoilPredicate, BlockSettings.SAPLING)).itemGroup(ItemGroup.DECORATIONS).render(BlockCreator.Render.CUTOUT_MIPPED)), modData);
 		this.leavesPack = add(new LeavesPack.Builder(suffix), modData);
 	}
 
@@ -26,6 +29,7 @@ public class NormalWoodPack extends WoodPack {
 		private final MaterialColor planksColor;
 		private final MaterialColor insideColor;
 		private final MaterialColor barkColor;
+		private Predicate<BlockState> saplingSoilPredicate;
 
 		/**
 		 * Creates an entry pack containing blocks for normal wood types.
@@ -56,8 +60,18 @@ public class NormalWoodPack extends WoodPack {
 			this.barkColor = barkColor;
 		}
 
+		/**
+		 * Adds a predicate for blocks that the sapling can grow on.
+		 *
+		 * @param predicate The predicate for the allowed states.
+		 */
+		public Builder saplingSoil(Predicate<BlockState> predicate) {
+			this.saplingSoilPredicate = predicate;
+			return this;
+		}
+
 		public NormalWoodPack build(ModData modData) {
-			return new NormalWoodPack(modData, suffix, saplingGenerator, planksColor, insideColor, barkColor);
+			return new NormalWoodPack(modData, suffix, saplingGenerator, saplingSoilPredicate, planksColor, insideColor, barkColor);
 		}
 	}
 
