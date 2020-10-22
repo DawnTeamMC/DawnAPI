@@ -56,7 +56,7 @@ public class ItemEntryData extends EntryData {
 			protected Identifier recipeRemainder;
 
 			public Properties(Item item) {
-				ItemAccessor accessor = (ItemAccessor)item;
+				ItemAccessor accessor = (ItemAccessor) item;
 				this.group = item.getGroup() != null ? item.getGroup().getName() : null;
 				this.rarity = accessor.getRarity();
 				this.maxCount = item.getMaxCount();

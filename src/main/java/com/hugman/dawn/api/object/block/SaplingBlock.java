@@ -1,28 +1,31 @@
 package com.hugman.dawn.api.object.block;
 
-import com.hugman.dawn.api.object.world.gen.tree.ExtendedTreeGeneration;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.sapling.SaplingGenerator;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
-import net.minecraft.world.TestableWorld;
+
+import java.util.function.Predicate;
 
 public class SaplingBlock extends net.minecraft.block.SaplingBlock {
-	private final SaplingGenerator saplingGenerator;
+	private final Predicate<BlockState> predicate;
 
 	public SaplingBlock(SaplingGenerator saplingGenerator, AbstractBlock.Settings settings) {
 		super(saplingGenerator, settings);
-		this.saplingGenerator = saplingGenerator;
+		this.predicate = null;
+	}
+
+	public SaplingBlock(SaplingGenerator saplingGenerator, Predicate<BlockState> predicate, AbstractBlock.Settings settings) {
+		super(saplingGenerator, settings);
+		this.predicate = predicate;
 	}
 
 	@Override
 	protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
-		if(saplingGenerator instanceof ExtendedTreeGeneration) {
-			return ((ExtendedTreeGeneration) this).canPlantOnTop(floor, world, pos);
+		if(predicate != null) {
+			if(predicate.test(floor)) return true;
 		}
-		else {
-			return super.canPlantOnTop(floor, world, pos);
-		}
+		return super.canPlantOnTop(floor, world, pos);
 	}
 }

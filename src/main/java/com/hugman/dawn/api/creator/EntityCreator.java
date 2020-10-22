@@ -33,7 +33,7 @@ public class EntityCreator<E extends Entity> extends Creator<EntityType<E>> {
 		/**
 		 * Creates an entity type.
 		 *
-		 * @param name           The name of the entity type.
+		 * @param name       The name of the entity type.
 		 * @param entityType The entity type itself.
 		 */
 		public Builder(String name, EntityType<E> entityType) {
