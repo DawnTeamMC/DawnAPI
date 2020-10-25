@@ -31,7 +31,7 @@ public class ConfiguredCarverCreator<CC extends CarverConfig> extends Creator<Co
 			this.feature = configuredCarver;
 		}
 
-		public ConfiguredCarverCreator build(ModData modData) {
+		public ConfiguredCarverCreator<CC> build(ModData modData) {
 			return new ConfiguredCarverCreator<>(modData, this.name, this.feature);
 		}
 	}

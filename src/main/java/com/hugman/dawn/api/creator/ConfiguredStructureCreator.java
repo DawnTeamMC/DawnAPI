@@ -32,7 +32,7 @@ public class ConfiguredStructureCreator<FC extends FeatureConfig, SF extends Str
 			this.feature = configuredStructureFeature;
 		}
 
-		public ConfiguredStructureCreator build(ModData modData) {
+		public ConfiguredStructureCreator<FC, SF> build(ModData modData) {
 			return new ConfiguredStructureCreator<>(modData, this.name, this.feature);
 		}
 	}

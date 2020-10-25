@@ -31,7 +31,7 @@ public class ConfiguredFeatureCreator<FC extends FeatureConfig> extends Creator<
 			this.feature = configuredFeature;
 		}
 
-		public ConfiguredFeatureCreator build(ModData modData) {
+		public ConfiguredFeatureCreator<FC> build(ModData modData) {
 			return new ConfiguredFeatureCreator<>(modData, this.name, this.feature);
 		}
 	}

@@ -30,7 +30,7 @@ public class FeatureCreator<FC extends FeatureConfig, F extends Feature<FC>> ext
 			this.feature = feature;
 		}
 
-		public FeatureCreator build(ModData modData) {
+		public FeatureCreator<FC, F> build(ModData modData) {
 			return new FeatureCreator<>(modData, this.name, this.feature);
 		}
 	}

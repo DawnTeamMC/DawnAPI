@@ -31,7 +31,7 @@ public class ConfiguredSurfaceBuilderCreator<SC extends SurfaceConfig> extends C
 			this.feature = configuredSurfaceBuilder;
 		}
 
-		public ConfiguredSurfaceBuilderCreator build(ModData modData) {
+		public ConfiguredSurfaceBuilderCreator<SC> build(ModData modData) {
 			return new ConfiguredSurfaceBuilderCreator<>(modData, this.name, this.feature);
 		}
 	}
