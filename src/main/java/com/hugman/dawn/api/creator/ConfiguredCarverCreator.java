@@ -1,6 +1,5 @@
 package com.hugman.dawn.api.creator;
 
-import com.hugman.dawn.api.util.CreatorBuilder;
 import com.hugman.dawn.api.util.ModData;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
@@ -17,7 +16,7 @@ public class ConfiguredCarverCreator<CC extends CarverConfig> extends Creator<Co
 		Registry.register(BuiltinRegistries.CONFIGURED_CARVER, modData.id(name), value);
 	}
 
-	public static class Builder<CC extends CarverConfig> implements CreatorBuilder<ConfiguredCarver<CC>> {
+	public static class Builder<CC extends CarverConfig> implements Creator.Builder<ConfiguredCarver<CC>> {
 		protected final String name;
 		protected final ConfiguredCarver<CC> feature;
 

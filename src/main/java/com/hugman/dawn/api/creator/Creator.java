@@ -36,4 +36,8 @@ public abstract class Creator<V> {
 	public V getValue() {
 		return value;
 	}
+
+	public interface Builder<V> {
+		Creator<V> build(ModData modData);
+	}
 }

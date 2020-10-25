@@ -1,6 +1,5 @@
 package com.hugman.dawn.api.creator;
 
-import com.hugman.dawn.api.util.CreatorBuilder;
 import com.hugman.dawn.api.util.ModData;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
@@ -18,7 +17,7 @@ public class ConfiguredStructureCreator<FC extends FeatureConfig, SF extends Str
 		Registry.register(BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE, modData.id(name), value);
 	}
 
-	public static class Builder<FC extends FeatureConfig, SF extends StructureFeature<FC>> implements CreatorBuilder<ConfiguredStructureFeature<FC, SF>> {
+	public static class Builder<FC extends FeatureConfig, SF extends StructureFeature<FC>> implements Creator.Builder<ConfiguredStructureFeature<FC, SF>> {
 		protected final String name;
 		protected final ConfiguredStructureFeature<FC, SF> feature;
 

@@ -1,6 +1,5 @@
 package com.hugman.dawn.api.creator;
 
-import com.hugman.dawn.api.util.CreatorBuilder;
 import com.hugman.dawn.api.util.ModData;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
@@ -35,7 +34,7 @@ public class ItemCreator extends Creator<Item> {
 		}
 	}
 
-	public static class Builder implements CreatorBuilder<Item> {
+	public static class Builder implements Creator.Builder<Item> {
 		protected final String name;
 		protected final Item item;
 		protected int cookTime;

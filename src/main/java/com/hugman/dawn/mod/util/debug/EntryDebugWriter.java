@@ -1,11 +1,10 @@
-package com.hugman.dawn.api.util.debug;
+package com.hugman.dawn.mod.util.debug;
 
 import com.hugman.dawn.Dawn;
-import com.hugman.dawn.api.util.debug.data.BlockEntryData;
-import com.hugman.dawn.api.util.debug.data.ItemEntryData;
-import com.hugman.dawn.api.util.debug.data.SimpleEntryData;
+import com.hugman.dawn.mod.util.debug.data.BlockEntryData;
+import com.hugman.dawn.mod.util.debug.data.ItemEntryData;
+import com.hugman.dawn.mod.util.debug.data.SimpleEntryData;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 
 import java.util.HashMap;

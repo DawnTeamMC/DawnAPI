@@ -2,7 +2,6 @@ package com.hugman.dawn.api.creator.pack.block;
 
 import com.hugman.dawn.api.creator.BlockCreator;
 import com.hugman.dawn.api.creator.pack.Pack;
-import com.hugman.dawn.api.creator.pack.PackBuilder;
 import com.hugman.dawn.api.object.item.AxeItem;
 import com.hugman.dawn.api.util.BlockSettings;
 import com.hugman.dawn.api.util.ModData;
@@ -73,7 +72,7 @@ public class LogsPack extends Pack {
 		return woodName;
 	}
 
-	public static class Builder implements PackBuilder {
+	public static class Builder implements Pack.Builder {
 		private final String name;
 		private final MaterialColor insideColor;
 		private final MaterialColor barkColor;

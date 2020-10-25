@@ -2,7 +2,6 @@ package com.hugman.dawn.api.creator.pack.block;
 
 import com.hugman.dawn.api.creator.BlockCreator;
 import com.hugman.dawn.api.creator.pack.Pack;
-import com.hugman.dawn.api.creator.pack.PackBuilder;
 import com.hugman.dawn.api.util.BlockSettings;
 import com.hugman.dawn.api.util.ModData;
 import net.minecraft.block.Block;
@@ -25,7 +24,7 @@ public class PottedPlantPack extends Pack {
 		return this.pottedPlant;
 	}
 
-	public static class Builder implements PackBuilder {
+	public static class Builder implements Pack.Builder {
 		private final BlockCreator.Builder builder;
 
 		/**

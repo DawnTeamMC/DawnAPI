@@ -1,6 +1,5 @@
 package com.hugman.dawn.api.creator;
 
-import com.hugman.dawn.api.util.CreatorBuilder;
 import com.hugman.dawn.api.util.ModData;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.util.registry.Registry;
@@ -15,7 +14,7 @@ public class EffectCreator extends Creator<StatusEffect> {
 		Registry.register(Registry.STATUS_EFFECT, modData.id(name), value);
 	}
 
-	public static class Builder implements CreatorBuilder<StatusEffect> {
+	public static class Builder implements Creator.Builder<StatusEffect> {
 		protected final String name;
 		protected final StatusEffect effect;
 

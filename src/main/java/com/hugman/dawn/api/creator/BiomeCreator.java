@@ -1,6 +1,5 @@
 package com.hugman.dawn.api.creator;
 
-import com.hugman.dawn.api.util.CreatorBuilder;
 import com.hugman.dawn.api.util.ModData;
 import net.fabricmc.fabric.api.biome.v1.NetherBiomes;
 import net.fabricmc.fabric.api.biome.v1.OverworldBiomes;
@@ -51,7 +50,7 @@ public class BiomeCreator extends Creator<RegistryKey<Biome>> {
 		THE_END
 	}
 
-	public static class Builder implements CreatorBuilder<RegistryKey<Biome>> {
+	public static class Builder implements Creator.Builder<RegistryKey<Biome>> {
 		private final String name;
 		private final Biome biome;
 		private SpawnDimension spawnDimension;

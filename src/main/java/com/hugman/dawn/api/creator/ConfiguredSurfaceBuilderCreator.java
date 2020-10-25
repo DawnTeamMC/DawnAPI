@@ -1,6 +1,5 @@
 package com.hugman.dawn.api.creator;
 
-import com.hugman.dawn.api.util.CreatorBuilder;
 import com.hugman.dawn.api.util.ModData;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
@@ -17,7 +16,7 @@ public class ConfiguredSurfaceBuilderCreator<SC extends SurfaceConfig> extends C
 		Registry.register(BuiltinRegistries.CONFIGURED_SURFACE_BUILDER, modData.id(name), value);
 	}
 
-	public static class Builder<SC extends SurfaceConfig> implements CreatorBuilder<ConfiguredSurfaceBuilder<SC>> {
+	public static class Builder<SC extends SurfaceConfig> implements Creator.Builder<ConfiguredSurfaceBuilder<SC>> {
 		protected final String name;
 		protected final ConfiguredSurfaceBuilder<SC> feature;
 

@@ -1,4 +1,4 @@
-package com.hugman.dawn.api.util.debug.data;
+package com.hugman.dawn.mod.util.debug.data;
 
 import com.google.gson.annotations.Expose;
 import net.minecraft.util.Identifier;

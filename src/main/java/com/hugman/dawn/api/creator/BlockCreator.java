@@ -1,7 +1,6 @@
 package com.hugman.dawn.api.creator;
 
 import com.hugman.dawn.api.util.BlockGetter;
-import com.hugman.dawn.api.util.CreatorBuilder;
 import com.hugman.dawn.api.util.ModData;
 import com.hugman.dawn.api.util.StringUtil;
 import net.fabricmc.api.EnvType;
@@ -94,7 +93,7 @@ public class BlockCreator extends Creator<Block> {
 		TRANSLUCENT
 	}
 
-	public static class Builder implements CreatorBuilder<Block> {
+	public static class Builder implements Creator.Builder<Block> {
 		private final String name;
 		private final Block block;
 		protected Render render;

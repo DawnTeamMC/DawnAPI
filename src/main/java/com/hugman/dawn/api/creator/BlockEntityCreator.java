@@ -1,6 +1,5 @@
 package com.hugman.dawn.api.creator;
 
-import com.hugman.dawn.api.util.CreatorBuilder;
 import com.hugman.dawn.api.util.ModData;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
@@ -18,7 +17,7 @@ public class BlockEntityCreator<E extends BlockEntity> extends Creator<BlockEnti
 		Registry.register(Registry.BLOCK_ENTITY_TYPE, modData.id(name), value);
 	}
 
-	public static class Builder<E extends BlockEntity> implements CreatorBuilder<BlockEntityType<E>> {
+	public static class Builder<E extends BlockEntity> implements Creator.Builder<BlockEntityType<E>> {
 		protected final String name;
 		protected final BlockEntityType.Builder<E> builder;
 

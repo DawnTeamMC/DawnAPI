@@ -1,6 +1,5 @@
 package com.hugman.dawn.api.creator;
 
-import com.hugman.dawn.api.util.CreatorBuilder;
 import com.hugman.dawn.api.util.ModData;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.Feature;
@@ -16,7 +15,7 @@ public class FeatureCreator<FC extends FeatureConfig, F extends Feature<FC>> ext
 		Registry.register(Registry.FEATURE, modData.id(name), value);
 	}
 
-	public static class Builder<FC extends FeatureConfig, F extends Feature<FC>> implements CreatorBuilder<F> {
+	public static class Builder<FC extends FeatureConfig, F extends Feature<FC>> implements Creator.Builder<F> {
 		protected final String name;
 		protected final F feature;
 

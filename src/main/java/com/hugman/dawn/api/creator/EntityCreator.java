@@ -1,6 +1,5 @@
 package com.hugman.dawn.api.creator;
 
-import com.hugman.dawn.api.util.CreatorBuilder;
 import com.hugman.dawn.api.util.ModData;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.entity.Entity;
@@ -25,7 +24,7 @@ public class EntityCreator<E extends Entity> extends Creator<EntityType<E>> {
 		}
 	}
 
-	public static class Builder<E extends Entity> implements CreatorBuilder<EntityType<E>> {
+	public static class Builder<E extends Entity> implements Creator.Builder<EntityType<E>> {
 		protected final String name;
 		protected final EntityType<E> entityType;
 		protected DefaultAttributeContainer.Builder attributeBuilder;
@@ -41,7 +40,7 @@ public class EntityCreator<E extends Entity> extends Creator<EntityType<E>> {
 			this.entityType = entityType;
 		}
 
-		public Builder<E> attributes(DefaultAttributeContainer.Builder attributeBuilder) {
+		public Builder attributes(DefaultAttributeContainer.Builder attributeBuilder) {
 			this.attributeBuilder = attributeBuilder;
 			return this;
 		}

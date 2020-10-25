@@ -1,9 +1,7 @@
 package com.hugman.dawn;
 
-import com.hugman.dawn.api.creator.Creator;
-import com.hugman.dawn.api.creator.pack.PackManager;
 import com.hugman.dawn.api.util.ModData;
-import com.hugman.dawn.api.util.debug.EntryDebugWriter;
+import com.hugman.dawn.mod.util.debug.EntryDebugWriter;
 import com.hugman.dawn.config.DawnConfig;
 import com.hugman.dawn.mod.init.*;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
@@ -28,17 +26,11 @@ public class Dawn implements ModInitializer {
 		DawnEnchantments.init();
 		DawnItemGroups.init();
 		DawnCommands.init();
-		for(Creator<?> creator : PackManager.CREATORS) {
-			creator.register();
-		}
-
+		MOD_DATA.registerEverything();
 		ServerLifecycleEvents.SERVER_STARTED.register(this::onServerLoad);
 	}
 
 	public void onServerLoad(MinecraftServer minecraftServer) {
-		for(Creator<?> creator : PackManager.CREATORS) {
-			creator.serverRegister(minecraftServer.isDedicated());
-		}
 		if(minecraftServer.isDedicated()) {
 			DEBUG_WRITER.load();
 		}

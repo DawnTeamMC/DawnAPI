@@ -1,7 +1,7 @@
-package com.hugman.dawn.api.util.debug.data;
+package com.hugman.dawn.mod.util.debug.data;
 
 import com.hugman.dawn.api.util.FileUtil;
-import com.hugman.dawn.api.util.debug.DataSerialization;
+import com.hugman.dawn.mod.util.debug.DataSerialization;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 

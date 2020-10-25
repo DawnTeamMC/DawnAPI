@@ -2,7 +2,6 @@ package com.hugman.dawn.api.creator.pack.block;
 
 import com.hugman.dawn.api.creator.BlockCreator;
 import com.hugman.dawn.api.creator.pack.Pack;
-import com.hugman.dawn.api.creator.pack.PackBuilder;
 import com.hugman.dawn.api.util.BlockGetter;
 import com.hugman.dawn.api.util.ModData;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -26,7 +25,7 @@ public class MCBlockPack extends Pack {
 		return blockMap.get(color);
 	}
 
-	public static class Builder implements PackBuilder {
+	public static class Builder implements Pack.Builder {
 		private final String name;
 		private final BlockGetter getter;
 		private final FabricBlockSettings settings;

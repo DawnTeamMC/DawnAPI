@@ -1,6 +1,5 @@
 package com.hugman.dawn.api.creator;
 
-import com.hugman.dawn.api.util.CreatorBuilder;
 import com.hugman.dawn.api.util.ModData;
 import net.minecraft.stat.StatFormatter;
 import net.minecraft.stat.Stats;
@@ -21,7 +20,7 @@ public class StatCreator extends Creator<Identifier> {
 		Stats.CUSTOM.getOrCreateStat(value, formatter);
 	}
 
-	public static class Builder implements CreatorBuilder<Identifier> {
+	public static class Builder implements Creator.Builder<Identifier> {
 		protected final String name;
 		protected StatFormatter formatter;
 

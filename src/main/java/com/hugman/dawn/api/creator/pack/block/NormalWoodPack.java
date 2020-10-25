@@ -1,7 +1,7 @@
 package com.hugman.dawn.api.creator.pack.block;
 
 import com.hugman.dawn.api.creator.BlockCreator;
-import com.hugman.dawn.api.creator.pack.PackBuilder;
+import com.hugman.dawn.api.creator.pack.Pack;
 import com.hugman.dawn.api.object.block.SaplingBlock;
 import com.hugman.dawn.api.util.BlockSettings;
 import com.hugman.dawn.api.util.ModData;
@@ -39,7 +39,7 @@ public class NormalWoodPack extends WoodPack {
 		return leavesPack.getLeafPile();
 	}
 
-	public static class Builder implements PackBuilder {
+	public static class Builder implements Pack.Builder {
 		private final String suffix;
 		private final SaplingGenerator saplingGenerator;
 		private final MaterialColor planksColor;

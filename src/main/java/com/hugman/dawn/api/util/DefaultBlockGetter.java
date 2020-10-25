@@ -70,13 +70,13 @@ public enum DefaultBlockGetter implements BlockGetter {
 			case WALL:
 				return new WallBlock(settings);
 			case STONE_PRESSURE_PLATE:
-				return new PressurePlateBlock(ActivationRule.MOBS, settings);
+				return new PressurePlateBlock(ActivationRule.MOBS, settings.noCollision());
 			case WOOD_PRESSURE_PLATE:
-				return new PressurePlateBlock(ActivationRule.EVERYTHING, settings);
+				return new PressurePlateBlock(ActivationRule.EVERYTHING, settings.noCollision());
 			case STONE_BUTTON:
-				return new StoneButtonBlock(settings);
+				return new StoneButtonBlock(settings.noCollision());
 			case WOOD_BUTTON:
-				return new WoodButtonBlock(settings);
+				return new WoodButtonBlock(settings.noCollision());
 			case TRAPDOOR:
 				return new TrapdoorBlock(settings);
 			case DOOR:

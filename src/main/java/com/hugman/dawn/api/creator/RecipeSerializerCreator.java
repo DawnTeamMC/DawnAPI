@@ -1,6 +1,5 @@
 package com.hugman.dawn.api.creator;
 
-import com.hugman.dawn.api.util.CreatorBuilder;
 import com.hugman.dawn.api.util.ModData;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeSerializer;
@@ -16,7 +15,7 @@ public class RecipeSerializerCreator<S extends RecipeSerializer<? extends Recipe
 		Registry.register(Registry.RECIPE_SERIALIZER, modData.id(name), value);
 	}
 
-	public static class Builder<S extends RecipeSerializer<? extends Recipe<?>>> implements CreatorBuilder<S> {
+	public static class Builder<S extends RecipeSerializer<? extends Recipe<?>>> implements Creator.Builder<S> {
 		protected final String name;
 		protected final S serializer;
 

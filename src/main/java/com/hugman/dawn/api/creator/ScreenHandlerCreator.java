@@ -1,6 +1,5 @@
 package com.hugman.dawn.api.creator;
 
-import com.hugman.dawn.api.util.CreatorBuilder;
 import com.hugman.dawn.api.util.ModData;
 import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
 import net.minecraft.screen.ScreenHandler;
@@ -11,7 +10,7 @@ public class ScreenHandlerCreator<T extends ScreenHandler> extends Creator<Scree
 		super(modData, name, ScreenHandlerRegistry.registerSimple(modData.id(name), factory));
 	}
 
-	public static class Builder<T extends ScreenHandler> implements CreatorBuilder<ScreenHandlerType<T>> {
+	public static class Builder<T extends ScreenHandler> implements Creator.Builder<ScreenHandlerType<T>> {
 		protected final String name;
 		protected final ScreenHandlerRegistry.SimpleClientHandlerFactory<T> factory;
 

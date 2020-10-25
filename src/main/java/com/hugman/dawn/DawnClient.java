@@ -1,7 +1,5 @@
 package com.hugman.dawn;
 
-import com.hugman.dawn.api.creator.Creator;
-import com.hugman.dawn.api.creator.pack.PackManager;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -16,9 +14,6 @@ public class DawnClient implements ClientModInitializer {
 	}
 
 	public void onClientLoad(MinecraftClient minecraftClient) {
-		for(Creator<?> creator : PackManager.CREATORS) {
-			creator.clientRegister();
-		}
 		Dawn.DEBUG_WRITER.load();
 	}
 }
