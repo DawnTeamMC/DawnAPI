@@ -26,7 +26,7 @@ public class ModData {
 		return creator;
 	}
 
-	public void registerEverything() {
+	public void registerCreators() {
 		CREATORS.forEach(creator -> {
 			creator.register();
 			ClientLifecycleEvents.CLIENT_STARTED.register(minecraftClient -> creator.clientRegister());
