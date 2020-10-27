@@ -1,4 +1,4 @@
-package com.hugman.dawn.mod.mixin.client;
+package com.hugman.dawn.mod.mixin;
 
 import com.hugman.dawn.api.util.EnchantmentUtil;
 import com.hugman.dawn.mod.init.DawnEnchantments;

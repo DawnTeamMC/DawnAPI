@@ -9,8 +9,10 @@
 		"StatusEffectInstanceMixin"
 	],
 	"client": [
-		"client.ItemRendererMixin",
-		"client.ItemStackMixin"
+		"ClientPlayerEntityMixin",
+		"BackgroundRendererMixin",
+		"ItemRendererMixin",
+		"ItemStackMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
