@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ModData {
 	private final String modName;
-	private final List<Creator<?>> CREATORS = new ArrayList<>();
+	private List<Creator<?>> CREATORS = new ArrayList<>();
 
 	public ModData(String modName) {
 		this.modName = modName;
@@ -32,6 +32,7 @@ public class ModData {
 			ClientLifecycleEvents.CLIENT_STARTED.register(minecraftClient -> creator.clientRegister());
 			ServerLifecycleEvents.SERVER_STARTED.register(minecraftServer -> creator.serverRegister(minecraftServer.isDedicated()));
 		});
+		CREATORS = new ArrayList<>();
 	}
 
 	public Identifier id(String s) {
