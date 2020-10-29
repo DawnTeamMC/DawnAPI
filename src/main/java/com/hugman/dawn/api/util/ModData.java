@@ -4,8 +4,6 @@ import com.hugman.dawn.Dawn;
 import com.hugman.dawn.api.creator.Creator;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.util.Identifier;
 
 import java.util.ArrayList;

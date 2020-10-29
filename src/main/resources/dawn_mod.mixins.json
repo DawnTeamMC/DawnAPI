@@ -9,8 +9,8 @@
 		"StatusEffectInstanceMixin"
 	],
 	"client": [
-		"ClientPlayerEntityMixin",
 		"BackgroundRendererMixin",
+		"ClientPlayerEntityMixin",
 		"ItemRendererMixin",
 		"ItemStackMixin"
 	],

@@ -6,8 +6,8 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 
 public class DawnFeatures extends DawnPack {
+	public static final Feature<TreeFeatureConfig> SANDY_TREE = register(new FeatureCreator.Builder<>("sandy_tree", new SandyTreeFeature(TreeFeatureConfig.CODEC)));
+
 	public static void init() {
 	}
-
-	public static final Feature<TreeFeatureConfig> SANDY_TREE = register(new FeatureCreator.Builder<>("sandy_tree", new SandyTreeFeature(TreeFeatureConfig.CODEC)));
 }
