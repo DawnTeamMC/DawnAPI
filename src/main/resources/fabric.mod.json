@@ -1,4 +1,5 @@
 {
+	"schemaVersion": 1,
 	"name": "Dawn API",
 	"id": "dawn",
 	"version": "${version}",
@@ -29,6 +30,7 @@
 		"dawn_mod.mixins.json"
 	],
 	"depends": {
+		"minecraft": ">=1.16.2",
 		"fabric": "*"
 	},
 	"custom": {
@@ -38,6 +40,5 @@
 			"projectID": 399309
 		}
 	},
-	"license": "MIT",
-	"schemaVersion": 1
+	"license": "MIT"
 }

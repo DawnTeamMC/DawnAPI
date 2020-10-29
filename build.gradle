@@ -8,39 +8,31 @@ apply plugin: "maven"
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
-archivesBaseName = project.archives_base_name
+archivesBaseName = project.archive_name
 version = project.mod_version
 group = project.maven_group
 
 repositories {
     jcenter()
+    mavenLocal()
     maven { url 'https://jitpack.io' }
 }
 
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    modCompile "net.fabricmc:fabric-loader:${project.loader_version}"
+    modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    modApi("me.shedaniel.cloth:config-2:${project.cloth_version}") {
-        exclude(group: "net.fabricmc.fabric-api")
-    }
-    modApi("me.sargunvohra.mcmods:autoconfig1u:${project.autoconfig_version}") {
-        exclude(group: "net.fabricmc.fabric-api")
-    }
-    modImplementation("io.github.prospector:modmenu:${project.modmenu_version}") {
-        exclude(group: "net.fabricmc.fabric-api")
-    }
+    modCompile "me.shedaniel.cloth:config-2:${project.cloth_version}"
+    modCompile "io.github.prospector:modmenu:${project.modmenu_version}"
 
-    include "me.shedaniel.cloth:config-2:${project.cloth_version}"
+    modCompile "me.sargunvohra.mcmods:autoconfig1u:${project.autoconfig_version}"
     include "me.sargunvohra.mcmods:autoconfig1u:${project.autoconfig_version}"
+    modCompile "com.terraformersmc.terraform-api-experimental:terraform-legacy-v0:${project.terraform_version}"
+    include "com.terraformersmc.terraform-api-experimental:terraform-legacy-v0:${project.terraform_version}"
 
     compileOnly "com.google.code.findbugs:jsr305:3.0.2"
-}
-
-configurations.all {
-    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
 }
 
 processResources {
