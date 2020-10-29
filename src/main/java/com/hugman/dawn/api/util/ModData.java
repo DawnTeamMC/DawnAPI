@@ -1,6 +1,9 @@
 package com.hugman.dawn.api.util;
 
+import com.hugman.dawn.Dawn;
 import com.hugman.dawn.api.creator.Creator;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.util.Identifier;
@@ -27,12 +30,17 @@ public class ModData {
 	}
 
 	public void registerCreators() {
-		CREATORS.forEach(creator -> {
-			creator.register();
-			ClientLifecycleEvents.CLIENT_STARTED.register(minecraftClient -> creator.clientRegister());
-			ServerLifecycleEvents.SERVER_STARTED.register(minecraftServer -> creator.serverRegister(minecraftServer.isDedicated()));
-		});
-		CREATORS = new ArrayList<>();
+		CREATORS.forEach(Creator::register);
+		Dawn.MOD_DATAS.add(this);
+	}
+
+	@Environment(EnvType.CLIENT)
+	public void registerCreatorsClient() {
+		CREATORS.forEach(Creator::clientRegister);
+	}
+
+	public void registerCreatorsServer(boolean isDedicated) {
+		CREATORS.forEach(creator -> creator.serverRegister(isDedicated));
 	}
 
 	public Identifier id(String s) {

@@ -23,18 +23,18 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    modApi("me.shedaniel.cloth:config-2:+") {
+    modApi("me.shedaniel.cloth:config-2:${project.cloth_version}") {
         exclude(group: "net.fabricmc.fabric-api")
     }
-    modApi("me.sargunvohra.mcmods:autoconfig1u:+") {
+    modApi("me.sargunvohra.mcmods:autoconfig1u:${project.autoconfig_version}") {
         exclude(group: "net.fabricmc.fabric-api")
     }
-    modImplementation("io.github.prospector:modmenu:+") {
+    modImplementation("io.github.prospector:modmenu:${project.modmenu_version}") {
         exclude(group: "net.fabricmc.fabric-api")
     }
 
-    include "me.shedaniel.cloth:config-2:+"
-    include "me.sargunvohra.mcmods:autoconfig1u:+"
+    include "me.shedaniel.cloth:config-2:${project.cloth_version}"
+    include "me.sargunvohra.mcmods:autoconfig1u:${project.autoconfig_version}"
 
     compileOnly "com.google.code.findbugs:jsr305:3.0.2"
 }
