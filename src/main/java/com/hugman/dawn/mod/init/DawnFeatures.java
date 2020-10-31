@@ -1,13 +1,9 @@
 package com.hugman.dawn.mod.init;
 
-import com.hugman.dawn.api.creator.FeatureCreator;
-import com.hugman.dawn.api.object.world.gen.tree.SandyTreeFeature;
+import com.terraformersmc.terraform.tree.feature.TerraformTreeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 
-public class DawnFeatures extends DawnPack {
-	public static final Feature<TreeFeatureConfig> SANDY_TREE = register(new FeatureCreator.Builder<>("sandy_tree", new SandyTreeFeature(TreeFeatureConfig.CODEC)));
-
-	public static void init() {
-	}
+public class DawnFeatures {
+	public static final Feature<TreeFeatureConfig> SANDY_TREE = TerraformTreeFeatures.SANDY_TREE;
 }

@@ -6,7 +6,8 @@
 	"icon": "assets/dawn/textures/logo.png",
 	"description": "API that facilitates the creation of features.",
 	"authors": [
-		"Hugman"
+		"Hugman",
+		"Dawn Team"
 	],
 	"contact": {
 		"homepage": "https://www.curseforge.com/minecraft/mc-mods/dawn",

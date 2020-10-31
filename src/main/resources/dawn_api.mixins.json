@@ -4,8 +4,7 @@
 	"compatibilityLevel": "JAVA_8",
 	"mixins": [
 		"AxeItemMixin",
-		"ItemAccessor",
-		"TreeFeatureMixin"
+		"ItemAccessor"
 	],
 	"injectors": {
 		"defaultRequire": 1

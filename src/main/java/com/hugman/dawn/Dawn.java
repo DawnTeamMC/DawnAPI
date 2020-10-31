@@ -25,7 +25,6 @@ public class Dawn implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		DawnFeatures.init();
 		DawnEffects.init();
 		DawnEnchantments.init();
 		DawnItemGroups.init();
