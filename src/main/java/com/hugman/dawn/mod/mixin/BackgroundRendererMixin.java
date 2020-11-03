@@ -19,7 +19,7 @@ public class BackgroundRendererMixin {
 		else return entity.hasStatusEffect(effect);
 	}
 
-	@Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;hasStatusEffect(Lnet/minecraft/entity/effect/StatusEffect;)Z"))
+	@Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;hasStatusEffect(Lnet/minecraft/entity/effect/StatusEffect;)Z", ordinal = 0))
 	private static boolean dawn_hasStatusEffect(LivingEntity entity, StatusEffect effect, Camera camera, float tickDelta, ClientWorld world, int i, float f) {
 		if(effect == StatusEffects.BLINDNESS && entity.hasStatusEffect(DawnEffects.FORESIGHT)) return false;
 		else return entity.hasStatusEffect(effect);
