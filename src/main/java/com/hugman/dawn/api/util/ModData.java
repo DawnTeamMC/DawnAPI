@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ModData {
 	private final String modName;
-	private List<Creator<?>> CREATORS = new ArrayList<>();
+	private final List<Creator<?>> CREATORS = new ArrayList<>();
 
 	public ModData(String modName) {
 		this.modName = modName;
@@ -29,7 +29,7 @@ public class ModData {
 
 	public void registerCreators() {
 		CREATORS.forEach(Creator::register);
-		Dawn.MOD_DATAS.add(this);
+		Dawn.MOD_DATA_LIST.add(this);
 	}
 
 	@Environment(EnvType.CLIENT)

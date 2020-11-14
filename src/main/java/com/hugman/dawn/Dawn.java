@@ -2,7 +2,10 @@ package com.hugman.dawn;
 
 import com.hugman.dawn.api.util.ModData;
 import com.hugman.dawn.config.DawnConfig;
-import com.hugman.dawn.mod.init.*;
+import com.hugman.dawn.mod.init.DawnCommands;
+import com.hugman.dawn.mod.init.DawnEffects;
+import com.hugman.dawn.mod.init.DawnEnchantments;
+import com.hugman.dawn.mod.init.DawnItemGroups;
 import com.hugman.dawn.mod.util.debug.EntryDebugWriter;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.GsonConfigSerializer;
@@ -21,7 +24,7 @@ public class Dawn implements ModInitializer {
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static final DawnConfig CONFIG = AutoConfig.register(DawnConfig.class, PartitioningSerializer.wrap(GsonConfigSerializer::new)).getConfig();
 	public static final EntryDebugWriter DEBUG_WRITER = new EntryDebugWriter();
-	public static final List<ModData> MOD_DATAS = new ArrayList<>();
+	public static final List<ModData> MOD_DATA_LIST = new ArrayList<>();
 
 	@Override
 	public void onInitialize() {
@@ -34,7 +37,7 @@ public class Dawn implements ModInitializer {
 	}
 
 	public void onServerLoad(MinecraftServer minecraftServer) {
-		MOD_DATAS.forEach(modData -> modData.registerCreatorsServer(minecraftServer.isDedicated()));
+		MOD_DATA_LIST.forEach(modData -> modData.registerCreatorsServer(minecraftServer.isDedicated()));
 		if(minecraftServer.isDedicated()) DEBUG_WRITER.load();
 	}
 }

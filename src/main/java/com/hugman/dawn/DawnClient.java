@@ -15,7 +15,7 @@ public class DawnClient implements ClientModInitializer {
 	}
 
 	public void onClientLoad(MinecraftClient minecraftClient) {
-		Dawn.MOD_DATAS.forEach(ModData::registerCreatorsClient);
+		Dawn.MOD_DATA_LIST.forEach(ModData::registerCreatorsClient);
 		Dawn.DEBUG_WRITER.load();
 	}
 }
