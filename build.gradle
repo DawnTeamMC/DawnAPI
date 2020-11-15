@@ -21,20 +21,20 @@ repositories {
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-    modCompile "net.fabricmc:fabric-loader:${project.loader_version}"
-    modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+    modImplementation "io.github.prospector:modmenu:${project.modmenu_version}"
 
     includeMod "me.shedaniel.cloth:config-2:${project.cloth_version}"
     includeMod "me.sargunvohra.mcmods:autoconfig1u:${project.autoconfig_version}"
     includeMod "com.terraformersmc.terraform-api:terraform-tree-api-v1:${project.terraform_tree_version}"
 
-    modCompile "io.github.prospector:modmenu:${project.modmenu_version}"
-
     compileOnly "com.google.code.findbugs:jsr305:3.0.2"
 }
 
 def includeMod(String dep) {
-    dependencies.modCompile(dep)
+    dependencies.modApi(dep)
     dependencies.include(dep)
 }
 
