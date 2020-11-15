@@ -3,14 +3,12 @@ plugins {
     id 'maven-publish'
 }
 
-apply plugin: "maven"
-
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
 archivesBaseName = project.mod_id
 version = project.mod_version
-group = project.maven_group
+group = "com.github.DawnTeam"
 
 repositories {
     jcenter()
@@ -26,11 +24,20 @@ dependencies {
 
     modApi "io.github.prospector:modmenu:${project.modmenu_version}"
 
-    include modApi("me.shedaniel.cloth:config-2:${project.cloth_version}")
-    include modApi("me.sargunvohra.mcmods:autoconfig1u:${project.autoconfig_version}")
-    include modApi("com.terraformersmc.terraform-api:terraform-tree-api-v1:${project.terraform_tree_version}")
+    includeMod "me.shedaniel.cloth:config-2:${project.cloth_version}"
+    includeMod "me.sargunvohra.mcmods:autoconfig1u:${project.autoconfig_version}"
+    includeMod "com.terraformersmc.terraform-api:terraform-tree-api-v1:${project.terraform_tree_version}"
 
     compileOnly "com.google.code.findbugs:jsr305:3.0.2"
+}
+
+def includeMod(String dep) {
+    dependencies.modApi(dep) {
+        exclude(group: "net.fabricmc.fabric-api")
+    }
+    dependencies.include(dep) {
+        exclude(group: "net.fabricmc.fabric-api")
+    }
 }
 
 processResources {
@@ -57,5 +64,22 @@ java {
 jar {
     from("LICENSE") {
         rename { "${it}_${project.archivesBaseName}" }
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact(sourcesJar) {
+                builtBy remapSourcesJar
+            }
+
+            afterEvaluate {
+                artifact remapJar
+            }
+        }
+    }
+
+    repositories {
     }
 }
