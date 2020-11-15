@@ -8,7 +8,7 @@ apply plugin: "maven"
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
-archivesBaseName = project.archive_name
+archivesBaseName = project.mod_id
 version = project.mod_version
 group = project.maven_group
 
@@ -24,42 +24,38 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    modImplementation "io.github.prospector:modmenu:${project.modmenu_version}"
+    modApi "io.github.prospector:modmenu:${project.modmenu_version}"
 
-    includeMod "me.shedaniel.cloth:config-2:${project.cloth_version}"
-    includeMod "me.sargunvohra.mcmods:autoconfig1u:${project.autoconfig_version}"
-    includeMod "com.terraformersmc.terraform-api:terraform-tree-api-v1:${project.terraform_tree_version}"
+    include modApi("me.shedaniel.cloth:config-2:${project.cloth_version}")
+    include modApi("me.sargunvohra.mcmods:autoconfig1u:${project.autoconfig_version}")
+    include modApi("com.terraformersmc.terraform-api:terraform-tree-api-v1:${project.terraform_tree_version}")
 
     compileOnly "com.google.code.findbugs:jsr305:3.0.2"
-}
-
-def includeMod(String dep) {
-    dependencies.modApi(dep)
-    dependencies.include(dep)
 }
 
 processResources {
     inputs.property "version", project.version
 
-    from(sourceSets.main.resources.srcDirs) {
-        include "fabric.mod.json"
+    filesMatching("fabric.mod.json") {
         expand "version": project.version
     }
+}
 
-    from(sourceSets.main.resources.srcDirs) {
-        exclude "fabric.mod.json"
+tasks.withType(JavaCompile).configureEach {
+    it.options.encoding = "UTF-8"
+
+    def targetVersion = 8
+    if (JavaVersion.current().isJava9Compatible()) {
+        it.options.release = targetVersion
     }
 }
 
-tasks.withType(JavaCompile) {
-    options.encoding = "UTF-8"
-}
-
-task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = "sources"
-    from sourceSets.main.allSource
+java {
+    withSourcesJar()
 }
 
 jar {
-    from "LICENSE"
+    from("LICENSE") {
+        rename { "${it}_${project.archivesBaseName}" }
+    }
 }
