@@ -29,7 +29,7 @@ public class BiomeCreator extends Creator<RegistryKey<Biome>> {
 
 	@Override
 	public void register() {
-		Registry.register(BuiltinRegistries.BIOME, modData.id(name), biome);
+		Registry.register(BuiltinRegistries.BIOME, value.getValue(), biome);
 		switch(this.spawnDimension) {
 			case NONE:
 			default:
@@ -43,6 +43,7 @@ public class BiomeCreator extends Creator<RegistryKey<Biome>> {
 		}
 	}
 
+	@Deprecated
 	public enum SpawnDimension {
 		NONE,
 		OVERWORLD_CONTINENTAL,
@@ -77,7 +78,9 @@ public class BiomeCreator extends Creator<RegistryKey<Biome>> {
 		 *
 		 * @param climate The biome climate.
 		 * @param weight  The biome weight.
+		 * @deprecated Use {@link OverworldBiomes#addContinentalBiome} instead. Method will be removed next update.
 		 */
+		@Deprecated
 		public Builder addToOverworldContinental(OverworldClimate climate, double weight) {
 			this.spawnDimension = SpawnDimension.OVERWORLD_CONTINENTAL;
 			this.climate = climate;
@@ -87,7 +90,10 @@ public class BiomeCreator extends Creator<RegistryKey<Biome>> {
 
 		/**
 		 * Adds the biome to the nether generation.
+		 *
+		 * @deprecated Use {@link OverworldBiomes#addContinentalBiome} instead. Method will be removed next update.
 		 */
+		@Deprecated
 		public Builder addToNether(float temperature, float humidity, float altitude, float weirdness, float weight) {
 			this.spawnDimension = SpawnDimension.THE_NETHER;
 			this.noises = new Biome.MixedNoisePoint(temperature, humidity, altitude, weirdness, weight);
