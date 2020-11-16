@@ -1,20 +1,13 @@
 {
-	"comment": "CREATIVE TABS",
 	"itemGroup.dawn.creative_tools": "Creatiefwerktuigen",
-
-	"comment": "ENCHANTMENTS",
 	"enchantment.dawn.telekinesis": "Afstandelijke Voorwerpbeweging",
 	"enchantment.dawn.ignorance_curse": "Vloek der Ontwetendheid",
-
-	"comment": "EFFECTS",
 	"effect.dawn.heaviness": "Zwaarte",
 	"effect.dawn.hiccup": "Hik",
 	"effect.dawn.foresight": "Vooruitziendheid",
 	"effect.dawn.fulfillment": "Voldoening",
 	"effect.dawn.guard": "Bescherming",
-	"effect.dawn.poison_resistance": "Gifbescherming",
-
-	"comment": "COMMANDS",
+	"effect.dawn.poison_resistance": "Gifweerstand",
 	"commands.foodbar.add.food.success.single": "Heb %s voetselpunt(en) toegevoegd aan %s",
 	"commands.foodbar.add.food.success.multiple": "Heb %s voetselpunt(en) toegevoegd aan %s entiteiten",
 	"commands.foodbar.set.food.success.single": "Heb voetselpunten naar %s gezet voor %s",
@@ -35,11 +28,9 @@
 	"commands.motion.add.success.multiple": "Heb %s, %s, %s toegevoegd aan de beweging van %s entiteiten",
 	"commands.motion.set.success.single": "Heb beweging naar %s, %s, %s gezet voor %s",
 	"commands.motion.set.success.multiple": "Heb beweging naar %s, %s, %s gezet voor %s entiteiten",
-
-	"comment": "CONFIG",
 	"text.autoconfig.dawn.title": "Dawn API configuratie",
 	"text.autoconfig.dawn.category.features": "Eigenschappen",
-	"text.autoconfig.dawn.category.debug": "Debug",
+	"text.autoconfig.dawn.category.debug": "Debuggen",
 	"text.autoconfig.dawn.option.features.creativeToolsTab": "Sta creatiefwerktuigen tab toe",
 	"text.autoconfig.dawn.option.features.healthCommand": "Sta /health toe",
 	"text.autoconfig.dawn.option.features.motionCommand": "Sta /motion toe",

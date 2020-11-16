@@ -1,20 +1,11 @@
 {
-	"comment": "CREATIVE TABS",
-	"//itemGroup.dawn.creative_tools": "Creative Tools",
-
-	"comment": "ENCHANTMENTS",
 	"enchantment.dawn.telekinesis": "Telekinese",
-	"//enchantment.dawn.ignorance_curse": "Curse of Ignorance",
-
-	"comment": "EFFECTS",
 	"effect.dawn.heaviness": "Schwere",
 	"effect.dawn.hiccup": "Schluckauf",
 	"effect.dawn.foresight": "Vooruitziendheid",
 	"effect.dawn.fulfillment": "Voldoening",
 	"effect.dawn.guard": "Besherming",
 	"effect.dawn.poison_resistance": "Gifbescherming",
-
-	"comment": "COMMANDS",
 	"commands.foodbar.add.food.success.single": "Gebe %s Nahrungspunkt(e) an %s",
 	"commands.foodbar.add.food.success.multiple": "Gebe %s Nahrungspunkt(e) an %s Wesen",
 	"commands.foodbar.set.food.success.single": "Nahrungspunkt(e) auf %s setzen bei %s",
@@ -23,30 +14,8 @@
 	"commands.foodbar.add.saturation.success.multiple": "Gebe %s Sättigungspunkt(e) an %s Wesen",
 	"commands.foodbar.set.saturation.success.single": "Sättigungspunkt(e) auf %s setzen bei %s",
 	"commands.foodbar.set.saturation.success.multiple": "Sättigungspunkt(e) auf %s setzen bei %s Wesen",
-	"//commands.foodbar.query.food": "%s has %s food points",
-	"//commands.foodbar.query.saturation": "%s has %s saturation points",
 	"commands.health.add.success.single": "Gebe %s Lebenspunkt(e) an %s",
 	"commands.health.add.success.multiple": "Gebe %s Lebenspunkt(e) an %s Wesen",
 	"commands.health.set.success.single": "Lebenspunkte auf %s setzen bei %s",
-	"commands.health.set.success.multiple": "Lebenspunkte auf %s setzen bei %s Wesen",
-	"//commands.health.query.success": "%s has %s health points",
-	"//commands.health.query.failed": "Target is not a living entity",
-	"//commands.motion.add.success.single": "Added %s, %s, %s to the motion of %s",
-	"//commands.motion.add.success.multiple": "Added %s, %s, %s to the motion of %s entities",
-	"//commands.motion.set.success.single": "Set %s, %s, %s to the motion of %s",
-	"//commands.motion.set.success.multiple": "Set %s, %s, %s to the motion of %s entities",
-
-	"comment": "CONFIG",
-	"//text.autoconfig.dawn.title": "Dawn API Configuration",
-	"//text.autoconfig.dawn.category.features": "Features",
-	"//text.autoconfig.dawn.category.debug": "Debug",
-	"//text.autoconfig.dawn.option.features.creativeToolsTab": "Enable Creative Tools tab",
-	"//text.autoconfig.dawn.option.features.healthCommand": "Enable /health",
-	"//text.autoconfig.dawn.option.features.motionCommand": "Enable /motion",
-	"//text.autoconfig.dawn.option.features.foodbarCommand": "Enable /foodbar",
-	"//text.autoconfig.dawn.option.debug.writeIds.@PrefixText": "The writing process only fires once, when the game loads",
-	"//text.autoconfig.dawn.option.debug.writeIds": "Write IDs",
-	"//text.autoconfig.dawn.option.debug.writeIds.@Tooltip": "Writes every registered ID in .json files",
-	"//text.autoconfig.dawn.option.debug.expandedInfo": "Expanded ID info",
-	"//text.autoconfig.dawn.option.debug.expandedInfo.@Tooltip": "Gives more information about the properties of each ID"
+	"commands.health.set.success.multiple": "Lebenspunkte auf %s setzen bei %s Wesen"
 }

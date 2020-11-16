@@ -1,20 +1,13 @@
 {
-	"comment": "CREATIVE TABS",
 	"itemGroup.dawn.creative_tools": "Outils de créatif",
-
-	"comment": "ENCHANTMENTS",
 	"enchantment.dawn.telekinesis": "Télékinésie",
 	"enchantment.dawn.ignorance_curse": "Malédiction d'ignorance",
-
-	"comment": "EFFECTS",
 	"effect.dawn.heaviness": "Lourdeur",
 	"effect.dawn.hiccup": "Hoquet",
 	"effect.dawn.foresight": "Regard précis",
 	"effect.dawn.fulfillment": "Remplissage",
 	"effect.dawn.guard": "Défense",
 	"effect.dawn.poison_resistance": "Résistance au poison",
-
-	"comment": "COMMANDS",
 	"commands.foodbar.add.food.success.single": "Don de %s points de nourriture à %s",
 	"commands.foodbar.add.food.success.multiple": "Don de %s points de nourriture à %s entités",
 	"commands.foodbar.set.food.success.single": "Valeur %s attribuée aux points de nourriture de %s",
@@ -35,8 +28,6 @@
 	"commands.motion.add.success.multiple": "Ajout des valeurs %s, %s, %s au vecteur de mouvement de %s entités",
 	"commands.motion.set.success.single": "Valeurs %s, %s, %s attribuées au vecteur de mouvement de %s",
 	"commands.motion.set.success.multiple": "Valeurs %s, %s, %s attribuées au vecteur de mouvement de %s entités",
-
-	"comment": "CONFIG",
 	"text.autoconfig.dawn.title": "Configuration de la Dawn API",
 	"text.autoconfig.dawn.category.features": "Fonctionnalités",
 	"text.autoconfig.dawn.category.debug": "Débogue",

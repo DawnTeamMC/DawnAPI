@@ -1,5 +1,4 @@
 {
-	"schemaVersion": 1,
 	"name": "Dawn API",
 	"id": "dawn",
 	"version": "${version}",
@@ -41,5 +40,6 @@
 			"projectID": 399309
 		}
 	},
-	"license": "MIT"
+	"license": "MIT",
+	"schemaVersion": 1
 }
