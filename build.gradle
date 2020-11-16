@@ -89,3 +89,20 @@ jar {
 build {
     dependsOn downloadTranslations
 }
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact(sourcesJar) {
+                builtBy remapSourcesJar
+            }
+
+            afterEvaluate {
+                artifact remapJar
+            }
+        }
+    }
+
+    repositories {
+    }
+}
