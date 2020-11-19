@@ -1,20 +1,13 @@
 {
-	"comment": "CREATIVE TABS",
 	"itemGroup.dawn.creative_tools": "Creative Tools",
-
-	"comment": "ENCHANTMENTS",
 	"enchantment.dawn.telekinesis": "Telekinesis",
 	"enchantment.dawn.ignorance_curse": "Curse of Ignorance",
-
-	"comment": "EFFECTS",
 	"effect.dawn.heaviness": "Heaviness",
 	"effect.dawn.hiccup": "Hiccup",
 	"effect.dawn.foresight": "Foresight",
 	"effect.dawn.fulfillment": "Fulfillment",
 	"effect.dawn.guard": "Guard",
 	"effect.dawn.poison_resistance": "Poison Resistance",
-
-	"comment": "COMMANDS",
 	"commands.foodbar.add.food.success.single": "Gave %s food points to %s",
 	"commands.foodbar.add.food.success.multiple": "Gave %s food points to %s entities",
 	"commands.foodbar.set.food.success.single": "Set %s food points on %s",
@@ -35,8 +28,6 @@
 	"commands.motion.add.success.multiple": "Added %s, %s, %s to the motion of %s entities",
 	"commands.motion.set.success.single": "Set %s, %s, %s to the motion of %s",
 	"commands.motion.set.success.multiple": "Set %s, %s, %s to the motion of %s entities",
-
-	"comment": "CONFIG",
 	"text.autoconfig.dawn.title": "Dawn API Configuration",
 	"text.autoconfig.dawn.category.features": "Features",
 	"text.autoconfig.dawn.category.debug": "Debug",
