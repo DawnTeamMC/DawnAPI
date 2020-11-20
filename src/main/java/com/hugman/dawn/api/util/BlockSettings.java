@@ -28,11 +28,15 @@ public class BlockSettings {
 	public static final FabricBlockSettings MUSHROOM_BLOCK = FabricBlockSettings.of(Material.WOOD).hardness(0.2F).sounds(BlockSoundGroup.WOOD);
 	public static final FabricBlockSettings MUSHROOM = FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS).lightLevel(1);
 
-	public static Boolean canSpawnOnLeaves(BlockState state, BlockView world, BlockPos pos, EntityType<?> type) {
+	public static boolean canSpawnOnLeaves(BlockState state, BlockView world, BlockPos pos, EntityType<?> type) {
 		return type == EntityType.OCELOT || type == EntityType.PARROT;
 	}
 
-	public static boolean never(BlockState state, BlockView world, BlockPos pos) {
+	public static boolean never(BlockState state, BlockView world, BlockPos pos, EntityType<?> entityType) {
+		return false;
+	}
+
+	public static boolean never(BlockState blockState, BlockView blockView, BlockPos blockPos) {
 		return false;
 	}
 }

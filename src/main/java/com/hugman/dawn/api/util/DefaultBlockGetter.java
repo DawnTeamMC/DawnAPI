@@ -8,6 +8,7 @@ import com.hugman.dawn.api.object.block.StairsBlock;
 import com.hugman.dawn.api.object.block.StoneButtonBlock;
 import com.hugman.dawn.api.object.block.TrapdoorBlock;
 import com.hugman.dawn.api.object.block.*;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.PressurePlateBlock.ActivationRule;
 import net.minecraft.item.ItemGroup;
@@ -59,41 +60,42 @@ public enum DefaultBlockGetter implements BlockGetter {
 	}
 
 	public Block getBlock(AbstractBlock.Settings settings) {
+		FabricBlockSettings newSettings = FabricBlockSettings.copyOf(settings);
 		switch(this) {
 			case CUBE:
 			default:
-				return new Block(settings);
+				return new Block(newSettings);
 			case SLAB:
-				return new SlabBlock(settings);
+				return new SlabBlock(newSettings);
 			case STAIRS:
-				return new StairsBlock(settings);
+				return new StairsBlock(newSettings);
 			case WALL:
-				return new WallBlock(settings);
+				return new WallBlock(newSettings);
 			case STONE_PRESSURE_PLATE:
-				return new PressurePlateBlock(ActivationRule.MOBS, settings.noCollision());
+				return new PressurePlateBlock(ActivationRule.MOBS, newSettings.requiresTool().noCollision().strength(0.5F));
 			case WOOD_PRESSURE_PLATE:
-				return new PressurePlateBlock(ActivationRule.EVERYTHING, settings.noCollision());
+				return new PressurePlateBlock(ActivationRule.EVERYTHING, newSettings.noCollision().strength(0.5F));
 			case STONE_BUTTON:
-				return new StoneButtonBlock(settings.noCollision());
+				return new StoneButtonBlock(newSettings.noCollision().strength(0.5F));
 			case WOOD_BUTTON:
-				return new WoodButtonBlock(settings.noCollision());
+				return new WoodButtonBlock(newSettings.noCollision().strength(0.5F));
 			case TRAPDOOR:
-				return new TrapdoorBlock(settings);
+				return new TrapdoorBlock(newSettings.strength(3.0F).nonOpaque().allowsSpawning(BlockSettings::never));
 			case DOOR:
-				return new DoorBlock(settings);
+				return new DoorBlock(newSettings.strength(3.0F).nonOpaque());
 			case FENCE:
-				return new FenceBlock(settings);
+				return new FenceBlock(newSettings);
 			case FENCE_GATE:
-				return new FenceGateBlock(settings);
+				return new FenceGateBlock(newSettings);
 			case LEAVES:
-				return new LeavesBlock(settings);
+				return new LeavesBlock(newSettings);
 			case LEAF_PILE:
 			case PLANT_PILE:
-				return new PlantPileBlock(settings);
+				return new PlantPileBlock(newSettings);
 			case MUSHROOM:
-				return new MushroomPlantBlock(settings);
+				return new MushroomPlantBlock(newSettings);
 			case MUSHROOM_BLOCK:
-				return new MushroomBlock(settings);
+				return new MushroomBlock(newSettings);
 		}
 	}
 }
