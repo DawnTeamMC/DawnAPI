@@ -7,8 +7,8 @@ import net.minecraft.world.gen.feature.ConfiguredStructureFeature;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
 
-public class ConfiguredStructureCreator<FC extends FeatureConfig, SF extends StructureFeature<FC>> extends Creator<ConfiguredStructureFeature<FC, SF>> {
-	private ConfiguredStructureCreator(ModData modData, String name, ConfiguredStructureFeature<FC, SF> feature) {
+public class ConfiguredStructureFeatureCreator<FC extends FeatureConfig, SF extends StructureFeature<FC>> extends Creator<ConfiguredStructureFeature<FC, SF>> {
+	private ConfiguredStructureFeatureCreator(ModData modData, String name, ConfiguredStructureFeature<FC, SF> feature) {
 		super(modData, name, feature);
 	}
 
@@ -32,8 +32,8 @@ public class ConfiguredStructureCreator<FC extends FeatureConfig, SF extends Str
 			this.feature = configuredStructureFeature;
 		}
 
-		public ConfiguredStructureCreator<FC, SF> build(ModData modData) {
-			return new ConfiguredStructureCreator<>(modData, this.name, this.feature);
+		public ConfiguredStructureFeatureCreator<FC, SF> build(ModData modData) {
+			return new ConfiguredStructureFeatureCreator<>(modData, this.name, this.feature);
 		}
 	}
 }
