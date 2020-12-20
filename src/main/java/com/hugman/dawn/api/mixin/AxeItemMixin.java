@@ -37,8 +37,5 @@ public class AxeItemMixin {
 			}
 			info.setReturnValue(ActionResult.SUCCESS);
 		}
-		else {
-			info.setReturnValue(ActionResult.PASS);
-		}
 	}
 }
