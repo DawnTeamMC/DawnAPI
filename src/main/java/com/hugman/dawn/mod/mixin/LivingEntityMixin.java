@@ -3,6 +3,7 @@ package com.hugman.dawn.mod.mixin;
 import com.hugman.dawn.api.util.EnchantmentUtil;
 import com.hugman.dawn.mod.init.DawnEffects;
 import com.hugman.dawn.mod.init.DawnEnchantments;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
@@ -65,7 +66,7 @@ public abstract class LivingEntityMixin {
 		if(attacker instanceof PlayerEntity) {
 			PlayerEntity player = (PlayerEntity) attacker;
 			if(!player.getMainHandStack().isEmpty()) {
-				if(EnchantmentUtil.hasEnchantment(DawnEnchantments.TELEKINESIS, player.getMainHandStack())) {
+				if(EnchantmentHelper.getLevel(DawnEnchantments.TELEKINESIS, player.getMainHandStack()) >= 2) {
 					player.addExperience(this.getCurrentExperience(player));
 					info.cancel();
 				}
