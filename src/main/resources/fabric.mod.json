@@ -1,7 +1,7 @@
 {
-	"name": "Dawn API",
-	"id": "dawn",
-	"version": "${version}",
+	"name": "${mod_name}",
+	"id": "${mod_id}",
+	"version": "${mod_version}",
 	"icon": "assets/dawn/textures/logo.png",
 	"description": "API that facilitates the creation of features.",
 	"authors": [
@@ -9,9 +9,9 @@
 		"Dawn Team"
 	],
 	"contact": {
-		"homepage": "https://www.curseforge.com/minecraft/mc-mods/dawn",
-		"sources": "https://github.com/DawnTeamMC/DawnAPI",
-		"issues": "https://github.com/DawnTeamMC/DawnAPI/issues"
+		"homepage": "https://www.curseforge.com/minecraft/mc-mods/${curseforge_slug}",
+		"sources": "https://github.com/DawnTeamMC/${github_name}",
+		"issues": "https://github.com/DawnTeamMC/${github_name}/issues"
 	},
 	"environment": "*",
 	"entrypoints": {
@@ -37,7 +37,7 @@
 		"modmenu:api": true,
 		"modupdater": {
 			"strategy": "curseforge",
-			"projectID": 399309
+			"projectID": "${399309}"
 		}
 	},
 	"license": "MIT",
