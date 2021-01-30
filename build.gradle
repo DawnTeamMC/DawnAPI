@@ -221,7 +221,7 @@ task github {
         }
 
         def ghRelease = releaseBuilder.create()
-        ghRelease.uploadAsset(file("${project.buildDir}/libs/${project.mod_name}-${version}.jar"), "application/java-archive")
+        ghRelease.uploadAsset(file("${project.buildDir}/libs/${project.mod_id}-${version}.jar"), "application/java-archive")
         githubDownloadLink = ghRelease.getHtmlUrl()
         sendDiscordWebhook()
     }
