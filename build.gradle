@@ -84,8 +84,10 @@ def includeMod(String dep) {
 }
 
 processResources {
+    inputs.property "version", version
     filesMatching("fabric.mod.json") {
         expand project.properties
+        expand "version": version
     }
 }
 
@@ -336,6 +338,7 @@ task generateChangelog {
 task sendDiscordWebhook() {
     println "CurseForge download: $curseforgeDownloadLink"
     println "Modrinth download: $modrinthDownloadLink"
+    println "GitHub download: $githubDownloadLink"
     if (curseforgeDownloadLink != null && modrinthDownloadLink != null && githubDownloadLink != null && System.getenv().DISCORD_WEBHOOK) {
         println "Preparing webhook"
         def release_url = curseforgeDownloadLink

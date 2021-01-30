@@ -1,7 +1,7 @@
 {
 	"name": "${mod_name}",
 	"id": "${mod_id}",
-	"version": "${mod_version}",
+	"version": "${version}",
 	"icon": "assets/dawn/textures/logo.png",
 	"description": "API that facilitates the creation of features.",
 	"authors": [
