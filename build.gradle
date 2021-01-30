@@ -24,12 +24,3 @@ dependencies {
 
     compileOnly "com.google.code.findbugs:jsr305:3.0.2"
 }
-
-def includeMod(String dep) {
-    dependencies.modApi(dep) {
-        exclude(group: "net.fabricmc.fabric-api")
-    }
-    dependencies.include(dep) {
-        exclude(group: "net.fabricmc.fabric-api")
-    }
-}
