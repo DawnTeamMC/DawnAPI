@@ -2,7 +2,7 @@
 	"name": "${mod_name}",
 	"id": "${mod_id}",
 	"version": "${version}",
-	"icon": "assets/dawn/textures/logo.png",
+	"icon": "assets/${mod_id}/textures/logo.png",
 	"description": "API that facilitates the creation of features.",
 	"authors": [
 		"Hugman",
@@ -37,7 +37,7 @@
 		"modmenu:api": true,
 		"modupdater": {
 			"strategy": "curseforge",
-			"projectID": "${399309}"
+			"projectID": "${curseforge_id}"
 		}
 	},
 	"license": "MIT",
