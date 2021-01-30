@@ -1,4 +1,4 @@
-name: Release Minor
+name: Release Patch
 on: [ workflow_dispatch ] # Manual trigger
 jobs:
   build:
