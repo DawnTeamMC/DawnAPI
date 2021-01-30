@@ -204,9 +204,7 @@ task modrinth(type: TaskModrinthUpload) {
 }
 
 task github {
-    if (System.getenv().GITHUB_TOKEN) {
-        token = System.getenv().GITHUB_TOKEN
-    } else {
+    if (!System.getenv().GITHUB_TOKEN) {
         println "No GITHUB_TOKEN specified"
     }
 
