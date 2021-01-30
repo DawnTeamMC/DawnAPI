@@ -213,7 +213,7 @@ task github {
         def repository = github.getRepository(System.getenv().GITHUB_REPOSITORY)
 
         def releaseBuilder = new org.kohsuke.github.GHReleaseBuilder(repository, project.getProperty("currentTag"))
-        releaseBuilder.name("$project.project_name v$version for $project.minecraft_version")
+        releaseBuilder.name("$project.mod_name v$version")
         releaseBuilder.body(releaseChangelog)
         releaseBuilder.commitish(getBranch())
         if (releaseType != "stable") {
@@ -221,7 +221,7 @@ task github {
         }
 
         def ghRelease = releaseBuilder.create()
-        ghRelease.uploadAsset(file("${project.buildDir}/libs/${project.project_name}-${version}.jar"), "application/java-archive")
+        ghRelease.uploadAsset(file("${project.buildDir}/libs/${project.mod_name}-${version}.jar"), "application/java-archive")
         githubDownloadLink = ghRelease.getHtmlUrl()
         sendDiscordWebhook()
     }
