@@ -335,7 +335,7 @@ task generateChangelog {
     println releaseChangelog
 }
 
-task sendDiscordWebhook() {
+void sendDiscordWebhook() {
     println "CurseForge download: $curseforgeDownloadLink"
     println "Modrinth download: $modrinthDownloadLink"
     println "GitHub download: $githubDownloadLink"
