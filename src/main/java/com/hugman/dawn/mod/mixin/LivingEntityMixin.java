@@ -29,7 +29,7 @@ public abstract class LivingEntityMixin {
 		LivingEntity entity = (LivingEntity) (Object) this;
 		if(entity.hasStatusEffect(DawnEffects.GUARD)) {
 			double d = entity.getAttributeValue(EntityAttributes.GENERIC_ARMOR);
-			info.setReturnValue(MathHelper.floor(d + d * 0.15 * entity.getStatusEffect(DawnEffects.GUARD).getAmplifier()));
+			info.setReturnValue(MathHelper.floor(d + d * 0.15F * (float) (entity.getStatusEffect(DawnEffects.GUARD).getAmplifier() + 1)));
 		}
 	}
 

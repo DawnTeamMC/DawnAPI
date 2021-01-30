@@ -31,6 +31,7 @@ repositories {
     jcenter()
     mavenLocal()
     maven { url 'https://jitpack.io' }
+    maven { url 'http://maven.terraformersmc.com/' }
 }
 
 dependencies {
