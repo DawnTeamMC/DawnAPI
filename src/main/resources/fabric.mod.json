@@ -4,13 +4,10 @@
 	"id": "${mod_id}",
 	"version": "${version}",
 	"icon": "assets/${mod_id}/textures/logo.png",
-	"description": "API that facilitates the creation of features.",
 	"authors": [
-		"Hugman",
-		"Dawn Team"
+		"Hugman"
 	],
 	"contact": {
-		"homepage": "https://www.curseforge.com/minecraft/mc-mods/${curseforge_slug}",
 		"sources": "https://github.com/DawnTeamMC/${github_name}",
 		"issues": "https://github.com/DawnTeamMC/${github_name}/issues"
 	},
@@ -35,7 +32,16 @@
 		"fabric": "*"
 	},
 	"custom": {
-		"modmenu:api": true,
+		"modmenu": {
+			"links": {
+				"modmenu.discord": "https://discord.gg/8ksTVJu",
+				"modmenu.dawn.curseforge": "https://www.curseforge.com/minecraft/mc-mods/${curseforge_slug}",
+				"modmenu.dawn.modrinth": "https://modrinth.com/mod/${modrinth_slug}"
+			},
+			"badges": [
+				"library"
+			]
+		},
 		"modupdater": {
 			"strategy": "curseforge",
 			"projectID": 399309
