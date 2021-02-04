@@ -31,7 +31,8 @@ public class StringUtil {
 		if(s.endsWith("_")) {
 			s = s.substring(0, s.length() - 1);
 		}
-		if(!getter.getSuffix().isEmpty() && s.endsWith("bricks") && s.endsWith("tiles")) {
+		boolean b = s.endsWith("bricks") || s.endsWith("tiles");
+		if(!getter.getSuffix().isEmpty() && b) {
 			return s.substring(0, s.length() - 1) + suffix;
 		}
 		else {
