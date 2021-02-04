@@ -1,7 +1,5 @@
 {
-	"modmenu.descriptionTranslation.dawn": "API that facilitates the creation of features.",
-	"modmenu.dawn.curseforge": "CurseForge",
-	"modmenu.dawn.modrinth": "Modrinth",
+	"modmenu.descriptionTranslation.dawn": "API that facilitates the creation of features.\nIncludes 3 commands, 2 enchantments and 6 effects.",
 	"itemGroup.dawn.creative_tools": "Creative Tools",
 	"enchantment.dawn.telekinesis": "Telekinesis",
 	"enchantment.dawn.ignorance_curse": "Curse of Ignorance",
