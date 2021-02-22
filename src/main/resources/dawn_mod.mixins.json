@@ -11,6 +11,7 @@
 	"client": [
 		"BackgroundRendererMixin",
 		"ClientPlayerEntityMixin",
+		"ClientPlayNetworkHandlerMixin",
 		"ItemRendererMixin",
 		"ItemStackMixin"
 	],
