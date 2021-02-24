@@ -40,6 +40,10 @@ public class EntityCreator<E extends Entity> extends Creator<EntityType<E>> {
 			this.entityType = entityType;
 		}
 
+		/**
+		 * @deprecated Will be removed in next major version.
+		 */
+		@Deprecated
 		public Builder<E> attributes(DefaultAttributeContainer.Builder attributeBuilder) {
 			this.attributeBuilder = attributeBuilder;
 			return this;
