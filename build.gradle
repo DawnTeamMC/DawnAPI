@@ -22,8 +22,7 @@ dependencies {
         exclude(group: "net.fabricmc.fabric-api")
     }
 
-    includeMod "me.shedaniel.cloth:config-2:${cloth_version}"
-    includeMod "me.sargunvohra.mcmods:autoconfig1u:${autoconfig_version}"
+    includeMod "me.shedaniel.cloth:cloth-config-fabric::${cloth_version}"
     includeMod "com.terraformersmc.terraform-api:terraform-tree-api-v1:${terraform_tree_version}"
     includeMod "com.terraformersmc.terraform-api:terraform-shapes-api-v1:${terraform_shapes_version}"
 

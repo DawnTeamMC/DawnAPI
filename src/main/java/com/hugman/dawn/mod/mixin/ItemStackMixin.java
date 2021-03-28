@@ -36,7 +36,7 @@ public class ItemStackMixin {
 		}
 	}
 
-	@Redirect(method = "getTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isDamaged()Z"))
+	@Redirect(method = "getTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isDamaged()Z", ordinal = 0))
 	public boolean dawn_isDamaged(ItemStack stack) {
 		ClientPlayerEntity clientPlayerEntity = MinecraftClient.getInstance().player;
 		if(EnchantmentUtil.hasEnchantment(DawnEnchantments.IGNORANCE_CURSE, stack) && !clientPlayerEntity.isCreative()) {

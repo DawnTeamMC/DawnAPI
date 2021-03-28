@@ -24,9 +24,9 @@ public class DawnConfig extends PartitioningSerializer.GlobalData {
 		@ConfigEntry.Gui.RequiresRestart
 		public boolean healthCommand = true;
 		@ConfigEntry.Gui.RequiresRestart
-		public boolean motionCommand = true;
-		@ConfigEntry.Gui.RequiresRestart
 		public boolean foodbarCommand = true;
+		@ConfigEntry.Gui.RequiresRestart
+		public boolean motionCommand = true;
 	}
 
 	@Config(name = "debug")
