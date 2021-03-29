@@ -2,6 +2,8 @@ package com.hugman.dawn.mod.util.debug;
 
 import com.hugman.dawn.Dawn;
 import com.hugman.dawn.mod.util.debug.data.BlockEntryData;
+import com.hugman.dawn.mod.util.debug.data.EnchantmentEntryData;
+import com.hugman.dawn.mod.util.debug.data.EntityTypeEntryData;
 import com.hugman.dawn.mod.util.debug.data.ItemEntryData;
 import com.hugman.dawn.mod.util.debug.data.SimpleEntryData;
 import net.minecraft.util.Identifier;
@@ -44,6 +46,12 @@ public class EntryDebugWriter {
 			}
 			else if(registry.getKey().getValue().equals(Registry.ITEM.getKey().getValue())) {
 				entryDataList.forEach((namespace, identifiers) -> new ItemEntryData(namespace, identifiers).save());
+			}
+			else if(registry.getKey().getValue().equals(Registry.ENTITY_TYPE.getKey().getValue())) {
+				entryDataList.forEach((namespace, identifiers) -> new EntityTypeEntryData(namespace, identifiers).save());
+			}
+			else if(registry.getKey().getValue().equals(Registry.ENCHANTMENT.getKey().getValue())) {
+				entryDataList.forEach((namespace, identifiers) -> new EnchantmentEntryData(namespace, identifiers).save());
 			}
 			else {
 				entryDataList.forEach((namespace, identifiers) -> new SimpleEntryData(namespace, registry, identifiers).save());

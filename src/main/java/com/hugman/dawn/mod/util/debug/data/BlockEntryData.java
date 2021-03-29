@@ -26,7 +26,7 @@ public class BlockEntryData extends EntryData {
 		}
 	}
 
-	public class BlockData {
+	public static class BlockData {
 		@Expose
 		protected Identifier name;
 		@Expose
@@ -37,7 +37,7 @@ public class BlockEntryData extends EntryData {
 			this.properties = new Properties(block);
 		}
 
-		public class Properties {
+		public static class Properties {
 			@Expose
 			protected MaterialProperties material;
 			@Expose
@@ -79,7 +79,7 @@ public class BlockEntryData extends EntryData {
 				this.isToolRequired = settings.isToolRequired();
 			}
 
-			public class MaterialProperties {
+			public static class MaterialProperties {
 				@Expose
 				@SerializedName("is_liquid")
 				protected boolean isLiquid;
