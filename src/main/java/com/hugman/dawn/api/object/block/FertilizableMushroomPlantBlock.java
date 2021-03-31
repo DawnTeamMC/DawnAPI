@@ -1,6 +1,5 @@
 package com.hugman.dawn.api.object.block;
 
-import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -17,21 +16,8 @@ import java.util.Random;
 public class FertilizableMushroomPlantBlock extends net.minecraft.block.MushroomPlantBlock {
 	protected final Block hatBlock;
 
-	public FertilizableMushroomPlantBlock(AbstractBlock.Settings settings, Block hatBlock) {
-		super(settings);
+	public FertilizableMushroomPlantBlock(Settings settings, Block hatBlock) {
+		super(settings, () -> Feature.HUGE_RED_MUSHROOM.configure(new HugeMushroomFeatureConfig(new SimpleBlockStateProvider(hatBlock.getDefaultState().with(MushroomBlock.DOWN, false)), new SimpleBlockStateProvider(Blocks.MUSHROOM_STEM.getDefaultState()), 2)));
 		this.hatBlock = hatBlock;
-	}
-
-	@Override
-	public boolean trySpawningBigMushroom(ServerWorld serverWorld, BlockPos pos, BlockState state, Random random) {
-		serverWorld.removeBlock(pos, false);
-		ConfiguredFeature hugeMushroomFeature = Feature.HUGE_RED_MUSHROOM.configure(new HugeMushroomFeatureConfig(new SimpleBlockStateProvider(this.hatBlock.getDefaultState().with(MushroomBlock.DOWN, false)), new SimpleBlockStateProvider(Blocks.MUSHROOM_STEM.getDefaultState()), 2));
-		if(hugeMushroomFeature.generate(serverWorld, serverWorld.getChunkManager().getChunkGenerator(), random, pos)) {
-			return true;
-		}
-		else {
-			serverWorld.setBlockState(pos, state, 3);
-			return false;
-		}
 	}
 }

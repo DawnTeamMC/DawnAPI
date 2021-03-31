@@ -8,8 +8,8 @@ import com.hugman.dawn.api.util.ModData;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
-import net.minecraft.block.MaterialColor;
 import net.minecraft.block.PillarBlock;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.sound.BlockSoundGroup;
@@ -23,11 +23,11 @@ public class LogsPack extends Pack {
 
 	private final String logName;
 	private final String woodName;
-	private final MaterialColor insideColor;
-	private final MaterialColor barkColor;
+	private final MapColor insideColor;
+	private final MapColor barkColor;
 	private final boolean isNether;
 
-	protected LogsPack(ModData modData, String name, MaterialColor insideColor, MaterialColor barkColor, boolean isNether) {
+	protected LogsPack(ModData modData, String name, MapColor insideColor, MapColor barkColor, boolean isNether) {
 		this.logName = isNether ? "_stem" : "_log";
 		this.woodName = isNether ? "_hyphae" : "_wood";
 		this.insideColor = insideColor;
@@ -78,8 +78,8 @@ public class LogsPack extends Pack {
 
 	public static class Builder implements Pack.Builder {
 		private final String name;
-		private final MaterialColor insideColor;
-		private final MaterialColor barkColor;
+		private final MapColor insideColor;
+		private final MapColor barkColor;
 		private final boolean isNether;
 
 		/**
@@ -90,7 +90,7 @@ public class LogsPack extends Pack {
 		 * @param barkColor   The material color of the bark side of logs.
 		 * @param isNether    Defines if the wood type comes from the nether. (changes the name, sounds and materials)
 		 */
-		public Builder(String name, MaterialColor insideColor, MaterialColor barkColor, boolean isNether) {
+		public Builder(String name, MapColor insideColor, MapColor barkColor, boolean isNether) {
 			this.name = name;
 			this.insideColor = insideColor;
 			this.barkColor = barkColor;

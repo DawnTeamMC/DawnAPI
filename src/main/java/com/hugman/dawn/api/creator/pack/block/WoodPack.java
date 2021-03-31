@@ -7,7 +7,7 @@ import com.hugman.dawn.api.util.ModData;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.MapColor;
 
 public class WoodPack extends Pack {
 	private final Block planks;
@@ -15,7 +15,7 @@ public class WoodPack extends Pack {
 	private final MSBlockPack woodenBlocks;
 	private final MSBlockPack barkBlocks;
 
-	protected WoodPack(ModData modData, String name, MaterialColor planksColor, MaterialColor insideColor, MaterialColor barkColor, boolean isNether) {
+	protected WoodPack(ModData modData, String name, MapColor planksColor, MapColor insideColor, MapColor barkColor, boolean isNether) {
 		FabricBlockSettings settings = FabricBlockSettings.copyOf(isNether ? Blocks.CRIMSON_PLANKS : Blocks.OAK_PLANKS).materialColor(planksColor);
 		this.planks = add(new BlockCreator.Builder(name, DefaultBlockGetter.PLANKS, settings), modData);
 		this.logs = add(new LogsPack.Builder(name, insideColor, barkColor, isNether), modData);
@@ -89,9 +89,9 @@ public class WoodPack extends Pack {
 
 	public static class Builder implements Pack.Builder {
 		private final String name;
-		private final MaterialColor planksColor;
-		private final MaterialColor insideColor;
-		private final MaterialColor barkColor;
+		private final MapColor planksColor;
+		private final MapColor insideColor;
+		private final MapColor barkColor;
 		private final boolean isNether;
 
 		/**
@@ -103,7 +103,7 @@ public class WoodPack extends Pack {
 		 * @param barkColor   The material color of the bark side of logs.
 		 * @param isNether    Defines if the wood type comes from the nether. (changes the name, sounds and materials)
 		 */
-		public Builder(String name, MaterialColor planksColor, MaterialColor insideColor, MaterialColor barkColor, boolean isNether) {
+		public Builder(String name, MapColor planksColor, MapColor insideColor, MapColor barkColor, boolean isNether) {
 			this.name = name;
 			this.planksColor = planksColor;
 			this.insideColor = insideColor;

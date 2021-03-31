@@ -28,7 +28,7 @@
 		"dawn_mod.mixins.json"
 	],
 	"depends": {
-		"minecraft": ">=1.16.2",
+		"minecraft": ">=21w11a",
 		"fabric": "*"
 	},
 	"custom": {

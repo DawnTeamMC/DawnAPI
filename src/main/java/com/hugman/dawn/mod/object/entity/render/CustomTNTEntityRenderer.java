@@ -5,19 +5,19 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.entity.EntityRenderDispatcher;
+import net.minecraft.client.render.entity.EntityRendererFactory.Context;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.TntMinecartEntityRenderer;
 import net.minecraft.client.texture.SpriteAtlasTexture;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3f;
 
 @Environment(EnvType.CLIENT)
 public class CustomTNTEntityRenderer extends EntityRenderer<CustomTNTEntity> {
-	public CustomTNTEntityRenderer(EntityRenderDispatcher dispatcher) {
-		super(dispatcher);
+	public CustomTNTEntityRenderer(Context context) {
+		super(context);
 		this.shadowRadius = 0.5F;
 	}
 
@@ -34,9 +34,9 @@ public class CustomTNTEntityRenderer extends EntityRenderer<CustomTNTEntity> {
 			float j = 1.0F + h * 0.3F;
 			matrixStack.scale(j, j, j);
 		}
-		matrixStack.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(-90.0F));
+		matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(-90.0F));
 		matrixStack.translate(-0.5D, -0.5D, 0.5D);
-		matrixStack.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(90.0F));
+		matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(90.0F));
 		TntMinecartEntityRenderer.renderFlashingBlock(blockState, matrixStack, vertexConsumerProvider, light, entity.getFuse() / 5 % 2 == 0);
 		matrixStack.pop();
 		super.render(entity, entityYaw, partialTicks, matrixStack, vertexConsumerProvider, light);

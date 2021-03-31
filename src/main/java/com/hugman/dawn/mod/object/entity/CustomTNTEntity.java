@@ -11,7 +11,7 @@ import net.minecraft.entity.MovementType;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtHelper;
 import net.minecraft.network.Packet;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
@@ -54,13 +54,13 @@ public class CustomTNTEntity extends Entity {
 	}
 
 	@Override
-	protected boolean canClimb() {
-		return false;
+	protected MoveEffect getMoveEffect() {
+		return MoveEffect.NONE;
 	}
 
 	@Override
 	public boolean collides() {
-		return !this.removed;
+		return !this.isRemoved();
 	}
 
 	@Override
@@ -75,7 +75,7 @@ public class CustomTNTEntity extends Entity {
 		}
 		--this.fuse;
 		if(this.fuse <= 0) {
-			this.remove();
+			this.discard();
 			if(!this.world.isClient) {
 				this.explode();
 			}
@@ -93,14 +93,14 @@ public class CustomTNTEntity extends Entity {
 	}
 
 	@Override
-	protected void writeCustomDataToTag(CompoundTag compound) {
+	protected void writeCustomDataToNbt(NbtCompound compound) {
 		compound.put("BlockState", NbtHelper.fromBlockState(this.state));
 		compound.putShort("Fuse", (short) this.getFuse());
 		compound.putFloat("Strength", this.getStrength());
 	}
 
 	@Override
-	protected void readCustomDataFromTag(CompoundTag compound) {
+	protected void readCustomDataFromNbt(NbtCompound compound) {
 		this.state = NbtHelper.toBlockState(compound.getCompound("BlockState"));
 		if(this.state.getBlock() == Blocks.AIR) {
 			this.state = Blocks.TNT.getDefaultState();

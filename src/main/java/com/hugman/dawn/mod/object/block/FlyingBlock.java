@@ -21,12 +21,6 @@ public class FlyingBlock extends Block {
 		super(builder);
 	}
 
-	public static boolean canFlyThrough(BlockState state) {
-		Block block = state.getBlock();
-		Material material = state.getMaterial();
-		return block instanceof AirBlock || block == Blocks.FIRE || material.isLiquid() || material.isReplaceable();
-	}
-
 	@Override
 	public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
 		world.getBlockTickScheduler().schedule(pos, this, this.getFlyDelay());
@@ -40,7 +34,7 @@ public class FlyingBlock extends Block {
 
 	@Override
 	public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-		if(canFlyThrough(world.getBlockState(pos.up())) && pos.getX() <= world.getDimensionHeight()) {
+		if(canFlyThrough(world.getBlockState(pos.up())) && pos.getX() <= world.getHeight()) {
 			FlyingBlockEntity flyingBlockEntity = new FlyingBlockEntity(world, (double) pos.getX() + 0.5D, pos.getY(), (double) pos.getZ() + 0.5D, world.getBlockState(pos));
 			this.configureFlyingBlockEntity(flyingBlockEntity);
 			world.spawnEntity(flyingBlockEntity);
@@ -52,6 +46,12 @@ public class FlyingBlock extends Block {
 
 	protected int getFlyDelay() {
 		return 2;
+	}
+
+	public static boolean canFlyThrough(BlockState state) {
+		Block block = state.getBlock();
+		Material material = state.getMaterial();
+		return block instanceof AirBlock || block == Blocks.FIRE || material.isLiquid() || material.isReplaceable();
 	}
 
 	public void onLanding(World world, BlockPos pos, BlockState flyingBlockState, BlockState currentStateInPos, FlyingBlockEntity flyingBlockEntity) {
