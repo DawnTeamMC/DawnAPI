@@ -3,8 +3,6 @@ package com.hugman.dawn;
 import com.hugman.dawn.api.util.ModData;
 import com.hugman.dawn.config.DawnConfig;
 import com.hugman.dawn.mod.init.DawnCommands;
-import com.hugman.dawn.mod.init.DawnEffects;
-import com.hugman.dawn.mod.init.DawnEnchantments;
 import com.hugman.dawn.mod.init.DawnEntities;
 import com.hugman.dawn.mod.init.DawnItemGroups;
 import com.hugman.dawn.mod.util.debug.EntryDebugWriter;
@@ -29,8 +27,6 @@ public class Dawn implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		DawnEffects.init();
-		DawnEnchantments.init();
 		DawnItemGroups.init();
 		DawnCommands.init();
 		DawnEntities.init();

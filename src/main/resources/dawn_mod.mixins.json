@@ -3,17 +3,10 @@
 	"package": "com.hugman.dawn.mod.mixin",
 	"compatibilityLevel": "JAVA_8",
 	"mixins": [
-		"HungerManagerAccessor",
-		"LivingEntityMixin",
-		"PlayerEntityMixin",
-		"StatusEffectInstanceMixin"
+		"HungerManagerAccessor"
 	],
 	"client": [
-		"BackgroundRendererMixin",
-		"ClientPlayerEntityMixin",
-		"ClientPlayNetworkHandlerMixin",
-		"ItemRendererMixin",
-		"ItemStackMixin"
+		"ClientPlayNetworkHandlerMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

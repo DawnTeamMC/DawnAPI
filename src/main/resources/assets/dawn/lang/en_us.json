@@ -6,16 +6,6 @@
 	"entity.dawn.custom_tnt": "Custom TNT",
 	"entity.dawn.flying_block": "Flying Block",
 
-	"enchantment.dawn.telekinesis": "Telekinesis",
-	"enchantment.dawn.ignorance_curse": "Curse of Ignorance",
-
-	"effect.dawn.heaviness": "Heaviness",
-	"effect.dawn.hiccup": "Hiccup",
-	"effect.dawn.foresight": "Foresight",
-	"effect.dawn.fulfillment": "Fulfillment",
-	"effect.dawn.guard": "Guard",
-	"effect.dawn.poison_resistance": "Poison Resistance",
-
 	"commands.health.add.success.single": "Gave %s health points to %s",
 	"commands.health.add.success.multiple": "Gave %s health points to %s entities",
 	"commands.health.set.success.single": "Set %s health points on %s",
