@@ -5,7 +5,7 @@ import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.util.registry.Registry;
 
-public class RecipeSerializerCreator<S extends RecipeSerializer<? extends Recipe<?>>> extends Creator<S> {
+public class RecipeSerializerCreator<S extends RecipeSerializer<? extends Recipe<?>>> extends Creator {
 	private RecipeSerializerCreator(ModData modData, String name, S serializer) {
 		super(modData, name, serializer);
 	}
@@ -15,7 +15,7 @@ public class RecipeSerializerCreator<S extends RecipeSerializer<? extends Recipe
 		Registry.register(Registry.RECIPE_SERIALIZER, modData.id(name), value);
 	}
 
-	public static class Builder<S extends RecipeSerializer<? extends Recipe<?>>> implements Creator.Builder<S> {
+	public static class Builder<S extends RecipeSerializer<? extends Recipe<?>>> implements CreatorBuilder<S> {
 		protected final String name;
 		protected final S serializer;
 

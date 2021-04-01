@@ -1,9 +1,7 @@
 package com.hugman.dawn.api.creator.pack.block;
 
 import com.hugman.dawn.api.creator.BlockCreator;
-import com.hugman.dawn.api.creator.pack.Pack;
 import com.hugman.dawn.api.util.BlockSettings;
-import com.hugman.dawn.api.util.DefaultBlockGetter;
 import com.hugman.dawn.api.util.ModData;
 import net.minecraft.block.Block;
 

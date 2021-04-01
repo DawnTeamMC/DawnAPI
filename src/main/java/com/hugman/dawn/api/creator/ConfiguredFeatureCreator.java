@@ -6,7 +6,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.FeatureConfig;
 
-public class ConfiguredFeatureCreator<FC extends FeatureConfig> extends Creator<ConfiguredFeature<FC, ?>> {
+public class ConfiguredFeatureCreator<FC extends FeatureConfig> extends Creator {
 	private ConfiguredFeatureCreator(ModData modData, String name, ConfiguredFeature<FC, ?> feature) {
 		super(modData, name, feature);
 	}
@@ -16,7 +16,7 @@ public class ConfiguredFeatureCreator<FC extends FeatureConfig> extends Creator<
 		Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, modData.id(name), value);
 	}
 
-	public static class Builder<FC extends FeatureConfig> implements Creator.Builder<ConfiguredFeature<FC, ?>> {
+	public static class Builder<FC extends FeatureConfig> implements CreatorBuilder<ConfiguredFeature<FC, ?>> {
 		protected final String name;
 		protected final ConfiguredFeature<FC, ?> feature;
 

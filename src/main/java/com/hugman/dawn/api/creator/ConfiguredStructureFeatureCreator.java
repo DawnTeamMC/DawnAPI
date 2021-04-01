@@ -7,7 +7,7 @@ import net.minecraft.world.gen.feature.ConfiguredStructureFeature;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
 
-public class ConfiguredStructureFeatureCreator<FC extends FeatureConfig, SF extends StructureFeature<FC>> extends Creator<ConfiguredStructureFeature<FC, SF>> {
+public class ConfiguredStructureFeatureCreator<FC extends FeatureConfig, SF extends StructureFeature<FC>> extends Creator {
 	private ConfiguredStructureFeatureCreator(ModData modData, String name, ConfiguredStructureFeature<FC, SF> feature) {
 		super(modData, name, feature);
 	}
@@ -17,7 +17,7 @@ public class ConfiguredStructureFeatureCreator<FC extends FeatureConfig, SF exte
 		Registry.register(BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE, modData.id(name), value);
 	}
 
-	public static class Builder<FC extends FeatureConfig, SF extends StructureFeature<FC>> implements Creator.Builder<ConfiguredStructureFeature<FC, SF>> {
+	public static class Builder<FC extends FeatureConfig, SF extends StructureFeature<FC>> implements CreatorBuilder<ConfiguredStructureFeature<FC, SF>> {
 		protected final String name;
 		protected final ConfiguredStructureFeature<FC, SF> feature;
 

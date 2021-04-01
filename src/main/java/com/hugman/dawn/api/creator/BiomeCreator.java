@@ -6,7 +6,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
 
-public class BiomeCreator extends Creator<RegistryKey<Biome>> {
+public class BiomeCreator extends Creator {
 	private final Biome biome;
 
 	private BiomeCreator(ModData modData, String name, Biome biome) {
@@ -19,7 +19,7 @@ public class BiomeCreator extends Creator<RegistryKey<Biome>> {
 		Registry.register(BuiltinRegistries.BIOME, value.getValue(), biome);
 	}
 
-	public static class Builder implements Creator.Builder<RegistryKey<Biome>> {
+	public static class Builder implements CreatorBuilder<RegistryKey<Biome>> {
 		private final String name;
 		private final Biome biome;
 

@@ -4,7 +4,7 @@ import com.hugman.dawn.api.util.ModData;
 import net.minecraft.structure.StructurePieceType;
 import net.minecraft.util.registry.Registry;
 
-public class StructurePieceCreator extends Creator<StructurePieceType> {
+public class StructurePieceCreator extends Creator {
 	private StructurePieceCreator(ModData modData, String name, StructurePieceType piece) {
 		super(modData, name, piece);
 	}
@@ -14,7 +14,7 @@ public class StructurePieceCreator extends Creator<StructurePieceType> {
 		Registry.register(Registry.STRUCTURE_PIECE, modData.id(name), value);
 	}
 
-	public static class Builder implements Creator.Builder<StructurePieceType> {
+	public static class Builder implements CreatorBuilder<StructurePieceType> {
 		protected final String name;
 		protected final StructurePieceType piece;
 

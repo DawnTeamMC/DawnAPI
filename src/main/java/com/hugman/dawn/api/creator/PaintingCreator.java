@@ -4,7 +4,7 @@ import com.hugman.dawn.api.util.ModData;
 import net.minecraft.entity.decoration.painting.PaintingMotive;
 import net.minecraft.util.registry.Registry;
 
-public class PaintingCreator extends Creator<PaintingMotive> {
+public class PaintingCreator extends Creator {
 	private PaintingCreator(ModData modData, String name, int width, int height) {
 		super(modData, name, new PaintingMotive(width, height));
 	}
@@ -14,7 +14,7 @@ public class PaintingCreator extends Creator<PaintingMotive> {
 		Registry.register(Registry.PAINTING_MOTIVE, modData.id(name), value);
 	}
 
-	public static class Builder implements Creator.Builder<PaintingMotive> {
+	public static class Builder implements CreatorBuilder<PaintingMotive> {
 		protected final String name;
 		protected final int width;
 		protected final int height;

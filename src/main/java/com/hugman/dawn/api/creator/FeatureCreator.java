@@ -5,7 +5,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
 
-public class FeatureCreator<FC extends FeatureConfig, F extends Feature<FC>> extends Creator<F> {
+public class FeatureCreator<FC extends FeatureConfig, F extends Feature<FC>> extends Creator {
 	private FeatureCreator(ModData modData, String name, F feature) {
 		super(modData, name, feature);
 	}
@@ -15,7 +15,7 @@ public class FeatureCreator<FC extends FeatureConfig, F extends Feature<FC>> ext
 		Registry.register(Registry.FEATURE, modData.id(name), value);
 	}
 
-	public static class Builder<FC extends FeatureConfig, F extends Feature<FC>> implements Creator.Builder<F> {
+	public static class Builder<FC extends FeatureConfig, F extends Feature<FC>> implements CreatorBuilder<F> {
 		protected final String name;
 		protected final F feature;
 

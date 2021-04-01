@@ -1,8 +1,7 @@
 package com.hugman.dawn.api.creator;
 
-import com.hugman.dawn.api.util.BlockGetter;
 import com.hugman.dawn.api.util.ModData;
-import com.hugman.dawn.api.util.StringUtil;
+import com.swordglowsblue.artifice.api.ArtificeResourcePack;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
@@ -17,42 +16,38 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.registry.Registry;
 
-public class BlockCreator extends Creator<Block> {
-	protected final Render render;
-	protected final ItemGroup itemGroup;
-	protected final int flammabilityBurn;
-	protected final int flammabilitySpread;
-	protected final boolean noItem;
-	protected final int cookTime;
-	protected final float compostingChance;
+import java.util.Objects;
+import java.util.function.Function;
 
-	private BlockCreator(ModData modData, String name, Block block, Render render, ItemGroup itemGroup, int flammabilityBurn, int flammabilitySpread, boolean noItem, int cookTime, float compostingChance) {
-		super(modData, name, block);
-		this.render = render;
-		this.itemGroup = itemGroup;
-		this.flammabilityBurn = flammabilityBurn;
-		this.flammabilitySpread = flammabilitySpread;
-		this.noItem = noItem;
-		this.cookTime = cookTime;
-		this.compostingChance = compostingChance;
+public class BlockCreator extends Creator {
+	protected Block block;
+	private final Builder builder;
+
+	private BlockCreator(Builder builder) {
+		this.builder = builder;
+		this.block = builder.blockProvider.apply(builder.settings);
+	}
+
+	public Block getBlock() {
+		return block;
 	}
 
 	@Override
-	public void register() {
-		Registry.register(Registry.BLOCK, modData.id(name), value);
-		FlammableBlockRegistry.getDefaultInstance().add(value, flammabilityBurn, flammabilitySpread);
-		if(!noItem) {
-			BlockItem blockItem = Registry.register(Registry.ITEM, Registry.BLOCK.getId(value), new BlockItem(value, new Item.Settings().group(itemGroup)));
+	public void register(ModData modData) {
+		Registry.register(Registry.BLOCK, modData.id(this.builder.id), this.block);
+		FlammableBlockRegistry.getDefaultInstance().add(this.block, this.builder.flammabilityBurn, this.builder.flammabilitySpread);
+		if(!this.builder.noItem) {
+			BlockItem blockItem = Registry.register(Registry.ITEM, modData.id(this.builder.id), new BlockItem(this.block, new Item.Settings().group(this.builder.itemGroup)));
 			blockItem.appendBlocks(Item.BLOCK_ITEMS, blockItem);
 		}
 	}
 
 	@Override
 	@Environment(EnvType.CLIENT)
-	public void clientRegister() {
+	public void clientRegister(ModData modData, ArtificeResourcePack.ClientResourcePackBuilder resourcePackBuilder) {
 		RenderLayer renderF;
-		if(render != null) {
-			switch(render) {
+		if(this.builder.render != null) {
+			switch(this.builder.render) {
 				case SOLID:
 				default:
 					renderF = RenderLayer.getSolid();
@@ -71,17 +66,17 @@ public class BlockCreator extends Creator<Block> {
 		else {
 			renderF = RenderLayer.getSolid();
 		}
-		BlockRenderLayerMap.INSTANCE.putBlock(value, renderF);
+		BlockRenderLayerMap.INSTANCE.putBlock(this.block, renderF);
 	}
 
 	@Override
-	public void serverRegister(boolean isDedicated) {
-		if(!noItem) {
-			if(cookTime != 0) {
-				FuelRegistry.INSTANCE.add(value, cookTime);
+	public void serverRegister(ModData modData, ArtificeResourcePack.ServerResourcePackBuilder dataPackBuilder, boolean isDedicatedServer) {
+		if(!this.builder.noItem) {
+			if(this.builder.cookTime != 0) {
+				FuelRegistry.INSTANCE.add(block, this.builder.cookTime);
 			}
-			if(compostingChance != 0) {
-				CompostingChanceRegistry.INSTANCE.add(value, compostingChance);
+			if(this.builder.compostingChance != 0) {
+				CompostingChanceRegistry.INSTANCE.add(block, this.builder.compostingChance);
 			}
 		}
 	}
@@ -93,39 +88,45 @@ public class BlockCreator extends Creator<Block> {
 		TRANSLUCENT
 	}
 
-	public static class Builder implements Creator.Builder<Block> {
-		private final String name;
-		private final Block block;
+	public static class Builder {
+		protected AbstractBlock.Settings settings;
 		protected Render render;
-
 		protected ItemGroup itemGroup;
 		protected int flammabilityBurn;
 		protected int flammabilitySpread;
 		protected boolean noItem;
 		protected int cookTime;
 		protected float compostingChance;
+		private String id;
+		private Function<AbstractBlock.Settings, ? extends Block> blockProvider;
 
-		/**
-		 * Creates a simple block with an item but no item group, flammability or cook time and is rendered has a solid block.
-		 *
-		 * @param name  The name of the block.
-		 * @param block The block itself.
-		 */
-		public Builder(String name, Block block) {
-			this.name = name;
-			this.block = block;
+		public Builder() {
+
 		}
 
-		/**
-		 * Creates a block copying some properties from a getter and a block.
-		 *
-		 * @param prefix   The prefix of the block.
-		 * @param getter   The getter to copy properties from. (block class, name suffix, render layer, item group)
-		 * @param settings The block settings.
-		 */
-		public Builder(String prefix, BlockGetter getter, AbstractBlock.Settings settings) {
-			this(StringUtil.getShapedName(prefix, getter), getter.getBlock(settings));
-			copy(getter);
+		public Builder(String id, Function<AbstractBlock.Settings, ? extends Block> blockProvider, AbstractBlock.Settings settings) {
+			this.id(id);
+			this.block(blockProvider);
+			this.settings(settings);
+		}
+
+		public Builder id(String id) {
+			this.id = id;
+			return this;
+		}
+
+		public String getId() {
+			return id;
+		}
+
+		public Builder block(Function<AbstractBlock.Settings, ? extends Block> blockProvider) {
+			this.blockProvider = blockProvider;
+			return this;
+		}
+
+		public Builder settings(AbstractBlock.Settings settings) {
+			this.settings = settings;
+			return this;
 		}
 
 		public Builder render(Render render) {
@@ -168,21 +169,11 @@ public class BlockCreator extends Creator<Block> {
 			return this;
 		}
 
-		/**
-		 * Copies some properties from a getter. (render layer, item group)
-		 */
-		public Builder copy(BlockGetter getter) {
-			itemGroup(getter.getItemGroup());
-			render(getter.getRender());
-			return this;
-		}
-
-		public BlockCreator build(ModData modData) {
-			return new BlockCreator(modData, this.name, this.block, this.render, this.itemGroup, this.flammabilityBurn, this.flammabilitySpread, this.noItem, this.cookTime, this.compostingChance);
-		}
-
-		public String getName() {
-			return name;
+		public BlockCreator build() {
+			Objects.requireNonNull(this.id, "Cannot build a block with no name!");
+			Objects.requireNonNull(this.blockProvider, "Cannot build a block with no block provider!");
+			Objects.requireNonNull(this.settings, "Cannot build a block with no block settings!");
+			return new BlockCreator(this);
 		}
 	}
 }

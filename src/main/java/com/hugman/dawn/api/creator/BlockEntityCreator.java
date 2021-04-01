@@ -7,7 +7,7 @@ import net.minecraft.datafixer.TypeReferences;
 import net.minecraft.util.Util;
 import net.minecraft.util.registry.Registry;
 
-public class BlockEntityCreator<E extends BlockEntity> extends Creator<BlockEntityType<E>> {
+public class BlockEntityCreator<E extends BlockEntity> extends Creator {
 	private BlockEntityCreator(String name, BlockEntityType.Builder<E> builder, ModData modData) {
 		super(modData, name, builder.build(Util.getChoiceType(TypeReferences.BLOCK_ENTITY, name)));
 	}
@@ -17,7 +17,7 @@ public class BlockEntityCreator<E extends BlockEntity> extends Creator<BlockEnti
 		Registry.register(Registry.BLOCK_ENTITY_TYPE, modData.id(name), value);
 	}
 
-	public static class Builder<E extends BlockEntity> implements Creator.Builder<BlockEntityType<E>> {
+	public static class Builder<E extends BlockEntity> implements CreatorBuilder<BlockEntityType<E>> {
 		protected final String name;
 		protected final BlockEntityType.Builder<E> builder;
 

@@ -8,7 +8,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.util.registry.Registry;
 
-public class EntityCreator<E extends Entity> extends Creator<EntityType<E>> {
+public class EntityCreator<E extends Entity> extends Creator {
 	protected final DefaultAttributeContainer.Builder attributeBuilder;
 
 	private EntityCreator(ModData modData, String name, EntityType<E> entityType, DefaultAttributeContainer.Builder attributeBuilder) {
@@ -24,7 +24,7 @@ public class EntityCreator<E extends Entity> extends Creator<EntityType<E>> {
 		}
 	}
 
-	public static class Builder<E extends Entity> implements Creator.Builder<EntityType<E>> {
+	public static class Builder<E extends Entity> implements CreatorBuilder<EntityType<E>> {
 		protected final String name;
 		protected final EntityType<E> entityType;
 		protected DefaultAttributeContainer.Builder attributeBuilder;

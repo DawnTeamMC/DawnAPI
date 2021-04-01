@@ -4,7 +4,7 @@ import com.hugman.dawn.api.util.ModData;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.util.registry.Registry;
 
-public class EffectCreator extends Creator<StatusEffect> {
+public class EffectCreator extends Creator {
 	private EffectCreator(ModData modData, String name, StatusEffect effect) {
 		super(modData, name, effect);
 	}
@@ -14,7 +14,7 @@ public class EffectCreator extends Creator<StatusEffect> {
 		Registry.register(Registry.STATUS_EFFECT, modData.id(name), value);
 	}
 
-	public static class Builder implements Creator.Builder<StatusEffect> {
+	public static class Builder implements CreatorBuilder<StatusEffect> {
 		protected final String name;
 		protected final StatusEffect effect;
 

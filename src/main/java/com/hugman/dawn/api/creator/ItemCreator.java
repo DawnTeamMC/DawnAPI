@@ -1,12 +1,13 @@
 package com.hugman.dawn.api.creator;
 
 import com.hugman.dawn.api.util.ModData;
+import com.swordglowsblue.artifice.api.ArtificeResourcePack;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.item.Item;
 import net.minecraft.util.registry.Registry;
 
-public class ItemCreator extends Creator<Item> {
+public class ItemCreator extends Creator {
 	protected final int cookTime;
 	protected final float compostingChance;
 
@@ -25,7 +26,7 @@ public class ItemCreator extends Creator<Item> {
 	}
 
 	@Override
-	public void serverRegister(boolean isDedicated) {
+	public void serverRegister(boolean isDedicated, ArtificeResourcePack.ServerResourcePackBuilder dataPackBuilder) {
 		if(cookTime != 0) {
 			FuelRegistry.INSTANCE.add(value, cookTime);
 		}
@@ -34,7 +35,7 @@ public class ItemCreator extends Creator<Item> {
 		}
 	}
 
-	public static class Builder implements Creator.Builder<Item> {
+	public static class Builder implements CreatorBuilder<Item> {
 		protected final String name;
 		protected final Item item;
 		protected int cookTime;

@@ -4,7 +4,7 @@ import com.hugman.dawn.api.util.ModData;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.registry.Registry;
 
-public class SoundCreator extends Creator<SoundEvent> {
+public class SoundCreator extends Creator {
 	private SoundCreator(ModData modData, String name) {
 		super(modData, name, new SoundEvent(modData.id(name)));
 	}
@@ -14,7 +14,7 @@ public class SoundCreator extends Creator<SoundEvent> {
 		Registry.register(Registry.SOUND_EVENT, modData.id(name), value);
 	}
 
-	public static class Builder implements Creator.Builder<SoundEvent> {
+	public static class Builder implements CreatorBuilder<SoundEvent> {
 		protected final String name;
 
 		/**

@@ -4,7 +4,7 @@ import com.hugman.dawn.api.util.ModData;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.util.registry.Registry;
 
-public class EnchantmentCreator extends Creator<Enchantment> {
+public class EnchantmentCreator extends Creator {
 
 	private EnchantmentCreator(String name, Enchantment enchantment, ModData modData) {
 		super(modData, name, enchantment);
@@ -15,7 +15,7 @@ public class EnchantmentCreator extends Creator<Enchantment> {
 		Registry.register(Registry.ENCHANTMENT, modData.id(name), value);
 	}
 
-	public static class Builder implements Creator.Builder<Enchantment> {
+	public static class Builder implements CreatorBuilder<Enchantment> {
 		protected final String name;
 		protected final Enchantment enchantment;
 

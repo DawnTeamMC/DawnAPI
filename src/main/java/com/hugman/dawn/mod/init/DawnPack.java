@@ -1,15 +1,17 @@
 package com.hugman.dawn.mod.init;
 
 import com.hugman.dawn.Dawn;
+import com.hugman.dawn.api.creator.Bundle;
 import com.hugman.dawn.api.creator.Creator;
-import com.hugman.dawn.api.creator.pack.Pack;
 
-public abstract class DawnPack extends Pack {
-	protected static <V, B extends Creator.Builder<V>> V register(B creatorBuilder) {
-		return add(creatorBuilder, Dawn.MOD_DATA);
+public abstract class DawnPack {
+	protected static <V extends Creator> V register(V creator) {
+		Dawn.MOD_DATA.addCreator(creator);
+		return creator;
 	}
 
-	private static <P extends Pack, B extends Builder> P register(B packBuilder) {
-		return add(packBuilder, Dawn.MOD_DATA);
+	protected static <V extends Bundle> V register(V bundle) {
+		Dawn.MOD_DATA.addBundle(bundle);
+		return bundle;
 	}
 }

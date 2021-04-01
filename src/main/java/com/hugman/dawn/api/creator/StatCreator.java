@@ -6,7 +6,7 @@ import net.minecraft.stat.Stats;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-public class StatCreator extends Creator<Identifier> {
+public class StatCreator extends Creator {
 	protected final StatFormatter formatter;
 
 	private StatCreator(ModData modData, String name, StatFormatter formatter) {
@@ -20,7 +20,7 @@ public class StatCreator extends Creator<Identifier> {
 		Stats.CUSTOM.getOrCreateStat(value, formatter);
 	}
 
-	public static class Builder implements Creator.Builder<Identifier> {
+	public static class Builder implements CreatorBuilder<Identifier> {
 		protected final String name;
 		protected StatFormatter formatter;
 

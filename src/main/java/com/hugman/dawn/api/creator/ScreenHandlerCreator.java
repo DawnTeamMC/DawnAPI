@@ -5,12 +5,12 @@ import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerType;
 
-public class ScreenHandlerCreator<T extends ScreenHandler> extends Creator<ScreenHandlerType<T>> {
+public class ScreenHandlerCreator<T extends ScreenHandler> extends Creator {
 	private ScreenHandlerCreator(ModData modData, String name, ScreenHandlerRegistry.SimpleClientHandlerFactory<T> factory) {
 		super(modData, name, ScreenHandlerRegistry.registerSimple(modData.id(name), factory));
 	}
 
-	public static class Builder<T extends ScreenHandler> implements Creator.Builder<ScreenHandlerType<T>> {
+	public static class Builder<T extends ScreenHandler> implements CreatorBuilder<ScreenHandlerType<T>> {
 		protected final String name;
 		protected final ScreenHandlerRegistry.SimpleClientHandlerFactory<T> factory;
 

@@ -6,7 +6,7 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
 
-public class StructureFeatureCreator<FC extends FeatureConfig, S extends StructureFeature<FC>> extends Creator<S> {
+public class StructureFeatureCreator<FC extends FeatureConfig, S extends StructureFeature<FC>> extends Creator {
 	protected final GenerationStep.Feature step;
 	protected final int spacing;
 	protected final int separation;
@@ -29,7 +29,7 @@ public class StructureFeatureCreator<FC extends FeatureConfig, S extends Structu
 		builder.register();
 	}
 
-	public static class Builder<FC extends FeatureConfig, S extends StructureFeature<FC>> implements Creator.Builder<S> {
+	public static class Builder<FC extends FeatureConfig, S extends StructureFeature<FC>> implements CreatorBuilder<S> {
 		protected final String name;
 		protected final S structure;
 		protected final GenerationStep.Feature step;
