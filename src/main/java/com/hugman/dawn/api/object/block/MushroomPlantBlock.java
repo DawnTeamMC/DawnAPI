@@ -12,7 +12,6 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 
-import java.util.Iterator;
 import java.util.Random;
 
 public class MushroomPlantBlock extends PlantBlock implements Fertilizable {
@@ -29,9 +28,10 @@ public class MushroomPlantBlock extends PlantBlock implements Fertilizable {
 	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
 		BlockPos blockPos = pos.down();
 		BlockState blockState = world.getBlockState(blockPos);
-		if (blockState.isIn(BlockTags.MUSHROOM_GROW_BLOCK)) {
+		if(blockState.isIn(BlockTags.MUSHROOM_GROW_BLOCK)) {
 			return true;
-		} else {
+		}
+		else {
 			return world.getBaseLightLevel(pos, 0) < 13 && this.canPlantOnTop(blockState, world, blockPos);
 		}
 	}
