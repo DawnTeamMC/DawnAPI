@@ -36,7 +36,7 @@ public class PlantPileBlock extends PlantBlock {
 
 	@Override
 	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-		BlockPos blockpos = pos.offset(Direction.DOWN);
+		BlockPos blockpos = pos.down();
 		BlockState blockState = world.getBlockState(blockpos);
 		return Block.isFaceFullSquare(blockState.getCollisionShape(world, blockpos), Direction.UP);
 	}

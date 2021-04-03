@@ -2,12 +2,11 @@ package com.hugman.dawn;
 
 import com.hugman.dawn.api.util.ModData;
 import com.hugman.dawn.config.DawnConfig;
+import com.hugman.dawn.mod.init.DawnBlocks;
 import com.hugman.dawn.mod.init.DawnCommands;
 import com.hugman.dawn.mod.init.DawnEntities;
 import com.hugman.dawn.mod.init.DawnItemGroups;
 import com.hugman.dawn.mod.util.debug.EntryDebugWriter;
-import com.swordglowsblue.artifice.api.Artifice;
-import com.swordglowsblue.artifice.api.ArtificeResourcePack;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import me.shedaniel.autoconfig.serializer.PartitioningSerializer;
@@ -29,6 +28,7 @@ public class Dawn implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		DawnBlocks.init();
 		DawnItemGroups.init();
 		DawnCommands.init();
 		DawnEntities.init();

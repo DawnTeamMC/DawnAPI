@@ -28,7 +28,7 @@ public class ModData {
 	}
 
 	public void addBundle(Bundle bundle) {
-		CREATORS.addAll(bundle.open());
+		CREATORS.add(bundle);
 	}
 
 	public void registerCreators() {
@@ -38,14 +38,23 @@ public class ModData {
 
 	@Environment(EnvType.CLIENT)
 	public void registerCreatorsClient() {
-		Artifice.registerAssetPack(id("my_assets"), builder -> CREATORS.forEach(creator -> creator.clientRegister(this, builder)));
+		Artifice.registerAssetPack(id("vanilla"), builder -> {
+			this.CREATORS.forEach(creator -> creator.clientRegister(this, builder));
+			builder.setDisplayName(this.modName + " - Vanilla");
+			builder.setDescription("Vanilla resource pack for the " + this.modName + " mod");
+			builder.setVisible();
+		});
 	}
 
 	public void registerCreatorsServer(boolean isDedicated) {
-		Artifice.registerDataPack(id("my_data"), builder -> CREATORS.forEach(creator -> creator.serverRegister(this, builder, isDedicated)));
+		Artifice.registerDataPack(id("vanilla"), builder -> {
+			this.CREATORS.forEach(creator -> creator.serverRegister(this, builder, isDedicated));
+			builder.setDisplayName(this.modName + " - Vanilla");
+			builder.setDescription("Vanilla data pack for the " + this.modName + " mod");
+		});
 	}
 
 	public Identifier id(String s) {
-		return new Identifier(modName, s);
+		return new Identifier(this.modName, s);
 	}
 }

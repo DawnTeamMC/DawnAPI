@@ -20,8 +20,8 @@ import java.util.Objects;
 import java.util.function.Function;
 
 public class BlockCreator extends Creator {
-	protected Block block;
 	private final Builder builder;
+	protected Block block;
 
 	private BlockCreator(Builder builder) {
 		this.builder = builder;
@@ -89,6 +89,8 @@ public class BlockCreator extends Creator {
 	}
 
 	public static class Builder {
+		protected String id;
+		protected Function<AbstractBlock.Settings, ? extends Block> blockProvider;
 		protected AbstractBlock.Settings settings;
 		protected Render render;
 		protected ItemGroup itemGroup;
@@ -97,17 +99,27 @@ public class BlockCreator extends Creator {
 		protected boolean noItem;
 		protected int cookTime;
 		protected float compostingChance;
-		private String id;
-		private Function<AbstractBlock.Settings, ? extends Block> blockProvider;
 
 		public Builder() {
+		}
 
+		public Builder(String id, Function<AbstractBlock.Settings, ? extends Block> blockProvider, AbstractBlock.Settings settings, Render render, ItemGroup itemGroup, int flammabilityBurn, int flammabilitySpread, boolean noItem, int cookTime, float compostingChance) {
+			this.id = id;
+			this.blockProvider = blockProvider;
+			this.settings = settings;
+			this.render = render;
+			this.itemGroup = itemGroup;
+			this.flammabilityBurn = flammabilityBurn;
+			this.flammabilitySpread = flammabilitySpread;
+			this.noItem = noItem;
+			this.cookTime = cookTime;
+			this.compostingChance = compostingChance;
 		}
 
 		public Builder(String id, Function<AbstractBlock.Settings, ? extends Block> blockProvider, AbstractBlock.Settings settings) {
-			this.id(id);
-			this.block(blockProvider);
-			this.settings(settings);
+			this.id = id;
+			this.blockProvider = blockProvider;
+			this.settings = settings;
 		}
 
 		public Builder id(String id) {
@@ -173,7 +185,7 @@ public class BlockCreator extends Creator {
 			Objects.requireNonNull(this.id, "Cannot build a block with no name!");
 			Objects.requireNonNull(this.blockProvider, "Cannot build a block with no block provider!");
 			Objects.requireNonNull(this.settings, "Cannot build a block with no block settings!");
-			return new BlockCreator(this);
+			return new BlockCreator(new Builder(this.id, this.blockProvider, this.settings, this.render, this.itemGroup, this.flammabilityBurn, this.flammabilitySpread, this.noItem, this.cookTime, this.compostingChance));
 		}
 	}
 }
