@@ -2,14 +2,12 @@ package com.hugman.dawn.api.creator.bundle.block;
 
 import com.hugman.dawn.api.creator.BlockCreator;
 import com.hugman.dawn.api.creator.Bundle;
+import com.hugman.dawn.api.object.ModData;
 import com.hugman.dawn.api.util.BlockSettings;
-import com.hugman.dawn.api.util.ModData;
 import com.swordglowsblue.artifice.api.ArtificeResourcePack;
 import net.minecraft.block.Block;
 import net.minecraft.block.FlowerPotBlock;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
-import org.lwjgl.system.CallbackI;
 
 public class PlantBundle extends Bundle {
 	private final BlockCreator plant;
@@ -17,15 +15,15 @@ public class PlantBundle extends Bundle {
 
 	public PlantBundle(BlockCreator.Builder builder) {
 		this.plant = put(builder.build());
-		this.pottedPlant = put(builder.id("potted_" + builder.getId()).block(settings -> new FlowerPotBlock(plant.getBlock(), settings)).settings(BlockSettings.POTTED_PLANT.luminance(getPlant().getDefaultState().getLuminance())).render(BlockCreator.Render.CUTOUT).noItem().build());
+		this.pottedPlant = put(builder.id("potted_" + builder.getName()).block(settings -> new FlowerPotBlock(plant.getBlock(), settings)).settings(BlockSettings.POTTED_PLANT.luminance(getPlant().getDefaultState().getLuminance())).render(BlockCreator.Render.CUTOUT).noItem().build());
 	}
 
 	@Override
 	public void clientRegister(ModData modData, ArtificeResourcePack.ClientResourcePackBuilder rp) {
 		super.clientRegister(modData, rp);
 		String namespace = modData.getModName();
-		String plantName = Registry.BLOCK.getId(getPlant()).getPath();
-		String pottedPlantName = Registry.BLOCK.getId(getPottedPlant()).getPath();
+		String plantName = plant.getBuilder().getName();
+		String pottedPlantName = pottedPlant.getBuilder().getName();
 		rp.addItemModel(new Identifier(namespace, plantName), modelBuilder -> modelBuilder
 				.parent(new Identifier("item/generated"))
 				.texture("layer0", new Identifier(namespace, "block/" + plantName)));

@@ -16,7 +16,7 @@ public abstract class EntryData {
 	}
 
 	private static File createFile(String namespace, String registryNamespace, String registryPath) {
-		String filePath = "debug/registry_entries/" + namespace + "/" + registryNamespace + "/" + registryPath + ".json";
+		String filePath = "debug/generated/registries/" + namespace + "/" + registryNamespace + "/" + registryPath + ".json";
 		FileUtil.createDirectories(FileUtil.getParentPath(filePath));
 		return new File(filePath);
 	}

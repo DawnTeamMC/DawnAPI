@@ -1,6 +1,6 @@
 package com.hugman.dawn.api.creator;
 
-import com.hugman.dawn.api.util.ModData;
+import com.hugman.dawn.api.object.ModData;
 import com.swordglowsblue.artifice.api.ArtificeResourcePack;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

@@ -1,6 +1,7 @@
 package com.hugman.dawn.api.creator;
 
-import com.hugman.dawn.api.util.ModData;
+import com.hugman.dawn.api.object.ModData;
+import com.hugman.dawn.api.object.Registrable;
 import com.swordglowsblue.artifice.api.ArtificeResourcePack;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -32,19 +33,23 @@ public class BlockCreator extends Creator {
 		return block;
 	}
 
+	public Builder getBuilder() {
+		return builder;
+	}
+
 	@Override
 	public void register(ModData modData) {
-		Registry.register(Registry.BLOCK, modData.id(this.builder.id), this.block);
+		Registry.register(Registry.BLOCK, modData.id(this.builder.name), this.block);
 		FlammableBlockRegistry.getDefaultInstance().add(this.block, this.builder.flammabilityBurn, this.builder.flammabilitySpread);
 		if(!this.builder.noItem) {
-			BlockItem blockItem = Registry.register(Registry.ITEM, modData.id(this.builder.id), new BlockItem(this.block, new Item.Settings().group(this.builder.itemGroup)));
+			BlockItem blockItem = Registry.register(Registry.ITEM, modData.id(this.builder.name), new BlockItem(this.block, new Item.Settings().group(this.builder.itemGroup)));
 			blockItem.appendBlocks(Item.BLOCK_ITEMS, blockItem);
 		}
 	}
 
 	@Override
 	@Environment(EnvType.CLIENT)
-	public void clientRegister(ModData modData, ArtificeResourcePack.ClientResourcePackBuilder resourcePackBuilder) {
+	public void clientRegister(ModData modData, ArtificeResourcePack.ClientResourcePackBuilder resourcePack) {
 		RenderLayer renderF;
 		if(this.builder.render != null) {
 			switch(this.builder.render) {
@@ -67,10 +72,14 @@ public class BlockCreator extends Creator {
 			renderF = RenderLayer.getSolid();
 		}
 		BlockRenderLayerMap.INSTANCE.putBlock(this.block, renderF);
+		if(this.block instanceof Registrable) {
+			Registrable registrable = (Registrable) this.block;
+			registrable.registerResources(modData.id(this.builder.name), resourcePack);
+		}
 	}
 
 	@Override
-	public void serverRegister(ModData modData, ArtificeResourcePack.ServerResourcePackBuilder dataPackBuilder, boolean isDedicatedServer) {
+	public void serverRegister(ModData modData, ArtificeResourcePack.ServerResourcePackBuilder dataPack, boolean isDedicatedServer) {
 		if(!this.builder.noItem) {
 			if(this.builder.cookTime != 0) {
 				FuelRegistry.INSTANCE.add(block, this.builder.cookTime);
@@ -78,6 +87,10 @@ public class BlockCreator extends Creator {
 			if(this.builder.compostingChance != 0) {
 				CompostingChanceRegistry.INSTANCE.add(block, this.builder.compostingChance);
 			}
+		}
+		if(this.block instanceof Registrable) {
+			Registrable registrable = (Registrable) this.block;
+			registrable.registerData(modData.id(this.builder.name), dataPack);
 		}
 	}
 
@@ -89,7 +102,7 @@ public class BlockCreator extends Creator {
 	}
 
 	public static class Builder {
-		protected String id;
+		protected String name;
 		protected Function<AbstractBlock.Settings, ? extends Block> blockProvider;
 		protected AbstractBlock.Settings settings;
 		protected Render render;
@@ -103,8 +116,8 @@ public class BlockCreator extends Creator {
 		public Builder() {
 		}
 
-		public Builder(String id, Function<AbstractBlock.Settings, ? extends Block> blockProvider, AbstractBlock.Settings settings, Render render, ItemGroup itemGroup, int flammabilityBurn, int flammabilitySpread, boolean noItem, int cookTime, float compostingChance) {
-			this.id = id;
+		public Builder(String name, Function<AbstractBlock.Settings, ? extends Block> blockProvider, AbstractBlock.Settings settings, Render render, ItemGroup itemGroup, int flammabilityBurn, int flammabilitySpread, boolean noItem, int cookTime, float compostingChance) {
+			this.name = name;
 			this.blockProvider = blockProvider;
 			this.settings = settings;
 			this.render = render;
@@ -116,19 +129,19 @@ public class BlockCreator extends Creator {
 			this.compostingChance = compostingChance;
 		}
 
-		public Builder(String id, Function<AbstractBlock.Settings, ? extends Block> blockProvider, AbstractBlock.Settings settings) {
-			this.id = id;
+		public Builder(String name, Function<AbstractBlock.Settings, ? extends Block> blockProvider, AbstractBlock.Settings settings) {
+			this.name = name;
 			this.blockProvider = blockProvider;
 			this.settings = settings;
 		}
 
 		public Builder id(String id) {
-			this.id = id;
+			this.name = id;
 			return this;
 		}
 
-		public String getId() {
-			return id;
+		public String getName() {
+			return name;
 		}
 
 		public Builder block(Function<AbstractBlock.Settings, ? extends Block> blockProvider) {
@@ -182,10 +195,10 @@ public class BlockCreator extends Creator {
 		}
 
 		public BlockCreator build() {
-			Objects.requireNonNull(this.id, "Cannot build a block with no name!");
+			Objects.requireNonNull(this.name, "Cannot build a block with no name!");
 			Objects.requireNonNull(this.blockProvider, "Cannot build a block with no block provider!");
 			Objects.requireNonNull(this.settings, "Cannot build a block with no block settings!");
-			return new BlockCreator(new Builder(this.id, this.blockProvider, this.settings, this.render, this.itemGroup, this.flammabilityBurn, this.flammabilitySpread, this.noItem, this.cookTime, this.compostingChance));
+			return new BlockCreator(new Builder(this.name, this.blockProvider, this.settings, this.render, this.itemGroup, this.flammabilityBurn, this.flammabilitySpread, this.noItem, this.cookTime, this.compostingChance));
 		}
 	}
 }

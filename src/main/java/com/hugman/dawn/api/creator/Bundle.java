@@ -1,7 +1,6 @@
 package com.hugman.dawn.api.creator;
 
-import com.hugman.dawn.Dawn;
-import com.hugman.dawn.api.util.ModData;
+import com.hugman.dawn.api.object.ModData;
 import com.swordglowsblue.artifice.api.ArtificeResourcePack;
 
 import java.util.ArrayList;

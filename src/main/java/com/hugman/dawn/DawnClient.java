@@ -1,6 +1,6 @@
 package com.hugman.dawn;
 
-import com.hugman.dawn.api.util.ModData;
+import com.hugman.dawn.api.object.ModData;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -12,14 +12,10 @@ public class DawnClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		ClientLifecycleEvents.CLIENT_STARTED.register(this::onClientLoad);
-		registerEntityRenders();
 		Dawn.MOD_DATA_LIST.forEach(ModData::registerCreatorsClient);
 	}
 
 	public void onClientLoad(MinecraftClient minecraftClient) {
 		Dawn.DEBUG_WRITER.load();
-	}
-
-	private void registerEntityRenders() {
 	}
 }

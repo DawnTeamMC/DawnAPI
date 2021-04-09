@@ -1,5 +1,7 @@
 package com.hugman.dawn.api.util;
 
+import net.minecraft.util.Identifier;
+
 public class StringUtil {
 	public static String[] cutAtLast(String s, String separatorChar) {
 		int i = s.lastIndexOf(separatorChar);
@@ -23,20 +25,15 @@ public class StringUtil {
 		}
 	}
 
-	public static String getShapedName(String s, BlockGetter getter) {
-		String suffix = getter.getSuffix();
-		if(!suffix.isEmpty()) {
-			suffix = "_" + suffix;
-		}
-		if(s.endsWith("_")) {
-			s = s.substring(0, s.length() - 1);
-		}
-		boolean b = s.endsWith("bricks") || s.endsWith("tiles");
-		if(!getter.getSuffix().isEmpty() && b) {
-			return s.substring(0, s.length() - 1) + suffix;
-		}
-		else {
-			return s + suffix;
-		}
+	public static Identifier addToPath(String s, Identifier identifier) {
+		return new Identifier(identifier.getNamespace(), s + identifier.getPath());
+	}
+
+	public static Identifier addToPath(Identifier identifier, String s) {
+		return new Identifier(identifier.getNamespace(), identifier.getPath() + s);
+	}
+
+	public static Identifier addToPath(String s1, Identifier identifier, String s2) {
+		return new Identifier(identifier.getNamespace(), s1 + identifier.getPath() + s2);
 	}
 }

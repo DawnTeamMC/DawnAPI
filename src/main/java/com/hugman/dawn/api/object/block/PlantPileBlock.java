@@ -1,5 +1,6 @@
 package com.hugman.dawn.api.object.block;
 
+import com.hugman.dawn.api.object.RegistrableBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -12,7 +13,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 
-public class PlantPileBlock extends PlantBlock {
+public class PlantPileBlock extends PlantBlock implements RegistrableBlock {
 	protected static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D);
 
 	public PlantPileBlock(Settings settings) {

@@ -36,5 +36,7 @@ public class DawnConfig extends PartitioningSerializer.GlobalData {
 		public boolean writeIds = false;
 		@ConfigEntry.Gui.Tooltip
 		public boolean expandedInfo = false;
+		@ConfigEntry.Gui.Tooltip
+		public boolean outputGeneratedResources = false;
 	}
 }
