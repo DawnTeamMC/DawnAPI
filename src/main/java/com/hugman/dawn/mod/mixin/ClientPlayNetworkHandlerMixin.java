@@ -1,5 +1,9 @@
 package com.hugman.dawn.mod.mixin;
 
+import com.hugman.dawn.mod.init.DawnEntities;
+import com.hugman.dawn.mod.object.entity.CustomTNTEntity;
+import com.hugman.dawn.mod.object.entity.FlyingBlockEntity;
+import net.minecraft.block.Block;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.world.ClientWorld;
@@ -28,6 +32,12 @@ public class ClientPlayNetworkHandlerMixin {
 		double z = packet.getZ();
 		EntityType<?> entityType = packet.getEntityTypeId();
 		Entity entity = null;
+		if(entityType == DawnEntities.CUSTOM_TNT.getValue()) {
+			entity = new CustomTNTEntity(this.world, x, y, z, Block.getStateFromRawId(packet.getEntityData()), 0, 0, null);
+		}
+		else if(entityType == DawnEntities.FLYING_BLOCK.getValue()) {
+			entity = new FlyingBlockEntity(this.world, x, y, z, Block.getStateFromRawId(packet.getEntityData()));
+		}
 		if(entity != null) {
 			int i = packet.getId();
 			entity.updateTrackedPosition(x, y, z);

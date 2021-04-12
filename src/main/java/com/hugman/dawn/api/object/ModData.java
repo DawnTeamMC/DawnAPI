@@ -1,14 +1,12 @@
 package com.hugman.dawn.api.object;
 
 import com.hugman.dawn.Dawn;
-import com.hugman.dawn.api.creator.Bundle;
 import com.hugman.dawn.api.creator.Creator;
-import com.swordglowsblue.artifice.api.Artifice;
+import com.hugman.dawn.api.creator.bundle.Bundle;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.util.Identifier;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,37 +37,11 @@ public class ModData {
 
 	@Environment(EnvType.CLIENT)
 	public void registerCreatorsClient() {
-		Artifice.registerAssetPack(id("vanilla"), rp -> {
-			this.CREATORS.forEach(creator -> creator.clientRegister(this, rp));
-			rp.setDisplayName(this.modName + " - Vanilla");
-			rp.setDescription("Vanilla resource pack for the " + this.modName + " mod");
-			rp.setVisible();
-			if(Dawn.CONFIG.debug.outputGeneratedResources) {
-				try {
-					rp.dumpResources("debug/generated/resources/" + id("vanilla"), "assets");
-				}
-				catch(IOException e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		this.CREATORS.forEach(creator -> creator.clientRegister(this));
 	}
 
 	public void registerCreatorsServer(boolean isDedicated) {
-		Artifice.registerDataPack(id("vanilla"), dp -> {
-			this.CREATORS.forEach(creator -> creator.serverRegister(this, dp, isDedicated));
-			dp.setDisplayName(this.modName + " - Vanilla");
-			dp.setDescription("Vanilla data pack for the " + this.modName + " mod");
-			if(Dawn.CONFIG.debug.outputGeneratedResources) {
-
-				try {
-					dp.dumpResources("debug/generated/resources/" + id("vanilla"), "data");
-				}
-				catch(IOException e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		this.CREATORS.forEach(creator -> creator.serverRegister(this, isDedicated));
 	}
 
 	public Identifier id(String s) {

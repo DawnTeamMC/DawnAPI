@@ -1,19 +1,14 @@
 package com.hugman.dawn.api.object.block;
 
-import com.hugman.dawn.api.object.RegistrableBlock;
-import com.swordglowsblue.artifice.api.ArtificeResourcePack;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.sapling.SaplingGenerator;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 
 import java.util.function.Predicate;
 
-public class SaplingBlock extends net.minecraft.block.SaplingBlock implements RegistrableBlock {
+public class SaplingBlock extends net.minecraft.block.SaplingBlock {
 	private final Predicate<BlockState> predicate;
 
 	public SaplingBlock(SaplingGenerator saplingGenerator, AbstractBlock.Settings settings) {
@@ -32,13 +27,5 @@ public class SaplingBlock extends net.minecraft.block.SaplingBlock implements Re
 			if(predicate.test(floor)) return true;
 		}
 		return super.canPlantOnTop(floor, world, pos);
-	}
-
-	@Environment(EnvType.CLIENT)
-	@Override
-	public void registerResources(Identifier identifier, ArtificeResourcePack.ClientResourcePackBuilder rp) {
-		rp.addItemModel(identifier, modelBuilder -> modelBuilder
-				.parent(new Identifier("item/generated"))
-				.texture("layer0", identifier));
 	}
 }

@@ -2,8 +2,8 @@ package com.hugman.dawn;
 
 import com.hugman.dawn.api.object.ModData;
 import com.hugman.dawn.config.DawnConfig;
-import com.hugman.dawn.mod.init.DawnBlocks;
 import com.hugman.dawn.mod.init.DawnCommands;
+import com.hugman.dawn.mod.init.DawnEntities;
 import com.hugman.dawn.mod.init.DawnItemGroups;
 import com.hugman.dawn.mod.util.debug.EntryDebugWriter;
 import me.shedaniel.autoconfig.AutoConfig;
@@ -27,9 +27,9 @@ public class Dawn implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		DawnBlocks.init();
 		DawnItemGroups.init();
 		DawnCommands.init();
+		DawnEntities.init();
 		MOD_DATA.registerCreators();
 		ServerLifecycleEvents.SERVER_STARTED.register(this::onServerLoad);
 	}
