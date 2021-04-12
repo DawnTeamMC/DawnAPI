@@ -15,7 +15,7 @@ public class StructureFeatureCreator<FC extends FeatureConfig, S extends Structu
 	protected final boolean adjustsSurface;
 	protected S structure;
 
-	private StructureFeatureCreator(String name, S structure, GenerationStep.Feature step, int spacing, int separation, int salt, boolean adjustsSurface) {
+	public StructureFeatureCreator(String name, S structure, GenerationStep.Feature step, int spacing, int separation, int salt, boolean adjustsSurface) {
 		this.name = name;
 		this.structure = structure;
 		this.step = step;
