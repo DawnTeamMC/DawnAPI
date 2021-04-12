@@ -1,7 +1,6 @@
 package com.hugman.dawn.api.creator.bundle.block;
 
 import com.hugman.dawn.api.creator.BlockCreator;
-import com.hugman.dawn.api.object.ModData;
 import com.hugman.dawn.api.object.block.FungusBlock;
 import com.hugman.dawn.api.util.BlockSettings;
 import net.minecraft.block.Block;
@@ -98,7 +97,7 @@ public class NetherWoodBundle extends WoodBundle {
 			return this;
 		}
 
-		public NetherWoodBundle build(ModData modData) {
+		public NetherWoodBundle build() {
 			return new NetherWoodBundle(prefix, hugeFungusSupplier, planksColor, insideColor, barkColor, addHyphaeBlocks);
 		}
 	}
