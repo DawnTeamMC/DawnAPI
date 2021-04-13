@@ -199,7 +199,7 @@ public class BlockCreator extends SimpleCreator<Block> {
 			Objects.requireNonNull(this.name, "Cannot build a block with no name!");
 			Objects.requireNonNull(this.blockProvider, "Cannot build a block with no block provider!");
 			Objects.requireNonNull(this.settings, "Cannot build a block with no block settings!");
-			return new BlockCreator(copy());
+			return new BlockCreator(this);
 		}
 
 		public Builder copy() {

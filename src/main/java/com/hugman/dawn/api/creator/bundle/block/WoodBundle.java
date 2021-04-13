@@ -16,8 +16,8 @@ public class WoodBundle extends Bundle {
 
 	protected WoodBundle(String prefix, MapColor planksColor, MapColor insideColor, MapColor barkColor, boolean isNether, boolean addBarkBlocks) {
 		FabricBlockSettings settings = FabricBlockSettings.copyOf(isNether ? Blocks.CRIMSON_PLANKS : Blocks.OAK_PLANKS).mapColor(planksColor);
-		BlockCreator.Builder builder = new BlockCreator.Builder(prefix, DefaultBlockTemplate.PLANKS.getBlockProvider(), FabricBlockSettings.copyOf(isNether ? Blocks.CRIMSON_PLANKS : Blocks.OAK_PLANKS).mapColor(planksColor));
-		this.planks = put(builder.build());
+		BlockCreator.Builder builder = new BlockCreator.Builder().name(prefix).settings(FabricBlockSettings.copyOf(isNether ? Blocks.CRIMSON_PLANKS : Blocks.OAK_PLANKS).mapColor(planksColor));
+		this.planks = put(builder.copy().applyTemplate(DefaultBlockTemplate.PLANKS).build());
 		this.logs = put(new LogsBundle(prefix, insideColor, barkColor, isNether));
 		this.woodenBlocks = put(new MTBlockBundle(builder, DefaultBlockTemplate.STAIRS, DefaultBlockTemplate.SLAB, DefaultBlockTemplate.TRAPDOOR, DefaultBlockTemplate.WOOD_PRESSURE_PLATE, DefaultBlockTemplate.WOOD_BUTTON, DefaultBlockTemplate.FENCE, DefaultBlockTemplate.FENCE_GATE, DefaultBlockTemplate.DOOR));
 		if(addBarkBlocks) this.barkBlocks = put(new MTBlockBundle(builder.copy().name(prefix + logs.getWoodName()).settings(settings.mapColor(barkColor)), DefaultBlockTemplate.STAIRS, DefaultBlockTemplate.SLAB, DefaultBlockTemplate.WOOD_BUTTON));
