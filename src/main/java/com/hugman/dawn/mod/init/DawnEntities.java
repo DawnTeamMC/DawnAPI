@@ -9,8 +9,8 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 
 public class DawnEntities extends DawnBundle {
-	public static final EntityType<CustomTNTEntity> CUSTOM_TNT = register(new EntityCreator<>("custom_tnt", FabricEntityTypeBuilder.<CustomTNTEntity>create(SpawnGroup.MISC, CustomTNTEntity::new).fireImmune().dimensions(EntityDimensions.fixed(0.98F, 0.98F)).trackRangeChunks(10).trackedUpdateRate(10).forceTrackedVelocityUpdates(true).build()));
-	public static final EntityType<FlyingBlockEntity> FLYING_BLOCK = register(new EntityCreator<>("flying_block", FabricEntityTypeBuilder.<FlyingBlockEntity>create(SpawnGroup.MISC, FlyingBlockEntity::new).dimensions(EntityDimensions.fixed(0.98F, 0.98F)).trackRangeChunks(10).trackedUpdateRate(20).forceTrackedVelocityUpdates(true).build()));
+	public static final EntityType<CustomTNTEntity> CUSTOM_TNT = add(new EntityCreator<>("custom_tnt", FabricEntityTypeBuilder.<CustomTNTEntity>create(SpawnGroup.MISC, CustomTNTEntity::new).fireImmune().dimensions(EntityDimensions.fixed(0.98F, 0.98F)).trackRangeChunks(10).trackedUpdateRate(10).forceTrackedVelocityUpdates(true).build()));
+	public static final EntityType<FlyingBlockEntity> FLYING_BLOCK = add(new EntityCreator<>("flying_block", FabricEntityTypeBuilder.<FlyingBlockEntity>create(SpawnGroup.MISC, FlyingBlockEntity::new).dimensions(EntityDimensions.fixed(0.98F, 0.98F)).trackRangeChunks(10).trackedUpdateRate(20).forceTrackedVelocityUpdates(true).build()));
 
 	public static void init() {
 	}

@@ -6,17 +6,18 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
 
-public class StructureFeatureCreator<FC extends FeatureConfig, S extends StructureFeature<FC>> extends Creator<S> {
+public class StructureFeatureCreator<FC extends FeatureConfig, S extends StructureFeature<FC>> extends Creator {
 	protected final String name;
 	protected final GenerationStep.Feature step;
 	protected final int spacing;
 	protected final int separation;
 	protected final int salt;
 	protected final boolean adjustsSurface;
+	protected S structure;
 
 	public StructureFeatureCreator(String name, S structure, GenerationStep.Feature step, int spacing, int separation, int salt, boolean adjustsSurface) {
 		this.name = name;
-		this.value = structure;
+		this.structure = structure;
 		this.step = step;
 		this.spacing = spacing;
 		this.separation = separation;
@@ -24,10 +25,14 @@ public class StructureFeatureCreator<FC extends FeatureConfig, S extends Structu
 		this.adjustsSurface = adjustsSurface;
 	}
 
+	public S getStructure() {
+		return structure;
+	}
+
 	@Override
 	public void register(ModData modData) {
-		FabricStructureBuilder<FC, S> builder = FabricStructureBuilder.create(modData.id(name), this.value).step(step).defaultConfig(spacing, separation, salt);
+		FabricStructureBuilder<FC, S> builder = FabricStructureBuilder.create(modData.id(name), this.structure).step(step).defaultConfig(spacing, separation, salt);
 		if(adjustsSurface) builder.adjustsSurface();
-		this.value = builder.register();
+		this.structure = builder.register();
 	}
 }

@@ -5,14 +5,19 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.util.registry.Registry;
 
-public abstract class SimpleCreator<V> extends Creator<V> {
+public abstract class SimpleCreator<V> extends Creator {
 	protected final String name;
 	protected final Registry<?> registry;
+	protected V value;
 
 	protected SimpleCreator(Registry<?> registry, String name, V value) {
 		this.name = name;
 		this.value = value;
 		this.registry = registry;
+	}
+
+	public V getValue() {
+		return value;
 	}
 
 	public void register(ModData modData) {
