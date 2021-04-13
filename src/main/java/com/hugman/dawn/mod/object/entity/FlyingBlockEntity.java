@@ -67,7 +67,7 @@ public class FlyingBlockEntity extends Entity {
 	}
 
 	public FlyingBlockEntity(World world, double x, double y, double z, BlockState state) {
-		this(DawnEntities.FLYING_BLOCK.getValue(), world);
+		this(DawnEntities.FLYING_BLOCK, world);
 		this.state = state;
 		this.inanimate = true;
 		this.updatePosition(x, y + (double) ((1.0F - this.getHeight()) / 2.0F), z);

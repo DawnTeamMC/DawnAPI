@@ -34,7 +34,7 @@ public class CustomTNTEntity extends Entity {
 	}
 
 	public CustomTNTEntity(World world, double x, double y, double z, BlockState state, int fuse, float strength, LivingEntity igniter) {
-		this(DawnEntities.CUSTOM_TNT.getValue(), world);
+		this(DawnEntities.CUSTOM_TNT, world);
 		this.state = state;
 		this.updatePosition(x, y, z);
 		float f = (float) (Math.random() * (double) ((float) Math.PI * 2F));

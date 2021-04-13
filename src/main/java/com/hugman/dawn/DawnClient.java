@@ -25,7 +25,7 @@ public class DawnClient implements ClientModInitializer {
 	}
 
 	private void registerEntityRenders() {
-		EntityRendererRegistry.INSTANCE.register(DawnEntities.CUSTOM_TNT.getValue(), CustomTNTEntityRenderer::new);
-		EntityRendererRegistry.INSTANCE.register(DawnEntities.FLYING_BLOCK.getValue(), FlyingBlockEntityRenderer::new);
+		EntityRendererRegistry.INSTANCE.register(DawnEntities.CUSTOM_TNT, CustomTNTEntityRenderer::new);
+		EntityRendererRegistry.INSTANCE.register(DawnEntities.FLYING_BLOCK, FlyingBlockEntityRenderer::new);
 	}
 }

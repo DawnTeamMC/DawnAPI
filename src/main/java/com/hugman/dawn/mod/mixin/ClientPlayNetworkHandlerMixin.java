@@ -32,10 +32,10 @@ public class ClientPlayNetworkHandlerMixin {
 		double z = packet.getZ();
 		EntityType<?> entityType = packet.getEntityTypeId();
 		Entity entity = null;
-		if(entityType == DawnEntities.CUSTOM_TNT.getValue()) {
+		if(entityType == DawnEntities.CUSTOM_TNT) {
 			entity = new CustomTNTEntity(this.world, x, y, z, Block.getStateFromRawId(packet.getEntityData()), 0, 0, null);
 		}
-		else if(entityType == DawnEntities.FLYING_BLOCK.getValue()) {
+		else if(entityType == DawnEntities.FLYING_BLOCK) {
 			entity = new FlyingBlockEntity(this.world, x, y, z, Block.getStateFromRawId(packet.getEntityData()));
 		}
 		if(entity != null) {
