@@ -2,7 +2,7 @@ package com.hugman.dawn.api.creator.bundle.block;
 
 import com.hugman.dawn.api.creator.BlockCreator;
 import com.hugman.dawn.api.creator.bundle.Bundle;
-import com.hugman.dawn.api.util.DefaultBlockTemplate;
+import com.hugman.dawn.api.util.DefaultBlockTemplates;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -12,15 +12,13 @@ public class WoodBundle extends Bundle {
 	private final BlockCreator planks;
 	private final LogsBundle logs;
 	private final MTBlockBundle woodenBlocks;
-	private MTBlockBundle barkBlocks;
 
-	protected WoodBundle(String prefix, MapColor planksColor, MapColor insideColor, MapColor barkColor, boolean isNether, boolean addBarkBlocks) {
+	protected WoodBundle(String prefix, MapColor planksColor, MapColor insideColor, MapColor barkColor, boolean isNether) {
 		FabricBlockSettings settings = FabricBlockSettings.copyOf(isNether ? Blocks.CRIMSON_PLANKS : Blocks.OAK_PLANKS).mapColor(planksColor);
-		BlockCreator.Builder builder = new BlockCreator.Builder().name(prefix).settings(FabricBlockSettings.copyOf(isNether ? Blocks.CRIMSON_PLANKS : Blocks.OAK_PLANKS).mapColor(planksColor));
-		this.planks = put(builder.copy().applyTemplate(DefaultBlockTemplate.PLANKS).build());
+		BlockCreator.Builder builder = new BlockCreator.Builder().name(prefix).settings(settings);
+		this.planks = put(builder.copy().applyTemplate(DefaultBlockTemplates.PLANKS).build());
 		this.logs = put(new LogsBundle(prefix, insideColor, barkColor, isNether));
-		this.woodenBlocks = put(new MTBlockBundle(builder, DefaultBlockTemplate.STAIRS, DefaultBlockTemplate.SLAB, DefaultBlockTemplate.TRAPDOOR, DefaultBlockTemplate.WOOD_PRESSURE_PLATE, DefaultBlockTemplate.WOOD_BUTTON, DefaultBlockTemplate.FENCE, DefaultBlockTemplate.FENCE_GATE, DefaultBlockTemplate.DOOR));
-		if(addBarkBlocks) this.barkBlocks = put(new MTBlockBundle(builder.copy().name(prefix + logs.getWoodName()).settings(settings.mapColor(barkColor)), DefaultBlockTemplate.STAIRS, DefaultBlockTemplate.SLAB, DefaultBlockTemplate.WOOD_BUTTON));
+		this.woodenBlocks = put(new MTBlockBundle(builder, DefaultBlockTemplates.STAIRS, DefaultBlockTemplates.SLAB, DefaultBlockTemplates.TRAPDOOR, DefaultBlockTemplates.WOOD_PRESSURE_PLATE, DefaultBlockTemplates.WOOD_BUTTON, DefaultBlockTemplates.FENCE, DefaultBlockTemplates.FENCE_GATE, DefaultBlockTemplates.DOOR));
 	}
 
 	public Block getPlanks() {
@@ -44,47 +42,35 @@ public class WoodBundle extends Bundle {
 	}
 
 	public Block getPressurePlate() {
-		return woodenBlocks.getBlock(DefaultBlockTemplate.WOOD_PRESSURE_PLATE);
+		return woodenBlocks.getBlock(DefaultBlockTemplates.WOOD_PRESSURE_PLATE);
 	}
 
 	public Block getTrapdoor() {
-		return woodenBlocks.getBlock(DefaultBlockTemplate.TRAPDOOR);
+		return woodenBlocks.getBlock(DefaultBlockTemplates.TRAPDOOR);
 	}
 
 	public Block getButton() {
-		return woodenBlocks.getBlock(DefaultBlockTemplate.WOOD_BUTTON);
+		return woodenBlocks.getBlock(DefaultBlockTemplates.WOOD_BUTTON);
 	}
 
 	public Block getStairs() {
-		return woodenBlocks.getBlock(DefaultBlockTemplate.STAIRS);
+		return woodenBlocks.getBlock(DefaultBlockTemplates.STAIRS);
 	}
 
 	public Block getSlab() {
-		return woodenBlocks.getBlock(DefaultBlockTemplate.SLAB);
+		return woodenBlocks.getBlock(DefaultBlockTemplates.SLAB);
 	}
 
 	public Block getFenceGate() {
-		return woodenBlocks.getBlock(DefaultBlockTemplate.FENCE_GATE);
+		return woodenBlocks.getBlock(DefaultBlockTemplates.FENCE_GATE);
 	}
 
 	public Block getFence() {
-		return woodenBlocks.getBlock(DefaultBlockTemplate.FENCE);
+		return woodenBlocks.getBlock(DefaultBlockTemplates.FENCE);
 	}
 
 	public Block getDoor() {
-		return woodenBlocks.getBlock(DefaultBlockTemplate.DOOR);
-	}
-
-	public Block getWoodStairs() {
-		return barkBlocks.getBlock(DefaultBlockTemplate.STAIRS);
-	}
-
-	public Block getWoodSlab() {
-		return barkBlocks.getBlock(DefaultBlockTemplate.SLAB);
-	}
-
-	public Block getWoodButton() {
-		return barkBlocks.getBlock(DefaultBlockTemplate.WOOD_BUTTON);
+		return woodenBlocks.getBlock(DefaultBlockTemplates.DOOR);
 	}
 
 	public static class Builder {
@@ -93,7 +79,6 @@ public class WoodBundle extends Bundle {
 		private final MapColor insideColor;
 		private final MapColor barkColor;
 		private final boolean isNether;
-		private boolean addBarkBlocks;
 
 		/**
 		 * Creates an entry pack containing blocks for basic wood types.
@@ -110,16 +95,10 @@ public class WoodBundle extends Bundle {
 			this.insideColor = insideColor;
 			this.barkColor = barkColor;
 			this.isNether = isNether;
-			this.addBarkBlocks = false;
-		}
-
-		public Builder barkBlocks(boolean barkBlocks) {
-			this.addBarkBlocks = barkBlocks;
-			return this;
 		}
 
 		public WoodBundle build() {
-			return new WoodBundle(name, planksColor, insideColor, barkColor, isNether, addBarkBlocks);
+			return new WoodBundle(name, planksColor, insideColor, barkColor, isNether);
 		}
 	}
 }

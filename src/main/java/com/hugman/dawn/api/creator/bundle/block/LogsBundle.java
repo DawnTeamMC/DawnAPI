@@ -3,7 +3,7 @@ package com.hugman.dawn.api.creator.bundle.block;
 import com.hugman.dawn.api.creator.BlockCreator;
 import com.hugman.dawn.api.creator.bundle.Bundle;
 import com.hugman.dawn.api.object.item.AxeItem;
-import com.hugman.dawn.api.util.BlockSettings;
+import com.hugman.dawn.api.util.DefaultBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -50,7 +50,7 @@ public class LogsBundle extends Bundle {
 	}
 
 	private AbstractBlock.Settings createLogSettings(boolean isSideBark) {
-		return (isNether ? BlockSettings.STEM : BlockSettings.LOG).mapColor(isSideBark ? barkColor : insideColor);
+		return (isNether ? DefaultBlockSettings.STEM : DefaultBlockSettings.LOG).mapColor(isSideBark ? barkColor : insideColor);
 	}
 
 	private AbstractBlock.Settings createLogSettings() {

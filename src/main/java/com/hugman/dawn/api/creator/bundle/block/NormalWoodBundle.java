@@ -2,7 +2,8 @@ package com.hugman.dawn.api.creator.bundle.block;
 
 import com.hugman.dawn.api.creator.BlockCreator;
 import com.hugman.dawn.api.object.block.SaplingBlock;
-import com.hugman.dawn.api.util.BlockSettings;
+import com.hugman.dawn.api.util.DefaultBlockSettings;
+import com.hugman.dawn.api.util.DefaultBlockTemplates;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.MapColor;
@@ -13,12 +14,12 @@ import java.util.function.Predicate;
 
 public class NormalWoodBundle extends WoodBundle {
 	private final PlantBundle saplingPack;
-	private final LeavesBundle leaves;
+	private final BlockCreator leaves;
 
-	protected NormalWoodBundle(String prefix, SaplingGenerator saplingGenerator, Predicate<BlockState> saplingSoilPredicate, MapColor planksColor, MapColor insideColor, MapColor barkColor, boolean addBarkBlocks, boolean addLeafPile) {
-		super(prefix, planksColor, insideColor, barkColor, false, addBarkBlocks);
-		this.saplingPack = put(new PlantBundle(new BlockCreator.Builder(prefix + "_sapling", settings -> new SaplingBlock(saplingGenerator, saplingSoilPredicate, settings), BlockSettings.SAPLING).itemGroup(ItemGroup.DECORATIONS).render(BlockCreator.Render.CUTOUT_MIPPED)));
-		this.leaves = put(new LeavesBundle.Builder(prefix).pile(addLeafPile).build());
+	protected NormalWoodBundle(String prefix, SaplingGenerator saplingGenerator, Predicate<BlockState> saplingSoilPredicate, MapColor planksColor, MapColor insideColor, MapColor barkColor) {
+		super(prefix, planksColor, insideColor, barkColor, false);
+		this.saplingPack = put(new PlantBundle(new BlockCreator.Builder(prefix + "_sapling", settings -> new SaplingBlock(saplingGenerator, saplingSoilPredicate, settings), DefaultBlockSettings.SAPLING).itemGroup(ItemGroup.DECORATIONS).render(BlockCreator.Render.CUTOUT_MIPPED)));
+		this.leaves = put(new BlockCreator.Builder(prefix, DefaultBlockTemplates.LEAVES, DefaultBlockSettings.LEAVES).flammability(30, 60).build());
 	}
 
 	public Block getSapling() {
@@ -30,11 +31,7 @@ public class NormalWoodBundle extends WoodBundle {
 	}
 
 	public Block getLeaves() {
-		return leaves.getLeaves();
-	}
-
-	public Block getLeafPile() {
-		return leaves.getLeafPile();
+		return leaves.getValue();
 	}
 
 	public static class Builder {
@@ -44,8 +41,6 @@ public class NormalWoodBundle extends WoodBundle {
 		private final MapColor insideColor;
 		private final MapColor barkColor;
 		private Predicate<BlockState> saplingSoilPredicate;
-		private boolean addBarkBlocks;
-		private boolean addLeafPile;
 
 		/**
 		 * Creates an entry pack containing blocks for normal wood types.
@@ -86,18 +81,8 @@ public class NormalWoodBundle extends WoodBundle {
 			return this;
 		}
 
-		public Builder barkBlocks(boolean barkBlocks) {
-			this.addBarkBlocks = barkBlocks;
-			return this;
-		}
-
-		public Builder leafPile(boolean addLeafPile) {
-			this.addLeafPile = addLeafPile;
-			return this;
-		}
-
 		public NormalWoodBundle build() {
-			return new NormalWoodBundle(suffix, saplingGenerator, saplingSoilPredicate, planksColor, insideColor, barkColor, addBarkBlocks, addLeafPile);
+			return new NormalWoodBundle(suffix, saplingGenerator, saplingSoilPredicate, planksColor, insideColor, barkColor);
 		}
 	}
 }

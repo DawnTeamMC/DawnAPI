@@ -2,7 +2,7 @@ package com.hugman.dawn.api.creator.bundle.block;
 
 import com.hugman.dawn.api.creator.BlockCreator;
 import com.hugman.dawn.api.creator.bundle.Bundle;
-import com.hugman.dawn.api.util.BlockSettings;
+import com.hugman.dawn.api.util.DefaultBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.FlowerPotBlock;
 
@@ -12,7 +12,7 @@ public class PlantBundle extends Bundle {
 
 	public PlantBundle(BlockCreator.Builder builder) {
 		this.plant = put(builder.build());
-		this.pottedPlant = put(builder.copy().name("potted_" + builder.getName()).blockProvider(settings -> new FlowerPotBlock(plant.getValue(), settings)).settings(BlockSettings.POTTED_PLANT.luminance(getPlant().getDefaultState().getLuminance())).render(BlockCreator.Render.CUTOUT).noItem().build());
+		this.pottedPlant = put(builder.copy().name("potted_" + builder.getName()).blockProvider(settings -> new FlowerPotBlock(plant.getValue(), settings)).settings(DefaultBlockSettings.POTTED_PLANT.luminance(getPlant().getDefaultState().getLuminance())).render(BlockCreator.Render.CUTOUT).noItem().build());
 	}
 
 	public Block getPlant() {

@@ -2,7 +2,7 @@ package com.hugman.dawn.api.creator.bundle.block;
 
 import com.hugman.dawn.api.creator.BlockCreator;
 import com.hugman.dawn.api.object.block.FungusBlock;
-import com.hugman.dawn.api.util.BlockSettings;
+import com.hugman.dawn.api.util.DefaultBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.MapColor;
 import net.minecraft.item.ItemGroup;
@@ -14,9 +14,9 @@ import java.util.function.Supplier;
 public class NetherWoodBundle extends WoodBundle {
 	private final PlantBundle fungusPack;
 
-	protected NetherWoodBundle(String prefix, Supplier<ConfiguredFeature<HugeFungusFeatureConfig, ?>> hugeFungusSupplier, MapColor planksColor, MapColor insideColor, MapColor barkColor, boolean addHyphaeBlocks) {
-		super(prefix, planksColor, insideColor, barkColor, true, addHyphaeBlocks);
-		this.fungusPack = put(new PlantBundle(new BlockCreator.Builder(prefix + "_fungus", settings -> new FungusBlock(settings, hugeFungusSupplier), BlockSettings.FUNGUS).compostingChance(0.65F).itemGroup(ItemGroup.DECORATIONS).render(BlockCreator.Render.CUTOUT_MIPPED)));
+	protected NetherWoodBundle(String prefix, Supplier<ConfiguredFeature<HugeFungusFeatureConfig, ?>> hugeFungusSupplier, MapColor planksColor, MapColor insideColor, MapColor barkColor) {
+		super(prefix, planksColor, insideColor, barkColor, true);
+		this.fungusPack = put(new PlantBundle(new BlockCreator.Builder(prefix + "_fungus", settings -> new FungusBlock(settings, hugeFungusSupplier), DefaultBlockSettings.FUNGUS).compostingChance(0.65F).itemGroup(ItemGroup.DECORATIONS).render(BlockCreator.Render.CUTOUT_MIPPED)));
 	}
 
 	public Block getStem() {
@@ -41,18 +41,6 @@ public class NetherWoodBundle extends WoodBundle {
 
 	public Block getPottedFungus() {
 		return fungusPack.getPottedPlant();
-	}
-
-	public Block getHyphaeStairs() {
-		return getWoodStairs();
-	}
-
-	public Block getHyphaeSlab() {
-		return getWoodSlab();
-	}
-
-	public Block getHyphaeButton() {
-		return getWoodButton();
 	}
 
 	public static class Builder {
@@ -92,13 +80,8 @@ public class NetherWoodBundle extends WoodBundle {
 			this.barkColor = barkColor;
 		}
 
-		public Builder hyphaeBlocks(boolean hyphaeBlocks) {
-			this.addHyphaeBlocks = hyphaeBlocks;
-			return this;
-		}
-
 		public NetherWoodBundle build() {
-			return new NetherWoodBundle(prefix, hugeFungusSupplier, planksColor, insideColor, barkColor, addHyphaeBlocks);
+			return new NetherWoodBundle(prefix, hugeFungusSupplier, planksColor, insideColor, barkColor);
 		}
 	}
 }

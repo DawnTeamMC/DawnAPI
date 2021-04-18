@@ -16,6 +16,7 @@ public class DawnItemGroups {
 			list.add(new ItemStack(Blocks.CHAIN_COMMAND_BLOCK));
 			list.add(new ItemStack(Blocks.REPEATING_COMMAND_BLOCK));
 			list.add(new ItemStack(Items.COMMAND_BLOCK_MINECART));
+			list.add(new ItemStack(Blocks.LIGHT));
 			list.add(new ItemStack(Items.STRUCTURE_BLOCK));
 			list.add(new ItemStack(Items.STRUCTURE_VOID));
 			list.add(new ItemStack(Items.JIGSAW));

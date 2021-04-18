@@ -7,12 +7,36 @@ import net.minecraft.item.ItemGroup;
 
 import java.util.function.Function;
 
-public interface BlockTemplate {
-	String getSuffix();
+public class BlockTemplate {
+	private final String suffix;
+	private final ItemGroup itemGroup;
+	private final BlockCreator.Render render;
+	private final Function<AbstractBlock.Settings, ? extends Block> blockProvider;
 
-	ItemGroup getItemGroup();
+	BlockTemplate(Function<AbstractBlock.Settings, ? extends Block> blockProvider, String suffix, ItemGroup itemGroup, BlockCreator.Render render) {
+		this.suffix = suffix;
+		this.itemGroup = itemGroup;
+		this.render = render;
+		this.blockProvider = blockProvider;
+	}
 
-	BlockCreator.Render getRender();
+	BlockTemplate(Function<AbstractBlock.Settings, ? extends Block> blockProvider, String suffix, ItemGroup itemGroup) {
+		this(blockProvider, suffix, itemGroup, null);
+	}
 
-	Function<AbstractBlock.Settings, ? extends Block> getBlockProvider();
+	public String getSuffix() {
+		return suffix;
+	}
+
+	public ItemGroup getItemGroup() {
+		return itemGroup;
+	}
+
+	public BlockCreator.Render getRender() {
+		return render;
+	}
+
+	public Function<AbstractBlock.Settings, ? extends Block> getBlockProvider() {
+		return blockProvider;
+	}
 }
