@@ -13,14 +13,14 @@ public class BlockTemplate {
 	private final BlockCreator.Render render;
 	private final Function<AbstractBlock.Settings, ? extends Block> blockProvider;
 
-	BlockTemplate(Function<AbstractBlock.Settings, ? extends Block> blockProvider, String suffix, ItemGroup itemGroup, BlockCreator.Render render) {
+	public BlockTemplate(Function<AbstractBlock.Settings, ? extends Block> blockProvider, String suffix, ItemGroup itemGroup, BlockCreator.Render render) {
 		this.suffix = suffix;
 		this.itemGroup = itemGroup;
 		this.render = render;
 		this.blockProvider = blockProvider;
 	}
 
-	BlockTemplate(Function<AbstractBlock.Settings, ? extends Block> blockProvider, String suffix, ItemGroup itemGroup) {
+	public BlockTemplate(Function<AbstractBlock.Settings, ? extends Block> blockProvider, String suffix, ItemGroup itemGroup) {
 		this(blockProvider, suffix, itemGroup, null);
 	}
 
