@@ -13,8 +13,6 @@ public class DefaultBlockSettings {
 	public static final FabricBlockSettings STEM = FabricBlockSettings.of(Material.NETHER_WOOD).strength(2.0F).sounds(BlockSoundGroup.NETHER_STEM);
 
 	public static final FabricBlockSettings LEAVES = FabricBlockSettings.of(Material.LEAVES).strength(0.2F).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().allowsSpawning(DefaultBlockSettings::canSpawnOnLeaves).suffocates(DefaultBlockSettings::never).blockVision(DefaultBlockSettings::never);
-	public static final FabricBlockSettings LEAF_PILE = FabricBlockSettings.of(Material.LEAVES).strength(0.1F).ticksRandomly().sounds(BlockSoundGroup.GRASS).noCollision().nonOpaque();
-	public static final FabricBlockSettings FLOWER_PILE = FabricBlockSettings.of(Material.PLANT).breakInstantly().sounds(BlockSoundGroup.GRASS).noCollision();
 	public static final FabricBlockSettings SAPLING = FabricBlockSettings.of(Material.PLANT).sounds(BlockSoundGroup.GRASS).breakInstantly().noCollision().ticksRandomly();
 	public static final FabricBlockSettings FUNGUS = FabricBlockSettings.of(Material.PLANT).sounds(BlockSoundGroup.FUNGUS).breakInstantly().noCollision();
 	public static final FabricBlockSettings POTTED_PLANT = FabricBlockSettings.of(Material.DECORATION).breakInstantly().nonOpaque();
