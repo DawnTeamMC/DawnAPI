@@ -304,6 +304,18 @@ public class FlyingBlockEntity extends Entity {
 	}
 
 	@Override
+	public void onSpawnPacket(EntitySpawnS2CPacket packet) {
+		super.onSpawnPacket(packet);
+		this.state = Block.getStateFromRawId(packet.getEntityData());
+		this.inanimate = true;
+		double d = packet.getX();
+		double e = packet.getY();
+		double f = packet.getZ();
+		this.setPosition(d, e + (double) ((1.0F - this.getHeight()) / 2.0F), f);
+		this.setFlyingBlockPos(this.getBlockPos());
+	}
+
+	@Override
 	public Packet<?> createSpawnPacket() {
 		return new EntitySpawnS2CPacket(this, Block.getRawIdFromState(this.getBlockState()));
 	}
