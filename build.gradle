@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '0.5-SNAPSHOT' apply false
+    id 'fabric-loom' version '0.8-SNAPSHOT' apply false
     id 'maven-publish'
 }
 
@@ -9,8 +9,7 @@ repositories {
     mavenLocal()
     maven { url 'https://jitpack.io' }
     maven { url "https://maven.shedaniel.me/" }
-    maven { url 'http://maven.terraformersmc.com/' }
-    maven { url 'https://raw.githubusercontent.com/Devan-Kerman/Devan-Repo/master/' }
+    maven { url 'https://maven.terraformersmc.com/' }
 }
 
 dependencies {
