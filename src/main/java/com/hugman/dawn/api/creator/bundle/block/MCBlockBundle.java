@@ -20,7 +20,7 @@ public class MCBlockBundle extends Bundle {
 	 */
 	public MCBlockBundle(BlockCreator.Builder builder, BlockTemplate template) {
 		for(DyeColor color : DyeColor.values()) {
-			map.put(color, put(builder.copy().applyTemplate(template).name(color.getName() + "_" + builder.getName()).build()));
+			map.put(color, put(builder.copy().name(color.getName() + "_" + builder.getName()).applyTemplate(template).build()));
 		}
 	}
 
