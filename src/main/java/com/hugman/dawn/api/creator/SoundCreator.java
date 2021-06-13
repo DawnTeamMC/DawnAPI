@@ -2,6 +2,7 @@ package com.hugman.dawn.api.creator;
 
 import com.hugman.dawn.api.object.ModData;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class SoundCreator extends Creator {
@@ -18,7 +19,8 @@ public class SoundCreator extends Creator {
 
 	@Override
 	public void register(ModData modData) {
-		this.sound = new SoundEvent(modData.id(this.name));
-		Registry.register(Registry.SOUND_EVENT, modData.id(this.name), new SoundEvent(modData.id(this.name)));
+		Identifier id = modData.id(this.name);
+		this.sound = new SoundEvent(id);
+		Registry.register(Registry.SOUND_EVENT, id, this.sound);
 	}
 }
