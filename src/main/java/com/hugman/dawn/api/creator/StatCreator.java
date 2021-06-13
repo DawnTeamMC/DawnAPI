@@ -20,7 +20,7 @@ public class StatCreator extends SimpleCreator<Identifier> {
 
 	@Override
 	public void register(ModData modData) {
-		super.register(modData);
+		this.value = Registry.register(Registry.CUSTOM_STAT, modData.id(this.name), modData.id(this.name));
 		Stats.CUSTOM.getOrCreateStat(value, formatter);
 	}
 }
