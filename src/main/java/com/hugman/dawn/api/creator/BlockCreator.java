@@ -47,21 +47,12 @@ public class BlockCreator extends SimpleCreator<Block> {
 	public void clientRegister(ModData modData) {
 		RenderLayer renderF;
 		if(this.builder.render != null) {
-			switch(this.builder.render) {
-				case SOLID:
-				default:
-					renderF = RenderLayer.getSolid();
-					break;
-				case CUTOUT:
-					renderF = RenderLayer.getCutout();
-					break;
-				case CUTOUT_MIPPED:
-					renderF = RenderLayer.getCutoutMipped();
-					break;
-				case TRANSLUCENT:
-					renderF = RenderLayer.getTranslucent();
-					break;
-			}
+			renderF = switch(this.builder.render) {
+				default -> RenderLayer.getSolid();
+				case CUTOUT -> RenderLayer.getCutout();
+				case CUTOUT_MIPPED -> RenderLayer.getCutoutMipped();
+				case TRANSLUCENT -> RenderLayer.getTranslucent();
+			};
 		}
 		else {
 			renderF = RenderLayer.getSolid();
