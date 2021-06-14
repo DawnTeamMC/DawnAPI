@@ -20,7 +20,6 @@ public class SoundCreator extends Creator {
 	@Override
 	public void register(ModData modData) {
 		Identifier id = modData.id(this.name);
-		this.sound = new SoundEvent(id);
-		Registry.register(Registry.SOUND_EVENT, id, this.sound);
+		this.sound = Registry.register(Registry.SOUND_EVENT, id, new SoundEvent(id));
 	}
 }

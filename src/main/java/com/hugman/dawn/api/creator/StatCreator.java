@@ -6,22 +6,28 @@ import net.minecraft.stat.Stats;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-public class StatCreator extends SimpleCreator<Identifier> {
-	protected final StatFormatter formatter;
+public class StatCreator extends Creator {
+	private final String name;
+	private final StatFormatter formatter;
+	private Identifier stat;
+
+	public StatCreator(String name, StatFormatter formatter) {
+		this.name = name;
+		this.formatter = formatter;
+	}
 
 	public StatCreator(String name) {
 		this(name, StatFormatter.DEFAULT);
 	}
 
-	public StatCreator(String name, StatFormatter formatter) {
-		super(Registry.CUSTOM_STAT, name, null);
-		this.formatter = formatter;
+	public Identifier getStat() {
+		return stat;
 	}
 
 	@Override
 	public void register(ModData modData) {
-		this.value = modData.id(this.name);
-		Registry.register(Registry.CUSTOM_STAT, this.value, this.value);
-		Stats.CUSTOM.getOrCreateStat(this.value, formatter);
+		Identifier id = modData.id(this.name);
+		this.stat = Registry.register(Registry.CUSTOM_STAT, id, id);
+		Stats.CUSTOM.getOrCreateStat(id, formatter);
 	}
 }
