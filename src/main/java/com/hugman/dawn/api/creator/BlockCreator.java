@@ -6,6 +6,7 @@ import com.hugman.dawn.api.util.StringUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
@@ -190,11 +191,11 @@ public class BlockCreator extends SimpleCreator<Block> {
 			Objects.requireNonNull(this.name, "Cannot build a block with no name!");
 			Objects.requireNonNull(this.blockProvider, "Cannot build a block with no block provider!");
 			Objects.requireNonNull(this.settings, "Cannot build a block with no block settings!");
-			return new BlockCreator(copy());
+			return new BlockCreator(this);
 		}
 
 		public Builder copy() {
-			return new Builder(this.name, this.blockProvider, this.settings, this.render, this.itemGroup, this.flammabilityBurn, this.flammabilitySpread, this.noItem, this.cookTime, this.compostingChance);
+			return new Builder(this.name, this.blockProvider, FabricBlockSettings.copyOf(this.settings), this.render, this.itemGroup, this.flammabilityBurn, this.flammabilitySpread, this.noItem, this.cookTime, this.compostingChance);
 		}
 	}
 }
