@@ -8,6 +8,8 @@ In order to use Dawn API as a library for your project, add the following in you
 ```gradle
 repositories {
     maven { url 'https://jitpack.io' }
+    maven { url 'https://maven.shedaniel.me/' }
+    maven { url 'https://maven.terraformersmc.com/' }
 }
 
 dependencies {
