@@ -1,4 +1,4 @@
-# Dawn API [![Latest release](https://img.shields.io/github/release/DawnTeamMC/DawnAPI.svg)](https://github.com/DawnTeamMC/DawnAPI/releases/latest) [![License](https://img.shields.io/github/license/DawnTeamMC/DawnAPI.svg)](https://github.com/DawnTeamMC/DawnAPI/blob/master/LICENSE)
+# Dawn API [![Latest release](https://img.shields.io/github/release/DawnTeamMC/DawnAPI.svg)](https://github.com/DawnTeamMC/DawnAPI/releases/latest) [![License](https://img.shields.io/github/license/DawnTeamMC/DawnAPI.svg)](https://github.com/DawnTeamMC/DawnAPI/blob/master/LICENSE) [![](http://cf.way2muchnoise.eu/full_dawn_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/dawn)
 
 [![Dawn API](https://raw.githubusercontent.com/DawnTeamMC/DawnTeamMC/master/dawn_api/header.png)](https://github.com/DawnTeamMC/DawnAPI/wiki)
 
