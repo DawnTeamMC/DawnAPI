@@ -29,6 +29,9 @@ public class BlockCreator extends SimpleCreator<Block> {
 		this.builder = builder;
 	}
 
+	/**
+	 * @return the builder this block was made with
+	 */
 	public Builder getBuilder() {
 		return builder;
 	}
@@ -73,6 +76,9 @@ public class BlockCreator extends SimpleCreator<Block> {
 		}
 	}
 
+	/**
+	 * A render layer a block can use.
+	 */
 	public enum Render {
 		SOLID,
 		CUTOUT,
@@ -120,73 +126,142 @@ public class BlockCreator extends SimpleCreator<Block> {
 			this.settings = settings;
 		}
 
+		/**
+		 * Sets the name of this block.
+		 * @param name a string
+		 * @return this builder for chaining
+		 */
 		public Builder name(String name) {
 			this.name = name;
 			return this;
 		}
 
+		/**
+		 * Sets the name of this block from a block template.
+		 * @param name a string
+		 * @param getter a block template
+		 * @return this builder for chaining
+		 */
 		public Builder name(String name, BlockTemplate getter) {
 			return name(StringUtil.getShapedName(name, getter));
 		}
 
+		/**
+		 * @return the name of this block
+		 */
 		public String getName() {
 			return name;
 		}
 
+		/**
+		 * Sets the block provider of this block.
+		 * @param blockProvider a block provider
+		 * @return this builder for chaining
+		 */
 		public Builder blockProvider(Function<AbstractBlock.Settings, ? extends Block> blockProvider) {
 			this.blockProvider = blockProvider;
 			return this;
 		}
 
+		/**
+		 * Sets the vanilla settings of this block.
+		 * @param settings a vanilla settings builder
+		 * @return this builder for chaining
+		 */
 		public Builder settings(AbstractBlock.Settings settings) {
 			this.settings = settings;
 			return this;
 		}
 
+		/**
+		 * Sets the render layer this block will use.
+		 * @param render a render layer
+		 * @return this builder for chaining
+		 */
 		public Builder render(Render render) {
 			this.render = render;
 			return this;
 		}
 
+		/**
+		 * Sets the item group of this block as an item.
+		 * <p>Note: This is unnecessary if {@link #noItem()} is set.</p>
+		 * @param itemGroup an item group
+		 * @return this builder for chaining
+		 */
 		public Builder itemGroup(ItemGroup itemGroup) {
 			this.itemGroup = itemGroup;
 			return this;
 		}
 
+		/**
+		 * Sets the burn and spread chances of this block.
+		 * @param flammability a chance between 0 and 100
+		 * @return this builder for chaining
+		 */
 		public Builder flammability(int flammability) {
 			this.flammabilityBurn = flammability;
 			this.flammabilitySpread = flammability;
 			return this;
 		}
 
+		/**
+		 * Sets the burn and spread chances of this block.
+		 * @param burn a chance between 0 and 100
+		 * @param spread a chance between 0 and 100
+		 * @return this builder for chaining
+		 */
 		public Builder flammability(int burn, int spread) {
 			this.flammabilityBurn = burn;
 			this.flammabilitySpread = spread;
 			return this;
 		}
 
+		/**
+		 * Sets the time this block as an item will burn when used as a fuel.
+		 * <p>Note: This is unnecessary if {@link #noItem()} is set.</p>
+		 * @param cookTime a number of ticks
+		 * @return this builder for chaining
+		 */
 		public Builder cookTime(int cookTime) {
 			this.cookTime = cookTime;
 			return this;
 		}
 
+		/**
+		 * Sets the chance of this block as an item to be composted when used on a composter.
+		 * <p>Note: This is unnecessary if {@link #noItem()} is set.</p>
+		 * @param compostingChance a chance between 0.0F and 1.0F
+		 * @return this builder for chaining
+		 */
 		public Builder compostingChance(float compostingChance) {
 			this.compostingChance = compostingChance;
 			return this;
 		}
 
 		/**
-		 * Removes the item form of the block.
+		 * Removes the item form of this block.
+		 * @return this builder for chaining
 		 */
 		public Builder noItem() {
 			this.noItem = true;
 			return this;
 		}
 
+		/**
+		 * Sets the name, the render layer and the block provider of this block, as well as the item group of its item form, from a block template.
+		 * @param template a block template
+		 * @return this builder for chaining
+		 */
 		public Builder applyTemplate(BlockTemplate template) {
 			return name(this.name, template).itemGroup(template.getItemGroup()).render(template.getRender()).blockProvider(template.getBlockProvider());
 		}
 
+		/**
+		 * Creates a block creator from the properties of this builder.
+		 * @throws NullPointerException if either the name, the block provider or the vanilla settings builder is not set
+		 * @return the block creator created
+		 */
 		public BlockCreator build() {
 			Objects.requireNonNull(this.name, "Cannot build a block with no name!");
 			Objects.requireNonNull(this.blockProvider, "Cannot build a block with no block provider!");
@@ -194,6 +269,10 @@ public class BlockCreator extends SimpleCreator<Block> {
 			return new BlockCreator(copy());
 		}
 
+		/**
+		 * Creates a new builder with the same properties as this builder.
+		 * @return the new builder
+		 */
 		public Builder copy() {
 			return new Builder(this.name, this.blockProvider, FabricBlockSettings.copyOf(this.settings), this.render, this.itemGroup, this.flammabilityBurn, this.flammabilitySpread, this.noItem, this.cookTime, this.compostingChance);
 		}
