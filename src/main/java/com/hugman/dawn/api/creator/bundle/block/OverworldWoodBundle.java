@@ -35,7 +35,7 @@ public class OverworldWoodBundle extends WoodBundle {
 	}
 
 	public static class Builder {
-		private final String suffix;
+		private final String prefix;
 		private final SaplingGenerator saplingGenerator;
 		private final MapColor planksColor;
 		private final MapColor insideColor;
@@ -64,7 +64,7 @@ public class OverworldWoodBundle extends WoodBundle {
 		 * @param barkColor        The material color of the bark side of logs.
 		 */
 		public Builder(String prefix, SaplingGenerator saplingGenerator, MapColor planksColor, MapColor insideColor, MapColor barkColor) {
-			this.suffix = prefix;
+			this.prefix = prefix;
 			this.saplingGenerator = saplingGenerator;
 			this.planksColor = planksColor;
 			this.insideColor = insideColor;
@@ -82,7 +82,7 @@ public class OverworldWoodBundle extends WoodBundle {
 		}
 
 		public OverworldWoodBundle build() {
-			return new OverworldWoodBundle(suffix, saplingGenerator, saplingSoilPredicate, planksColor, insideColor, barkColor);
+			return new OverworldWoodBundle(prefix, saplingGenerator, saplingSoilPredicate, planksColor, insideColor, barkColor);
 		}
 	}
 }
