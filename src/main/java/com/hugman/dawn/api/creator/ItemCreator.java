@@ -9,9 +9,16 @@ import net.minecraft.util.registry.Registry;
 import java.util.Objects;
 import java.util.function.Function;
 
+/**
+ * A class allowing an item to be created.
+ */
 public class ItemCreator extends SimpleCreator<Item> {
 	protected final Builder builder;
 
+	/**
+	 * Creates an item.
+	 * @param builder the builder used to create the item itself
+	 */
 	protected ItemCreator(Builder builder) {
 		super(Registry.ITEM, builder.name, builder.itemProvider.apply(builder.settings));
 		this.builder = builder;

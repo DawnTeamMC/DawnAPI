@@ -21,9 +21,16 @@ import net.minecraft.util.registry.Registry;
 import java.util.Objects;
 import java.util.function.Function;
 
+/**
+ * A class allowing a block to be created.
+ */
 public class BlockCreator extends SimpleCreator<Block> {
 	private final Builder builder;
 
+	/**
+	 * Creates a block.
+	 * @param builder the builder used to create the block itself
+	 */
 	private BlockCreator(Builder builder) {
 		super(Registry.BLOCK, builder.name, builder.blockProvider.apply(builder.settings));
 		this.builder = builder;

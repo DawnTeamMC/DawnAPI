@@ -6,6 +6,9 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
 
+/**
+ * A class allowing a biome to be created.
+ */
 public class BiomeCreator extends Creator {
 	private final String name;
 	private final Biome biome;
@@ -13,9 +16,8 @@ public class BiomeCreator extends Creator {
 
 	/**
 	 * Creates a biome.
-	 *
-	 * @param name  The name of the biome.
-	 * @param biome The biome itself.
+	 * @param name the name of the biome
+	 * @param biome the biome itself
 	 */
 	public BiomeCreator(String name, Biome biome) {
 		this.name = name;
