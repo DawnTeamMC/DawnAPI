@@ -12,15 +12,11 @@ import net.minecraft.item.ItemGroup;
 
 import java.util.function.Predicate;
 
-/**
- * @deprecated Please use {@link OverworldWoodBundle}, this class will be removed as of version 2.2.0.
- */
-@Deprecated(forRemoval = true)
-public class NormalWoodBundle extends WoodBundle {
+public class OverworldWoodBundle extends WoodBundle {
 	private final PlantBundle saplingPack;
 	private final BlockCreator leaves;
 
-	protected NormalWoodBundle(String prefix, SaplingGenerator saplingGenerator, Predicate<BlockState> saplingSoilPredicate, MapColor planksColor, MapColor insideColor, MapColor barkColor) {
+	protected OverworldWoodBundle(String prefix, SaplingGenerator saplingGenerator, Predicate<BlockState> saplingSoilPredicate, MapColor planksColor, MapColor insideColor, MapColor barkColor) {
 		super(prefix, planksColor, insideColor, barkColor, false);
 		this.saplingPack = put(new PlantBundle(new BlockCreator.Builder(prefix + "_sapling", settings -> new SaplingBlock(saplingGenerator, saplingSoilPredicate, settings), DefaultBlockSettings.SAPLING).itemGroup(ItemGroup.DECORATIONS).render(BlockCreator.Render.CUTOUT_MIPPED)));
 		this.leaves = put(new BlockCreator.Builder(prefix, DefaultBlockTemplates.LEAVES, DefaultBlockSettings.LEAVES).flammability(30, 60).build());
@@ -85,8 +81,8 @@ public class NormalWoodBundle extends WoodBundle {
 			return this;
 		}
 
-		public NormalWoodBundle build() {
-			return new NormalWoodBundle(suffix, saplingGenerator, saplingSoilPredicate, planksColor, insideColor, barkColor);
+		public OverworldWoodBundle build() {
+			return new OverworldWoodBundle(suffix, saplingGenerator, saplingSoilPredicate, planksColor, insideColor, barkColor);
 		}
 	}
 }
