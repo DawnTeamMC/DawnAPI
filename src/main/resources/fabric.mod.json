@@ -5,7 +5,8 @@
 	"version": "${version}",
 	"icon": "assets/${mod_id}/textures/logo.png",
 	"authors": [
-		"Hugman"
+		"Hugman",
+		"YanisBft"
 	],
 	"contact": {
 		"sources": "https://github.com/DawnTeamMC/${github_name}",

@@ -1,9 +1,8 @@
 {
 	"required": true,
 	"package": "com.hugman.dawn.api.mixin",
-	"compatibilityLevel": "JAVA_8",
+	"compatibilityLevel": "JAVA_16",
 	"mixins": [
-		"AxeItemMixin",
 		"ItemAccessor"
 	],
 	"injectors": {

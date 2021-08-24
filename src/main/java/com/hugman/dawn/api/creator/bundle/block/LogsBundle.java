@@ -2,9 +2,9 @@ package com.hugman.dawn.api.creator.bundle.block;
 
 import com.hugman.dawn.api.creator.BlockCreator;
 import com.hugman.dawn.api.creator.bundle.Bundle;
-import com.hugman.dawn.api.object.item.AxeItem;
 import com.hugman.dawn.api.util.DefaultBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.MapColor;
@@ -45,8 +45,8 @@ public class LogsBundle extends Bundle {
 		this.strippedLog = put(new BlockCreator.Builder("stripped_" + name + logName, PillarBlock::new, createLogSettings(false)).itemGroup(ItemGroup.BUILDING_BLOCKS).flammability(flammability).build());
 		this.wood = put(new BlockCreator.Builder(name + woodName, PillarBlock::new, createLogSettings(true)).itemGroup(ItemGroup.BUILDING_BLOCKS).flammability(flammability).build());
 		this.strippedWood = put(new BlockCreator.Builder("stripped_" + name + woodName, PillarBlock::new, createLogSettings(false)).itemGroup(ItemGroup.BUILDING_BLOCKS).flammability(flammability).build());
-		AxeItem.BLOCK_STRIPPING_MAP.put(getLog(), getStrippedLog());
-		AxeItem.BLOCK_STRIPPING_MAP.put(getWood(), getStrippedWood());
+		StrippableBlockRegistry.register(getLog(), getStrippedLog());
+		StrippableBlockRegistry.register(getWood(), getStrippedWood());
 	}
 
 	private AbstractBlock.Settings createLogSettings(boolean isSideBark) {
