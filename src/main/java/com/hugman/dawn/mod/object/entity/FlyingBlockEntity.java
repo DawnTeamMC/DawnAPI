@@ -15,6 +15,7 @@ import net.minecraft.block.LandingBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.FallingBlockEntity;
 import net.minecraft.entity.MovementType;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
@@ -168,7 +169,7 @@ public class FlyingBlockEntity extends Entity {
 									if(this.blockEntityData != null && block instanceof BlockEntityProvider) {
 										BlockEntity blockEntity = this.world.getBlockEntity(blockPos2);
 										if(blockEntity != null) {
-											NbtCompound nbtCompound = blockEntity.writeNbt(new NbtCompound());
+											NbtCompound nbtCompound = blockEntity.createNbt();
 											for(String string : this.blockEntityData.getKeys()) {
 												NbtElement tag = this.blockEntityData.get(string);
 												if(!"x".equals(string) && !"y".equals(string) && !"z".equals(string)) {

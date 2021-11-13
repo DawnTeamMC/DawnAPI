@@ -1,9 +1,11 @@
 plugins {
-    id 'fabric-loom' version '0.9-SNAPSHOT' apply false
-    id 'maven-publish'
+    id 'fabric-loom' version '0.10-SNAPSHOT'
 }
 
-apply from: 'https://raw.githubusercontent.com/DawnTeamMC/DawnTeamMC/master/build_template/1.17.gradle'
+//apply from: 'https://raw.githubusercontent.com/DawnTeamMC/DawnTeamMC/master/build_template/1.17.gradle'
+apply from: 'gradle_scripts/fabric-mod.gradle'
+apply from: 'gradle_scripts/publishing.gradle'
+apply from: 'gradle_scripts/translation.gradle'
 
 repositories {
     mavenLocal()
@@ -15,11 +17,6 @@ repositories {
 }
 
 dependencies {
-    minecraft "com.mojang:minecraft:${minecraft_version}"
-    mappings "net.fabricmc:yarn:${yarn_mappings}:v2"
-    modImplementation "net.fabricmc:fabric-loader:${loader_version}"
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
-
     modImplementation("com.terraformersmc:modmenu:${modmenu_version}") {
         exclude(group: "net.fabricmc.fabric-api")
     }

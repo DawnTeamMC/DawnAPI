@@ -29,12 +29,12 @@ public class FlyingBlock extends Block {
 
 	@Override
 	public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
-		world.getBlockTickScheduler().schedule(pos, this, this.getFlyDelay());
+		world.createAndScheduleBlockTick(pos, this, this.getFlyDelay());
 	}
 
 	@Override
 	public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState newState, WorldAccess world, BlockPos pos, BlockPos posFrom) {
-		world.getBlockTickScheduler().schedule(pos, this, this.getFlyDelay());
+		world.createAndScheduleBlockTick(pos, this, this.getFlyDelay());
 		return super.getStateForNeighborUpdate(state, direction, newState, world, pos, posFrom);
 	}
 
