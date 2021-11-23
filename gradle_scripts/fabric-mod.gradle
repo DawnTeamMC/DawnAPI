@@ -6,10 +6,6 @@ buildscript {
             name = 'Fabric'
             url = 'https://maven.fabricmc.net/'
         }
-        maven {
-            name = 'TerraformersMC'
-            url = 'https://maven.terraformersmc.com/'
-        }
         gradlePluginPortal()
         mavenLocal()
     }
