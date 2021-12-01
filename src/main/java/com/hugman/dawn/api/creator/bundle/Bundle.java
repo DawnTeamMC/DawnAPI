@@ -9,8 +9,14 @@ import java.util.List;
 public abstract class Bundle extends Creator {
 	private final List<Creator> list = new ArrayList<>();
 
+	@Override
 	public void register(ModData modData) {
 		this.list.forEach(creator -> creator.register(modData));
+	}
+
+	@Override
+	public void postRegister(ModData modData) {
+		this.list.forEach(creator -> creator.postRegister(modData));
 	}
 
 	@Override

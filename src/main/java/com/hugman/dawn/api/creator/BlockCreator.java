@@ -46,11 +46,15 @@ public class BlockCreator extends SimpleCreator<Block> {
 	@Override
 	public void register(ModData modData) {
 		super.register(modData);
-		FlammableBlockRegistry.getDefaultInstance().add(this.value, this.builder.flammabilityBurn, this.builder.flammabilitySpread);
 		if(!this.builder.noItem) {
 			BlockItem blockItem = Registry.register(Registry.ITEM, modData.id(this.builder.name), new BlockItem(this.value, new Item.Settings().group(this.builder.itemGroup)));
 			blockItem.appendBlocks(Item.BLOCK_ITEMS, blockItem);
 		}
+	}
+
+	@Override
+	public void postRegister(ModData modData) {
+		FlammableBlockRegistry.getDefaultInstance().add(this.value, this.builder.flammabilityBurn, this.builder.flammabilitySpread);
 	}
 
 	@Override

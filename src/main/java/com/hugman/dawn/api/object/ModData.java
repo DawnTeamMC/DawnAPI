@@ -32,6 +32,7 @@ public class ModData {
 
 	public void registerCreators() {
 		CREATORS.forEach(creator -> creator.register(this));
+		CREATORS.forEach(creator -> creator.postRegister(this));
 		Dawn.MOD_DATA_LIST.add(this);
 	}
 

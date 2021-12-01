@@ -8,6 +8,9 @@ public abstract class Creator {
 	public void register(ModData modData) {
 	}
 
+	public void postRegister(ModData modData) {
+	}
+
 	@Environment(EnvType.CLIENT)
 	public void clientRegister(ModData modData) {
 
