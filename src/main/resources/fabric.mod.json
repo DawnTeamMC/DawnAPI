@@ -29,10 +29,8 @@
 		"dawn_mod.mixins.json"
 	],
 	"depends": {
-		"minecraft": "1.18.*",
-		"fabric": "*",
-		"fabricloader": ">=0.11.3",
-		"java": ">=17"
+		"minecraft": ">=1.18",
+		"fabric": "*"
 	},
 	"custom": {
 		"modmenu": {
