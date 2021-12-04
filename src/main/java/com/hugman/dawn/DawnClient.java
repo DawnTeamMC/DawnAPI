@@ -8,7 +8,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
-import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.MinecraftClient;
 
 @Environment(EnvType.CLIENT)
@@ -25,7 +25,7 @@ public class DawnClient implements ClientModInitializer {
 	}
 
 	private void registerEntityRenders() {
-		EntityRendererRegistry.INSTANCE.register(DawnEntities.CUSTOM_TNT, CustomTNTEntityRenderer::new);
-		EntityRendererRegistry.INSTANCE.register(DawnEntities.FLYING_BLOCK, FlyingBlockEntityRenderer::new);
+		EntityRendererRegistry.register(DawnEntities.CUSTOM_TNT, CustomTNTEntityRenderer::new);
+		EntityRendererRegistry.register(DawnEntities.FLYING_BLOCK, FlyingBlockEntityRenderer::new);
 	}
 }

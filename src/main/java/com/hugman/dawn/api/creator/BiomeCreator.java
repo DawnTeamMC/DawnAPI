@@ -16,7 +16,8 @@ public class BiomeCreator extends Creator {
 
 	/**
 	 * Creates a biome.
-	 * @param name the name of the biome
+	 *
+	 * @param name  the name of the biome
 	 * @param biome the biome itself
 	 */
 	public BiomeCreator(String name, Biome biome) {

@@ -7,6 +7,7 @@ import net.minecraft.world.gen.feature.StructureFeature;
 
 /**
  * A class allowing a configured structure feature to be created.
+ *
  * @param <FC> the feature config class, inheriting {@link FeatureConfig}
  * @param <SF> the structure feature class, inheriting {@link StructureFeature}
  */
@@ -14,7 +15,8 @@ public class ConfiguredStructureFeatureCreator<FC extends FeatureConfig, SF exte
 
 	/**
 	 * Creates a configured structure feature.
-	 * @param name the name of the configured structure feature
+	 *
+	 * @param name    the name of the configured structure feature
 	 * @param feature the configured structure feature itself
 	 */
 	public ConfiguredStructureFeatureCreator(String name, ConfiguredStructureFeature<FC, SF> feature) {

@@ -10,7 +10,8 @@ public class EnchantmentCreator extends SimpleCreator<Enchantment> {
 
 	/**
 	 * Creates an enchantment.
-	 * @param name the name of the enchantment
+	 *
+	 * @param name        the name of the enchantment
 	 * @param enchantment the enchantment itself
 	 */
 	public EnchantmentCreator(String name, Enchantment enchantment) {

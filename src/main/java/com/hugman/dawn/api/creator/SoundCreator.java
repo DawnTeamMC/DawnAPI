@@ -14,6 +14,7 @@ public class SoundCreator extends Creator {
 
 	/**
 	 * Creates a sound event.
+	 *
 	 * @param name the name of the sound event
 	 */
 	public SoundCreator(String name) {

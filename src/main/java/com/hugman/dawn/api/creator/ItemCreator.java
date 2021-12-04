@@ -17,6 +17,7 @@ public class ItemCreator extends SimpleCreator<Item> {
 
 	/**
 	 * Creates an item.
+	 *
 	 * @param builder the builder used to create the item itself
 	 */
 	protected ItemCreator(Builder builder) {

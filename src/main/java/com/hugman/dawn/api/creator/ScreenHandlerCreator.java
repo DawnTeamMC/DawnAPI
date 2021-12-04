@@ -7,6 +7,7 @@ import net.minecraft.screen.ScreenHandlerType;
 
 /**
  * A class allowing a screen handler type to be created.
+ *
  * @param <T> the screen handler class, inheriting {@link ScreenHandler}
  */
 public class ScreenHandlerCreator<T extends ScreenHandler> extends Creator {
@@ -16,7 +17,8 @@ public class ScreenHandlerCreator<T extends ScreenHandler> extends Creator {
 
 	/**
 	 * Creates a screen handler type.
-	 * @param name the name of the screen handler type
+	 *
+	 * @param name    the name of the screen handler type
 	 * @param factory the factory used to create the screen handler type itself
 	 */
 	public ScreenHandlerCreator(String name, ScreenHandlerRegistry.SimpleClientHandlerFactory<T> factory) {

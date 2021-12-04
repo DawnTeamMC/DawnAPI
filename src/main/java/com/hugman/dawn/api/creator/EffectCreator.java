@@ -10,7 +10,8 @@ public class EffectCreator extends SimpleCreator<StatusEffect> {
 
 	/**
 	 * Creates a status effect.
-	 * @param name the name of the status effect
+	 *
+	 * @param name   the name of the status effect
 	 * @param effect the status effect itself
 	 */
 	public EffectCreator(String name, StatusEffect effect) {

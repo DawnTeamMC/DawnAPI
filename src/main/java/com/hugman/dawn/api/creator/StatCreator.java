@@ -16,7 +16,8 @@ public class StatCreator extends Creator {
 
 	/**
 	 * Creates a custom stat.
-	 * @param name the name of the custom stat
+	 *
+	 * @param name      the name of the custom stat
 	 * @param formatter the formatter the custom stat will use
 	 */
 	public StatCreator(String name, StatFormatter formatter) {

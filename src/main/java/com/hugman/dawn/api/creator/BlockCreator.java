@@ -29,6 +29,7 @@ public class BlockCreator extends SimpleCreator<Block> {
 
 	/**
 	 * Creates a block.
+	 *
 	 * @param builder the builder used to create the block itself
 	 */
 	private BlockCreator(Builder builder) {
@@ -139,7 +140,9 @@ public class BlockCreator extends SimpleCreator<Block> {
 
 		/**
 		 * Sets the name of this block.
+		 *
 		 * @param name a string
+		 *
 		 * @return this builder for chaining
 		 */
 		public Builder name(String name) {
@@ -149,8 +152,10 @@ public class BlockCreator extends SimpleCreator<Block> {
 
 		/**
 		 * Sets the name of this block from a block template.
-		 * @param name a string
+		 *
+		 * @param name   a string
 		 * @param getter a block template
+		 *
 		 * @return this builder for chaining
 		 */
 		public Builder name(String name, BlockTemplate getter) {
@@ -166,7 +171,9 @@ public class BlockCreator extends SimpleCreator<Block> {
 
 		/**
 		 * Sets the block provider of this block.
+		 *
 		 * @param blockProvider a block provider
+		 *
 		 * @return this builder for chaining
 		 */
 		public Builder blockProvider(Function<AbstractBlock.Settings, ? extends Block> blockProvider) {
@@ -176,7 +183,9 @@ public class BlockCreator extends SimpleCreator<Block> {
 
 		/**
 		 * Sets the vanilla settings of this block.
+		 *
 		 * @param settings a vanilla settings builder
+		 *
 		 * @return this builder for chaining
 		 */
 		public Builder settings(AbstractBlock.Settings settings) {
@@ -186,7 +195,9 @@ public class BlockCreator extends SimpleCreator<Block> {
 
 		/**
 		 * Sets the render layer this block will use.
+		 *
 		 * @param render a render layer
+		 *
 		 * @return this builder for chaining
 		 */
 		public Builder render(Render render) {
@@ -197,7 +208,9 @@ public class BlockCreator extends SimpleCreator<Block> {
 		/**
 		 * Sets the item group of this block as an item.
 		 * <p>Note: This is unnecessary if {@link #noItem()} is set.</p>
+		 *
 		 * @param itemGroup an item group
+		 *
 		 * @return this builder for chaining
 		 */
 		public Builder itemGroup(ItemGroup itemGroup) {
@@ -207,7 +220,9 @@ public class BlockCreator extends SimpleCreator<Block> {
 
 		/**
 		 * Sets the burn and spread chances of this block.
+		 *
 		 * @param flammability a chance between 0 and 100
+		 *
 		 * @return this builder for chaining
 		 */
 		public Builder flammability(int flammability) {
@@ -218,8 +233,10 @@ public class BlockCreator extends SimpleCreator<Block> {
 
 		/**
 		 * Sets the burn and spread chances of this block.
-		 * @param burn a chance between 0 and 100
+		 *
+		 * @param burn   a chance between 0 and 100
 		 * @param spread a chance between 0 and 100
+		 *
 		 * @return this builder for chaining
 		 */
 		public Builder flammability(int burn, int spread) {
@@ -231,7 +248,9 @@ public class BlockCreator extends SimpleCreator<Block> {
 		/**
 		 * Sets the time this block as an item will burn when used as a fuel.
 		 * <p>Note: This is unnecessary if {@link #noItem()} is set.</p>
+		 *
 		 * @param cookTime a number of ticks
+		 *
 		 * @return this builder for chaining
 		 */
 		public Builder cookTime(int cookTime) {
@@ -242,7 +261,9 @@ public class BlockCreator extends SimpleCreator<Block> {
 		/**
 		 * Sets the chance of this block as an item to be composted when used on a composter.
 		 * <p>Note: This is unnecessary if {@link #noItem()} is set.</p>
+		 *
 		 * @param compostingChance a chance between 0.0F and 1.0F
+		 *
 		 * @return this builder for chaining
 		 */
 		public Builder compostingChance(float compostingChance) {
@@ -252,6 +273,7 @@ public class BlockCreator extends SimpleCreator<Block> {
 
 		/**
 		 * Removes the item form of this block.
+		 *
 		 * @return this builder for chaining
 		 */
 		public Builder noItem() {
@@ -261,7 +283,9 @@ public class BlockCreator extends SimpleCreator<Block> {
 
 		/**
 		 * Sets the name, the render layer and the block provider of this block, as well as the item group of its item form, from a block template.
+		 *
 		 * @param template a block template
+		 *
 		 * @return this builder for chaining
 		 */
 		public Builder applyTemplate(BlockTemplate template) {
@@ -270,8 +294,9 @@ public class BlockCreator extends SimpleCreator<Block> {
 
 		/**
 		 * Creates a block creator from the properties of this builder.
-		 * @throws NullPointerException if either the name, the block provider or the vanilla settings builder is not set
+		 *
 		 * @return the block creator created
+		 * @throws NullPointerException if either the name, the block provider or the vanilla settings builder is not set
 		 */
 		public BlockCreator build() {
 			Objects.requireNonNull(this.name, "Cannot build a block with no name!");
@@ -282,6 +307,7 @@ public class BlockCreator extends SimpleCreator<Block> {
 
 		/**
 		 * Creates a new builder with the same properties as this builder.
+		 *
 		 * @return the new builder
 		 */
 		public Builder copy() {

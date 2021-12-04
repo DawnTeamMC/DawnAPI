@@ -10,8 +10,9 @@ public class PaintingCreator extends SimpleCreator<PaintingMotive> {
 
 	/**
 	 * Creates a painting motive.
-	 * @param name the name of the painting motive
-	 * @param width the width, as a multiple of 16
+	 *
+	 * @param name   the name of the painting motive
+	 * @param width  the width, as a multiple of 16
 	 * @param height the height, as a multiple of 16
 	 */
 	public PaintingCreator(String name, int width, int height) {
@@ -20,6 +21,7 @@ public class PaintingCreator extends SimpleCreator<PaintingMotive> {
 
 	/**
 	 * Creates a painting motive, with the same width and height.
+	 *
 	 * @param name the name of the painting motive
 	 * @param size the size, as a multiple of 16
 	 */
