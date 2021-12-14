@@ -18,8 +18,8 @@ public class OverworldWoodBundle extends WoodBundle {
 
 	protected OverworldWoodBundle(String prefix, SaplingGenerator saplingGenerator, Predicate<BlockState> saplingSoilPredicate, MapColor planksColor, MapColor insideColor, MapColor barkColor) {
 		super(prefix, planksColor, insideColor, barkColor, false);
-		this.saplingPack = put(new PlantBundle(new BlockCreator.Builder(prefix + "_sapling", settings -> new SaplingBlock(saplingGenerator, saplingSoilPredicate, settings), DefaultBlockSettings.SAPLING).itemGroup(ItemGroup.DECORATIONS).render(BlockCreator.Render.CUTOUT_MIPPED)));
-		this.leaves = put(new BlockCreator.Builder(prefix, DefaultBlockTemplates.LEAVES, DefaultBlockSettings.LEAVES).flammability(30, 60).build());
+		this.saplingPack = put(new PlantBundle(new BlockCreator.Builder(prefix + "_sapling", settings -> new SaplingBlock(saplingGenerator, saplingSoilPredicate, settings), DefaultBlockSettings.SAPLING).compostingChance(0.3f).itemGroup(ItemGroup.DECORATIONS).render(BlockCreator.Render.CUTOUT_MIPPED)));
+		this.leaves = put(new BlockCreator.Builder(prefix, DefaultBlockTemplates.LEAVES, DefaultBlockSettings.LEAVES).flammability(30, 60).compostingChance(0.3f).build());
 	}
 
 	public Block getSapling() {
