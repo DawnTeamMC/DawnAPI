@@ -16,23 +16,23 @@ import java.util.function.Predicate;
 
 public class CauldronInteractionBuilder {
 	private Predicate<BlockState> predicate;
-	private ItemStack newStack;
-	private Block newCauldron;
+	private Item item;
+	private Block cauldron;
 	private int level;
 	private boolean overwriteLevel;
 	private SoundEvent sound;
 
-	private CauldronInteractionBuilder(Predicate<BlockState> predicate, ItemStack newStack, Block newCauldron, int level, boolean overwriteLevel, SoundEvent sound) {
+	private CauldronInteractionBuilder(Predicate<BlockState> predicate, Item item, Block cauldron, int level, boolean overwriteLevel, SoundEvent sound) {
 		this.predicate = predicate;
-		this.newStack = newStack;
-		this.newCauldron = newCauldron;
+		this.item = item;
+		this.cauldron = cauldron;
 		this.level = level;
 		this.overwriteLevel = overwriteLevel;
 		this.sound = sound;
 	}
 
 	public static CauldronInteractionBuilder create() {
-		return new CauldronInteractionBuilder(state -> true, ItemStack.EMPTY, null, 0, false, null);
+		return new CauldronInteractionBuilder(state -> true, null, null, 0, false, null);
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class CauldronInteractionBuilder {
 	 * @return this builder for chaining
 	 */
 	public CauldronInteractionBuilder stack(ItemStack newStack) {
-		this.newStack = newStack;
+		this.item = newStack.getItem();
 		return this;
 	}
 
@@ -72,21 +72,22 @@ public class CauldronInteractionBuilder {
 	 * Sets the item that will result from the interaction.
 	 * <p>Note: This is a shortcut method for {@link #stack}.</p>
 	 *
-	 * @param newItem an item
+	 * @param item an item
 	 * @return this builder for chaining
 	 */
-	public CauldronInteractionBuilder item(Item newItem) {
-		return stack(new ItemStack(newItem));
+	public CauldronInteractionBuilder item(Item item) {
+		this.item = item;
+		return this;
 	}
 
 	/**
 	 * Sets the cauldron that will result from the interaction.
 	 *
-	 * @param newCauldron a cauldron. If set to <code>null</code>, then the cauldron will try to stay the same.
+	 * @param cauldron a cauldron. If set to <code>null</code>, then the cauldron will try to stay the same.
 	 * @return this builder for chaining
 	 */
-	public CauldronInteractionBuilder cauldron(Block newCauldron) {
-		this.newCauldron = newCauldron;
+	public CauldronInteractionBuilder cauldron(Block cauldron) {
+		this.cauldron = cauldron;
 		return this;
 	}
 
@@ -143,12 +144,12 @@ public class CauldronInteractionBuilder {
 	public CauldronBehavior build() {
 		return (state, world, pos, player, hand, stack) -> {
 			if(predicate.test(state)) {
-				if(newCauldron == null) newCauldron = state.getBlock();
+				if(cauldron == null) cauldron = state.getBlock();
 				int newLevel = !overwriteLevel ? CauldronUtil.getLevel(state) + level : level;
 				if(!world.isClient) {
-					BlockState returnedState = CauldronUtil.modifyCauldron(state, newCauldron, newLevel);
+					BlockState returnedState = CauldronUtil.modifyCauldron(state, cauldron, newLevel);
 
-					player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, newStack));
+					player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, item.getDefaultStack()));
 					player.incrementStat(CauldronUtil.isFull(returnedState) ? Stats.FILL_CAULDRON : Stats.USE_CAULDRON);
 					player.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));
 					world.setBlockState(pos, returnedState);
@@ -167,6 +168,6 @@ public class CauldronInteractionBuilder {
 	 * @return the new builder
 	 */
 	public CauldronInteractionBuilder copy() {
-		return new CauldronInteractionBuilder(this.predicate, this.newStack, this.newCauldron, this.level, this.overwriteLevel, this.sound);
+		return new CauldronInteractionBuilder(this.predicate, this.item, this.cauldron, this.level, this.overwriteLevel, this.sound);
 	}
 }
