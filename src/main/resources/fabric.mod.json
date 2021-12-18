@@ -22,6 +22,9 @@
 		],
 		"modmenu": [
 			"com.hugman.dawn.config.DawnModMenuIntegration"
+		],
+		"appleskin" : [
+			"com.hugman.dawn.api.compat.AppleSkinEventHandler"
 		]
 	},
 	"mixins": [
@@ -31,6 +34,9 @@
 	"depends": {
 		"minecraft": ">=1.18",
 		"fabric": "*"
+	},
+	"suggests": {
+		"appleskin": "*"
 	},
 	"custom": {
 		"modmenu": {

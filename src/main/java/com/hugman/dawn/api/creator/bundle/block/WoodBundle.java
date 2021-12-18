@@ -11,15 +11,21 @@ import net.minecraft.block.MapColor;
 public class WoodBundle extends Bundle {
 	private final BlockCreator planks;
 	private final LogsBundle logs;
-	private final BlockCreator planks;
-	private final MTBlockBundle woodenBlocks;
+	private final BlockCreator stairs, slab, trapdoor, pressurePlate, button, fence, fenceGate, door;
 
 	protected WoodBundle(String prefix, MapColor planksColor, MapColor insideColor, MapColor barkColor, boolean isNether) {
 		FabricBlockSettings settings = FabricBlockSettings.copyOf(isNether ? Blocks.CRIMSON_PLANKS : Blocks.OAK_PLANKS).mapColor(planksColor);
 		BlockCreator.Builder builder = new BlockCreator.Builder().name(prefix).settings(settings);
 		this.planks = put(builder.copy().from(DefaultBlockTemplates.PLANKS).build());
 		this.logs = put(new LogsBundle(prefix, insideColor, barkColor, isNether));
-		this.woodenBlocks = put(new MTBlockBundle(builder, DefaultBlockTemplates.STAIRS, DefaultBlockTemplates.SLAB, DefaultBlockTemplates.TRAPDOOR, DefaultBlockTemplates.WOOD_PRESSURE_PLATE, DefaultBlockTemplates.WOOD_BUTTON, DefaultBlockTemplates.FENCE, DefaultBlockTemplates.FENCE_GATE, DefaultBlockTemplates.DOOR));
+		this.stairs = put(builder.copy().from(DefaultBlockTemplates.STAIRS).build());
+		this.slab = put(builder.copy().from(DefaultBlockTemplates.SLAB).build());
+		this.trapdoor = put(builder.copy().from(DefaultBlockTemplates.TRAPDOOR).build());
+		this.pressurePlate = put(builder.copy().from(DefaultBlockTemplates.WOOD_PRESSURE_PLATE).build());
+		this.button = put(builder.copy().from(DefaultBlockTemplates.WOOD_BUTTON).build());
+		this.fence = put(builder.copy().from(DefaultBlockTemplates.FENCE).build());
+		this.fenceGate = put(builder.copy().from(DefaultBlockTemplates.FENCE_GATE).build());
+		this.door = put(builder.copy().from(DefaultBlockTemplates.DOOR).build());
 	}
 
 	public Block getPlanks() {
@@ -42,36 +48,36 @@ public class WoodBundle extends Bundle {
 		return logs.getStrippedWood();
 	}
 
-	public Block getPressurePlate() {
-		return woodenBlocks.getBlock(DefaultBlockTemplates.WOOD_PRESSURE_PLATE);
-	}
-
-	public Block getTrapdoor() {
-		return woodenBlocks.getBlock(DefaultBlockTemplates.TRAPDOOR);
-	}
-
-	public Block getButton() {
-		return woodenBlocks.getBlock(DefaultBlockTemplates.WOOD_BUTTON);
-	}
-
 	public Block getStairs() {
-		return woodenBlocks.getBlock(DefaultBlockTemplates.STAIRS);
+		return stairs.getValue();
 	}
 
 	public Block getSlab() {
-		return woodenBlocks.getBlock(DefaultBlockTemplates.SLAB);
+		return slab.getValue();
+	}
+
+	public Block getTrapdoor() {
+		return trapdoor.getValue();
+	}
+
+	public Block getPressurePlate() {
+		return pressurePlate.getValue();
+	}
+
+	public Block getButton() {
+		return button.getValue();
 	}
 
 	public Block getFenceGate() {
-		return woodenBlocks.getBlock(DefaultBlockTemplates.FENCE_GATE);
+		return fenceGate.getValue();
 	}
 
 	public Block getFence() {
-		return woodenBlocks.getBlock(DefaultBlockTemplates.FENCE);
+		return fence.getValue();
 	}
 
 	public Block getDoor() {
-		return woodenBlocks.getBlock(DefaultBlockTemplates.DOOR);
+		return door.getValue();
 	}
 
 	public static class Builder {

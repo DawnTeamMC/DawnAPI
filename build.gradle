@@ -13,6 +13,7 @@ repositories {
     maven { url 'https://maven.terraformersmc.com/' }
     maven { url 'https://server.bbkr.space/artifactory/libs-release' }
     maven { url 'https://www.cursemaven.com' }
+    maven { url "https://maven.ryanliptak.com/" }
 }
 
 dependencies {
@@ -21,6 +22,10 @@ dependencies {
     }
     modImplementation("curse.maven:columns-385230:${columns_version}"){
         exclude(group: "net.fabricmc.fabric-api")
+    }
+    modImplementation "squeek.appleskin:appleskin-fabric:mc1.18-${appleskin_version}:api"
+    modImplementation("squeek.appleskin:appleskin-fabric:mc1.18-${appleskin_version}") {
+        exclude module: 'modmenu'
     }
 
     modImplementation "io.github.cottonmc:LibCD:${libcd_version}"

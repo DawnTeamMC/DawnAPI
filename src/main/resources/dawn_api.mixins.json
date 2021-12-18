@@ -3,6 +3,7 @@
 	"package": "com.hugman.dawn.api.mixin",
 	"compatibilityLevel": "JAVA_16",
 	"mixins": [
+		"DefaultedRegistryMixin",
 		"ItemAccessor"
 	],
 	"injectors": {
