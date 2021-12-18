@@ -5,13 +5,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class FileUtil {
-	public static final Path getParentPath(String s) {
+public final class FileUtil {
+	public static Path getParentPath(String s) {
 		String[] splitFilePath = StringUtil.cutAtLast(s, "/");
 		return Paths.get(splitFilePath[0]);
 	}
 
-	public static final void createDirectories(Path path) {
+	public static void createDirectories(Path path) {
 		if(!Files.exists(path)) {
 			try {
 				Files.createDirectories(path);

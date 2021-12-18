@@ -19,20 +19,20 @@ import net.minecraft.block.WallBlock;
 import net.minecraft.item.ItemGroup;
 
 public class DefaultBlockTemplates {
-	public static final BlockTemplate CUBE = new BlockTemplate(Block::new, "", ItemGroup.BUILDING_BLOCKS);
-	public static final BlockTemplate PLANKS = new BlockTemplate(Block::new, "planks", ItemGroup.BUILDING_BLOCKS);
-	public static final BlockTemplate STAIRS = new BlockTemplate(StairsBlock::new, "stairs", ItemGroup.BUILDING_BLOCKS);
-	public static final BlockTemplate SLAB = new BlockTemplate(SlabBlock::new, "slab", ItemGroup.BUILDING_BLOCKS);
-	public static final BlockTemplate WALL = new BlockTemplate(WallBlock::new, "wall", ItemGroup.DECORATIONS);
-	public static final BlockTemplate STONE_BUTTON = new BlockTemplate(settings -> new StoneButtonBlock(settings.noCollision().strength(0.5F)), "button", ItemGroup.REDSTONE);
-	public static final BlockTemplate WOOD_BUTTON = new BlockTemplate(settings -> new WoodButtonBlock(settings.noCollision().strength(0.5F)), "button", ItemGroup.REDSTONE);
-	public static final BlockTemplate STONE_PRESSURE_PLATE = new BlockTemplate(settings -> new PressurePlateBlock(ActivationRule.MOBS, settings.requiresTool().noCollision().strength(0.5F)), "pressure_plate", ItemGroup.REDSTONE);
-	public static final BlockTemplate WOOD_PRESSURE_PLATE = new BlockTemplate(settings -> new PressurePlateBlock(ActivationRule.EVERYTHING, settings.noCollision().strength(0.5F)), "pressure_plate", ItemGroup.REDSTONE);
-	public static final BlockTemplate TRAPDOOR = new BlockTemplate(settings -> new TrapdoorBlock(settings.strength(3.0F).nonOpaque().allowsSpawning(DefaultBlockSettings::never)), "trapdoor", ItemGroup.REDSTONE, BlockCreator.Render.CUTOUT);
-	public static final BlockTemplate DOOR = new BlockTemplate(settings -> new DoorBlock(settings.strength(3.0F).nonOpaque()), "door", ItemGroup.REDSTONE, BlockCreator.Render.CUTOUT);
-	public static final BlockTemplate FENCE = new BlockTemplate(FenceBlock::new, "fence", ItemGroup.DECORATIONS);
-	public static final BlockTemplate FENCE_GATE = new BlockTemplate(FenceGateBlock::new, "fence_gate", ItemGroup.REDSTONE);
-	public static final BlockTemplate LEAVES = new BlockTemplate(LeavesBlock::new, "leaves", ItemGroup.DECORATIONS, BlockCreator.Render.CUTOUT_MIPPED);
-	public static final BlockTemplate MUSHROOM_BLOCK = new BlockTemplate(MushroomBlock::new, "mushroom_block", ItemGroup.DECORATIONS);
-	public static final BlockTemplate MUSHROOM = new BlockTemplate(MushroomPlantBlock::new, "mushroom", ItemGroup.DECORATIONS);
+	public static final BlockCreator.Builder CUBE = new BlockCreator.Builder().provider(Block::new).itemGroup(ItemGroup.BUILDING_BLOCKS);
+	public static final BlockCreator.Builder PLANKS = new BlockCreator.Builder().provider(Block::new).itemGroup(ItemGroup.BUILDING_BLOCKS);
+	public static final BlockCreator.Builder STAIRS = new BlockCreator.Builder().provider(StairsBlock::new).itemGroup(ItemGroup.BUILDING_BLOCKS);
+	public static final BlockCreator.Builder SLAB = new BlockCreator.Builder().provider(SlabBlock::new).itemGroup(ItemGroup.BUILDING_BLOCKS);
+	public static final BlockCreator.Builder WALL = new BlockCreator.Builder().provider(WallBlock::new).itemGroup(ItemGroup.DECORATIONS);
+	public static final BlockCreator.Builder STONE_BUTTON = new BlockCreator.Builder().provider(s -> new StoneButtonBlock(s.noCollision().strength(0.5F))).itemGroup(ItemGroup.REDSTONE);
+	public static final BlockCreator.Builder WOOD_BUTTON = new BlockCreator.Builder().provider(s -> new WoodButtonBlock(s.noCollision().strength(0.5F))).itemGroup(ItemGroup.REDSTONE);
+	public static final BlockCreator.Builder STONE_PRESSURE_PLATE = new BlockCreator.Builder().provider(s -> new PressurePlateBlock(ActivationRule.MOBS, s.requiresTool().noCollision().strength(0.5F))).itemGroup(ItemGroup.REDSTONE);
+	public static final BlockCreator.Builder WOOD_PRESSURE_PLATE = new BlockCreator.Builder().provider(s -> new PressurePlateBlock(ActivationRule.EVERYTHING, s.noCollision().strength(0.5F))).itemGroup(ItemGroup.REDSTONE);
+	public static final BlockCreator.Builder TRAPDOOR = new BlockCreator.Builder().provider(s -> new TrapdoorBlock(s.strength(3.0F).nonOpaque().allowsSpawning(DefaultBlockSettings::never))).itemGroup(ItemGroup.REDSTONE).render(BlockCreator.Render.CUTOUT);
+	public static final BlockCreator.Builder DOOR = new BlockCreator.Builder().provider(s -> new DoorBlock(s.strength(3.0F).nonOpaque())).itemGroup(ItemGroup.REDSTONE).render(BlockCreator.Render.CUTOUT);
+	public static final BlockCreator.Builder FENCE = new BlockCreator.Builder().provider(FenceBlock::new).itemGroup(ItemGroup.DECORATIONS);
+	public static final BlockCreator.Builder FENCE_GATE = new BlockCreator.Builder().provider(FenceGateBlock::new).itemGroup(ItemGroup.REDSTONE);
+	public static final BlockCreator.Builder LEAVES = new BlockCreator.Builder().provider(LeavesBlock::new).itemGroup(ItemGroup.DECORATIONS).render(BlockCreator.Render.CUTOUT_MIPPED);
+	public static final BlockCreator.Builder MUSHROOM_BLOCK = new BlockCreator.Builder().provider(MushroomBlock::new).itemGroup(ItemGroup.DECORATIONS);
+	public static final BlockCreator.Builder MUSHROOM = new BlockCreator.Builder().provider(MushroomPlantBlock::new).itemGroup(ItemGroup.DECORATIONS);
 }

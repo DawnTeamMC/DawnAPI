@@ -2,7 +2,6 @@ package com.hugman.dawn.api.creator.bundle.block;
 
 import com.hugman.dawn.api.creator.BlockCreator;
 import com.hugman.dawn.api.creator.bundle.Bundle;
-import com.hugman.dawn.api.util.BlockTemplate;
 import net.minecraft.block.Block;
 import net.minecraft.util.DyeColor;
 
@@ -19,8 +18,18 @@ public class MCBlockBundle extends Bundle {
 	 * @param builder  The base block creator builder.
 	 * @param template The template to use.
 	 */
-	public MCBlockBundle(BlockCreator.Builder builder, BlockTemplate template) {
-		this(color -> builder.copy().name(color.getName() + "_" + builder.getName()).applyTemplate(template).build());
+	@Deprecated
+	public MCBlockBundle(BlockCreator.Builder builder, BlockCreator.Builder template) {
+		this(builder.copy().from(template));
+	}
+
+	/**
+	 * Creates a creator bundle containing blocks of 16 different colors.
+	 *
+	 * @param builder  The base block creator builder.
+	 */
+	public MCBlockBundle(BlockCreator.Builder builder) {
+		this(color -> builder.copy().name(color.getName() + "_" + builder.getName()).build());
 	}
 
 	/**

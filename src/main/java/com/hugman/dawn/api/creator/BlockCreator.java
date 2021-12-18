@@ -1,7 +1,6 @@
 package com.hugman.dawn.api.creator;
 
 import com.hugman.dawn.api.object.ModData;
-import com.hugman.dawn.api.util.BlockTemplate;
 import com.hugman.dawn.api.util.StringUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -33,7 +32,7 @@ public class BlockCreator extends SimpleCreator<Block> {
 	 * @param builder the builder used to create the block itself
 	 */
 	private BlockCreator(Builder builder) {
-		super(Registry.BLOCK, builder.name, builder.blockProvider.apply(builder.settings));
+		super(Registry.BLOCK, builder.name, builder.block);
 		this.builder = builder;
 	}
 
@@ -100,6 +99,7 @@ public class BlockCreator extends SimpleCreator<Block> {
 
 	public static class Builder {
 		protected String name;
+		protected Block block;
 		protected Function<AbstractBlock.Settings, ? extends Block> blockProvider;
 		protected AbstractBlock.Settings settings;
 		protected Render render;
@@ -113,8 +113,9 @@ public class BlockCreator extends SimpleCreator<Block> {
 		public Builder() {
 		}
 
-		public Builder(String name, Function<AbstractBlock.Settings, ? extends Block> blockProvider, AbstractBlock.Settings settings, Render render, ItemGroup itemGroup, int flammabilityBurn, int flammabilitySpread, boolean noItem, int cookTime, float compostingChance) {
+		protected Builder(String name, Block block, Function<AbstractBlock.Settings, ? extends Block> blockProvider, AbstractBlock.Settings settings, Render render, ItemGroup itemGroup, int flammabilityBurn, int flammabilitySpread, boolean noItem, int cookTime, float compostingChance) {
 			this.name = name;
+			this.block = block;
 			this.blockProvider = blockProvider;
 			this.settings = settings;
 			this.render = render;
@@ -126,40 +127,32 @@ public class BlockCreator extends SimpleCreator<Block> {
 			this.compostingChance = compostingChance;
 		}
 
-		public Builder(String prefix, BlockTemplate template, AbstractBlock.Settings settings) {
-			this.name = prefix;
-			this.applyTemplate(template);
-			this.settings = settings;
-		}
-
 		public Builder(String name, Function<AbstractBlock.Settings, ? extends Block> blockProvider, AbstractBlock.Settings settings) {
 			this.name = name;
 			this.blockProvider = blockProvider;
 			this.settings = settings;
 		}
 
+		@Deprecated
+		public Builder(String prefix, Builder builder, AbstractBlock.Settings settings) {
+			this.name = prefix;
+			this.from(builder);
+			this.settings = settings;
+		}
+
+		public Builder(String name, Block block) {
+			this.name = name;
+			this.block = block;
+		}
+
 		/**
 		 * Sets the name of this block.
-		 *
-		 * @param name a string
 		 *
 		 * @return this builder for chaining
 		 */
 		public Builder name(String name) {
 			this.name = name;
 			return this;
-		}
-
-		/**
-		 * Sets the name of this block from a block template.
-		 *
-		 * @param name   a string
-		 * @param getter a block template
-		 *
-		 * @return this builder for chaining
-		 */
-		public Builder name(String name, BlockTemplate getter) {
-			return name(StringUtil.getShapedName(name, getter));
 		}
 
 		/**
@@ -170,33 +163,41 @@ public class BlockCreator extends SimpleCreator<Block> {
 		}
 
 		/**
-		 * Sets the block provider of this block.
-		 *
-		 * @param blockProvider a block provider
+		 * Sets the block.
 		 *
 		 * @return this builder for chaining
 		 */
-		public Builder blockProvider(Function<AbstractBlock.Settings, ? extends Block> blockProvider) {
+		public Builder block(Block block) {
+			this.block = block;
+			return this;
+		}
+
+		/**
+		 * Sets the block provider of this block.
+		 * <p>Note: Also resets the block variable.</p>
+		 *
+		 * @return this builder for chaining
+		 */
+		public Builder provider(Function<AbstractBlock.Settings, ? extends Block> blockProvider) {
 			this.blockProvider = blockProvider;
+			this.block = null;
 			return this;
 		}
 
 		/**
 		 * Sets the vanilla settings of this block.
-		 *
-		 * @param settings a vanilla settings builder
+		 * <p>Note: Also resets the block variable.</p>
 		 *
 		 * @return this builder for chaining
 		 */
 		public Builder settings(AbstractBlock.Settings settings) {
 			this.settings = settings;
+			this.block = null;
 			return this;
 		}
 
 		/**
 		 * Sets the render layer this block will use.
-		 *
-		 * @param render a render layer
 		 *
 		 * @return this builder for chaining
 		 */
@@ -208,8 +209,6 @@ public class BlockCreator extends SimpleCreator<Block> {
 		/**
 		 * Sets the item group of this block as an item.
 		 * <p>Note: This is unnecessary if {@link #noItem()} is set.</p>
-		 *
-		 * @param itemGroup an item group
 		 *
 		 * @return this builder for chaining
 		 */
@@ -288,8 +287,33 @@ public class BlockCreator extends SimpleCreator<Block> {
 		 *
 		 * @return this builder for chaining
 		 */
-		public Builder applyTemplate(BlockTemplate template) {
-			return name(this.name, template).itemGroup(template.getItemGroup()).render(template.getRender()).blockProvider(template.getBlockProvider());
+		public Builder from(Builder template) {
+			this.name = Objects.requireNonNullElse(template.name, this.name);
+			this.block = Objects.requireNonNullElse(template.block, this.block);
+			this.blockProvider = Objects.requireNonNullElse(template.blockProvider, this.blockProvider);
+			this.settings = Objects.requireNonNullElse(template.settings, this.settings);
+			this.render = Objects.requireNonNullElse(template.render, this.render);
+			this.itemGroup = Objects.requireNonNullElse(template.itemGroup, this.itemGroup);
+			this.flammabilityBurn = Objects.requireNonNullElse(template.flammabilityBurn, this.flammabilityBurn);
+			this.flammabilitySpread = Objects.requireNonNullElse(template.flammabilitySpread, this.flammabilitySpread);
+			this.noItem = Objects.requireNonNullElse(template.noItem, this.noItem);
+			this.cookTime = Objects.requireNonNullElse(template.cookTime, this.cookTime);
+			this.compostingChance = Objects.requireNonNullElse(template.compostingChance, this.compostingChance);
+			return this;
+		}
+
+		/**
+		 * Sets the name, the render layer and the block provider of this block, as well as the item group of its item form, from a block template.
+		 *
+		 * @param template a block template
+		 *
+		 * @return this builder for chaining
+		 *
+		 * @deprecated Use {@link #from(Builder)} instead. Will be removed in v3.2.0
+		 */
+		@Deprecated(forRemoval = true)
+		public Builder applyTemplate(Builder template) {
+			return from(template);
 		}
 
 		/**
@@ -299,10 +323,15 @@ public class BlockCreator extends SimpleCreator<Block> {
 		 * @throws NullPointerException if either the name, the block provider or the vanilla settings builder is not set
 		 */
 		public BlockCreator build() {
+			Builder newBuilder = copy();
 			Objects.requireNonNull(this.name, "Cannot build a block with no name!");
-			Objects.requireNonNull(this.blockProvider, "Cannot build a block with no block provider!");
-			Objects.requireNonNull(this.settings, "Cannot build a block with no block settings!");
-			return new BlockCreator(copy());
+			if(newBuilder.block == null) {
+				Objects.requireNonNull(this.blockProvider, "Cannot build a block with no block provider!");
+				Objects.requireNonNull(this.settings, "Cannot build a block with no block settings!");
+				newBuilder.block(this.blockProvider.apply(this.settings));
+			}
+			Objects.requireNonNull(newBuilder.block, "Cannot build a block with no block!");
+			return new BlockCreator(newBuilder);
 		}
 
 		/**
@@ -311,7 +340,7 @@ public class BlockCreator extends SimpleCreator<Block> {
 		 * @return the new builder
 		 */
 		public Builder copy() {
-			return new Builder(this.name, this.blockProvider, FabricBlockSettings.copyOf(this.settings), this.render, this.itemGroup, this.flammabilityBurn, this.flammabilitySpread, this.noItem, this.cookTime, this.compostingChance);
+			return new Builder(this.name, this.block, this.blockProvider, FabricBlockSettings.copyOf(this.settings), this.render, this.itemGroup, this.flammabilityBurn, this.flammabilitySpread, this.noItem, this.cookTime, this.compostingChance);
 		}
 	}
 }

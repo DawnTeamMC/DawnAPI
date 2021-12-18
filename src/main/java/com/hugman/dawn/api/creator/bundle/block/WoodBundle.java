@@ -11,12 +11,13 @@ import net.minecraft.block.MapColor;
 public class WoodBundle extends Bundle {
 	private final BlockCreator planks;
 	private final LogsBundle logs;
+	private final BlockCreator planks;
 	private final MTBlockBundle woodenBlocks;
 
 	protected WoodBundle(String prefix, MapColor planksColor, MapColor insideColor, MapColor barkColor, boolean isNether) {
 		FabricBlockSettings settings = FabricBlockSettings.copyOf(isNether ? Blocks.CRIMSON_PLANKS : Blocks.OAK_PLANKS).mapColor(planksColor);
 		BlockCreator.Builder builder = new BlockCreator.Builder().name(prefix).settings(settings);
-		this.planks = put(builder.copy().applyTemplate(DefaultBlockTemplates.PLANKS).build());
+		this.planks = put(builder.copy().from(DefaultBlockTemplates.PLANKS).build());
 		this.logs = put(new LogsBundle(prefix, insideColor, barkColor, isNether));
 		this.woodenBlocks = put(new MTBlockBundle(builder, DefaultBlockTemplates.STAIRS, DefaultBlockTemplates.SLAB, DefaultBlockTemplates.TRAPDOOR, DefaultBlockTemplates.WOOD_PRESSURE_PLATE, DefaultBlockTemplates.WOOD_BUTTON, DefaultBlockTemplates.FENCE, DefaultBlockTemplates.FENCE_GATE, DefaultBlockTemplates.DOOR));
 	}
