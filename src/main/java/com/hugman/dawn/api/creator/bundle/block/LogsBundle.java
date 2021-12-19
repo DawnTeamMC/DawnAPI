@@ -20,8 +20,6 @@ public class LogsBundle extends Bundle {
 	private final BlockCreator wood;
 	private final BlockCreator strippedWood;
 
-	private final String logName;
-	private final String woodName;
 	private final MapColor insideColor;
 	private final MapColor barkColor;
 	private final boolean isNether;
@@ -35,26 +33,29 @@ public class LogsBundle extends Bundle {
 	 * @param isNether    Defines if the wood type comes from the nether. (changes the name, sounds and materials)
 	 */
 	protected LogsBundle(String name, MapColor insideColor, MapColor barkColor, boolean isNether) {
-		this.logName = isNether ? "_stem" : "_log";
-		this.woodName = isNether ? "_hyphae" : "_wood";
+		String logName = isNether ? "_stem" : "_log";
+		String woodName = isNether ? "_hyphae" : "_wood";
 		this.insideColor = insideColor;
 		this.barkColor = barkColor;
 		this.isNether = isNether;
 		int flammability = isNether ? 0 : 5;
-		this.log = put(new BlockCreator.Builder(name + logName, PillarBlock::new, createLogSettings()).itemGroup(ItemGroup.BUILDING_BLOCKS).flammability(flammability).build());
-		this.strippedLog = put(new BlockCreator.Builder("stripped_" + name + logName, PillarBlock::new, createLogSettings(false)).itemGroup(ItemGroup.BUILDING_BLOCKS).flammability(flammability).build());
-		this.wood = put(new BlockCreator.Builder(name + woodName, PillarBlock::new, createLogSettings(true)).itemGroup(ItemGroup.BUILDING_BLOCKS).flammability(flammability).build());
-		this.strippedWood = put(new BlockCreator.Builder("stripped_" + name + woodName, PillarBlock::new, createLogSettings(false)).itemGroup(ItemGroup.BUILDING_BLOCKS).flammability(flammability).build());
+
+		BlockCreator.Builder builder = new BlockCreator.Builder().provider(PillarBlock::new).itemGroup(ItemGroup.BUILDING_BLOCKS).flammability(flammability);
+		this.log = put(builder.copy(name + logName).settings(createMainLogSettings()).build());
+		this.strippedLog = put(builder.copy("stripped_" + name + logName).settings(createLogSettings(false)).build());
+		this.wood = put(builder.copy(name + woodName).settings(createLogSettings(true)).build());
+		this.strippedWood = put(builder.copy("stripped_" + name + woodName).settings(createLogSettings(false)).build());
+
 		StrippableBlockRegistry.register(getLog(), getStrippedLog());
 		StrippableBlockRegistry.register(getWood(), getStrippedWood());
 	}
 
-	private AbstractBlock.Settings createLogSettings(boolean isSideBark) {
-		return (isNether ? DefaultBlockSettings.STEM : DefaultBlockSettings.LOG).mapColor(isSideBark ? barkColor : insideColor);
+	private AbstractBlock.Settings createMainLogSettings() {
+		return FabricBlockSettings.of(isNether ? Material.NETHER_WOOD : Material.WOOD, (blockState) -> blockState.get(PillarBlock.AXIS) == Direction.Axis.Y ? insideColor : barkColor).strength(2.0F).sounds(isNether ? BlockSoundGroup.NETHER_STEM : BlockSoundGroup.WOOD);
 	}
 
-	private AbstractBlock.Settings createLogSettings() {
-		return FabricBlockSettings.of(isNether ? Material.NETHER_WOOD : Material.WOOD, (blockState) -> blockState.get(PillarBlock.AXIS) == Direction.Axis.Y ? insideColor : barkColor).strength(2.0F).sounds(isNether ? BlockSoundGroup.NETHER_STEM : BlockSoundGroup.WOOD);
+	private AbstractBlock.Settings createLogSettings(boolean isSideBark) {
+		return (isNether ? DefaultBlockSettings.STEM : DefaultBlockSettings.LOG).mapColor(isSideBark ? barkColor : insideColor);
 	}
 
 	public Block getLog() {
@@ -71,13 +72,5 @@ public class LogsBundle extends Bundle {
 
 	public Block getStrippedWood() {
 		return strippedWood.getValue();
-	}
-
-	protected String getLogName() {
-		return logName;
-	}
-
-	protected String getWoodName() {
-		return woodName;
 	}
 }

@@ -12,7 +12,7 @@ public class PlantBundle extends Bundle {
 
 	public PlantBundle(BlockCreator.Builder builder) {
 		this.plant = put(builder.build());
-		this.pottedPlant = put(builder.copy().name("potted_" + builder.getName()).provider(settings -> new FlowerPotBlock(plant.getValue(), settings)).settings(DefaultBlockSettings.POTTED_PLANT.luminance(getPlant().getDefaultState().getLuminance())).render(BlockCreator.Render.CUTOUT).noItem().build());
+		this.pottedPlant = put(builder.copy("potted_" + builder.getName()).provider(settings -> new FlowerPotBlock(plant.getValue(), settings)).settings(DefaultBlockSettings.POTTED_PLANT.luminance(getPlant().getDefaultState().getLuminance())).render(BlockCreator.Render.CUTOUT).noItem().build());
 	}
 
 	public Block getPlant() {

@@ -49,7 +49,6 @@ public class NetherWoodBundle extends WoodBundle {
 		private final MapColor planksColor;
 		private final MapColor insideColor;
 		private final MapColor barkColor;
-		private boolean addHyphaeBlocks;
 
 		/**
 		 * Creates an entry pack containing blocks for nether wood types.

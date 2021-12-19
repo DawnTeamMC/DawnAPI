@@ -18,7 +18,7 @@ import net.minecraft.block.SlabBlock;
 import net.minecraft.block.WallBlock;
 import net.minecraft.item.ItemGroup;
 
-public class DefaultBlockTemplates {
+public class DefaultBlockBuilders {
 	public static final BlockCreator.Builder CUBE = new BlockCreator.Builder().provider(Block::new).itemGroup(ItemGroup.BUILDING_BLOCKS);
 	public static final BlockCreator.Builder PLANKS = new BlockCreator.Builder().provider(Block::new).itemGroup(ItemGroup.BUILDING_BLOCKS);
 	public static final BlockCreator.Builder STAIRS = new BlockCreator.Builder().provider(StairsBlock::new).itemGroup(ItemGroup.BUILDING_BLOCKS);
@@ -32,7 +32,8 @@ public class DefaultBlockTemplates {
 	public static final BlockCreator.Builder DOOR = new BlockCreator.Builder().provider(s -> new DoorBlock(s.strength(3.0F).nonOpaque())).itemGroup(ItemGroup.REDSTONE).render(BlockCreator.Render.CUTOUT);
 	public static final BlockCreator.Builder FENCE = new BlockCreator.Builder().provider(FenceBlock::new).itemGroup(ItemGroup.DECORATIONS);
 	public static final BlockCreator.Builder FENCE_GATE = new BlockCreator.Builder().provider(FenceGateBlock::new).itemGroup(ItemGroup.REDSTONE);
-	public static final BlockCreator.Builder LEAVES = new BlockCreator.Builder().provider(LeavesBlock::new).itemGroup(ItemGroup.DECORATIONS).render(BlockCreator.Render.CUTOUT_MIPPED);
-	public static final BlockCreator.Builder MUSHROOM_BLOCK = new BlockCreator.Builder().provider(MushroomBlock::new).itemGroup(ItemGroup.DECORATIONS);
-	public static final BlockCreator.Builder MUSHROOM = new BlockCreator.Builder().provider(MushroomPlantBlock::new).itemGroup(ItemGroup.DECORATIONS);
+	public static final BlockCreator.Builder LEAVES = new BlockCreator.Builder().provider(LeavesBlock::new).itemGroup(ItemGroup.DECORATIONS).render(BlockCreator.Render.CUTOUT_MIPPED).flammability(30, 60).compostingChance(0.3f);
+	public static final BlockCreator.Builder SAPLING = new BlockCreator.Builder().settings(DefaultBlockSettings.SAPLING).compostingChance(0.3f).itemGroup(ItemGroup.DECORATIONS).render(BlockCreator.Render.CUTOUT_MIPPED);
+	public static final BlockCreator.Builder MUSHROOM_BLOCK = new BlockCreator.Builder().provider(MushroomBlock::new).itemGroup(ItemGroup.DECORATIONS).compostingChance(0.85F);
+	public static final BlockCreator.Builder MUSHROOM = new BlockCreator.Builder().provider(MushroomPlantBlock::new).itemGroup(ItemGroup.DECORATIONS).render(BlockCreator.Render.CUTOUT).compostingChance(0.65F);
 }

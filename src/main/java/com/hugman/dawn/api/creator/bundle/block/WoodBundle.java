@@ -2,7 +2,7 @@ package com.hugman.dawn.api.creator.bundle.block;
 
 import com.hugman.dawn.api.creator.BlockCreator;
 import com.hugman.dawn.api.creator.bundle.Bundle;
-import com.hugman.dawn.api.util.DefaultBlockTemplates;
+import com.hugman.dawn.api.util.DefaultBlockBuilders;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -16,16 +16,16 @@ public class WoodBundle extends Bundle {
 	protected WoodBundle(String prefix, MapColor planksColor, MapColor insideColor, MapColor barkColor, boolean isNether) {
 		FabricBlockSettings settings = FabricBlockSettings.copyOf(isNether ? Blocks.CRIMSON_PLANKS : Blocks.OAK_PLANKS).mapColor(planksColor);
 		BlockCreator.Builder builder = new BlockCreator.Builder().name(prefix).settings(settings);
-		this.planks = put(builder.copy().from(DefaultBlockTemplates.PLANKS).build());
+		this.planks = put(builder.copy(prefix + "_planks").from(DefaultBlockBuilders.PLANKS).build());
 		this.logs = put(new LogsBundle(prefix, insideColor, barkColor, isNether));
-		this.stairs = put(builder.copy().from(DefaultBlockTemplates.STAIRS).build());
-		this.slab = put(builder.copy().from(DefaultBlockTemplates.SLAB).build());
-		this.trapdoor = put(builder.copy().from(DefaultBlockTemplates.TRAPDOOR).build());
-		this.pressurePlate = put(builder.copy().from(DefaultBlockTemplates.WOOD_PRESSURE_PLATE).build());
-		this.button = put(builder.copy().from(DefaultBlockTemplates.WOOD_BUTTON).build());
-		this.fence = put(builder.copy().from(DefaultBlockTemplates.FENCE).build());
-		this.fenceGate = put(builder.copy().from(DefaultBlockTemplates.FENCE_GATE).build());
-		this.door = put(builder.copy().from(DefaultBlockTemplates.DOOR).build());
+		this.stairs = put(builder.copy(prefix + "_stairs").from(DefaultBlockBuilders.STAIRS).build());
+		this.slab = put(builder.copy(prefix + "_slab").from(DefaultBlockBuilders.SLAB).build());
+		this.trapdoor = put(builder.copy(prefix + "_trapdoor").from(DefaultBlockBuilders.TRAPDOOR).build());
+		this.pressurePlate = put(builder.copy(prefix + "_pressure_plate").from(DefaultBlockBuilders.WOOD_PRESSURE_PLATE).build());
+		this.button = put(builder.copy(prefix + "_button").from(DefaultBlockBuilders.WOOD_BUTTON).build());
+		this.fence = put(builder.copy(prefix + "_fence").from(DefaultBlockBuilders.FENCE).build());
+		this.fenceGate = put(builder.copy(prefix + "_fence_gate").from(DefaultBlockBuilders.FENCE_GATE).build());
+		this.door = put(builder.copy(prefix + "_door").from(DefaultBlockBuilders.DOOR).build());
 	}
 
 	public Block getPlanks() {

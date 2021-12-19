@@ -3,7 +3,7 @@ package com.hugman.dawn.api.creator.bundle.block;
 import com.hugman.dawn.api.creator.BlockCreator;
 import com.hugman.dawn.api.object.block.SaplingBlock;
 import com.hugman.dawn.api.util.DefaultBlockSettings;
-import com.hugman.dawn.api.util.DefaultBlockTemplates;
+import com.hugman.dawn.api.util.DefaultBlockBuilders;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.MapColor;
@@ -18,8 +18,8 @@ public class OverworldWoodBundle extends WoodBundle {
 
 	protected OverworldWoodBundle(String prefix, SaplingGenerator saplingGenerator, Predicate<BlockState> saplingSoilPredicate, MapColor planksColor, MapColor insideColor, MapColor barkColor) {
 		super(prefix, planksColor, insideColor, barkColor, false);
-		this.saplingPack = put(new PlantBundle(new BlockCreator.Builder(prefix + "_sapling", settings -> new SaplingBlock(saplingGenerator, saplingSoilPredicate, settings), DefaultBlockSettings.SAPLING).compostingChance(0.3f).itemGroup(ItemGroup.DECORATIONS).render(BlockCreator.Render.CUTOUT_MIPPED)));
-		this.leaves = put(new BlockCreator.Builder().from(DefaultBlockTemplates.LEAVES).name(prefix + "_leaves").flammability(30, 60).compostingChance(0.3f).build());
+		this.saplingPack = put(new PlantBundle(DefaultBlockBuilders.SAPLING.copy(prefix + "_sapling").provider(s -> new SaplingBlock(saplingGenerator, saplingSoilPredicate, s))));
+		this.leaves = put(DefaultBlockBuilders.LEAVES.copy(prefix + "_leaves").build());
 	}
 
 	public Block getSapling() {
