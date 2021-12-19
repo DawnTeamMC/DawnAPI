@@ -351,7 +351,7 @@ public class BlockCreator extends SimpleCreator<Block> {
 		 * @return the new builder
 		 */
 		public Builder copy(String name) {
-			return new Builder(name, new Block(FabricBlockSettings.copyOf(this.settings)), this.blockProvider, FabricBlockSettings.copyOf(this.settings), this.render, this.itemGroup, this.flammabilityBurn, this.flammabilitySpread, this.noItem, this.cookTime, this.compostingChance);
+			return new Builder(name, new Block(FabricBlockSettings.copyOf(this.block)), this.blockProvider, this.settings != null ? FabricBlockSettings.copyOf(this.settings) : null, this.render, this.itemGroup, this.flammabilityBurn, this.flammabilitySpread, this.noItem, this.cookTime, this.compostingChance);
 		}
 	}
 }
