@@ -288,17 +288,17 @@ public class BlockCreator extends SimpleCreator<Block> {
 		 * @return this builder for chaining
 		 */
 		public Builder from(Builder template) {
-			this.name = Objects.requireNonNullElse(template.name, this.name);
-			this.block = Objects.requireNonNullElse(template.block, this.block);
-			this.blockProvider = Objects.requireNonNullElse(template.blockProvider, this.blockProvider);
-			this.settings = Objects.requireNonNullElse(template.settings, this.settings);
-			this.render = Objects.requireNonNullElse(template.render, this.render);
-			this.itemGroup = Objects.requireNonNullElse(template.itemGroup, this.itemGroup);
-			this.flammabilityBurn = Objects.requireNonNullElse(template.flammabilityBurn, this.flammabilityBurn);
-			this.flammabilitySpread = Objects.requireNonNullElse(template.flammabilitySpread, this.flammabilitySpread);
-			this.noItem = Objects.requireNonNullElse(template.noItem, this.noItem);
-			this.cookTime = Objects.requireNonNullElse(template.cookTime, this.cookTime);
-			this.compostingChance = Objects.requireNonNullElse(template.compostingChance, this.compostingChance);
+			this.name = template.name != null ? template.name : this.name;
+			this.block = template.block != null ? template.block : this.block;
+			this.blockProvider = template.blockProvider != null ? template.blockProvider : this.blockProvider;
+			this.settings = template.settings != null ? template.settings : this.settings;
+			this.render = template.render != null ? template.render : this.render;
+			this.itemGroup = template.itemGroup != null ? template.itemGroup : this.itemGroup;
+			this.flammabilityBurn = template.flammabilityBurn != 0 ? template.flammabilityBurn : this.flammabilityBurn;
+			this.flammabilitySpread = template.flammabilitySpread != 0 ? template.flammabilitySpread : this.flammabilitySpread;
+			this.noItem = template.noItem || this.noItem;
+			this.cookTime = template.cookTime != 0 ? template.cookTime : this.cookTime;
+			this.compostingChance = template.compostingChance != 0 ? template.compostingChance : this.compostingChance;
 			return this;
 		}
 
