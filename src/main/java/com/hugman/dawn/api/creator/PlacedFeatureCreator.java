@@ -4,7 +4,7 @@ import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.world.gen.feature.PlacedFeature;
 
 /**
- * A class allowing a configured carver to be created.
+ * A class allowing a placed feature to be created.
  */
 public class PlacedFeatureCreator extends SimpleCreator<PlacedFeature> {
 
