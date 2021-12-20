@@ -4,6 +4,7 @@ import com.hugman.dawn.api.creator.BlockCreator;
 import com.hugman.dawn.api.object.block.SaplingBlock;
 import com.hugman.dawn.api.util.DefaultBlockSettings;
 import com.hugman.dawn.api.util.DefaultBlockBuilders;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.MapColor;
@@ -16,10 +17,19 @@ public class OverworldWoodBundle extends WoodBundle {
 	private final PlantBundle saplingPack;
 	private final BlockCreator leaves;
 
-	protected OverworldWoodBundle(String prefix, SaplingGenerator saplingGenerator, Predicate<BlockState> saplingSoilPredicate, MapColor planksColor, MapColor insideColor, MapColor barkColor) {
-		super(prefix, planksColor, insideColor, barkColor, false);
-		this.saplingPack = put(new PlantBundle(DefaultBlockBuilders.SAPLING.copy(prefix + "_sapling").provider(s -> new SaplingBlock(saplingGenerator, saplingSoilPredicate, s))));
-		this.leaves = put(DefaultBlockBuilders.LEAVES.copy(prefix + "_leaves").build());
+	/**
+	 * Creates a creator bundle containing all the stuff for creating a generic overworld wood type: logs, planks, trapdoor, pressure plate, button, fence, fence gate, door
+	 *
+	 * @param name        the name of the wood type (ex: <code>oak</code>)
+	 * @param insideColor the material color of the inside of logs
+	 * @param barkColor   the material color of the bark side of logs
+	 * @param isNether    defines if the wood type comes from the nether (changes the name, sounds and materials)
+	 */
+	protected OverworldWoodBundle(String name, SaplingGenerator saplingGenerator, Predicate<BlockState> saplingSoilPredicate, MapColor planksColor, MapColor insideColor, MapColor barkColor) {
+		super(name, planksColor, insideColor, barkColor, false);
+		this.saplingPack = put(new PlantBundle(DefaultBlockBuilders.SAPLING.copy(name + "_sapling").provider(s -> new SaplingBlock(saplingGenerator, saplingSoilPredicate, s))));
+		this.leaves = put(DefaultBlockBuilders.LEAVES.copy(name + "_leaves").build());
+		FabricBlockSettings
 	}
 
 	public Block getSapling() {
@@ -57,11 +67,11 @@ public class OverworldWoodBundle extends WoodBundle {
 		/**
 		 * Creates an entry pack containing blocks for normal wood types.
 		 *
-		 * @param prefix           The prefix of the wood type. (ex: <code>crimson</code>)
-		 * @param saplingGenerator The tree generator for the sapling.
-		 * @param planksColor      The material color of the planks.
-		 * @param insideColor      The material color of the inside of logs.
-		 * @param barkColor        The material color of the bark side of logs.
+		 * @param prefix           the prefix of the wood type (ex: <code>crimson</code>)
+		 * @param saplingGenerator the tree generator for the sapling
+		 * @param planksColor      the material color of the planks
+		 * @param insideColor      the material color of the inside of logs
+		 * @param barkColor        the material color of the bark side of logs
 		 */
 		public Builder(String prefix, SaplingGenerator saplingGenerator, MapColor planksColor, MapColor insideColor, MapColor barkColor) {
 			this.prefix = prefix;
@@ -74,7 +84,7 @@ public class OverworldWoodBundle extends WoodBundle {
 		/**
 		 * Adds a predicate for blocks that the sapling can grow on.
 		 *
-		 * @param predicate The predicate for the allowed states.
+		 * @param predicate the predicate for the allowed states
 		 */
 		public Builder saplingSoil(Predicate<BlockState> predicate) {
 			this.saplingSoilPredicate = predicate;

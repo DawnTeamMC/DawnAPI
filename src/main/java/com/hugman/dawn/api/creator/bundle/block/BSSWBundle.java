@@ -9,9 +9,14 @@ import net.minecraft.block.Block;
 public class BSSWBundle extends BSSBundle {
 	private final BlockCreator wall;
 
-	public BSSWBundle(String name, BlockCreator.Builder baseBuilder) {
-		super(name, baseBuilder);
-		this.wall = put(baseBuilder.copy(name + "_wall").from(DefaultBlockBuilders.WALL).build());
+	/**
+	 * Creates a creator bundle containing slab, stairs and wall variants for a block.
+	 *
+	 * @param builder the base builder for all the blocks
+	 */
+	public BSSWBundle(BlockCreator.Builder builder) {
+		super(builder);
+		this.wall = put(builder.copy(builder.getName() + "_wall").from(DefaultBlockBuilders.WALL).build());
 	}
 
 	public Block getWall() {

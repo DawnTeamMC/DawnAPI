@@ -9,35 +9,35 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-public class MCBlockBundle extends Bundle {
+public class ColoredBlockBundle extends Bundle {
 	private final Map<DyeColor, BlockCreator> map = new HashMap<>();
 
 	/**
 	 * Creates a creator bundle containing blocks of 16 different colors.
 	 *
-	 * @param builder  The base block creator builder.
-	 * @param template The template to use.
+	 * @param builder  the base block creator builder.
+	 * @param template the template to use.
 	 */
 	@Deprecated
-	public MCBlockBundle(BlockCreator.Builder builder, BlockCreator.Builder template) {
+	public ColoredBlockBundle(BlockCreator.Builder builder, BlockCreator.Builder template) {
 		this(builder.copy().from(template));
 	}
 
 	/**
 	 * Creates a creator bundle containing blocks of 16 different colors.
 	 *
-	 * @param builder  The base block creator builder.
+	 * @param builder  the base block creator builder.
 	 */
-	public MCBlockBundle(BlockCreator.Builder builder) {
+	public ColoredBlockBundle(BlockCreator.Builder builder) {
 		this(color -> builder.copy().name(color.getName() + "_" + builder.getName()).build());
 	}
 
 	/**
 	 * Creates a creator bundle containing blocks of 16 different colors.
 	 *
-	 * @param function The function for creating the blocks
+	 * @param function the function for creating the blocks
 	 */
-	public MCBlockBundle(Function<DyeColor, BlockCreator> function) {
+	public ColoredBlockBundle(Function<DyeColor, BlockCreator> function) {
 		for(DyeColor color : DyeColor.values()) {
 			map.put(color, put(function.apply(color)));
 		}

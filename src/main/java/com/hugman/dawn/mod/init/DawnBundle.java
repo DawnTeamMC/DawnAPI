@@ -15,9 +15,4 @@ public abstract class DawnBundle extends Bundle {
 		Dawn.MOD_DATA.addCreator(creator);
 		return creator;
 	}
-
-	protected static <V extends Bundle> V bundle(V bundle) {
-		Dawn.MOD_DATA.addBundle(bundle);
-		return bundle;
-	}
 }

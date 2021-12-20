@@ -13,19 +13,19 @@ public class WoodBundle extends Bundle {
 	private final LogsBundle logs;
 	private final BlockCreator stairs, slab, trapdoor, pressurePlate, button, fence, fenceGate, door;
 
-	protected WoodBundle(String prefix, MapColor planksColor, MapColor insideColor, MapColor barkColor, boolean isNether) {
+	protected WoodBundle(String name, MapColor planksColor, MapColor insideColor, MapColor barkColor, boolean isNether) {
 		FabricBlockSettings settings = FabricBlockSettings.copyOf(isNether ? Blocks.CRIMSON_PLANKS : Blocks.OAK_PLANKS).mapColor(planksColor);
-		BlockCreator.Builder builder = new BlockCreator.Builder().name(prefix).settings(settings);
-		this.planks = put(builder.copy(prefix + "_planks").from(DefaultBlockBuilders.PLANKS).build());
-		this.logs = put(new LogsBundle(prefix, insideColor, barkColor, isNether));
-		this.stairs = put(builder.copy(prefix + "_stairs").from(DefaultBlockBuilders.STAIRS).build());
-		this.slab = put(builder.copy(prefix + "_slab").from(DefaultBlockBuilders.SLAB).build());
-		this.trapdoor = put(builder.copy(prefix + "_trapdoor").from(DefaultBlockBuilders.TRAPDOOR).build());
-		this.pressurePlate = put(builder.copy(prefix + "_pressure_plate").from(DefaultBlockBuilders.WOOD_PRESSURE_PLATE).build());
-		this.button = put(builder.copy(prefix + "_button").from(DefaultBlockBuilders.WOOD_BUTTON).build());
-		this.fence = put(builder.copy(prefix + "_fence").from(DefaultBlockBuilders.FENCE).build());
-		this.fenceGate = put(builder.copy(prefix + "_fence_gate").from(DefaultBlockBuilders.FENCE_GATE).build());
-		this.door = put(builder.copy(prefix + "_door").from(DefaultBlockBuilders.DOOR).build());
+		BlockCreator.Builder builder = new BlockCreator.Builder().name(name).settings(settings);
+		this.planks = put(builder.copy(name + "_planks").from(DefaultBlockBuilders.PLANKS).build());
+		this.logs = put(new LogsBundle(name, insideColor, barkColor, isNether));
+		this.stairs = put(builder.copy(name + "_stairs").from(DefaultBlockBuilders.STAIRS).build());
+		this.slab = put(builder.copy(name + "_slab").from(DefaultBlockBuilders.SLAB).build());
+		this.trapdoor = put(builder.copy(name + "_trapdoor").from(DefaultBlockBuilders.TRAPDOOR).build());
+		this.pressurePlate = put(builder.copy(name + "_pressure_plate").from(DefaultBlockBuilders.WOOD_PRESSURE_PLATE).build());
+		this.button = put(builder.copy(name + "_button").from(DefaultBlockBuilders.WOOD_BUTTON).build());
+		this.fence = put(builder.copy(name + "_fence").from(DefaultBlockBuilders.FENCE).build());
+		this.fenceGate = put(builder.copy(name + "_fence_gate").from(DefaultBlockBuilders.FENCE_GATE).build());
+		this.door = put(builder.copy(name + "_door").from(DefaultBlockBuilders.DOOR).build());
 	}
 
 	public Block getPlanks() {
@@ -88,13 +88,13 @@ public class WoodBundle extends Bundle {
 		private final boolean isNether;
 
 		/**
-		 * Creates an entry pack containing blocks for basic wood types.
+		 * Creates a creator pack containing blocks for basic wood types.
 		 *
-		 * @param name        The name of the wood type. (ex: <code>oak</code>)
-		 * @param planksColor The material color of the planks.
-		 * @param insideColor The material color of the inside of logs.
-		 * @param barkColor   The material color of the bark side of logs.
-		 * @param isNether    Defines if the wood type comes from the nether. (changes the name, sounds and materials)
+		 * @param name        the name of the wood type. (ex: <code>oak</code>)
+		 * @param planksColor the material color of the planks
+		 * @param insideColor the material color of the inside of logs
+		 * @param barkColor   the material color of the bark side of logs
+		 * @param isNether    defines if the wood type comes from the nether (changes the name, sounds and materials)
 		 */
 		public Builder(String name, MapColor planksColor, MapColor insideColor, MapColor barkColor, boolean isNether) {
 			this.name = name;

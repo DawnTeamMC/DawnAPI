@@ -32,10 +32,6 @@ public class ModData {
 		creators.add(creator);
 	}
 
-	public void addBundle(Bundle bundle) {
-		creators.add(bundle);
-	}
-
 	public void addOldName(String string) {
 		oldModNames.add(string);
 	}
