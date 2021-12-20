@@ -1,7 +1,6 @@
 package com.hugman.dawn.api.creator;
 
 import com.hugman.dawn.api.object.ModData;
-import com.hugman.dawn.api.util.StringUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
@@ -100,7 +99,7 @@ public class BlockCreator extends SimpleCreator<Block> {
 	public static class Builder {
 		protected String name;
 		protected Block block;
-		protected Function<AbstractBlock.Settings, ? extends Block> blockProvider;
+		protected Function<AbstractBlock.Settings, ? extends Block> provider;
 		protected AbstractBlock.Settings settings;
 		protected Render render;
 		protected ItemGroup itemGroup;
@@ -113,10 +112,10 @@ public class BlockCreator extends SimpleCreator<Block> {
 		public Builder() {
 		}
 
-		protected Builder(String name, Block block, Function<AbstractBlock.Settings, ? extends Block> blockProvider, AbstractBlock.Settings settings, Render render, ItemGroup itemGroup, int flammabilityBurn, int flammabilitySpread, boolean noItem, int cookTime, float compostingChance) {
+		protected Builder(String name, Block block, Function<AbstractBlock.Settings, ? extends Block> provider, AbstractBlock.Settings settings, Render render, ItemGroup itemGroup, int flammabilityBurn, int flammabilitySpread, boolean noItem, int cookTime, float compostingChance) {
 			this.name = name;
 			this.block = block;
-			this.blockProvider = blockProvider;
+			this.provider = provider;
 			this.settings = settings;
 			this.render = render;
 			this.itemGroup = itemGroup;
@@ -127,9 +126,9 @@ public class BlockCreator extends SimpleCreator<Block> {
 			this.compostingChance = compostingChance;
 		}
 
-		public Builder(String name, Function<AbstractBlock.Settings, ? extends Block> blockProvider, AbstractBlock.Settings settings) {
+		public Builder(String name, Function<AbstractBlock.Settings, ? extends Block> provider, AbstractBlock.Settings settings) {
 			this.name = name;
-			this.blockProvider = blockProvider;
+			this.provider = provider;
 			this.settings = settings;
 		}
 
@@ -178,8 +177,8 @@ public class BlockCreator extends SimpleCreator<Block> {
 		 *
 		 * @return this builder for chaining
 		 */
-		public Builder provider(Function<AbstractBlock.Settings, ? extends Block> blockProvider) {
-			this.blockProvider = blockProvider;
+		public Builder provider(Function<AbstractBlock.Settings, ? extends Block> provider) {
+			this.provider = provider;
 			this.block = null;
 			return this;
 		}
@@ -290,7 +289,7 @@ public class BlockCreator extends SimpleCreator<Block> {
 		public Builder from(Builder template) {
 			this.name = template.name != null ? template.name : this.name;
 			this.block = template.block != null ? template.block : this.block;
-			this.blockProvider = template.blockProvider != null ? template.blockProvider : this.blockProvider;
+			this.provider = template.provider != null ? template.provider : this.provider;
 			this.settings = template.settings != null ? template.settings : this.settings;
 			this.render = template.render != null ? template.render : this.render;
 			this.itemGroup = template.itemGroup != null ? template.itemGroup : this.itemGroup;
@@ -326,9 +325,9 @@ public class BlockCreator extends SimpleCreator<Block> {
 			Builder newBuilder = copy();
 			Objects.requireNonNull(this.name, "Cannot build a block with no name!");
 			if(newBuilder.block == null) {
-				Objects.requireNonNull(this.blockProvider, "Cannot build a block with no block provider!");
+				Objects.requireNonNull(this.provider, "Cannot build a block with no block provider!");
 				Objects.requireNonNull(this.settings, "Cannot build a block with no block settings!");
-				newBuilder.block(this.blockProvider.apply(this.settings));
+				newBuilder.block(this.provider.apply(this.settings));
 			}
 			Objects.requireNonNull(newBuilder.block, "Cannot build a block with no block!");
 			return new BlockCreator(newBuilder);
@@ -351,7 +350,7 @@ public class BlockCreator extends SimpleCreator<Block> {
 		 * @return the new builder
 		 */
 		public Builder copy(String name) {
-			return new Builder(name, this.block != null ? new Block(FabricBlockSettings.copyOf(this.block)) : null, this.blockProvider, this.settings != null ? FabricBlockSettings.copyOf(this.settings) : null, this.render, this.itemGroup, this.flammabilityBurn, this.flammabilitySpread, this.noItem, this.cookTime, this.compostingChance);
+			return new Builder(name, this.block != null ? new Block(FabricBlockSettings.copyOf(this.block)) : null, this.provider, this.settings != null ? FabricBlockSettings.copyOf(this.settings) : null, this.render, this.itemGroup, this.flammabilityBurn, this.flammabilitySpread, this.noItem, this.cookTime, this.compostingChance);
 		}
 	}
 }
