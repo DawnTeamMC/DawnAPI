@@ -149,9 +149,9 @@ public class CauldronInteractionBuilder {
 				if(!world.isClient) {
 					BlockState returnedState = CauldronUtil.modifyCauldron(state, cauldron, newLevel);
 
-					player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, stack.copy()));
+					player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, this.stack.copy()));
 					player.incrementStat(CauldronUtil.isFull(returnedState) ? Stats.FILL_CAULDRON : Stats.USE_CAULDRON);
-					player.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));
+					player.incrementStat(Stats.USED.getOrCreateStat(this.stack.getItem()));
 					world.setBlockState(pos, returnedState);
 					world.emitGameEvent(null, newLevel < 0 ? GameEvent.FLUID_PICKUP : GameEvent.FLUID_PLACE, pos);
 					if(sound != null) world.playSound(null, pos, sound, SoundCategory.BLOCKS, 1.0F, 1.0F);
