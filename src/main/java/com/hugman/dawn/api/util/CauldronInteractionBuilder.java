@@ -16,15 +16,15 @@ import java.util.function.Predicate;
 
 public class CauldronInteractionBuilder {
 	private Predicate<BlockState> predicate;
-	private Item item;
+	private ItemStack stack;
 	private Block cauldron;
 	private int level;
 	private boolean overwriteLevel;
 	private SoundEvent sound;
 
-	private CauldronInteractionBuilder(Predicate<BlockState> predicate, Item item, Block cauldron, int level, boolean overwriteLevel, SoundEvent sound) {
+	private CauldronInteractionBuilder(Predicate<BlockState> predicate, ItemStack stack, Block cauldron, int level, boolean overwriteLevel, SoundEvent sound) {
 		this.predicate = predicate;
-		this.item = item;
+		this.stack = stack;
 		this.cauldron = cauldron;
 		this.level = level;
 		this.overwriteLevel = overwriteLevel;
@@ -64,7 +64,7 @@ public class CauldronInteractionBuilder {
 	 * @return this builder for chaining
 	 */
 	public CauldronInteractionBuilder stack(ItemStack newStack) {
-		this.item = newStack.getItem();
+		this.stack = newStack;
 		return this;
 	}
 
@@ -76,7 +76,7 @@ public class CauldronInteractionBuilder {
 	 * @return this builder for chaining
 	 */
 	public CauldronInteractionBuilder item(Item item) {
-		this.item = item;
+		this.stack = item.getDefaultStack();
 		return this;
 	}
 
@@ -149,7 +149,7 @@ public class CauldronInteractionBuilder {
 				if(!world.isClient) {
 					BlockState returnedState = CauldronUtil.modifyCauldron(state, cauldron, newLevel);
 
-					player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, item.getDefaultStack()));
+					player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, stack.copy()));
 					player.incrementStat(CauldronUtil.isFull(returnedState) ? Stats.FILL_CAULDRON : Stats.USE_CAULDRON);
 					player.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));
 					world.setBlockState(pos, returnedState);
@@ -168,6 +168,6 @@ public class CauldronInteractionBuilder {
 	 * @return the new builder
 	 */
 	public CauldronInteractionBuilder copy() {
-		return new CauldronInteractionBuilder(this.predicate, this.item, this.cauldron, this.level, this.overwriteLevel, this.sound);
+		return new CauldronInteractionBuilder(this.predicate, this.stack, this.cauldron, this.level, this.overwriteLevel, this.sound);
 	}
 }

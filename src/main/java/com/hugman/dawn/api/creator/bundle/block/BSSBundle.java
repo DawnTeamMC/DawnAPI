@@ -10,7 +10,7 @@ public class BSSBundle extends Bundle {
 	private final BlockCreator block, stairs, slab;
 
 	/**
-	 * Creates a creator bundle containing slab and stairs variants for a block.
+	 * Bundle builder that contains slab and stairs variants for a block.
 	 *
 	 * @param builder the base builder for all the blocks
 	 */

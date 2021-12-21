@@ -18,12 +18,12 @@ public class LogsBundle extends Bundle {
 	private final BlockCreator log, strippedLog, wood, strippedWood;
 
 	/**
-	 * Creates a creator bundle containing a log, a wood block and their stripped variants.
+	 * Bundle builder that contains a log, a wood block and their stripped variants.
 	 *
-	 * @param name        the name of the wood type. (ex: <code>oak</code>)
-	 * @param insideColor the material color of the inside of logs.
-	 * @param barkColor   the material color of the bark side of logs.
-	 * @param isNether    defines if the wood type comes from the nether. (changes the name, sounds and materials)
+	 * @param name        the name of the wood type (ex: <code>oak</code>)
+	 * @param insideColor the material color of the inside of logs
+	 * @param barkColor   the material color of the bark side of logs
+	 * @param isNether    defines if the wood type comes from the nether (changes the name, sounds and materials)
 	 */
 	protected LogsBundle(String name, MapColor insideColor, MapColor barkColor, boolean isNether) {
 		String logName = isNether ? "_stem" : "_log";

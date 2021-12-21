@@ -88,7 +88,7 @@ public class WoodBundle extends Bundle {
 		private final boolean isNether;
 
 		/**
-		 * Creates a creator pack containing blocks for basic wood types.
+		 * Bundle builder that contains blocks for basic wood types.
 		 *
 		 * @param name        the name of the wood type. (ex: <code>oak</code>)
 		 * @param planksColor the material color of the planks

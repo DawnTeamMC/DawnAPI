@@ -9,6 +9,12 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
+/**
+ * Mixin that automatically patches in old IDs replacements
+ *
+ * @see ModData#addOldName
+ * @see ModData#addOldId
+ */
 @Mixin(DefaultedRegistry.class)
 public class DefaultedRegistryMixin {
 	@ModifyVariable(at = @At("HEAD"), method = "get(Lnet/minecraft/util/Identifier;)Ljava/lang/Object;", ordinal = 0)

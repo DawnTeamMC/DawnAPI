@@ -14,9 +14,9 @@ import java.util.function.Supplier;
 public class NetherWoodBundle extends WoodBundle {
 	private final PlantBundle fungusPack;
 
-	protected NetherWoodBundle(String prefix, Supplier<ConfiguredFeature<HugeFungusFeatureConfig, ?>> hugeFungusSupplier, MapColor planksColor, MapColor insideColor, MapColor barkColor) {
-		super(prefix, planksColor, insideColor, barkColor, true);
-		this.fungusPack = put(new PlantBundle(new BlockCreator.Builder(prefix + "_fungus", settings -> new FungusBlock(settings, hugeFungusSupplier), DefaultBlockSettings.FUNGUS).compostingChance(0.65F).itemGroup(ItemGroup.DECORATIONS).render(BlockCreator.Render.CUTOUT_MIPPED)));
+	protected NetherWoodBundle(String name, Supplier<ConfiguredFeature<HugeFungusFeatureConfig, ?>> hugeFungusSupplier, MapColor planksColor, MapColor insideColor, MapColor barkColor) {
+		super(name, planksColor, insideColor, barkColor, true);
+		this.fungusPack = put(new PlantBundle(new BlockCreator.Builder(name + "_fungus", settings -> new FungusBlock(settings, hugeFungusSupplier), DefaultBlockSettings.FUNGUS).compostingChance(0.65F).itemGroup(ItemGroup.DECORATIONS).render(BlockCreator.Render.CUTOUT_MIPPED)));
 	}
 
 	public Block getStem() {
@@ -51,25 +51,25 @@ public class NetherWoodBundle extends WoodBundle {
 		private final MapColor barkColor;
 
 		/**
-		 * Creates an entry pack containing blocks for nether wood types.
+		 * Bundle builder that contains blocks for nether wood types.
 		 *
-		 * @param prefix             The prefix of the wood type. (ex: <code>crimson</code>)
-		 * @param hugeFungusSupplier The supplier for the huge fungus feature.
-		 * @param woodColor          The material color of the wood.
-		 * @param barkColor          The material color of the bark side of stems.
+		 * @param prefix             the prefix of the wood type (ex: <code>crimson</code>)
+		 * @param hugeFungusSupplier the supplier for the huge fungus feature
+		 * @param woodColor          the material color of the wood
+		 * @param barkColor          the material color of the bark side of stems
 		 */
 		public Builder(String prefix, Supplier<ConfiguredFeature<HugeFungusFeatureConfig, ?>> hugeFungusSupplier, MapColor woodColor, MapColor barkColor) {
 			this(prefix, hugeFungusSupplier, woodColor, woodColor, barkColor);
 		}
 
 		/**
-		 * Creates an entry pack containing blocks for nether wood types.
+		 * Bundle builder that contains blocks for nether wood types.
 		 *
-		 * @param prefix             The prefix of the wood type. (ex: <code>crimson</code>)
-		 * @param hugeFungusSupplier The supplier for the huge fungus feature.
-		 * @param planksColor        The material color of the planks.
-		 * @param insideColor        The material color of the inside of stems.
-		 * @param barkColor          The material color of the bark side of stems.
+		 * @param prefix             the prefix of the wood type (ex: <code>crimson</code>)
+		 * @param hugeFungusSupplier the supplier for the huge fungus feature
+		 * @param planksColor        the material color of the planks
+		 * @param insideColor        the material color of the inside of stems
+		 * @param barkColor          the material color of the bark side of stems
 		 */
 		public Builder(String prefix, Supplier<ConfiguredFeature<HugeFungusFeatureConfig, ?>> hugeFungusSupplier, MapColor planksColor, MapColor insideColor, MapColor barkColor) {
 			this.prefix = prefix;

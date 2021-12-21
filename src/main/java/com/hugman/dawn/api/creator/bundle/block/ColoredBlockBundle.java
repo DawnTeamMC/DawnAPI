@@ -13,10 +13,10 @@ public class ColoredBlockBundle extends Bundle {
 	private final Map<DyeColor, BlockCreator> map = new HashMap<>();
 
 	/**
-	 * Creates a creator bundle containing blocks of 16 different colors.
+	 * Bundle builder that contains blocks of all 16 Minecraft colors.
 	 *
-	 * @param builder  the base block creator builder.
-	 * @param template the template to use.
+	 * @param builder  the base block creator builder
+	 * @param template the template to use
 	 */
 	@Deprecated
 	public ColoredBlockBundle(BlockCreator.Builder builder, BlockCreator.Builder template) {
@@ -24,16 +24,16 @@ public class ColoredBlockBundle extends Bundle {
 	}
 
 	/**
-	 * Creates a creator bundle containing blocks of 16 different colors.
+	 * Bundle builder that contains blocks of all 16 Minecraft colors.
 	 *
-	 * @param builder  the base block creator builder.
+	 * @param builder  the base block creator builder
 	 */
 	public ColoredBlockBundle(BlockCreator.Builder builder) {
 		this(color -> builder.copy().name(color.getName() + "_" + builder.getName()).build());
 	}
 
 	/**
-	 * Creates a creator bundle containing blocks of 16 different colors.
+	 * Bundle builder that contains blocks of all 16 Minecraft colors.
 	 *
 	 * @param function the function for creating the blocks
 	 */
