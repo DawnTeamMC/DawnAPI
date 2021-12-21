@@ -6,19 +6,9 @@ public final class StringUtil {
 		return new String[]{s.substring(0, i), s.substring(i)};
 	}
 
-	public static String parseSuffix(String suffix, String name) {
-		if(!suffix.isEmpty()) {
-			suffix = "_" + suffix;
-		}
-		if(name.endsWith("_")) {
-			name = name.substring(0, name.length() - 1);
-		}
-		boolean b = name.endsWith("bricks") || name.endsWith("tiles");
-		if(!suffix.isEmpty() && b) {
-			return name.substring(0, name.length() - 1) + suffix;
-		}
-		else {
-			return name + suffix;
-		}
+	public static String parsePluralBlockName(String name) {
+		if(name.endsWith("bricks") || name.endsWith("tiles")) return name.substring(0, name.length() - 1);
+		else return name;
 	}
+
 }

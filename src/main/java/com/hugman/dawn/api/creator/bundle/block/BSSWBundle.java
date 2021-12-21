@@ -3,6 +3,7 @@ package com.hugman.dawn.api.creator.bundle.block;
 import com.hugman.dawn.api.creator.BlockCreator;
 import com.hugman.dawn.api.creator.bundle.Bundle;
 import com.hugman.dawn.api.util.DefaultBlockBuilders;
+import com.hugman.dawn.api.util.StringUtil;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 
@@ -16,7 +17,7 @@ public class BSSWBundle extends BSSBundle {
 	 */
 	public BSSWBundle(BlockCreator.Builder builder) {
 		super(builder);
-		this.wall = put(builder.copy(builder.getName() + "_wall").from(DefaultBlockBuilders.WALL).build());
+		this.wall = put(builder.copy(StringUtil.parsePluralBlockName(builder.getName()) + "_wall").from(DefaultBlockBuilders.WALL).build());
 	}
 
 	public Block getWall() {
