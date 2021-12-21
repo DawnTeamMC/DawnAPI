@@ -10,5 +10,4 @@ public final class StringUtil {
 		if(name.endsWith("bricks") || name.endsWith("tiles")) return name.substring(0, name.length() - 1);
 		else return name;
 	}
-
 }
