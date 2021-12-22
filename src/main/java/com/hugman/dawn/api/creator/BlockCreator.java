@@ -31,7 +31,7 @@ public class BlockCreator extends SimpleCreator<Block> {
 	 * @param builder the builder used to create the block itself
 	 */
 	private BlockCreator(Builder builder) {
-		super(Registry.BLOCK, builder.name, builder.block);
+		super(Registry.BLOCK, builder.name, builder.provider.apply(builder.settings));
 		this.builder = builder;
 	}
 
@@ -98,7 +98,6 @@ public class BlockCreator extends SimpleCreator<Block> {
 
 	public static class Builder {
 		protected String name;
-		protected Block block;
 		protected Function<AbstractBlock.Settings, ? extends Block> provider;
 		protected AbstractBlock.Settings settings;
 		protected Render render;
@@ -112,9 +111,8 @@ public class BlockCreator extends SimpleCreator<Block> {
 		public Builder() {
 		}
 
-		protected Builder(String name, Block block, Function<AbstractBlock.Settings, ? extends Block> provider, AbstractBlock.Settings settings, Render render, ItemGroup itemGroup, int flammabilityBurn, int flammabilitySpread, boolean noItem, int cookTime, float compostingChance) {
+		protected Builder(String name, Function<AbstractBlock.Settings, ? extends Block> provider, AbstractBlock.Settings settings, Render render, ItemGroup itemGroup, int flammabilityBurn, int flammabilitySpread, boolean noItem, int cookTime, float compostingChance) {
 			this.name = name;
-			this.block = block;
 			this.provider = provider;
 			this.settings = settings;
 			this.render = render;
@@ -139,11 +137,6 @@ public class BlockCreator extends SimpleCreator<Block> {
 			this.settings = settings;
 		}
 
-		public Builder(String name, Block block) {
-			this.name = name;
-			this.block = block;
-		}
-
 		/**
 		 * Sets the name of this block.
 		 *
@@ -162,36 +155,22 @@ public class BlockCreator extends SimpleCreator<Block> {
 		}
 
 		/**
-		 * Sets the block.
-		 *
-		 * @return this builder for chaining
-		 */
-		public Builder block(Block block) {
-			this.block = block;
-			return this;
-		}
-
-		/**
 		 * Sets the block provider of this block.
-		 * <p>Note: Also resets the block variable.</p>
 		 *
 		 * @return this builder for chaining
 		 */
 		public Builder provider(Function<AbstractBlock.Settings, ? extends Block> provider) {
 			this.provider = provider;
-			this.block = null;
 			return this;
 		}
 
 		/**
 		 * Sets the vanilla settings of this block.
-		 * <p>Note: Also resets the block variable.</p>
 		 *
 		 * @return this builder for chaining
 		 */
 		public Builder settings(AbstractBlock.Settings settings) {
 			this.settings = settings;
-			this.block = null;
 			return this;
 		}
 
@@ -288,7 +267,6 @@ public class BlockCreator extends SimpleCreator<Block> {
 		 */
 		public Builder from(Builder template) {
 			this.name = template.name != null ? template.name : this.name;
-			this.block = template.block != null ? template.block : this.block;
 			this.provider = template.provider != null ? template.provider : this.provider;
 			this.settings = template.settings != null ? template.settings : this.settings;
 			this.render = template.render != null ? template.render : this.render;
@@ -322,15 +300,10 @@ public class BlockCreator extends SimpleCreator<Block> {
 		 * @throws NullPointerException if either the name, the block provider or the vanilla settings builder is not set
 		 */
 		public BlockCreator build() {
-			Builder newBuilder = copy();
 			Objects.requireNonNull(this.name, "Cannot build a block with no name!");
-			if(newBuilder.block == null) {
-				Objects.requireNonNull(this.provider, "Cannot build a block with no block provider!");
-				Objects.requireNonNull(this.settings, "Cannot build a block with no block settings!");
-				newBuilder.block(this.provider.apply(this.settings));
-			}
-			Objects.requireNonNull(newBuilder.block, "Cannot build a block with no block!");
-			return new BlockCreator(newBuilder);
+			Objects.requireNonNull(this.provider, "Cannot build a block with no block provider!");
+			Objects.requireNonNull(this.settings, "Cannot build a block with no block settings!");
+			return new BlockCreator(copy());
 		}
 
 		/**
@@ -350,7 +323,7 @@ public class BlockCreator extends SimpleCreator<Block> {
 		 * @return the new builder
 		 */
 		public Builder copy(String name) {
-			return new Builder(name, this.block != null ? new Block(FabricBlockSettings.copyOf(this.block)) : null, this.provider, this.settings != null ? FabricBlockSettings.copyOf(this.settings) : null, this.render, this.itemGroup, this.flammabilityBurn, this.flammabilitySpread, this.noItem, this.cookTime, this.compostingChance);
+			return new Builder(name, this.provider, this.settings != null ? FabricBlockSettings.copyOf(this.settings) : null, this.render, this.itemGroup, this.flammabilityBurn, this.flammabilitySpread, this.noItem, this.cookTime, this.compostingChance);
 		}
 	}
 }
