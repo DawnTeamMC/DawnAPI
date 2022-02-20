@@ -70,7 +70,7 @@ public class FlyingBlockEntity extends Entity {
 	public FlyingBlockEntity(World world, double x, double y, double z, BlockState state) {
 		this(DawnEntities.FLYING_BLOCK, world);
 		this.state = state;
-		this.inanimate = true;
+		this.intersectionChecked = true;
 		this.updatePosition(x, y + (double) ((1.0F - this.getHeight()) / 2.0F), z);
 		this.setVelocity(Vec3d.ZERO);
 		this.prevX = x;
@@ -308,7 +308,7 @@ public class FlyingBlockEntity extends Entity {
 	public void onSpawnPacket(EntitySpawnS2CPacket packet) {
 		super.onSpawnPacket(packet);
 		this.state = Block.getStateFromRawId(packet.getEntityData());
-		this.inanimate = true;
+		this.intersectionChecked = true;
 		double d = packet.getX();
 		double e = packet.getY();
 		double f = packet.getZ();

@@ -30,7 +30,7 @@ public class CustomTNTEntity extends Entity {
 
 	public CustomTNTEntity(EntityType<? extends CustomTNTEntity> type, World worldIn) {
 		super(type, worldIn);
-		this.inanimate = true;
+		this.intersectionChecked = true;
 	}
 
 	public CustomTNTEntity(World world, double x, double y, double z, BlockState state, int fuse, float strength, LivingEntity igniter) {
@@ -156,7 +156,7 @@ public class CustomTNTEntity extends Entity {
 	public void onSpawnPacket(EntitySpawnS2CPacket packet) {
 		super.onSpawnPacket(packet);
 		this.state = Block.getStateFromRawId(packet.getEntityData());
-		this.inanimate = true;
+		this.intersectionChecked = true;
 		double d = packet.getX();
 		double e = packet.getY();
 		double f = packet.getZ();
