@@ -1,7 +1,6 @@
 package com.hugman.dawn.api.creator;
 
 import com.hugman.dawn.api.object.ModData;
-import net.fabricmc.fabric.api.structure.v1.FabricStructureBuilder;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
@@ -48,8 +47,12 @@ public class StructureFeatureCreator<FC extends FeatureConfig, S extends Structu
 
 	@Override
 	public void register(ModData modData) {
+		// TODO
+
+		/*
 		FabricStructureBuilder<FC, S> builder = FabricStructureBuilder.create(modData.id(name), this.structure).step(step).defaultConfig(spacing, separation, salt);
 		if(adjustsSurface) builder.adjustsSurface();
 		this.structure = builder.register();
+		 */
 	}
 }

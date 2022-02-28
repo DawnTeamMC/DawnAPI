@@ -70,10 +70,10 @@ public class FoodbarCommand {
 		for(ServerPlayerEntity entity : targets) {
 			HungerManager stats = entity.getHungerManager();
 			if(sum) {
-				((HungerManagerAccessor) stats).setFoodSaturationLevel(amount + stats.getSaturationLevel());
+				((HungerManagerAccessor) stats).setSaturationLevel(amount + stats.getSaturationLevel());
 			}
 			else {
-				((HungerManagerAccessor) stats).setFoodSaturationLevel(amount);
+				((HungerManagerAccessor) stats).setSaturationLevel(amount);
 			}
 		}
 		final String parameter;
