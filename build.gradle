@@ -7,9 +7,6 @@ apply from: 'https://raw.githubusercontent.com/DawnTeamMC/DawnTeamMC/master/grad
 apply from: 'https://raw.githubusercontent.com/DawnTeamMC/DawnTeamMC/master/gradle_scripts/fabric-translate.gradle'
 
 repositories {
-    mavenLocal()
-    maven { url 'https://jitpack.io' }
-
     maven { url 'https://maven.shedaniel.me/' }       // Required for Cloth Config
     maven { url 'https://maven.terraformersmc.com/' } // Required for Mod Menu
     maven { url 'https://maven.ryanliptak.com/' }     // Required for AppleSkin
