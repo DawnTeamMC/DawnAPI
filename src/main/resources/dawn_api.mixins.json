@@ -2,7 +2,11 @@
 	"required": true,
 	"package": "com.hugman.dawn.api.mixin",
 	"compatibilityLevel": "JAVA_16",
-	"mixins": ["DefaultedRegistryMixin", "HungerManagerMixin", "ItemAccessor"],
+	"mixins": [
+		"DefaultedRegistryMixin",
+		"HungerManagerMixin",
+		"ItemAccessor"
+	],
 	"injectors": {
 		"defaultRequire": 1
 	}
