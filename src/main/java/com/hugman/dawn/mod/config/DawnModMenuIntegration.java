@@ -1,4 +1,4 @@
-package com.hugman.dawn.config;
+package com.hugman.dawn.mod.config;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;

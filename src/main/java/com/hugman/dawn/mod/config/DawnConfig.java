@@ -1,4 +1,4 @@
-package com.hugman.dawn.config;
+package com.hugman.dawn.mod.config;
 
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;

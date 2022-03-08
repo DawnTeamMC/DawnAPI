@@ -14,7 +14,7 @@ import net.minecraft.block.PressurePlateBlock.ActivationRule;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.sound.BlockSoundGroup;
 
-public class DefaultBlockBuilders {
+public final class DefaultBlockBuilders {
 	public static final BlockCreator.Builder CUBE = new BlockCreator.Builder().provider(Block::new).itemGroup(ItemGroup.BUILDING_BLOCKS);
 	public static final BlockCreator.Builder PLANKS = new BlockCreator.Builder().provider(Block::new).itemGroup(ItemGroup.BUILDING_BLOCKS);
 	public static final BlockCreator.Builder STAIRS = new BlockCreator.Builder().provider(StairsBlock::new).itemGroup(ItemGroup.BUILDING_BLOCKS);
