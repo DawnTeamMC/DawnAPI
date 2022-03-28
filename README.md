@@ -8,6 +8,10 @@ In order to use Dawn API as a library for your project, add the following in you
 ```gradle
 repositories {
     maven { url 'https://jitpack.io' }
+    
+    maven { url 'https://maven.shedaniel.me/' }       // Required for Cloth Config
+    maven { url 'https://maven.terraformersmc.com/' } // Required for Mod Menu
+    maven { url 'https://maven.ryanliptak.com/' }     // Required for AppleSkin
 }
 
 dependencies {
@@ -17,5 +21,5 @@ dependencies {
 
 Then, add the version in your ``gradle.properties``:
 ```properties
-dawn_version = 2.0.5
+dawn_version = 3.3.0
 ```

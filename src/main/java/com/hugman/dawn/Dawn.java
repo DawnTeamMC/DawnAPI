@@ -1,7 +1,7 @@
 package com.hugman.dawn;
 
 import com.hugman.dawn.api.object.ModData;
-import com.hugman.dawn.config.DawnConfig;
+import com.hugman.dawn.mod.config.DawnConfig;
 import com.hugman.dawn.mod.init.DawnCommands;
 import com.hugman.dawn.mod.init.DawnEntities;
 import com.hugman.dawn.mod.init.DawnItemGroups;

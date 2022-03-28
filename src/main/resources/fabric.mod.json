@@ -5,7 +5,9 @@
 	"version": "${version}",
 	"icon": "assets/${mod_id}/textures/logo.png",
 	"authors": [
-		"Hugman",
+		"Hugman"
+	],
+	"contributors": [
 		"YanisBft"
 	],
 	"contact": {
@@ -21,7 +23,7 @@
 			"com.hugman.dawn.DawnClient"
 		],
 		"modmenu": [
-			"com.hugman.dawn.config.DawnModMenuIntegration"
+			"com.hugman.dawn.mod.config.DawnModMenuIntegration"
 		],
 		"appleskin" : [
 			"com.hugman.dawn.api.compat.AppleSkinEventHandler"
@@ -31,12 +33,15 @@
 		"dawn_api.mixins.json",
 		"dawn_mod.mixins.json"
 	],
+	"accessWidener": "dawn.aw",
 	"depends": {
-		"minecraft": ">=1.18",
-		"fabric": "*"
+		"minecraft": ">=1.18.2",
+		"fabric": "*",
+		"cloth-config": "*"
 	},
 	"suggests": {
-		"appleskin": "*"
+		"appleskin": "*",
+		"modmenu": "*"
 	},
 	"custom": {
 		"modmenu": {

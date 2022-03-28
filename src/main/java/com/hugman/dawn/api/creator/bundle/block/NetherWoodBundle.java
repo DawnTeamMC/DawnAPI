@@ -6,6 +6,7 @@ import com.hugman.dawn.api.util.DefaultBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.MapColor;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.HugeFungusFeatureConfig;
 
@@ -14,7 +15,7 @@ import java.util.function.Supplier;
 public class NetherWoodBundle extends WoodBundle {
 	private final PlantBundle fungusPack;
 
-	protected NetherWoodBundle(String name, Supplier<ConfiguredFeature<HugeFungusFeatureConfig, ?>> hugeFungusSupplier, MapColor planksColor, MapColor insideColor, MapColor barkColor) {
+	protected NetherWoodBundle(String name, Supplier<RegistryEntry<ConfiguredFeature<HugeFungusFeatureConfig, ?>>> hugeFungusSupplier, MapColor planksColor, MapColor insideColor, MapColor barkColor) {
 		super(name, planksColor, insideColor, barkColor, true);
 		this.fungusPack = put(new PlantBundle(new BlockCreator.Builder(name + "_fungus", settings -> new FungusBlock(settings, hugeFungusSupplier), DefaultBlockSettings.FUNGUS).compostingChance(0.65F).itemGroup(ItemGroup.DECORATIONS).render(BlockCreator.Render.CUTOUT_MIPPED)));
 	}
@@ -45,7 +46,7 @@ public class NetherWoodBundle extends WoodBundle {
 
 	public static class Builder {
 		private final String prefix;
-		private final Supplier<ConfiguredFeature<HugeFungusFeatureConfig, ?>> hugeFungusSupplier;
+		private final Supplier<RegistryEntry<ConfiguredFeature<HugeFungusFeatureConfig, ?>>> hugeFungusSupplier;
 		private final MapColor planksColor;
 		private final MapColor insideColor;
 		private final MapColor barkColor;
@@ -58,7 +59,7 @@ public class NetherWoodBundle extends WoodBundle {
 		 * @param woodColor          the material color of the wood
 		 * @param barkColor          the material color of the bark side of stems
 		 */
-		public Builder(String prefix, Supplier<ConfiguredFeature<HugeFungusFeatureConfig, ?>> hugeFungusSupplier, MapColor woodColor, MapColor barkColor) {
+		public Builder(String prefix, Supplier<RegistryEntry<ConfiguredFeature<HugeFungusFeatureConfig, ?>>> hugeFungusSupplier, MapColor woodColor, MapColor barkColor) {
 			this(prefix, hugeFungusSupplier, woodColor, woodColor, barkColor);
 		}
 
@@ -71,7 +72,7 @@ public class NetherWoodBundle extends WoodBundle {
 		 * @param insideColor        the material color of the inside of stems
 		 * @param barkColor          the material color of the bark side of stems
 		 */
-		public Builder(String prefix, Supplier<ConfiguredFeature<HugeFungusFeatureConfig, ?>> hugeFungusSupplier, MapColor planksColor, MapColor insideColor, MapColor barkColor) {
+		public Builder(String prefix, Supplier<RegistryEntry<ConfiguredFeature<HugeFungusFeatureConfig, ?>>> hugeFungusSupplier, MapColor planksColor, MapColor insideColor, MapColor barkColor) {
 			this.prefix = prefix;
 			this.hugeFungusSupplier = hugeFungusSupplier;
 			this.planksColor = planksColor;
