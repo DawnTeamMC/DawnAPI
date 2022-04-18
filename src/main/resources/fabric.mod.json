@@ -11,6 +11,7 @@
 		"YanisBft"
 	],
 	"contact": {
+		"homepage": "https://dawnteammc.github.io/",
 		"sources": "https://github.com/DawnTeamMC/${github_name}",
 		"issues": "https://github.com/DawnTeamMC/${github_name}/issues"
 	},
