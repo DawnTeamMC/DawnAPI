@@ -1,4 +1,4 @@
-[![Dawn API](https://raw.githubusercontent.com/DawnTeamMC/DawnTeamMC/master/dawn_api/header.png)](https://dawnteammc.github.io/)
+[![Dawn API](https://dawnteammc.github.io/images/dawn_api/header.png)](https://dawnteammc.github.io/)
 
 # 🌙 Dawn API
 [![Latest release](https://img.shields.io/github/release/DawnTeamMC/DawnAPI.svg)](https://github.com/DawnTeamMC/DawnAPI/releases/latest)
