@@ -26,5 +26,5 @@ dependencies {
 }
 
 loom {
-    accessWidenerPath = file("src/main/resources/dawn.aw")
+    accessWidenerPath = file("src/main/resources/dawn.accesswidener")
 }

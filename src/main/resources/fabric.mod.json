@@ -34,7 +34,7 @@
 		"dawn_api.mixins.json",
 		"dawn_mod.mixins.json"
 	],
-	"accessWidener": "dawn.aw",
+	"accessWidener": "dawn.accesswidener",
 	"depends": {
 		"minecraft": ">=1.18.2",
 		"fabric": "*",
