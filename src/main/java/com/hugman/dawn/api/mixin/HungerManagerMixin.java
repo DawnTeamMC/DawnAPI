@@ -16,7 +16,7 @@ public abstract class HungerManagerMixin {
 	public abstract void add(int food, float saturationModifier);
 
 	@Inject(method = "eat", at = @At(value = "HEAD"), cancellable = true)
-	public void culinaire$eat(Item item, ItemStack stack, CallbackInfo ci) {
+	public void dawn$eat(Item item, ItemStack stack, CallbackInfo ci) {
 		if(item instanceof DynamicFood dynamicFood) {
 			this.add(dynamicFood.getHunger(stack), dynamicFood.getSaturationModifier(stack));
 			ci.cancel();

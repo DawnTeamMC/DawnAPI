@@ -2,7 +2,7 @@ package com.hugman.dawn.mod.object.command;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.FloatArgumentType;
-import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import com.mojang.brigadier.tree.LiteralCommandNode;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -13,17 +13,38 @@ import net.minecraft.text.TranslatableText;
 
 import java.util.Collection;
 
-public class HealthCommand {
+public class HealthCommand
+{
+	public static final int PERMISSION_LEVEL = 2;
+	public static final String NAME = "health";
+	public static final String NAME_2 = "hp";
+	public static final String ADD_ARG = "add";
+	public static final String SET_ARG = "set";
+	public static final String QUERY_ARG = "query";
+	public static final String TARGETS_ARG = "targets";
+	public static final String TARGET_ARG = "target";
+	public static final String AMOUNT_AGG = "amount";
+
 	public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
-		dispatcher.register(LiteralArgumentBuilder.<ServerCommandSource>literal("health").requires((source) -> source.hasPermissionLevel(2))
-				.then(CommandManager.literal("add").then(CommandManager.argument("targets", EntityArgumentType.entities()).then(CommandManager.argument("amount", FloatArgumentType.floatArg()).executes((source) -> setHealth(source.getSource(), EntityArgumentType.getEntities(source, "targets"), FloatArgumentType.getFloat(source, "amount"), true)))))
-				.then(CommandManager.literal("set").then(CommandManager.argument("targets", EntityArgumentType.entities()).then(CommandManager.argument("amount", FloatArgumentType.floatArg(0.0f)).executes((source) -> setHealth(source.getSource(), EntityArgumentType.getEntities(source, "targets"), FloatArgumentType.getFloat(source, "amount"), false)))))
-				.then(CommandManager.literal("query").then(CommandManager.argument("target", EntityArgumentType.entity()).executes((source) -> queryHealth(source.getSource(), EntityArgumentType.getEntity(source, "target"))))));
+		LiteralCommandNode<ServerCommandSource> node = dispatcher.register(
+				CommandManager.literal(NAME)
+						.requires((sc) -> sc.hasPermissionLevel(PERMISSION_LEVEL))
+						.then(CommandManager.literal(ADD_ARG)
+								.then(CommandManager.argument(TARGETS_ARG, EntityArgumentType.entities()).
+										then(CommandManager.argument(AMOUNT_AGG, FloatArgumentType.floatArg())
+												.executes((cc) -> setHealth(cc.getSource(), EntityArgumentType.getEntities(cc, TARGETS_ARG), FloatArgumentType.getFloat(cc, AMOUNT_AGG), true)))))
+						.then(CommandManager.literal(SET_ARG)
+								.then(CommandManager.argument(TARGETS_ARG, EntityArgumentType.entities())
+										.then(CommandManager.argument(AMOUNT_AGG, FloatArgumentType.floatArg(0.0f))
+												.executes((cc) -> setHealth(cc.getSource(), EntityArgumentType.getEntities(cc, TARGETS_ARG), FloatArgumentType.getFloat(cc, AMOUNT_AGG), false)))))
+						.then(CommandManager.literal(QUERY_ARG)
+								.then(CommandManager.argument(TARGET_ARG, EntityArgumentType.entity())
+										.executes((cc) -> queryHealth(cc.getSource(), EntityArgumentType.getEntity(cc, TARGET_ARG))))));
+		dispatcher.register(CommandManager.literal(NAME_2).requires(source -> source.hasPermissionLevel(PERMISSION_LEVEL)).redirect(node));
 	}
 
 	private static int queryHealth(ServerCommandSource source, Entity target) {
-		if(target instanceof LivingEntity) {
-			LivingEntity livingEntity = (LivingEntity) target;
+		if(target instanceof LivingEntity livingEntity) {
 			float health = livingEntity.getHealth();
 			source.sendFeedback(new TranslatableText("commands.health.query.success", target.getDisplayName(), health), false);
 			return (int) health;
@@ -60,13 +81,7 @@ public class HealthCommand {
 				}
 			}
 		}
-		final String parameter;
-		if(sum) {
-			parameter = "add";
-		}
-		else {
-			parameter = "set";
-		}
+		final String parameter = sum ? ADD_ARG : SET_ARG;
 		if(targets.size() == 1) {
 			source.sendFeedback(new TranslatableText("commands.health." + parameter + ".success.single", amount, targets.iterator().next().getDisplayName()), true);
 		}
