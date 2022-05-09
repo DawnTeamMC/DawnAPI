@@ -58,9 +58,8 @@ public class HealthCommand
 	private static int setHealth(ServerCommandSource source, Collection<? extends Entity> targets, float amount, boolean sum) {
 		int finalTargetAmount = 0;
 		for(Entity entity : targets) {
-			if(entity instanceof LivingEntity) {
+			if(entity instanceof LivingEntity livingEntity) {
 				finalTargetAmount++;
-				LivingEntity livingEntity = (LivingEntity) entity;
 				if(sum) {
 					if(amount > 0.0F) {
 						livingEntity.heal(amount);

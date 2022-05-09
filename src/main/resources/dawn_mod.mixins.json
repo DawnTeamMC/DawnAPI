@@ -3,7 +3,8 @@
 	"package": "com.hugman.dawn.mod.mixin",
 	"compatibilityLevel": "JAVA_16",
 	"mixins": [
-		"HungerManagerAccessor"
+		"HungerManagerAccessor",
+		"WorldgenProviderAccessor"
 	],
 	"injectors": {
 		"defaultRequire": 1

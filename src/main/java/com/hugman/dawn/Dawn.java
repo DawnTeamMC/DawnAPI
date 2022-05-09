@@ -5,7 +5,6 @@ import com.hugman.dawn.mod.config.DawnConfig;
 import com.hugman.dawn.mod.init.DawnCommands;
 import com.hugman.dawn.mod.init.DawnEntities;
 import com.hugman.dawn.mod.init.DawnItemGroups;
-import com.hugman.dawn.mod.util.debug.EntryDebugWriter;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import me.shedaniel.autoconfig.serializer.PartitioningSerializer;
@@ -22,7 +21,6 @@ public class Dawn implements ModInitializer {
 	public static final ModData MOD_DATA = new ModData("dawn");
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static final DawnConfig CONFIG = AutoConfig.register(DawnConfig.class, PartitioningSerializer.wrap(GsonConfigSerializer::new)).getConfig();
-	public static final EntryDebugWriter DEBUG_WRITER = new EntryDebugWriter();
 	public static final List<ModData> MOD_DATA_LIST = new ArrayList<>();
 
 	@Override
@@ -36,6 +34,5 @@ public class Dawn implements ModInitializer {
 
 	public void onServerLoad(MinecraftServer minecraftServer) {
 		MOD_DATA_LIST.forEach(modData -> modData.registerCreatorsServer(minecraftServer.isDedicated()));
-		if(minecraftServer.isDedicated()) DEBUG_WRITER.load();
 	}
 }

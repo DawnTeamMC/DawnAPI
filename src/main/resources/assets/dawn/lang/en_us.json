@@ -26,6 +26,13 @@
 	"commands.motion.add.success.multiple": "Added %s, %s, %s to the motion of %s entities",
 	"commands.motion.set.success.single": "Set %s, %s, %s to the motion of %s",
 	"commands.motion.set.success.multiple": "Set %s, %s, %s to the motion of %s entities",
+	"commands.export.start": "Starting export, expect server lag & high ram usage...",
+	"commands.export.success": "Export successful! View the files here: %s!",
+	"commands.export.fail.unknown": "Uh oh, something weird happened during the export, check your latest.log!",
+	"commands.export.worldgen.fail.multiplayer": "You cannot export the world generation in multiplayer!",
+	"commands.export.worldgen.fail.already_exists": "World generation export already exists! View it here: %s!",
+
+	"chat.fileExplorer.click": "Click to Open in File Explorer",
 
 	"text.autoconfig.dawn.title": "Dawn API Configuration",
 	"text.autoconfig.dawn.category.features": "Features",
