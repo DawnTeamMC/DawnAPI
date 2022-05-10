@@ -41,6 +41,7 @@ Other than being a useful API, the Dawn API is also bundled with some in-game to
 - `/health` - A command that allows easy control over an entity's health.
 - `/foodbar` - A command that allows easy control over an entity's food/saturation points.
 - `/motion` - A command that allows easy control over an entity's motion (velocity).
+- `/export` - A command that can export information/files of the game's content.
 - A custom TNT entity with more NBT data parameters than the vanilla TNT entity.
 - A flying block entity which reflects the flying counterpart of the vanilla falling block entity.
 
