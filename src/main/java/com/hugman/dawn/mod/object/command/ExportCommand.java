@@ -2,12 +2,7 @@ package com.hugman.dawn.mod.object.command;
 
 import com.google.gson.JsonElement;
 import com.hugman.dawn.mod.mixin.WorldgenProviderAccessor;
-import com.hugman.dawn.mod.util.data.BlockData;
-import com.hugman.dawn.mod.util.data.DataList;
-import com.hugman.dawn.mod.util.data.DataSerialization;
-import com.hugman.dawn.mod.util.data.EnchantmentData;
-import com.hugman.dawn.mod.util.data.EntityTypeData;
-import com.hugman.dawn.mod.util.data.ItemData;
+import com.hugman.dawn.mod.util.data.*;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.serialization.DynamicOps;
@@ -23,7 +18,6 @@ import net.minecraft.text.ClickEvent;
 import net.minecraft.text.HoverEvent;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.dynamic.RegistryOps;
@@ -74,20 +68,20 @@ public class ExportCommand
 		registries.addAll(Registry.REGISTRIES.stream().toList());
 		registries.addAll(BuiltinRegistries.REGISTRIES.stream().toList());
 
-		source.sendFeedback(new TranslatableText("commands.export.start"), true);
+		source.sendFeedback(Text.translatable("commands.export.start"), true);
 		try {
 			for(Registry<?> registry : registries) {
 				exportRegistry(registry, expanded);
 			}
 		} catch(IOException e) {
-			source.sendError(new TranslatableText("commands.export.fail.unknown"));
+			source.sendError(Text.translatable("commands.export.fail.unknown"));
 			e.printStackTrace();
 			return 0;
 		}
 
 		Path finalExportPath = Paths.get("debug").resolve("export").resolve("registry_entries");
-		Text exportFileComponent = new LiteralText(finalExportPath.toString()).formatted(Formatting.BLUE, Formatting.UNDERLINE).styled(text -> text.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_FILE, finalExportPath.toString())).withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TranslatableText("chat.fileExplorer.click"))));
-		source.sendFeedback(new TranslatableText("commands.export.success", exportFileComponent), true);
+		Text exportFileComponent = new LiteralText(finalExportPath.toString()).formatted(Formatting.BLUE, Formatting.UNDERLINE).styled(text -> text.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_FILE, finalExportPath.toString())).withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Text.translatable("chat.fileExplorer.click"))));
+		source.sendFeedback(Text.translatable("commands.export.success", exportFileComponent), true);
 		return 1;
 	}
 
@@ -128,19 +122,19 @@ public class ExportCommand
 
 	public static int exportWorldGen(ServerCommandSource source, boolean builtin) {
 		if(!source.getServer().isSingleplayer() && source.getServer().getCurrentPlayerCount() > 1) {
-			source.sendError(new TranslatableText("commands.export.worldgen.fail.multiplayer"));
+			source.sendError(Text.translatable("commands.export.worldgen.fail.multiplayer"));
 			return 0;
 		}
 
 		Path finalExportPath = Paths.get("debug").resolve("export").resolve("world_gen");
 		Path exportPath = finalExportPath.resolve("cache");
-		Text exportFileComponent = new LiteralText(finalExportPath.toString()).formatted(Formatting.BLUE, Formatting.UNDERLINE).styled(text -> text.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_FILE, finalExportPath.toString())).withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TranslatableText("chat.fileExplorer.click"))));
+		Text exportFileComponent = new LiteralText(finalExportPath.toString()).formatted(Formatting.BLUE, Formatting.UNDERLINE).styled(text -> text.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_FILE, finalExportPath.toString())).withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Text.translatable("chat.fileExplorer.click"))));
 
 		if(exportPath.toFile().exists()) {
-			source.sendError(new TranslatableText("commands.export.worldgen.fail.already_exists", exportFileComponent));
+			source.sendError(Text.translatable("commands.export.worldgen.fail.already_exists", exportFileComponent));
 			return 0;
 		}
-		source.sendFeedback(new TranslatableText("commands.export.start"), true);
+		source.sendFeedback(Text.translatable("commands.export.start"), true);
 
 		try {
 			DataCache cache = new DataCache(exportPath, "cache");
@@ -188,10 +182,10 @@ public class ExportCommand
 				}
 			});
 
-			source.sendFeedback(new TranslatableText("commands.export.success", exportFileComponent), true);
+			source.sendFeedback(Text.translatable("commands.export.success", exportFileComponent), true);
 			return 1;
 		} catch(IOException e) {
-			source.sendError(new TranslatableText("commands.export.fail.unknown"));
+			source.sendError(Text.translatable("commands.export.fail.unknown"));
 			e.printStackTrace();
 			return 0;
 		}

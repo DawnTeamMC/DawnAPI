@@ -1,12 +1,12 @@
 package com.hugman.dawn.api.creator;
 
-import net.minecraft.entity.decoration.painting.PaintingMotive;
+import net.minecraft.entity.decoration.painting.PaintingVariant;
 import net.minecraft.util.registry.Registry;
 
 /**
  * A class allowing a painting motive to be created.
  */
-public class PaintingCreator extends SimpleCreator<PaintingMotive> {
+public class PaintingCreator extends SimpleCreator<PaintingVariant> {
 
 	/**
 	 * Creates a painting motive.
@@ -16,7 +16,7 @@ public class PaintingCreator extends SimpleCreator<PaintingMotive> {
 	 * @param height the height, as a multiple of 16
 	 */
 	public PaintingCreator(String name, int width, int height) {
-		super(Registry.PAINTING_MOTIVE, name, new PaintingMotive(width, height));
+		super(Registry.PAINTING_VARIANT, name, new PaintingVariant(width, height));
 	}
 
 	/**

@@ -2,16 +2,13 @@ package com.hugman.dawn.mod.object.command;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.DoubleArgumentType;
-import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.minecraft.command.argument.EntityArgumentType;
-import net.minecraft.command.argument.PosArgument;
 import net.minecraft.entity.Entity;
 import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
 import net.minecraft.server.command.CommandManager;
-import net.minecraft.server.command.DataCommand;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
 
 import java.util.Collection;
 
@@ -51,10 +48,10 @@ public class MotionCommand {
 		}
 		final String parameter = sum ? ADD_ARG : SET_ARG;
 		if(targets.size() == 1) {
-			source.sendFeedback(new TranslatableText("commands.motion." + parameter + ".success.single", x, y, z, targets.iterator().next().getDisplayName()), true);
+			source.sendFeedback(Text.translatable("commands.motion." + parameter + ".success.single", x, y, z, targets.iterator().next().getDisplayName()), true);
 		}
 		else {
-			source.sendFeedback(new TranslatableText("commands.motion." + parameter + ".success.multiple", x, y, z, targets.size()), true);
+			source.sendFeedback(Text.translatable("commands.motion." + parameter + ".success.multiple", x, y, z, targets.size()), true);
 		}
 		return targets.size();
 	}

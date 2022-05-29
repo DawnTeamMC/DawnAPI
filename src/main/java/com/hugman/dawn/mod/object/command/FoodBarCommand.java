@@ -9,7 +9,7 @@ import net.minecraft.entity.player.HungerManager;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
 
 import java.util.Collection;
 
@@ -56,13 +56,13 @@ public class FoodBarCommand
 
 	private static int queryFood(ServerCommandSource source, ServerPlayerEntity target) {
 		int foodLevel = target.getHungerManager().getFoodLevel();
-		source.sendFeedback(new TranslatableText("commands.foodbar.query.food", target.getDisplayName(), foodLevel), false);
+		source.sendFeedback(Text.translatable("commands.foodbar.query.food", target.getDisplayName(), foodLevel), false);
 		return foodLevel;
 	}
 
 	private static int querySaturation(ServerCommandSource source, ServerPlayerEntity target) {
 		float saturationLevel = target.getHungerManager().getSaturationLevel();
-		source.sendFeedback(new TranslatableText("commands.foodbar.query.saturation", target.getDisplayName(), saturationLevel), false);
+		source.sendFeedback(Text.translatable("commands.foodbar.query.saturation", target.getDisplayName(), saturationLevel), false);
 		return (int) saturationLevel;
 	}
 
@@ -73,10 +73,10 @@ public class FoodBarCommand
 		}
 		final String parameter = sum ? ADD_ARG : SET_ARG;
 		if(targets.size() == 1) {
-			source.sendFeedback(new TranslatableText("commands.foodbar." + parameter + ".food.success.single", amount, targets.iterator().next().getDisplayName()), true);
+			source.sendFeedback(Text.translatable("commands.foodbar." + parameter + ".food.success.single", amount, targets.iterator().next().getDisplayName()), true);
 		}
 		else {
-			source.sendFeedback(new TranslatableText("commands.foodbar." + parameter + ".food.success.multiple", amount, targets.size()), true);
+			source.sendFeedback(Text.translatable("commands.foodbar." + parameter + ".food.success.multiple", amount, targets.size()), true);
 		}
 		return targets.size();
 	}
@@ -88,10 +88,10 @@ public class FoodBarCommand
 		}
 		final String parameter = sum ? ADD_ARG : SET_ARG;
 		if(targets.size() == 1) {
-			source.sendFeedback(new TranslatableText("commands.foodbar." + parameter + ".saturation.success.single", amount, targets.iterator().next().getDisplayName()), true);
+			source.sendFeedback(Text.translatable("commands.foodbar." + parameter + ".saturation.success.single", amount, targets.iterator().next().getDisplayName()), true);
 		}
 		else {
-			source.sendFeedback(new TranslatableText("commands.foodbar." + parameter + ".saturation.success.multiple", amount, targets.size()), true);
+			source.sendFeedback(Text.translatable("commands.foodbar." + parameter + ".saturation.success.multiple", amount, targets.size()), true);
 		}
 		return targets.size();
 	}
