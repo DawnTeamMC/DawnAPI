@@ -36,7 +36,7 @@
 	],
 	"accessWidener": "dawn.accesswidener",
 	"depends": {
-		"minecraft": ">=1.19",
+		"minecraft": ">=1.18.2",
 		"fabric": "*",
 		"cloth-config": "*"
 	},
