@@ -4,11 +4,11 @@ import com.hugman.dawn.mod.object.command.ExportCommand;
 import com.hugman.dawn.mod.object.command.FoodBarCommand;
 import com.hugman.dawn.mod.object.command.HealthCommand;
 import com.hugman.dawn.mod.object.command.MotionCommand;
-import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 
 public class DawnCommands {
 	public static void init() {
-		CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
+		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
 			HealthCommand.register(dispatcher);
 			FoodBarCommand.register(dispatcher);
 			MotionCommand.register(dispatcher);

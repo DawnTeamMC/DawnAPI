@@ -4,7 +4,9 @@ import com.hugman.dawn.mod.object.entity.CustomTNTEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.block.BlockRenderManager;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory.Context;
 import net.minecraft.client.render.entity.TntMinecartEntityRenderer;
@@ -16,9 +18,12 @@ import net.minecraft.util.math.Vec3f;
 
 @Environment(EnvType.CLIENT)
 public class CustomTNTEntityRenderer extends EntityRenderer<CustomTNTEntity> {
+	private final BlockRenderManager tntBlockRenderManager;
+
 	public CustomTNTEntityRenderer(Context context) {
 		super(context);
 		this.shadowRadius = 0.5F;
+		this.tntBlockRenderManager = context.getBlockRenderManager();
 	}
 
 	@Override
@@ -37,7 +42,7 @@ public class CustomTNTEntityRenderer extends EntityRenderer<CustomTNTEntity> {
 		matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(-90.0F));
 		matrixStack.translate(-0.5D, -0.5D, 0.5D);
 		matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(90.0F));
-		TntMinecartEntityRenderer.renderFlashingBlock(blockState, matrixStack, vertexConsumerProvider, light, entity.getFuse() / 5 % 2 == 0);
+		TntMinecartEntityRenderer.renderFlashingBlock(this.tntBlockRenderManager, blockState, matrixStack, vertexConsumerProvider, light, entity.getFuse() / 5 % 2 == 0);
 		matrixStack.pop();
 		super.render(entity, entityYaw, partialTicks, matrixStack, vertexConsumerProvider, light);
 	}

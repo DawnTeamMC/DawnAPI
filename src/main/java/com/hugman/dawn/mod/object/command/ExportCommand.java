@@ -1,14 +1,14 @@
 package com.hugman.dawn.mod.object.command;
 
-import com.google.gson.JsonElement;
-import com.hugman.dawn.mod.mixin.WorldgenProviderAccessor;
-import com.hugman.dawn.mod.util.data.*;
+import com.hugman.dawn.mod.util.data.BlockData;
+import com.hugman.dawn.mod.util.data.DataList;
+import com.hugman.dawn.mod.util.data.DataSerialization;
+import com.hugman.dawn.mod.util.data.EnchantmentData;
+import com.hugman.dawn.mod.util.data.EntityTypeData;
+import com.hugman.dawn.mod.util.data.ItemData;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.BoolArgumentType;
-import com.mojang.serialization.DynamicOps;
-import com.mojang.serialization.JsonOps;
 import net.minecraft.block.Block;
-import net.minecraft.data.DataCache;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
@@ -16,27 +16,18 @@ import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.ClickEvent;
 import net.minecraft.text.HoverEvent;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.dynamic.RegistryOps;
 import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.DynamicRegistryManager;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
-import net.minecraft.world.dimension.DimensionOptions;
-import net.minecraft.world.dimension.DimensionType;
-import net.minecraft.world.gen.GeneratorOptions;
-import net.minecraft.world.gen.chunk.NoiseChunkGenerator;
-import net.minecraft.world.level.LevelProperties;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -80,7 +71,7 @@ public class ExportCommand
 		}
 
 		Path finalExportPath = Paths.get("debug").resolve("export").resolve("registry_entries");
-		Text exportFileComponent = new LiteralText(finalExportPath.toString()).formatted(Formatting.BLUE, Formatting.UNDERLINE).styled(text -> text.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_FILE, finalExportPath.toString())).withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Text.translatable("chat.fileExplorer.click"))));
+		Text exportFileComponent = Text.literal(finalExportPath.toString()).formatted(Formatting.BLUE, Formatting.UNDERLINE).styled(text -> text.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_FILE, finalExportPath.toString())).withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Text.translatable("chat.fileExplorer.click"))));
 		source.sendFeedback(Text.translatable("commands.export.success", exportFileComponent), true);
 		return 1;
 	}
@@ -128,7 +119,7 @@ public class ExportCommand
 
 		Path finalExportPath = Paths.get("debug").resolve("export").resolve("world_gen");
 		Path exportPath = finalExportPath.resolve("cache");
-		Text exportFileComponent = new LiteralText(finalExportPath.toString()).formatted(Formatting.BLUE, Formatting.UNDERLINE).styled(text -> text.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_FILE, finalExportPath.toString())).withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Text.translatable("chat.fileExplorer.click"))));
+		Text exportFileComponent = Text.literal(finalExportPath.toString()).formatted(Formatting.BLUE, Formatting.UNDERLINE).styled(text -> text.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_FILE, finalExportPath.toString())).withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Text.translatable("chat.fileExplorer.click"))));
 
 		if(exportPath.toFile().exists()) {
 			source.sendError(Text.translatable("commands.export.worldgen.fail.already_exists", exportFileComponent));
@@ -137,7 +128,10 @@ public class ExportCommand
 		source.sendFeedback(Text.translatable("commands.export.start"), true);
 
 		try {
-			DataCache cache = new DataCache(exportPath, "cache");
+			// TODO : fix this
+			throw new IOException("This has been disabled for the moment.");
+			/*
+			DataCache cache = new DataCache(exportPath, "cache", SharedConstants.getGameVersion());
 
 			DynamicRegistryManager registry = builtin ? DynamicRegistryManager.createAndLoad() : source.getWorld().getRegistryManager();
 
@@ -184,6 +178,7 @@ public class ExportCommand
 
 			source.sendFeedback(Text.translatable("commands.export.success", exportFileComponent), true);
 			return 1;
+			 */
 		} catch(IOException e) {
 			source.sendError(Text.translatable("commands.export.fail.unknown"));
 			e.printStackTrace();
