@@ -17,7 +17,7 @@ import java.nio.file.Path;
 @Mixin(WorldgenProvider.class)
 public interface WorldgenProviderAccessor {
     @Invoker(value = "writeRegistryEntries")
-    static <E, T extends Registry<E>> void dawn$invokeWriteRegistryEntries(DataWriter dataWriter, DynamicRegistryManager dynamicRegistryManager, DynamicOps<JsonElement> dynamicOps, DynamicRegistryManager.Info<T> info) {
+    static <T> void dawn$invokeWriteRegistryEntries(DataWriter dataWriter, DynamicRegistryManager dynamicRegistryManager, DynamicOps<JsonElement> dynamicOps, DynamicRegistryManager.Info<T> info) {
         throw new Error("Mixin did not apply");
     }
 }

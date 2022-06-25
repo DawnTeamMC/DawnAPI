@@ -1,8 +1,12 @@
 package com.hugman.dawn.api.compat;
 
-// TODO: reimplement appleskin when it's updated
-public class AppleSkinEventHandler /*implements AppleSkinApi */{
-	/*
+import com.hugman.dawn.api.object.item.DynamicFood;
+import squeek.appleskin.api.AppleSkinApi;
+import squeek.appleskin.api.event.FoodValuesEvent;
+import squeek.appleskin.api.food.FoodValues;
+
+public class AppleSkinEventHandler implements AppleSkinApi
+{
 	@Override
 	public void registerEvents() {
 		FoodValuesEvent.EVENT.register(event -> {
@@ -13,6 +17,4 @@ public class AppleSkinEventHandler /*implements AppleSkinApi */{
 			}
 		});
 	}
-
-	 */
 }

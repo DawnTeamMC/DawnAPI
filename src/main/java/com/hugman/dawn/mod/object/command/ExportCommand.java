@@ -1,5 +1,8 @@
 package com.hugman.dawn.mod.object.command;
 
+import com.google.gson.JsonElement;
+import com.hugman.dawn.mod.mixin.DataCacheAccessor;
+import com.hugman.dawn.mod.mixin.WorldgenProviderAccessor;
 import com.hugman.dawn.mod.util.data.BlockData;
 import com.hugman.dawn.mod.util.data.DataList;
 import com.hugman.dawn.mod.util.data.DataSerialization;
@@ -8,7 +11,13 @@ import com.hugman.dawn.mod.util.data.EntityTypeData;
 import com.hugman.dawn.mod.util.data.ItemData;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.BoolArgumentType;
+import com.mojang.serialization.DynamicOps;
+import com.mojang.serialization.JsonOps;
+import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.SharedConstants;
 import net.minecraft.block.Block;
+import net.minecraft.data.DataCache;
+import net.minecraft.data.DataWriter;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
@@ -19,15 +28,19 @@ import net.minecraft.text.HoverEvent;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.dynamic.RegistryOps;
 import net.minecraft.util.registry.BuiltinRegistries;
+import net.minecraft.util.registry.DynamicRegistryManager;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
+import org.apache.commons.io.file.PathUtils;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -117,40 +130,28 @@ public class ExportCommand
 			return 0;
 		}
 
-		Path finalExportPath = Paths.get("debug").resolve("export").resolve("world_gen");
-		Path exportPath = finalExportPath.resolve("cache");
+		Path finalExportPath = FabricLoader.getInstance().getGameDir().resolve("debug").resolve("export").resolve("world_gen");
+		Path cachePath = finalExportPath.resolve(".cache");
 		Text exportFileComponent = Text.literal(finalExportPath.toString()).formatted(Formatting.BLUE, Formatting.UNDERLINE).styled(text -> text.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_FILE, finalExportPath.toString())).withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Text.translatable("chat.fileExplorer.click"))));
 
-		if(exportPath.toFile().exists()) {
+		if(cachePath.toFile().exists()) {
 			source.sendError(Text.translatable("commands.export.worldgen.fail.already_exists", exportFileComponent));
 			return 0;
 		}
 		source.sendFeedback(Text.translatable("commands.export.start"), true);
 
 		try {
-			// TODO : fix this
-			throw new IOException("This has been disabled for the moment.");
-			/*
-			DataCache cache = new DataCache(exportPath, "cache", SharedConstants.getGameVersion());
-
+			DataWriter writer = DataCacheAccessor.dawn$init(SharedConstants.getGameVersion().getName(), DataCache.CachedData.parseCache(cachePath, cachePath.resolve("reports")));
 			DynamicRegistryManager registry = builtin ? DynamicRegistryManager.createAndLoad() : source.getWorld().getRegistryManager();
 
 			DynamicOps<JsonElement> ops = RegistryOps.of(JsonOps.INSTANCE, registry);
-			DynamicRegistryManager.getInfos().forEach(info -> WorldgenProviderAccessor.dawn$invokeWriteRegistryEntries(cache, exportPath, registry, ops, info));
 
-			Registry<DimensionOptions> worldSettings;
-			if(builtin) {
-				Registry<DimensionOptions> defaultDimensions = DimensionType.createDefaultDimensionOptions(registry, 0L, false);
-				NoiseChunkGenerator chunkGenerator = GeneratorOptions.createOverworldGenerator(registry, 0L, false);
-				worldSettings = GeneratorOptions.getRegistryWithReplacedOverworldGenerator(registry.getManaged(Registry.DIMENSION_TYPE_KEY), defaultDimensions, chunkGenerator);
+			for (DynamicRegistryManager.Info<?> info : DynamicRegistryManager.getInfos()) {
+				WorldgenProviderAccessor.dawn$invokeWriteRegistryEntries(writer, registry, ops, info);
 			}
-			else {
-				worldSettings = ((LevelProperties) source.getServer().getOverworld().getLevelProperties()).getGeneratorOptions().getDimensions();
-			}
-			WorldgenProviderAccessor.dawn$invokeWriteRegistryEntries(exportPath, cache, ops, Registry.DIMENSION_KEY, worldSettings, DimensionOptions.CODEC);
 
-			// Move reports to final export path
-			Path result = exportPath.resolve("reports").resolve("worldgen");
+			// Move cache to final export path
+			Path result = cachePath.resolve("reports").resolve("worldgen");
 			Files.walk(result).sorted(Comparator.reverseOrder()).forEach(path -> {
 				try {
 					if(path.getFileName().toString().endsWith(".json")) {
@@ -168,7 +169,7 @@ public class ExportCommand
 			});
 
 			// Delete the cache
-			Files.walk(exportPath).sorted(Comparator.reverseOrder()).forEach(path -> {
+			Files.walk(cachePath).sorted(Comparator.reverseOrder()).forEach(path -> {
 				try {
 					Files.delete(path);
 				} catch(IOException e) {
@@ -178,7 +179,6 @@ public class ExportCommand
 
 			source.sendFeedback(Text.translatable("commands.export.success", exportFileComponent), true);
 			return 1;
-			 */
 		} catch(IOException e) {
 			source.sendError(Text.translatable("commands.export.fail.unknown"));
 			e.printStackTrace();
