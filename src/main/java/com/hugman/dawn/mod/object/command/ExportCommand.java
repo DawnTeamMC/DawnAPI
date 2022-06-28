@@ -1,7 +1,6 @@
 package com.hugman.dawn.mod.object.command;
 
 import com.google.gson.JsonElement;
-import com.hugman.dawn.mod.mixin.WorldgenProviderAccessor;
 import com.hugman.dawn.mod.util.data.BlockData;
 import com.hugman.dawn.mod.util.data.DataList;
 import com.hugman.dawn.mod.util.data.DataSerialization;
@@ -14,6 +13,7 @@ import com.mojang.serialization.DynamicOps;
 import com.mojang.serialization.JsonOps;
 import net.minecraft.block.Block;
 import net.minecraft.data.DataCache;
+import net.minecraft.data.report.WorldgenProvider;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
@@ -148,7 +148,7 @@ public class ExportCommand
 			DynamicRegistryManager registry = builtin ? DynamicRegistryManager.createAndLoad() : source.getWorld().getRegistryManager();
 
 			DynamicOps<JsonElement> ops = RegistryOps.of(JsonOps.INSTANCE, registry);
-			DynamicRegistryManager.getInfos().forEach(info -> WorldgenProviderAccessor.dawn$invokeWriteRegistryEntries(cache, exportPath, registry, ops, info));
+			DynamicRegistryManager.getInfos().forEach(info -> WorldgenProvider.writeRegistryEntries(cache, exportPath, registry, ops, info));
 
 			Registry<DimensionOptions> worldSettings;
 			if(builtin) {
@@ -159,7 +159,7 @@ public class ExportCommand
 			else {
 				worldSettings = ((LevelProperties) source.getServer().getOverworld().getLevelProperties()).getGeneratorOptions().getDimensions();
 			}
-			WorldgenProviderAccessor.dawn$invokeWriteRegistryEntries(exportPath, cache, ops, Registry.DIMENSION_KEY, worldSettings, DimensionOptions.CODEC);
+			WorldgenProvider.writeRegistryEntries(exportPath, cache, ops, Registry.DIMENSION_KEY, worldSettings, DimensionOptions.CODEC);
 
 			// Move reports to final export path
 			Path result = exportPath.resolve("reports").resolve("worldgen");

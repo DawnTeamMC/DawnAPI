@@ -1,4 +1,6 @@
 accessWidener	v1	named
-accessible    method    net/minecraft/world/gen/trunk/TrunkPlacerType    <init>    (Lcom/mojang/serialization/Codec;)V
-accessible    method    net/minecraft/world/gen/foliage/FoliagePlacerType    <init>    (Lcom/mojang/serialization/Codec;)V
-accessible    field    net/minecraft/world/gen/feature/StructureFeature    STRUCTURE_TO_GENERATION_STEP    Ljava/util/Map;
+accessible    method    net/minecraft/world/gen/trunk/TrunkPlacerType       <init>                          (Lcom/mojang/serialization/Codec;)V
+accessible    method    net/minecraft/world/gen/foliage/FoliagePlacerType   <init>                          (Lcom/mojang/serialization/Codec;)V
+accessible    field     net/minecraft/world/gen/feature/StructureFeature    STRUCTURE_TO_GENERATION_STEP    Ljava/util/Map;
+accessible    method    net/minecraft/data/report/WorldgenProvider          writeRegistryEntries            (Ljava/nio/file/Path;Lnet/minecraft/data/DataCache;Lcom/mojang/serialization/DynamicOps;Lnet/minecraft/util/registry/RegistryKey;Lnet/minecraft/util/registry/Registry;Lcom/mojang/serialization/Encoder;)V
+accessible    method    net/minecraft/data/report/WorldgenProvider          writeRegistryEntries            (Lnet/minecraft/data/DataCache;Ljava/nio/file/Path;Lnet/minecraft/util/registry/DynamicRegistryManager;Lcom/mojang/serialization/DynamicOps;Lnet/minecraft/util/registry/DynamicRegistryManager$Info;)V
