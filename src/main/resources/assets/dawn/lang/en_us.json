@@ -1,5 +1,5 @@
 {
-	"modmenu.descriptionTranslation.dawn": "API that facilitates the creation of features.\nAlso includes useful commands, entities and tools for mapmakers.",
+	"modmenu.descriptionTranslation.dawn": "API that facilitates the creation of features.\nAlso includes useful commands, entities and tools for creators.",
 
 	"itemGroup.dawn.creative_tools": "Creative Tools",
 
@@ -26,11 +26,11 @@
 	"commands.motion.add.success.multiple": "Added %s, %s, %s to the motion of %s entities",
 	"commands.motion.set.success.single": "Set %s, %s, %s to the motion of %s",
 	"commands.motion.set.success.multiple": "Set %s, %s, %s to the motion of %s entities",
-	"commands.export.start": "Starting export, expect server lag & high ram usage...",
-	"commands.export.success": "Export successful! View the files here: %s!",
-	"commands.export.fail.unknown": "Uh oh, something weird happened during the export, check your latest.log!",
-	"commands.export.worldgen.fail.multiplayer": "You cannot export the world generation in multiplayer!",
-	"commands.export.worldgen.fail.already_exists": "World generation export already exists! View it here: %s!",
+	"commands.export.start": "Starting export, expect server lag & high RAM usage...",
+	"commands.export.success": "Export successful! View the files here: %s",
+	"commands.export.fail.already_exists": "A folder for this export already exists! View it here: %s, and delete it if you want to export again.",
+	"commands.export.fail.unknown": "Something weird happened during the export, for more information check your log files.",
+	"commands.export.dynamic.fail.multiplayer": "You cannot export dynamic content in multiplayer!",
 
 	"chat.fileExplorer.click": "Click to Open in File Explorer",
 

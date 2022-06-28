@@ -3,7 +3,13 @@ package com.hugman.dawn.mod.util.data;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.hugman.dawn.Dawn;
+import net.minecraft.block.Block;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.entity.EntityType;
+import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.RegistryKey;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -12,6 +18,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class DataSerialization {
@@ -53,5 +61,14 @@ public class DataSerialization {
 		catch(IOException e) {
 			Dawn.LOGGER.error("Failed to save file", e);
 		}
+	}
+
+	public static <T> Function<Map.Entry<RegistryKey<T>, T>, ?> getMapperFromRegistry(Registry<T> registry)
+	{
+		     if (registry == Registry.BLOCK)       return entry -> new BlockData      (entry.getKey().getValue(),         (Block) entry.getValue());
+		else if (registry == Registry.ITEM)        return entry -> new ItemData       (entry.getKey().getValue(),          (Item) entry.getValue());
+		else if (registry == Registry.ENCHANTMENT) return entry -> new EnchantmentData(entry.getKey().getValue(),   (Enchantment) entry.getValue());
+		else if (registry == Registry.ENTITY_TYPE) return entry -> new EntityTypeData (entry.getKey().getValue(), (EntityType<?>) entry.getValue());
+		else return e -> e.getKey().getValue();
 	}
 }

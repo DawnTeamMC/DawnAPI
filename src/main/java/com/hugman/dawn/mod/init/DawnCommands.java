@@ -12,7 +12,8 @@ public class DawnCommands {
 			HealthCommand.register(dispatcher);
 			FoodBarCommand.register(dispatcher);
 			MotionCommand.register(dispatcher);
-			ExportCommand.register(dispatcher);
+			if(environment.integrated)
+				ExportCommand.register(dispatcher);
 		});
 	}
 }
