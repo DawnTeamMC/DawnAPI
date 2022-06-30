@@ -1,7 +1,5 @@
 package com.hugman.dawn.mod.object.command;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.hugman.dawn.mod.util.data.DataList;
 import com.hugman.dawn.mod.util.data.DataSerialization;
@@ -10,6 +8,10 @@ import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.serialization.DynamicOps;
 import com.mojang.serialization.JsonOps;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.SharedConstants;
+import net.minecraft.data.DataCache;
+import net.minecraft.data.DataWriter;
+import net.minecraft.data.report.WorldgenProvider;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.ClickEvent;
@@ -27,7 +29,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -132,30 +133,28 @@ public class ExportCommand
 
 	private static void generateDynamicFiles(boolean builtin, ServerCommandSource source, Path exportPath) throws IOException {
 		Files.createDirectories(exportPath);
+		DataWriter writer = new DataCache.CachedDataWriter(SharedConstants.getGameVersion().getName(), DataCache.parseOrCreateCache(exportPath, exportPath.resolve("reports")));
 		DynamicRegistryManager manager = builtin ? DynamicRegistryManager.createAndLoad() : source.getWorld().getRegistryManager();
 
 		DynamicOps<JsonElement> ops = RegistryOps.of(JsonOps.INSTANCE, manager);
 
 		for(DynamicRegistryManager.Info<?> info : DynamicRegistryManager.getInfos()) {
-			dumpRegistryCap(exportPath, manager, ops, info);
+			dumpRegistryCap(exportPath, writer, manager, ops, info);
 		}
 	}
 
-	private static <T> void dumpRegistryCap(Path exportPath, DynamicRegistryManager manager, DynamicOps<JsonElement> ops, DynamicRegistryManager.Info<T> info) {
+	private static <T> void dumpRegistryCap(Path exportPath, DataWriter writer, DynamicRegistryManager manager, DynamicOps<JsonElement> ops, DynamicRegistryManager.Info<T> info) {
 		RegistryKey<? extends Registry<T>> registryKey = info.registry();
 		Registry<T> registry = manager.get(registryKey);
 
-		for(Map.Entry<RegistryKey<T>, T> registryKeyTEntry : registry.getEntrySet()) {
-			RegistryKey<T> key = registryKeyTEntry.getKey();
-			Path path = exportPath.resolve(key.getValue().getNamespace()).resolve(registryKey.getValue().getPath()).resolve(key.getValue().getPath() + ".json");
-			try {
-				Optional<JsonElement> jsonElement = info.entryCodec().encodeStart(ops, registryKeyTEntry.getValue()).resultOrPartial((s) -> {});
-				if(jsonElement.isPresent()) {
-					Gson gsonBuilder = new GsonBuilder().setPrettyPrinting().create();
-					Files.createDirectories(path.getParent());
-					Files.write(path, gsonBuilder.toJson(jsonElement.get()).getBytes());
-				}
-			} catch(IOException ignored) {}
+		for(Map.Entry<RegistryKey<T>, T> entry : registry.getEntrySet()) {
+			RegistryKey<T> key = entry.getKey();
+			Path path = exportPath
+					.resolve(key.getValue().getNamespace())
+					.resolve(registryKey.getValue().getNamespace())
+					.resolve(registryKey.getValue().getPath())
+					.resolve(key.getValue().getPath() + ".json");
+			WorldgenProvider.writeToPath(path, writer, ops, info.entryCodec(), entry.getValue());
 		}
 	}
 

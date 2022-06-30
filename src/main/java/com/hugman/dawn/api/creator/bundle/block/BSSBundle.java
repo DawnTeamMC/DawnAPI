@@ -4,7 +4,6 @@ import com.hugman.dawn.api.creator.BlockCreator;
 import com.hugman.dawn.api.creator.bundle.Bundle;
 import com.hugman.dawn.api.util.DefaultBlockBuilders;
 import com.hugman.dawn.api.util.StringUtil;
-import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 
 public class BSSBundle extends Bundle {
