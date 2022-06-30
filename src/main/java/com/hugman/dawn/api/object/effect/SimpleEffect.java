@@ -1,4 +1,4 @@
-package com.hugman.dawn.mod.object.effect;
+package com.hugman.dawn.api.object.effect;
 
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
