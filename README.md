@@ -2,7 +2,7 @@
 
 # 🌙 Dawn API
 [![Latest release](https://img.shields.io/github/release/DawnTeamMC/DawnAPI.svg)](https://github.com/DawnTeamMC/DawnAPI/releases/latest)
-[![CurseForge downloads](http://cf.way2muchnoise.eu/full_dawn_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/dawn)
+[![CurseForge downloads](http://cf.way2muchnoise.eu/full_399309_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/dawn)
 [![License (LGPL v3.0)](https://img.shields.io/badge/code%20license-LGPL%20v3.0-green.svg?style=flat-square)](https://www.gnu.org/licenses/lgpl-3.0.en.html)
 [![GitHub stars](https://img.shields.io/github/stars/DawnTeamMC/DawnAPI.svg?style=flat-square)]()
 
