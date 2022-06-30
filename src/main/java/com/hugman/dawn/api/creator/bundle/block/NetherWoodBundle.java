@@ -1,9 +1,9 @@
 package com.hugman.dawn.api.creator.bundle.block;
 
 import com.hugman.dawn.api.creator.BlockCreator;
-import com.hugman.dawn.api.object.block.FungusBlock;
 import com.hugman.dawn.api.util.DefaultBlockSettings;
 import net.minecraft.block.Block;
+import net.minecraft.block.FungusBlock;
 import net.minecraft.block.MapColor;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.registry.RegistryEntry;
