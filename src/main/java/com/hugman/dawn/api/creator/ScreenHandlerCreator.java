@@ -10,7 +10,8 @@ import net.minecraft.screen.ScreenHandlerType;
  *
  * @param <T> the screen handler class, inheriting {@link ScreenHandler}
  */
-public class ScreenHandlerCreator<T extends ScreenHandler> extends Creator {
+public class ScreenHandlerCreator<T extends ScreenHandler> extends Creator
+{
 	protected final String name;
 	protected final ScreenHandlerRegistry.SimpleClientHandlerFactory<T> factory;
 	protected ScreenHandlerType<T> type;

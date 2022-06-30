@@ -6,7 +6,8 @@ import net.minecraft.util.registry.Registry;
 /**
  * A class allowing an enchantment to be created.
  */
-public class EnchantmentCreator extends SimpleCreator<Enchantment> {
+public class EnchantmentCreator extends SimpleCreator<Enchantment>
+{
 
 	/**
 	 * Creates an enchantment.

@@ -9,7 +9,8 @@ import net.minecraft.util.registry.Registry;
  *
  * @param <E> the particle effect class, inheriting {@link ParticleEffect}
  */
-public class ParticleCreator<E extends ParticleEffect, T extends ParticleType<E>> extends SimpleCreator<T> {
+public class ParticleCreator<E extends ParticleEffect, T extends ParticleType<E>> extends SimpleCreator<T>
+{
 
 	/**
 	 * Creates a particle type.

@@ -9,7 +9,8 @@ import net.minecraft.world.gen.carver.ConfiguredCarver;
  *
  * @param <CC> the carver config class, inheriting {@link CarverConfig}
  */
-public class ConfiguredCarverCreator<CC extends CarverConfig> extends SimpleCreator<ConfiguredCarver<CC>> {
+public class ConfiguredCarverCreator<CC extends CarverConfig> extends SimpleCreator<ConfiguredCarver<CC>>
+{
 
 	/**
 	 * Creates a configured carver.

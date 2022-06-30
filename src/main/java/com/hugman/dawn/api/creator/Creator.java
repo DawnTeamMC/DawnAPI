@@ -4,7 +4,8 @@ import com.hugman.dawn.api.object.ModData;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-public abstract class Creator {
+public abstract class Creator
+{
 	public void register(ModData modData) {
 	}
 

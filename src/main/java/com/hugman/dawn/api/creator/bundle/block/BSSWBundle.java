@@ -5,7 +5,8 @@ import com.hugman.dawn.api.util.DefaultBlockBuilders;
 import com.hugman.dawn.api.util.StringUtil;
 import net.minecraft.block.Block;
 
-public class BSSWBundle extends BSSBundle {
+public class BSSWBundle extends BSSBundle
+{
 	private final BlockCreator wall;
 
 	/**

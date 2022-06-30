@@ -12,7 +12,8 @@ import net.minecraft.util.registry.Registry;
  *
  * @param <E> the block entity class, inheriting {@link BlockEntity}
  */
-public class BlockEntityCreator<E extends BlockEntity> extends SimpleCreator<BlockEntityType<E>> {
+public class BlockEntityCreator<E extends BlockEntity> extends SimpleCreator<BlockEntityType<E>>
+{
 
 	/**
 	 * Creates a block entity type.

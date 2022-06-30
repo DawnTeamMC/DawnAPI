@@ -9,7 +9,8 @@ import net.minecraft.world.biome.Biome;
 /**
  * A class allowing a biome to be created.
  */
-public class BiomeCreator extends Creator {
+public class BiomeCreator extends Creator
+{
 	private final String name;
 	private final Biome biome;
 	private RegistryKey<Biome> registryKey;

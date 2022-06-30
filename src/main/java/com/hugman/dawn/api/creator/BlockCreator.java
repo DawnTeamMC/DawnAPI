@@ -22,7 +22,8 @@ import java.util.function.Function;
 /**
  * A class allowing a block to be created.
  */
-public class BlockCreator extends SimpleCreator<Block> {
+public class BlockCreator extends SimpleCreator<Block>
+{
 	private final Builder builder;
 
 	/**
@@ -89,14 +90,16 @@ public class BlockCreator extends SimpleCreator<Block> {
 	/**
 	 * A render layer a block can use.
 	 */
-	public enum Render {
+	public enum Render
+	{
 		SOLID,
 		CUTOUT,
 		CUTOUT_MIPPED,
 		TRANSLUCENT
 	}
 
-	public static class Builder {
+	public static class Builder
+	{
 		protected String name;
 		protected Function<AbstractBlock.Settings, ? extends Block> provider;
 		protected AbstractBlock.Settings settings;
@@ -285,7 +288,6 @@ public class BlockCreator extends SimpleCreator<Block> {
 		 * @param template a block template
 		 *
 		 * @return this builder for chaining
-		 *
 		 * @deprecated Use {@link #from(Builder)} instead. Will be removed in v3.2.0
 		 */
 		@Deprecated(forRemoval = true)

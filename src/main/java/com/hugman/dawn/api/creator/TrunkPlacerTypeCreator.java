@@ -10,7 +10,8 @@ import net.minecraft.world.gen.trunk.TrunkPlacerType;
  *
  * @param <P> the trunk placer class, inheriting {@link TrunkPlacer}
  */
-public class TrunkPlacerTypeCreator<P extends TrunkPlacer> extends SimpleCreator<TrunkPlacerType<P>> {
+public class TrunkPlacerTypeCreator<P extends TrunkPlacer> extends SimpleCreator<TrunkPlacerType<P>>
+{
 
 	/**
 	 * Creates a trunk placer type.

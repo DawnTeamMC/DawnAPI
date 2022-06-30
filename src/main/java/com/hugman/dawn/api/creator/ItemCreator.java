@@ -12,7 +12,8 @@ import java.util.function.Function;
 /**
  * A class allowing an item to be created.
  */
-public class ItemCreator extends SimpleCreator<Item> {
+public class ItemCreator extends SimpleCreator<Item>
+{
 	protected final Builder builder;
 
 	/**
@@ -35,7 +36,8 @@ public class ItemCreator extends SimpleCreator<Item> {
 		}
 	}
 
-	public static class Builder {
+	public static class Builder
+	{
 		protected String name;
 		protected Function<Item.Settings, ? extends Item> itemProvider;
 		protected Item.Settings settings;

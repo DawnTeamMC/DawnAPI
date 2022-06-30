@@ -11,7 +11,8 @@ import net.minecraft.world.gen.feature.FeatureConfig;
  * @param <FC> the feature config class, inheriting {@link FeatureConfig}
  * @param <F>  the feature class, inheriting {@link Feature}
  */
-public class ConfiguredFeatureCreator<FC extends FeatureConfig, F extends Feature<FC>> extends SimpleCreator<ConfiguredFeature<FC, F>> {
+public class ConfiguredFeatureCreator<FC extends FeatureConfig, F extends Feature<FC>> extends SimpleCreator<ConfiguredFeature<FC, F>>
+{
 
 	/**
 	 * Creates a configured feature.

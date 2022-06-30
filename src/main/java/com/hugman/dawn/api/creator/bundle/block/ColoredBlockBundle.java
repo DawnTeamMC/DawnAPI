@@ -9,7 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-public class ColoredBlockBundle extends Bundle {
+public class ColoredBlockBundle extends Bundle
+{
 	private final Map<DyeColor, BlockCreator> map = new HashMap<>();
 
 	/**
@@ -26,7 +27,7 @@ public class ColoredBlockBundle extends Bundle {
 	/**
 	 * Bundle builder that contains blocks of all 16 Minecraft colors.
 	 *
-	 * @param builder  the base block creator builder
+	 * @param builder the base block creator builder
 	 */
 	public ColoredBlockBundle(BlockCreator.Builder builder) {
 		this(color -> builder.copy().name(color.getName() + "_" + builder.getName()).build());

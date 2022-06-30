@@ -6,7 +6,8 @@ import net.minecraft.world.gen.feature.PlacedFeature;
 /**
  * A class allowing a placed feature to be created.
  */
-public class PlacedFeatureCreator extends SimpleCreator<PlacedFeature> {
+public class PlacedFeatureCreator extends SimpleCreator<PlacedFeature>
+{
 
 	/**
 	 * Creates a placed feature.

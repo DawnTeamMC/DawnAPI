@@ -6,7 +6,8 @@ import net.minecraft.util.registry.Registry;
 /**
  * A class allowing a structure piece type to be created.
  */
-public class StructurePieceCreator extends SimpleCreator<StructurePieceType> {
+public class StructurePieceCreator extends SimpleCreator<StructurePieceType>
+{
 	/**
 	 * Creates a structure piece type.
 	 *

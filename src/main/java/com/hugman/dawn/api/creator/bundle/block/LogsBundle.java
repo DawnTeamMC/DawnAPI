@@ -14,7 +14,8 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.Direction;
 
-public class LogsBundle extends Bundle {
+public class LogsBundle extends Bundle
+{
 	private final BlockCreator log, strippedLog, wood, strippedWood;
 
 	/**

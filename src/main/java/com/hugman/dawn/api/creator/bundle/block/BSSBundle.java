@@ -6,7 +6,8 @@ import com.hugman.dawn.api.util.DefaultBlockBuilders;
 import com.hugman.dawn.api.util.StringUtil;
 import net.minecraft.block.Block;
 
-public class BSSBundle extends Bundle {
+public class BSSBundle extends Bundle
+{
 	private final BlockCreator block, stairs, slab;
 
 	/**

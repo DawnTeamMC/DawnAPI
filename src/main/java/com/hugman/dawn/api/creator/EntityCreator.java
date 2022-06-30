@@ -9,7 +9,8 @@ import net.minecraft.util.registry.Registry;
  *
  * @param <E> the entity class, inheriting {@link Entity}
  */
-public class EntityCreator<E extends Entity> extends SimpleCreator<EntityType<E>> {
+public class EntityCreator<E extends Entity> extends SimpleCreator<EntityType<E>>
+{
 
 	/**
 	 * Creates an entity type.

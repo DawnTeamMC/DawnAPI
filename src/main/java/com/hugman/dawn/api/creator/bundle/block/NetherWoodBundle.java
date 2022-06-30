@@ -12,7 +12,8 @@ import net.minecraft.world.gen.feature.HugeFungusFeatureConfig;
 
 import java.util.function.Supplier;
 
-public class NetherWoodBundle extends WoodBundle {
+public class NetherWoodBundle extends WoodBundle
+{
 	private final PlantBundle fungusPack;
 
 	protected NetherWoodBundle(String name, Supplier<RegistryEntry<ConfiguredFeature<HugeFungusFeatureConfig, ?>>> hugeFungusSupplier, MapColor planksColor, MapColor insideColor, MapColor barkColor) {
@@ -44,7 +45,8 @@ public class NetherWoodBundle extends WoodBundle {
 		return fungusPack.getPottedPlant();
 	}
 
-	public static class Builder {
+	public static class Builder
+	{
 		private final String prefix;
 		private final Supplier<RegistryEntry<ConfiguredFeature<HugeFungusFeatureConfig, ?>>> hugeFungusSupplier;
 		private final MapColor planksColor;

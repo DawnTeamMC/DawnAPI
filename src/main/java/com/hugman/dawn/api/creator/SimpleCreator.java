@@ -5,7 +5,8 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.util.registry.Registry;
 
-public abstract class SimpleCreator<V> extends Creator {
+public abstract class SimpleCreator<V> extends Creator
+{
 	protected final String name;
 	protected final Registry<?> registry;
 	protected V value;

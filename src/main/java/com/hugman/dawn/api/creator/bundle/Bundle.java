@@ -6,7 +6,8 @@ import com.hugman.dawn.api.object.ModData;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Bundle extends Creator {
+public abstract class Bundle extends Creator
+{
 	private final List<Creator> list = new ArrayList<>();
 
 	@Override

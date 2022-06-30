@@ -6,7 +6,8 @@ import net.minecraft.util.registry.Registry;
 /**
  * A class allowing a painting motive to be created.
  */
-public class PaintingCreator extends SimpleCreator<PaintingVariant> {
+public class PaintingCreator extends SimpleCreator<PaintingVariant>
+{
 
 	/**
 	 * Creates a painting motive.

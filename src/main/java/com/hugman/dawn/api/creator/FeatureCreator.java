@@ -10,7 +10,8 @@ import net.minecraft.world.gen.feature.FeatureConfig;
  * @param <FC> the feature config class, inheriting {@link FeatureConfig}
  * @param <F>  the feature class, inheriting {@link Feature}
  */
-public class FeatureCreator<FC extends FeatureConfig, F extends Feature<FC>> extends SimpleCreator<F> {
+public class FeatureCreator<FC extends FeatureConfig, F extends Feature<FC>> extends SimpleCreator<F>
+{
 
 	/**
 	 * Creates a feature.

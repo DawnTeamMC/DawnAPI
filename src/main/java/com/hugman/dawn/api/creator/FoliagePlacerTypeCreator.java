@@ -10,7 +10,8 @@ import net.minecraft.world.gen.foliage.FoliagePlacerType;
  *
  * @param <P> the foliage placer class, inheriting {@link FoliagePlacer}
  */
-public class FoliagePlacerTypeCreator<P extends FoliagePlacer> extends SimpleCreator<FoliagePlacerType<P>> {
+public class FoliagePlacerTypeCreator<P extends FoliagePlacer> extends SimpleCreator<FoliagePlacerType<P>>
+{
 
 	/**
 	 * Creates a foliage placer type.

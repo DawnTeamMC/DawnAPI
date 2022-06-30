@@ -9,7 +9,8 @@ import net.minecraft.util.registry.Registry;
  *
  * @param <S> the recipe serializer class, inheriting {@link RecipeSerializer}
  */
-public class RecipeSerializerCreator<S extends RecipeSerializer<? extends Recipe<?>>> extends SimpleCreator<S> {
+public class RecipeSerializerCreator<S extends RecipeSerializer<? extends Recipe<?>>> extends SimpleCreator<S>
+{
 
 	/**
 	 * Creates a recipe serializer.

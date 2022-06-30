@@ -9,7 +9,8 @@ import net.minecraft.util.registry.Registry;
  *
  * @param <S> the recipe type class, inheriting {@link RecipeType}
  */
-public class RecipeTypeCreator<S extends RecipeType<? extends Recipe<?>>> extends SimpleCreator<S> {
+public class RecipeTypeCreator<S extends RecipeType<? extends Recipe<?>>> extends SimpleCreator<S>
+{
 	/**
 	 * Creates a recipe type.
 	 *

@@ -6,7 +6,8 @@ import net.minecraft.util.registry.Registry;
 /**
  * A class allowing a status effect to be created.
  */
-public class EffectCreator extends SimpleCreator<StatusEffect> {
+public class EffectCreator extends SimpleCreator<StatusEffect>
+{
 
 	/**
 	 * Creates a status effect.

@@ -9,7 +9,8 @@ import net.minecraft.util.registry.Registry;
 /**
  * A class allowing a custom stat to be created.
  */
-public class StatCreator extends Creator {
+public class StatCreator extends Creator
+{
 	private final String name;
 	private final StatFormatter formatter;
 	private Identifier stat;

@@ -6,7 +6,8 @@ import com.hugman.dawn.api.util.DefaultBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.FlowerPotBlock;
 
-public class PlantBundle extends Bundle {
+public class PlantBundle extends Bundle
+{
 	private final BlockCreator plant;
 	private final BlockCreator pottedPlant;
 

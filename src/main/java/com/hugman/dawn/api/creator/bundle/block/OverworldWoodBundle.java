@@ -10,7 +10,8 @@ import net.minecraft.block.sapling.SaplingGenerator;
 
 import java.util.function.Predicate;
 
-public class OverworldWoodBundle extends WoodBundle {
+public class OverworldWoodBundle extends WoodBundle
+{
 	private final PlantBundle saplingPack;
 	private final BlockCreator leaves;
 
@@ -32,7 +33,8 @@ public class OverworldWoodBundle extends WoodBundle {
 		return leaves.getValue();
 	}
 
-	public static class Builder {
+	public static class Builder
+	{
 		private final String prefix;
 		private final SaplingGenerator saplingGenerator;
 		private final MapColor planksColor;

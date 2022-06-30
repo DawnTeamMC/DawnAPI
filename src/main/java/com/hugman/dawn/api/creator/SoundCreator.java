@@ -8,7 +8,8 @@ import net.minecraft.util.registry.Registry;
 /**
  * A class allowing a sound event to be created.
  */
-public class SoundCreator extends Creator {
+public class SoundCreator extends Creator
+{
 	private final String name;
 	private SoundEvent sound;
 

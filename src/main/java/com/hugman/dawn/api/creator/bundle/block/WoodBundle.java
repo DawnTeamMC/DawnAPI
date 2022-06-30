@@ -8,7 +8,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.MapColor;
 
-public class WoodBundle extends Bundle {
+public class WoodBundle extends Bundle
+{
 	private final BlockCreator planks;
 	private final LogsBundle logs;
 	private final BlockCreator stairs, slab, trapdoor, pressurePlate, button, fence, fenceGate, door;
@@ -80,7 +81,8 @@ public class WoodBundle extends Bundle {
 		return door.getValue();
 	}
 
-	public static class Builder {
+	public static class Builder
+	{
 		private final String name;
 		private final MapColor planksColor;
 		private final MapColor insideColor;
