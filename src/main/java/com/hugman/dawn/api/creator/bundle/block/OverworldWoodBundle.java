@@ -1,7 +1,7 @@
 package com.hugman.dawn.api.creator.bundle.block;
 
 import com.hugman.dawn.api.creator.BlockCreator;
-import com.hugman.dawn.api.object.block.SaplingBlock;
+import com.hugman.dawn.api.object.block.DawnSaplingBlock;
 import com.hugman.dawn.api.util.DefaultBlockBuilders;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -17,7 +17,7 @@ public class OverworldWoodBundle extends WoodBundle
 
 	protected OverworldWoodBundle(String name, SaplingGenerator saplingGenerator, Predicate<BlockState> saplingSoilPredicate, MapColor planksColor, MapColor insideColor, MapColor barkColor) {
 		super(name, planksColor, insideColor, barkColor, false);
-		this.saplingPack = put(new PlantBundle(DefaultBlockBuilders.SAPLING.copy(name + "_sapling").provider(s -> new SaplingBlock(saplingGenerator, saplingSoilPredicate, s))));
+		this.saplingPack = put(new PlantBundle(DefaultBlockBuilders.SAPLING.copy(name + "_sapling").provider(s -> new DawnSaplingBlock(s, saplingGenerator, saplingSoilPredicate))));
 		this.leaves = put(DefaultBlockBuilders.LEAVES.copy(name + "_leaves").build());
 	}
 

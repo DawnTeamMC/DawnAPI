@@ -27,9 +27,7 @@ public abstract class DynamicSaplingGenerator extends SaplingGenerator
 
 	public boolean generate(ServerWorld world, ChunkGenerator chunkGenerator, BlockPos pos, BlockState state, Random random) {
 		RegistryEntry<? extends ConfiguredFeature<?, ?>> registryEntry = this.getTreeFeature(world, random, this.areFlowersNearby(world, pos));
-		if(registryEntry == null) {
-			return false;
-		}
+		if(registryEntry == null) return false;
 		ConfiguredFeature<?, ?> configuredFeature = registryEntry.value();
 		world.setBlockState(pos, Blocks.AIR.getDefaultState(), Block.NO_REDRAW);
 		if(configuredFeature.generate(world, chunkGenerator, random, pos)) {

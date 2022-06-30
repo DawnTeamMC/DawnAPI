@@ -8,24 +8,17 @@ import net.minecraft.world.BlockView;
 
 import java.util.function.Predicate;
 
-public class SaplingBlock extends net.minecraft.block.SaplingBlock {
+public class DawnSaplingBlock extends net.minecraft.block.SaplingBlock {
 	private final Predicate<BlockState> predicate;
 
-	public SaplingBlock(SaplingGenerator saplingGenerator, AbstractBlock.Settings settings) {
-		super(saplingGenerator, settings);
-		this.predicate = null;
-	}
-
-	public SaplingBlock(SaplingGenerator saplingGenerator, Predicate<BlockState> predicate, AbstractBlock.Settings settings) {
+	public DawnSaplingBlock(AbstractBlock.Settings settings, SaplingGenerator saplingGenerator, Predicate<BlockState> predicate) {
 		super(saplingGenerator, settings);
 		this.predicate = predicate;
 	}
 
 	@Override
 	protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
-		if(predicate != null) {
-			if(predicate.test(floor)) return true;
-		}
+		if(predicate != null) return predicate.test(floor);
 		return super.canPlantOnTop(floor, world, pos);
 	}
 }
