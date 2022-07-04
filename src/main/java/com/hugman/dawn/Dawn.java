@@ -1,5 +1,6 @@
 package com.hugman.dawn;
 
+import com.hugman.dawn.api.DawnRegistries;
 import com.hugman.dawn.api.object.ModData;
 import com.hugman.dawn.mod.config.DawnConfig;
 import com.hugman.dawn.mod.init.DawnCommands;
@@ -25,6 +26,7 @@ public class Dawn implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		DawnRegistries.init();
 		DawnItemGroups.init();
 		DawnCommands.init();
 		DawnEntities.init();
