@@ -13,7 +13,7 @@ public record EllipticalPrismShape(FloatProvider a, FloatProvider b, FloatProvid
 	public static final Codec<EllipticalPrismShape> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
 			DawnCodecs.FLOAT_NON_ZERO.fieldOf("a").forGetter(EllipticalPrismShape::a),
 			DawnCodecs.FLOAT_NON_ZERO.fieldOf("b").forGetter(EllipticalPrismShape::b),
-			DawnCodecs.FLOAT_NON_ZERO.fieldOf("height").forGetter(EllipticalPrismShape::height)
+			DawnCodecs.FLOAT.fieldOf("height").forGetter(EllipticalPrismShape::height)
 	).apply(instance, EllipticalPrismShape::new));
 
 	@Override

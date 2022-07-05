@@ -11,9 +11,9 @@ import net.minecraft.util.math.random.Random;
 
 public record RectangularPyramidShape(FloatProvider width, FloatProvider height, FloatProvider depth) implements Shape {
 	public static final Codec<RectangularPyramidShape> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
-			DawnCodecs.FLOAT_NON_ZERO.fieldOf("width").forGetter(RectangularPyramidShape::width),
+			DawnCodecs.FLOAT.fieldOf("width").forGetter(RectangularPyramidShape::width),
 			DawnCodecs.FLOAT_NON_ZERO.fieldOf("height").forGetter(RectangularPyramidShape::height),
-			DawnCodecs.FLOAT_NON_ZERO.fieldOf("depth").forGetter(RectangularPyramidShape::depth)
+			DawnCodecs.FLOAT.fieldOf("depth").forGetter(RectangularPyramidShape::depth)
 	).apply(instance, RectangularPyramidShape::new));
 
 	@Override

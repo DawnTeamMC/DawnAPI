@@ -14,9 +14,9 @@ import net.minecraft.util.math.random.Random;
 
 public record TranslateShapeProcessor(FloatProvider x, FloatProvider y, FloatProvider z) implements ShapeProcessor {
 	public static final Codec<TranslateShapeProcessor> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
-			DawnCodecs.FLOAT.fieldOf("x").orElse(ConstantFloatProvider.create(0.0F)).forGetter((config) -> config.x),
-			DawnCodecs.FLOAT.fieldOf("y").orElse(ConstantFloatProvider.create(0.0F)).forGetter((config) -> config.y),
-			DawnCodecs.FLOAT.fieldOf("z").orElse(ConstantFloatProvider.create(0.0F)).forGetter((config) -> config.z)
+			DawnCodecs.FLOAT.fieldOf("x").orElse(ConstantFloatProvider.create(0.0F)).forGetter(TranslateShapeProcessor::x),
+			DawnCodecs.FLOAT.fieldOf("y").orElse(ConstantFloatProvider.create(0.0F)).forGetter(TranslateShapeProcessor::y),
+			DawnCodecs.FLOAT.fieldOf("z").orElse(ConstantFloatProvider.create(0.0F)).forGetter(TranslateShapeProcessor::z)
 	).apply(instance, TranslateShapeProcessor::new));
 
 	@Override

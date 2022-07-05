@@ -11,9 +11,9 @@ import net.minecraft.util.math.random.Random;
 
 public record TriangularPrismShape(FloatProvider width, FloatProvider height, FloatProvider depth) implements Shape {
 	public static final Codec<TriangularPrismShape> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
-			DawnCodecs.FLOAT_NON_ZERO.fieldOf("width").forGetter(TriangularPrismShape::width),
+			DawnCodecs.FLOAT.fieldOf("width").forGetter(TriangularPrismShape::width),
 			DawnCodecs.FLOAT_NON_ZERO.fieldOf("height").forGetter(TriangularPrismShape::height),
-			DawnCodecs.FLOAT_NON_ZERO.fieldOf("depth").forGetter(TriangularPrismShape::depth)
+			DawnCodecs.FLOAT.fieldOf("depth").forGetter(TriangularPrismShape::depth)
 	).apply(instance, TriangularPrismShape::new));
 
 	@Override

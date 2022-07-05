@@ -15,8 +15,8 @@ import java.util.Optional;
 
 public record NoiseTranslateShapeProcessor(FloatProvider magnitude, Optional<Long> seed) implements ShapeProcessor {
 	public static final Codec<NoiseTranslateShapeProcessor> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
-			DawnCodecs.FLOAT.fieldOf("magnitude").orElse(ConstantFloatProvider.create(0.0F)).forGetter((config) -> config.magnitude),
-			Codec.LONG.optionalFieldOf("seed").forGetter((config) -> config.seed)
+			DawnCodecs.FLOAT.fieldOf("magnitude").orElse(ConstantFloatProvider.create(1.0F)).forGetter(NoiseTranslateShapeProcessor::magnitude),
+			Codec.LONG.optionalFieldOf("seed").forGetter(NoiseTranslateShapeProcessor::seed)
 	).apply(instance, NoiseTranslateShapeProcessor::new));
 
 	@Override

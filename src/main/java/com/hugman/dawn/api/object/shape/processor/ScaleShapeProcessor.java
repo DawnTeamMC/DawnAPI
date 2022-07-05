@@ -14,9 +14,9 @@ import net.minecraft.util.math.random.Random;
 
 public record ScaleShapeProcessor(FloatProvider x, FloatProvider y, FloatProvider z) implements ShapeProcessor {
 	public static final Codec<ScaleShapeProcessor> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
-			DawnCodecs.FLOAT.fieldOf("x").orElse(ConstantFloatProvider.create(0.0F)).forGetter((config) -> config.x),
-			DawnCodecs.FLOAT.fieldOf("y").orElse(ConstantFloatProvider.create(0.0F)).forGetter((config) -> config.y),
-			DawnCodecs.FLOAT.fieldOf("z").orElse(ConstantFloatProvider.create(0.0F)).forGetter((config) -> config.z)
+			DawnCodecs.FLOAT.fieldOf("x").orElse(ConstantFloatProvider.create(1.0F)).forGetter(ScaleShapeProcessor::x),
+			DawnCodecs.FLOAT.fieldOf("y").orElse(ConstantFloatProvider.create(1.0F)).forGetter(ScaleShapeProcessor::y),
+			DawnCodecs.FLOAT.fieldOf("z").orElse(ConstantFloatProvider.create(1.0F)).forGetter(ScaleShapeProcessor::z)
 	).apply(instance, ScaleShapeProcessor::new));
 
 	@Override

@@ -11,8 +11,8 @@ import net.minecraft.util.math.random.Random;
 
 public record RectangleShape(FloatProvider width, FloatProvider height) implements Shape {
 	public static final Codec<RectangleShape> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
-			DawnCodecs.FLOAT_NON_ZERO.fieldOf("width").forGetter(RectangleShape::width),
-			DawnCodecs.FLOAT_NON_ZERO.fieldOf("height").forGetter(RectangleShape::height)
+			DawnCodecs.FLOAT.fieldOf("width").forGetter(RectangleShape::width),
+			DawnCodecs.FLOAT.fieldOf("height").forGetter(RectangleShape::height)
 	).apply(instance, RectangleShape::new));
 
 	@Override

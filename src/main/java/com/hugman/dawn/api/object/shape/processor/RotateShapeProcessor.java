@@ -12,11 +12,12 @@ import net.minecraft.util.math.floatprovider.ConstantFloatProvider;
 import net.minecraft.util.math.floatprovider.FloatProvider;
 import net.minecraft.util.math.random.Random;
 
-public record RotateShapeProcessor(FloatProvider xTheta, FloatProvider yTheta, FloatProvider zTheta) implements ShapeProcessor {
+public record RotateShapeProcessor(FloatProvider x, FloatProvider y, FloatProvider z, boolean degrees) implements ShapeProcessor {
 	public static final Codec<RotateShapeProcessor> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
-			DawnCodecs.FLOAT.fieldOf("x_theta").orElse(ConstantFloatProvider.create(0.0F)).forGetter((config) -> config.xTheta),
-			DawnCodecs.FLOAT.fieldOf("y_theta").orElse(ConstantFloatProvider.create(0.0F)).forGetter((config) -> config.yTheta),
-			DawnCodecs.FLOAT.fieldOf("z_theta").orElse(ConstantFloatProvider.create(0.0F)).forGetter((config) -> config.zTheta)
+			DawnCodecs.FLOAT.fieldOf("x").orElse(ConstantFloatProvider.create(0.0F)).forGetter(RotateShapeProcessor::x),
+			DawnCodecs.FLOAT.fieldOf("y").orElse(ConstantFloatProvider.create(0.0F)).forGetter(RotateShapeProcessor::y),
+			DawnCodecs.FLOAT.fieldOf("z").orElse(ConstantFloatProvider.create(0.0F)).forGetter(RotateShapeProcessor::z),
+			Codec.BOOL.fieldOf("degrees").orElse(true).forGetter(RotateShapeProcessor::degrees)
 	).apply(instance, RotateShapeProcessor::new));
 
 	@Override
@@ -26,6 +27,6 @@ public record RotateShapeProcessor(FloatProvider xTheta, FloatProvider yTheta, F
 
 	@Override
 	public Layer get(Random random) {
-		return new RotateLayer(Quaternion.of(xTheta.get(random), yTheta.get(random), zTheta.get(random), true));
+		return new RotateLayer(Quaternion.of(this.x.get(random), this.y.get(random), this.z.get(random), this.degrees));
 	}
 }
