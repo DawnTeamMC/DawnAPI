@@ -27,7 +27,7 @@ public class ShapeFeature extends Feature<ShapeFeatureConfig> {
 		StructureWorldAccess world = context.getWorld();
 		BlockPos pos = context.getOrigin();
 
-		Shape shape = config.shape().create(random);
+		Shape shape = config.shape().get(random);
 
 		shape = shape.applyLayer(new RotateLayer(Quaternion.of(0, 0, 0, 1)))
 				     .applyLayer(new TranslateLayer(Position.of(pos)));

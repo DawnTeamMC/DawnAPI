@@ -6,9 +6,9 @@ import com.terraformersmc.terraform.shapes.api.layer.Layer;
 import net.minecraft.util.math.random.Random;
 
 public interface ShapeProcessor {
-	Codec<ShapeProcessor> CODEC = DawnRegistries.SHAPE_PROCESSOR_TYPE.getCodec().dispatch(ShapeProcessor::getType, ShapeProcessorType::codec);
+	Codec<ShapeProcessor> TYPE_CODEC = DawnRegistries.SHAPE_PROCESSOR_TYPE.getCodec().dispatch(ShapeProcessor::getType, ShapeProcessorType::codec);
 
 	ShapeProcessorType<?> getType();
 
-	Layer create(Random random);
+	Layer get(Random random);
 }
