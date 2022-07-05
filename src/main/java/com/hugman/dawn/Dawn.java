@@ -5,6 +5,7 @@ import com.hugman.dawn.api.object.ModData;
 import com.hugman.dawn.mod.config.DawnConfig;
 import com.hugman.dawn.mod.init.DawnCommands;
 import com.hugman.dawn.mod.init.DawnEntities;
+import com.hugman.dawn.mod.init.DawnFeatures;
 import com.hugman.dawn.mod.init.DawnItemGroups;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
@@ -30,6 +31,7 @@ public class Dawn implements ModInitializer {
 		DawnItemGroups.init();
 		DawnCommands.init();
 		DawnEntities.init();
+		DawnFeatures.init();
 		MOD_DATA.registerCreators();
 		ServerLifecycleEvents.SERVER_STARTED.register(this::onServerLoad);
 	}

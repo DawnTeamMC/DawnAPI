@@ -12,4 +12,6 @@ import net.minecraft.world.gen.feature.Feature;
 
 public class DawnFeatures extends DawnBundle {
 	public static final Feature<ShapeFeatureConfig> SHAPE = add(new FeatureCreator<>("shape", new ShapeFeature(ShapeFeatureConfig.CODEC)));
+
+	public static void init() {}
 }
