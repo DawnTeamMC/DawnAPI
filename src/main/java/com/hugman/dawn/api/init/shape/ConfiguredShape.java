@@ -12,12 +12,11 @@ import net.minecraft.util.registry.RegistryEntryList;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 public record ConfiguredShape(Shape shape, List<ConfiguredShapeProcessor> processors) {
 	private static final Codec<ConfiguredShape> BASE_CODEC = RecordCodecBuilder.create((instance) -> instance.group(
 			Shape.CODEC.fieldOf("shape").forGetter(ConfiguredShape::shape),
-			ConfiguredShapeProcessor.CODEC.listOf().optionalFieldOf("processors").xmap(o -> o.orElse(Collections.emptyList()), Optional::ofNullable).forGetter(ConfiguredShape::processors)
+			ConfiguredShapeProcessor.CODEC.listOf().fieldOf("processors").forGetter(ConfiguredShape::processors)
 	).apply(instance, ConfiguredShape::new));
 
 	public static final Codec<ConfiguredShape> CODEC = Codec.either(Shape.CODEC, BASE_CODEC).xmap(
