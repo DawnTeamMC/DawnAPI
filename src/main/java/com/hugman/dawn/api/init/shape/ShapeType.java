@@ -21,7 +21,6 @@ public record ShapeType<P extends Shape>(Codec<P> codec) {
 	public static final ShapeType<HemiEllipsoidShape> HEMI_ELLIPSOID = register("hemi_ellipsoid", HemiEllipsoidShape.CODEC);
 
 	private static <P extends Shape> ShapeType<P> register(String name, Codec<P> codec) {
-		Dawn.LOGGER.info("Registering shape type: " + name);
 		return Registry.register(DawnRegistries.SHAPE_TYPE, Dawn.MOD_DATA.id(name), new ShapeType<>(codec));
 	}
 }

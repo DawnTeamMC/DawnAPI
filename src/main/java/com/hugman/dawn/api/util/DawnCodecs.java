@@ -16,27 +16,17 @@ import java.util.List;
 import java.util.function.Function;
 
 public final class DawnCodecs {
-	public static final Codec<Shape> SHAPE = Shape.TYPE_CODEC;
-	public static final Codec<ConfiguredShape> CONFIGURED_SHAPE = configuredShape();
-
-	public static final Codec<ShapeProcessor> SHAPE_PROCESSOR = ShapeProcessor.TYPE_CODEC;
-	public static final Codec<ConfiguredShapeProcessor> CONFIGURED_SHAPE_PROCESSOR = configuredShapeProcessor();
-
 	public static final Codec<IntProvider> INT = IntProvider.VALUE_CODEC;
 	public static final Codec<IntProvider> INT_POSITIVE = IntProvider.POSITIVE_CODEC;
 	public static final Codec<IntProvider> INT_NON_ZERO = nonZeroIntProvider();
 	public static final Codec<FloatProvider> FLOAT = FloatProvider.VALUE_CODEC;
 	public static final Codec<FloatProvider> FLOAT_NON_ZERO = nonZeroFloatProvider();
 
-	private static Codec<ConfiguredShape> configuredShape() {
-		return Codec.either(DawnCodecs.SHAPE, ConfiguredShape.CODEC).xmap((either) -> either.map(shape -> new ConfiguredShape(shape, Collections.emptyList()), configured -> configured),
-				configured -> configured.processors().isEmpty() ? Either.left(configured.shape()) : Either.right(configured));
-	}
+	public static final Codec<ShapeProcessor> SHAPE_PROCESSOR = ShapeProcessor.TYPE_CODEC;
+	public static final Codec<ConfiguredShapeProcessor> CONFIGURED_SHAPE_PROCESSOR = configuredShapeProcessor();
 
-	private static Codec<ConfiguredShapeProcessor> configuredShapeProcessor() {
-		return Codec.either(DawnCodecs.SHAPE_PROCESSOR, ConfiguredShapeProcessor.CODEC).xmap((either) -> either.map(processor -> new ConfiguredShapeProcessor(processor, ConstantIntProvider.create(1)), configured -> configured),
-				configured -> (configured.repeat().getMax() == 1 && configured.repeat().getMin() == 1) ? Either.left(configured.processor()) : Either.right(configured));
-	}
+	public static final Codec<Shape> SHAPE = Shape.TYPE_CODEC;
+	public static final Codec<ConfiguredShape> CONFIGURED_SHAPE = configuredShape();
 
 	private static Codec<IntProvider> nonZeroIntProvider() {
 		Function<IntProvider, DataResult<IntProvider>> function = (provider) -> {
@@ -56,5 +46,15 @@ public final class DawnCodecs {
 			return DataResult.success(provider);
 		};
 		return DawnCodecs.FLOAT.flatXmap(function, function);
+	}
+
+	private static Codec<ConfiguredShapeProcessor> configuredShapeProcessor() {
+		return Codec.either(DawnCodecs.SHAPE_PROCESSOR, ConfiguredShapeProcessor.CODEC).xmap((either) -> either.map(processor -> new ConfiguredShapeProcessor(processor, ConstantIntProvider.create(1)), configured -> configured),
+				configured -> (configured.repeat().getMax() == 1 && configured.repeat().getMin() == 1) ? Either.left(configured.processor()) : Either.right(configured));
+	}
+
+	private static Codec<ConfiguredShape> configuredShape() {
+		return Codec.either(DawnCodecs.SHAPE, ConfiguredShape.CODEC).xmap((either) -> either.map(shape -> new ConfiguredShape(shape, Collections.emptyList()), configured -> configured),
+				configured -> configured.processors().isEmpty() ? Either.left(configured.shape()) : Either.right(configured));
 	}
 }
