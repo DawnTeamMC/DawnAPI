@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
  */
 @Mixin(DefaultedRegistry.class)
 public class DefaultedRegistryMixin {
-	@ModifyVariable(at = @At("HEAD"), method = "get(Lnet/minecraft/util/Identifier;)Ljava/lang/Object;", ordinal = 0)
+	@ModifyVariable(at = @At("HEAD"), method = "get(Lnet/minecraft/util/Identifier;)Ljava/lang/Object;", ordinal = 0, argsOnly = true)
 	Identifier dawn$fixMissingFromRegistry(@Nullable Identifier id) {
 		if(id != null) {
 			for(ModData modData : Dawn.MOD_DATA_LIST) {

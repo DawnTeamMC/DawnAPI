@@ -5,7 +5,7 @@ import com.mojang.serialization.Codec;
 import net.minecraft.util.math.random.Random;
 
 public interface Shape {
-	Codec<Shape> TYPE_CODEC = DawnRegistries.SHAPE_TYPE.getCodec().dispatch(Shape::getType, ShapeType::codec);
+	Codec<Shape> CODEC = DawnRegistries.SHAPE_TYPE.getCodec().dispatch(Shape::getType, ShapeType::codec);
 
 	ShapeType<?> getType();
 
