@@ -1,6 +1,9 @@
 accessWidener v1 named
 accessible method net/minecraft/world/gen/trunk/TrunkPlacerType     <init> (Lcom/mojang/serialization/Codec;)V
 accessible method net/minecraft/world/gen/foliage/FoliagePlacerType <init> (Lcom/mojang/serialization/Codec;)V
-accessible method net/minecraft/data/DataCache$CachedDataWriter     <init>             (Ljava/lang/String;Lnet/minecraft/data/DataCache$CachedData;)V
-accessible method net/minecraft/data/DataCache                      parseOrCreateCache (Ljava/nio/file/Path;Ljava/nio/file/Path;)Lnet/minecraft/data/DataCache$CachedData;
-accessible method net/minecraft/data/report/WorldgenProvider        writeToPath        (Ljava/nio/file/Path;Lnet/minecraft/data/DataWriter;Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/Encoder;Ljava/lang/Object;)V
+
+accessible method net/minecraft/data/DataCache$CachedDataWriter          <init> (Ljava/lang/String;Lnet/minecraft/data/DataCache$CachedData;)V
+accessible method net/minecraft/data/DataCache                           parseOrCreateCache (Ljava/nio/file/Path;Ljava/nio/file/Path;)Lnet/minecraft/data/DataCache$CachedData;
+accessible method net/minecraft/data/report/WorldgenProvider             writeToPath        (Ljava/nio/file/Path;Lnet/minecraft/data/DataWriter;Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/Encoder;Ljava/lang/Object;)V
+
+accessible method net/minecraft/command/argument/RegistryKeyArgumentType getRegistryEntry (Lcom/mojang/brigadier/context/CommandContext;Ljava/lang/String;Lnet/minecraft/util/registry/RegistryKey;Lcom/mojang/brigadier/exceptions/DynamicCommandExceptionType;)Lnet/minecraft/util/registry/RegistryEntry;
