@@ -29,20 +29,20 @@ import java.util.List;
 
 public class ShapeCommand {
 	public static final String NAME = "shape";
-	public static final String SHAPE_ARG = "shape";
-	public static final String ORIGIN_ARG = "origin";
+	public static final String CONFIGURED_SHAPE_ARG = "configured_shape";
+	public static final String POS_ARG = "pos";
 	public static final String FILL_ARG = "fill";
-	public static final String STATE_ARG = "state";
+	public static final String BLOCK_ARG = "block";
 
 	private static final DynamicCommandExceptionType INVALID_SHAPE_EXCEPTION = new DynamicCommandExceptionType((id) -> Text.translatable("commands.shape.shape.invalid", id));
 
 	public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess registryAccess) {
 		dispatcher.register(CommandManager.literal(NAME).requires(sc -> sc.hasPermissionLevel(2))
-				.then(CommandManager.argument(SHAPE_ARG, RegistryKeyArgumentType.registryKey(DawnRegistries.CONFIGURED_SHAPE.getKey()))
-						.then(CommandManager.argument(ORIGIN_ARG, BlockPosArgumentType.blockPos())
+				.then(CommandManager.argument(CONFIGURED_SHAPE_ARG, RegistryKeyArgumentType.registryKey(DawnRegistries.CONFIGURED_SHAPE.getKey()))
+						.then(CommandManager.argument(POS_ARG, BlockPosArgumentType.blockPos())
 								.then(CommandManager.literal(FILL_ARG)
-										.then(CommandManager.argument(STATE_ARG, BlockStateArgumentType.blockState(registryAccess))
-												.executes(cc -> fillShape(cc.getSource(), getShapeEntry(cc, SHAPE_ARG), BlockPosArgumentType.getLoadedBlockPos(cc, ORIGIN_ARG), BlockStateArgumentType.getBlockState(cc, STATE_ARG))))))));
+										.then(CommandManager.argument(BLOCK_ARG, BlockStateArgumentType.blockState(registryAccess))
+												.executes(cc -> fillShape(cc.getSource(), getShapeEntry(cc, CONFIGURED_SHAPE_ARG), BlockPosArgumentType.getLoadedBlockPos(cc, POS_ARG), BlockStateArgumentType.getBlockState(cc, BLOCK_ARG))))))));
 	}
 
 	private static int fillShape(ServerCommandSource source, RegistryEntry<ConfiguredShape> configuredShapeEntry, BlockPos origin, BlockStateArgument stateArgument) throws CommandSyntaxException {
