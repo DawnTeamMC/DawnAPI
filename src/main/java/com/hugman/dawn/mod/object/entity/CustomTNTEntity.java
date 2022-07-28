@@ -8,6 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MovementType;
+import net.minecraft.entity.TntEntity;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
@@ -59,7 +60,7 @@ public class CustomTNTEntity extends Entity {
 	}
 
 	@Override
-	public boolean collides() {
+	public boolean canHit() {
 		return !this.isRemoved();
 	}
 
