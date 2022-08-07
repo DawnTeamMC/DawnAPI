@@ -1,9 +1,11 @@
 package com.hugman.dawn;
 
+import com.hugman.dawn.api.DawnRegistries;
 import com.hugman.dawn.api.object.ModData;
 import com.hugman.dawn.mod.config.DawnConfig;
 import com.hugman.dawn.mod.init.DawnCommands;
 import com.hugman.dawn.mod.init.DawnEntities;
+import com.hugman.dawn.mod.init.DawnFeatures;
 import com.hugman.dawn.mod.init.DawnItemGroups;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
@@ -25,9 +27,11 @@ public class Dawn implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		DawnRegistries.init();
 		DawnItemGroups.init();
 		DawnCommands.init();
 		DawnEntities.init();
+		DawnFeatures.init();
 		MOD_DATA.registerCreators();
 		ServerLifecycleEvents.SERVER_STARTED.register(this::onServerLoad);
 	}
