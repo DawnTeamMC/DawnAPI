@@ -13,7 +13,9 @@ import net.minecraft.client.texture.SpriteAtlasTexture;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3f;
+import org.joml.AxisAngle4f;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
 @Environment(EnvType.CLIENT)
 public class CustomTNTEntityRenderer extends EntityRenderer<CustomTNTEntity> {
@@ -38,9 +40,9 @@ public class CustomTNTEntityRenderer extends EntityRenderer<CustomTNTEntity> {
 			float j = 1.0F + h * 0.3F;
 			matrixStack.scale(j, j, j);
 		}
-		matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(-90.0F));
+		matrixStack.multiply(new Quaternionf(new AxisAngle4f(-90.0F*(float)Math.PI/180.f, 0.f, 1.f, 0.f)));
 		matrixStack.translate(-0.5D, -0.5D, 0.5D);
-		matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(90.0F));
+		matrixStack.multiply(new Quaternionf(new AxisAngle4f(90.0F*(float)Math.PI/180.f, 0.f, 1.f, 0.f)));
 		TntMinecartEntityRenderer.renderFlashingBlock(this.tntBlockRenderManager, blockState, matrixStack, vertexConsumerProvider, light, entity.getFuse() / 5 % 2 == 0);
 		matrixStack.pop();
 		super.render(entity, entityYaw, partialTicks, matrixStack, vertexConsumerProvider, light);

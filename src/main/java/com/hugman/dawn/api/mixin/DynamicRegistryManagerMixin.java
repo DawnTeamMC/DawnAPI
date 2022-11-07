@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(SerializableRegistries.class)
 public abstract class DynamicRegistryManagerMixin {
-	@Shadow private static <E> void add(ImmutableMap.Builder<RegistryKey<Registry<?>>, SerializableRegistries.Info<?>> builder, RegistryKey<? extends Registry<E>> key, Codec<E> entryCodec) {}
+	@Shadow public static <E> void add(ImmutableMap.Builder<RegistryKey<Registry<?>>, SerializableRegistries.Info<?>> builder, RegistryKey<? extends Registry<E>> key, Codec<E> entryCodec) {}
 	@Unique static private boolean added = false;
 
 	@SuppressWarnings("InvalidInjectorMethodSignature")

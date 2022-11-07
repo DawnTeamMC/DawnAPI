@@ -2,11 +2,17 @@ accessWidener v1 named
 accessible method net/minecraft/world/gen/trunk/TrunkPlacerType     <init> (Lcom/mojang/serialization/Codec;)V
 accessible method net/minecraft/world/gen/foliage/FoliagePlacerType <init> (Lcom/mojang/serialization/Codec;)V
 
-#accessible method net/minecraft/data/DataCache$CachedDataWriter          <init> (Ljava/lang/String;Lnet/minecraft/data/DataCache$CachedData;)V
+accessible class net/minecraft/data/DataCache$CachedDataWriter
+accessible method net/minecraft/data/DataCache$CachedDataWriter          <init> (Ljava/lang/String;Lnet/minecraft/data/DataCache$CachedData;)V
 accessible method net/minecraft/data/DataCache                           parseOrCreateCache (Ljava/nio/file/Path;Ljava/nio/file/Path;)Lnet/minecraft/data/DataCache$CachedData;
 #accessible method net/minecraft/data/report/WorldgenProvider             writeToPath        (Ljava/nio/file/Path;Lnet/minecraft/data/DataWriter;Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/Encoder;Ljava/lang/Object;)V
 
 #accessible method net/minecraft/command/argument/RegistryKeyArgumentType getRegistryEntry (Lcom/mojang/brigadier/context/CommandContext;Ljava/lang/String;Lnet/minecraft/util/registry/RegistryKey;Lcom/mojang/brigadier/exceptions/DynamicCommandExceptionType;)Lnet/minecraft/util/registry/RegistryEntry;
 accessible class net/minecraft/util/registry/RegistryBuilder$RegistryInfo
 accessible class net/minecraft/util/registry/SerializableRegistries$Info
-mutable field net/minecraft/util/registry/SerializableRegistries REGISTRIES Lnet/minecraft/util/registry/RegistryKey;
+mutable field net/minecraft/util/registry/SerializableRegistries REGISTRIES Ljava/util/Map;
+accessible field net/minecraft/util/registry/SerializableRegistries REGISTRIES Ljava/util/Map;
+accessible method net/minecraft/data/report/DynamicRegistriesProvider writeToPath (Ljava/nio/file/Path;Lnet/minecraft/data/DataWriter;Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/Encoder;Ljava/lang/Object;)Ljava/util/concurrent/CompletableFuture;
+accessible method Lnet/minecraft/util/registry/SerializableRegistries stream (Lnet/minecraft/util/registry/DynamicRegistryManager;)Ljava/util/stream/Stream;
+accessible field Lnet/minecraft/client/network/ClientDynamicRegistryType STATIC_REGISTRY_MANAGER Lnet/minecraft/util/registry/DynamicRegistryManager$Immutable;
+accessible method Lnet/minecraft/world/biome/BiomeKeys register (Ljava/lang/String;)Lnet/minecraft/util/registry/RegistryKey;
