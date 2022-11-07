@@ -11,7 +11,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.SharedConstants;
 import net.minecraft.data.DataCache;
 import net.minecraft.data.DataWriter;
-import net.minecraft.data.report.WorldgenProvider;
+//import net.minecraft.data.report.WorldgenProvider;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.ClickEvent;
@@ -20,10 +20,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.dynamic.RegistryOps;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.DynamicRegistryManager;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.util.registry.*;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -72,7 +69,7 @@ public class ExportCommand
 			for(Registry<?> registry : Registry.REGISTRIES) {
 				exportRegistry(registry, expanded, exportPath);
 			}
-			for(Registry<?> registry : BuiltinRegistries.REGISTRIES) {
+			for(Registry<?> registry : SerializableRegistries.REGISTRIES) {
 				exportRegistry(registry, expanded, exportPath);
 			}
 			source.sendFeedback(Text.translatable("commands." + NAME + ".success", exportFileComponent), true);
