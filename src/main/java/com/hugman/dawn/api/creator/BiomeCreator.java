@@ -4,9 +4,7 @@ import com.hugman.dawn.api.object.ModData;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
-import net.minecraft.util.registry.SerializableRegistries;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeKeys;
 
 /**
  * A class allowing a biome to be created.
@@ -34,8 +32,7 @@ public class BiomeCreator extends Creator
 
 	@Override
 	public void register(ModData modData) {
-		var register = SerializableRegistries.REGISTRIES.get(registryKey);
-		var codec = register.networkCodec();
-		//BiomeKeys.register(this.name);
+		this.registryKey = RegistryKey.of(Registry.BIOME_KEY, modData.id(this.name));
+		Registry.register(BuiltinRegistries.BIOME, this.registryKey.getValue(), this.biome);
 	}
 }

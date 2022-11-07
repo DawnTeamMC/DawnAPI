@@ -9,13 +9,9 @@ import com.mojang.serialization.DynamicOps;
 import com.mojang.serialization.JsonOps;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.SharedConstants;
-import net.minecraft.client.network.ClientDynamicRegistryType;
 import net.minecraft.data.DataCache;
-import net.minecraft.data.DataProvider;
 import net.minecraft.data.DataWriter;
-//import net.minecraft.data.report.WorldgenProvider;
-import net.minecraft.data.report.DynamicRegistriesProvider;
-import net.minecraft.data.report.RegistryDumpProvider;
+import net.minecraft.data.report.WorldgenProvider;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.ClickEvent;
@@ -24,7 +20,10 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.dynamic.RegistryOps;
-import net.minecraft.util.registry.*;
+import net.minecraft.util.registry.BuiltinRegistries;
+import net.minecraft.util.registry.DynamicRegistryManager;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.RegistryKey;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -32,7 +31,6 @@ import java.nio.file.Path;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class ExportCommand
 {
@@ -74,7 +72,7 @@ public class ExportCommand
 			for(Registry<?> registry : Registry.REGISTRIES) {
 				exportRegistry(registry, expanded, exportPath);
 			}
-			for(Registry<?> registry : SerializableRegistries.REGISTRIES) {
+			for(Registry<?> registry : BuiltinRegistries.REGISTRIES) {
 				exportRegistry(registry, expanded, exportPath);
 			}
 			source.sendFeedback(Text.translatable("commands." + NAME + ".success", exportFileComponent), true);
@@ -136,17 +134,17 @@ public class ExportCommand
 	private static void generateDynamicFiles(boolean builtin, ServerCommandSource source, Path exportPath) throws IOException {
 		Files.createDirectories(exportPath);
 		DataWriter writer = new DataCache.CachedDataWriter(SharedConstants.getGameVersion().getName(), DataCache.parseOrCreateCache(exportPath, exportPath.resolve("reports")));
-		DynamicRegistryManager manager = builtin ? ClientDynamicRegistryType.STATIC_REGISTRY_MANAGER : source.getWorld().getRegistryManager();
+		DynamicRegistryManager manager = builtin ? DynamicRegistryManager.createAndLoad() : source.getWorld().getRegistryManager();
 
 		DynamicOps<JsonElement> ops = RegistryOps.of(JsonOps.INSTANCE, manager);
 
-		for(SerializableRegistries.Info<?> info : SerializableRegistries.REGISTRIES) {
+		for(DynamicRegistryManager.Info<?> info : DynamicRegistryManager.getInfos()) {
 			dumpRegistryCap(exportPath, writer, manager, ops, info);
 		}
 	}
 
-	private static <T> void dumpRegistryCap(Path exportPath, DataWriter writer, DynamicRegistryManager manager, DynamicOps<JsonElement> ops, SerializableRegistries.Info<T> info) {
-		RegistryKey<? extends Registry<T>> registryKey = info.key();
+	private static <T> void dumpRegistryCap(Path exportPath, DataWriter writer, DynamicRegistryManager manager, DynamicOps<JsonElement> ops, DynamicRegistryManager.Info<T> info) {
+		RegistryKey<? extends Registry<T>> registryKey = info.registry();
 		Registry<T> registry = manager.get(registryKey);
 
 		for(Map.Entry<RegistryKey<T>, T> entry : registry.getEntrySet()) {
@@ -156,7 +154,7 @@ public class ExportCommand
 					.resolve(registryKey.getValue().getNamespace())
 					.resolve(registryKey.getValue().getPath())
 					.resolve(key.getValue().getPath() + ".json");
-			DynamicRegistriesProvider.writeToPath(path, writer, ops, info.networkCodec(), entry.getValue());
+			WorldgenProvider.writeToPath(path, writer, ops, info.entryCodec(), entry.getValue());
 		}
 	}
 

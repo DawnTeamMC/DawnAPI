@@ -76,7 +76,7 @@ public class OverworldWoodBundle extends WoodBundle
 		 *
 		 * @param predicate the predicate for the allowed states
 		 */
-		public Builder saplingSoil(Predicate<BlockState> predicate) {
+		public com.hugman.dawn.api.creator.bundle.block.OverworldWoodBundle.Builder saplingSoil(Predicate<BlockState> predicate) {
 			this.saplingSoilPredicate = predicate;
 			return this;
 		}

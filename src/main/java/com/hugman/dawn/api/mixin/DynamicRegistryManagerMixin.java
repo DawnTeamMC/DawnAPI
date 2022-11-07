@@ -7,22 +7,20 @@ import com.mojang.serialization.Codec;
 import net.minecraft.util.registry.DynamicRegistryManager;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
-import net.minecraft.util.registry.SerializableRegistries;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
-@Mixin(SerializableRegistries.class)
-public abstract class DynamicRegistryManagerMixin {
-	@Shadow public static <E> void add(ImmutableMap.Builder<RegistryKey<Registry<?>>, SerializableRegistries.Info<?>> builder, RegistryKey<? extends Registry<E>> key, Codec<E> entryCodec) {}
-	@Unique static private boolean added = false;
+@Mixin(DynamicRegistryManager.class)
+public interface DynamicRegistryManagerMixin {
+	@Shadow
+	private static <E> void register(ImmutableMap.Builder<RegistryKey<? extends Registry<?>>, DynamicRegistryManager.Info<?>> infosBuilder, RegistryKey<? extends Registry<E>> registryRef, Codec<E> entryCodec) {}
 
 	@SuppressWarnings("InvalidInjectorMethodSignature")
-	@Inject(method = "add", at = @At("RETURN"))
-	private static <E> void addInfos(ImmutableMap.Builder<RegistryKey<Registry<?>>, SerializableRegistries.Info<?>> builder, RegistryKey<? extends Registry<E>> key, Codec<E> entryCodec) {
-		if (!added) { added = true; add(builder, DawnRegistries.CONFIGURED_SHAPE.getKey(), ConfiguredShape.CODEC); };
+	@ModifyVariable(method = "method_30531", at = @At("STORE"))
+	private static ImmutableMap.Builder<RegistryKey<? extends Registry<?>>, DynamicRegistryManager.Info<?>> addInfos(ImmutableMap.Builder<RegistryKey<? extends Registry<?>>, DynamicRegistryManager.Info<?>> builder) {
+		register(builder, DawnRegistries.CONFIGURED_SHAPE.getKey(), ConfiguredShape.CODEC);
+		return builder;
 	}
 }

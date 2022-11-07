@@ -4,6 +4,7 @@ import com.hugman.dawn.api.DawnRegistries;
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.terraformersmc.terraform.shapes.api.Shape;
 import net.minecraft.util.dynamic.RegistryElementCodec;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.registry.RegistryCodecs;
