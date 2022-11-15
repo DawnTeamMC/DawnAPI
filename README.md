@@ -67,7 +67,7 @@ If you're running into bugs or other problems, feel free to open an issue on our
 Please refer to the [contributing guide](https://github.com/DawnTeamMC/DawnAPI/blob/master/CONTRIBUTING.md) for more information.
 
 ### Translations
-The Dawn Team mods makes use of crowd sourced translations using Crowdin.  
+The Dawn Team mods makes use of crowdsourced translations using Crowdin.  
 You can help translate the Dawn Team mods to any language supported in Minecraft by joining our team of avid translators [here](https://crowdin.com/project/dawnteam).
 
 ## ❤️ Support

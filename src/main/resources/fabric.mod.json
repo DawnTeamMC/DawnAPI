@@ -18,26 +18,21 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"com.hugman.dawn.Dawn"
+			"fr.hugman.dawn.Dawn"
 		],
 		"client": [
-			"com.hugman.dawn.DawnClient"
-		],
-		"modmenu": [
-			"com.hugman.dawn.mod.config.DawnModMenuIntegration"
+			"fr.hugman.dawn.DawnClient"
 		],
 		"appleskin" : [
-			"com.hugman.dawn.api.compat.AppleSkinEventHandler"
+			"fr.hugman.dawn.compat.DawnASCompat"
 		]
 	},
 	"mixins": [
-		"dawn_api.mixins.json",
-		"dawn_mod.mixins.json"
+		"dawn.mixins.json"
 	],
 	"accessWidener": "dawn.accesswidener",
 	"depends": {
-		"minecraft": ">=1.19",
-		"fabric": "*",
+		"fabric-api": "*",
 		"cloth-config": "*"
 	},
 	"suggests": {
