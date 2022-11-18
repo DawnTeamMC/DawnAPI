@@ -28,6 +28,10 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.PlacedFeature;
+import net.minecraft.world.gen.foliage.FoliagePlacer;
+import net.minecraft.world.gen.foliage.FoliagePlacerType;
+import net.minecraft.world.gen.trunk.TrunkPlacer;
+import net.minecraft.world.gen.trunk.TrunkPlacerType;
 
 import java.util.function.Predicate;
 
@@ -58,6 +62,14 @@ public final class DawnFactory {
 
 	public static RegistryKey<ConfiguredShape> configuredShape(Identifier id) {
 		return RegistryKey.of(DawnRegistryKeys.CONFIGURED_SHAPE, id);
+	}
+
+	public static <P extends TrunkPlacer> TrunkPlacerType<P> trunkPlacer(Codec<P> codec) {
+		return new TrunkPlacerType<>(codec);
+	}
+
+	public static <P extends FoliagePlacer> FoliagePlacerType<P> foliagePlacer(Codec<P> codec) {
+		return new FoliagePlacerType<>(codec);
 	}
 
 	/*================*/
