@@ -1,18 +1,13 @@
 package fr.hugman.dawn.command;
 
-import com.google.gson.JsonElement;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.BoolArgumentType;
-import com.mojang.serialization.DynamicOps;
-import com.mojang.serialization.JsonOps;
 import fr.hugman.dawn.debug.DataList;
 import fr.hugman.dawn.debug.DataSerialization;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.SharedConstants;
-import net.minecraft.data.DataCache;
-import net.minecraft.data.DataWriter;
-import net.minecraft.data.report.DynamicRegistriesProvider;
-import net.minecraft.server.MinecraftServer;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.ClickEvent;
@@ -20,12 +15,6 @@ import net.minecraft.text.HoverEvent;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.dynamic.RegistryOps;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.DynamicRegistryManager;
-import net.minecraft.util.registry.Registries;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
 
 import java.io.IOException;
 import java.nio.file.Files;

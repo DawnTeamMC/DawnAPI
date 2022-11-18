@@ -1,7 +1,5 @@
 package fr.hugman.dawn;
 
-import com.mojang.datafixers.DataFixer;
-import com.mojang.datafixers.DataFixerBuilder;
 import fr.hugman.dawn.registry.DawnCommands;
 import fr.hugman.dawn.registry.DawnEntities;
 import fr.hugman.dawn.registry.DawnFeatures;

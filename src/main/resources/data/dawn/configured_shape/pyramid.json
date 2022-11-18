@@ -1,0 +1,9 @@
+{
+  "shape": {
+    "type": "dawn:triangular_prism",
+    "width": 5,
+    "height": 5,
+    "depth": 7
+  },
+  "processors": []
+}

@@ -2,7 +2,7 @@ package fr.hugman.dawn.mixin;
 
 import fr.hugman.dawn.registry.DawnRegistryKeys;
 import fr.hugman.dawn.shape.ConfiguredShape;
-import net.minecraft.util.registry.RegistryLoader;
+import net.minecraft.registry.RegistryLoader;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -24,7 +24,7 @@ public class RegistryLoaderMixin {
 
 	@Inject(method = "<clinit>",
 			at = @At(value = "FIELD",
-					target = "Lnet/minecraft/util/registry/RegistryLoader;DYNAMIC_REGISTRIES:Ljava/util/List;",
+					target = "Lnet/minecraft/registry/RegistryLoader;DYNAMIC_REGISTRIES:Ljava/util/List;",
 					opcode = Opcodes.PUTSTATIC,
 					ordinal = 0,
 					shift = At.Shift.AFTER))

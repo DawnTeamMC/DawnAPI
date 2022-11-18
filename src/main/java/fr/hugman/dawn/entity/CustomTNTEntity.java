@@ -19,7 +19,7 @@ import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.crash.CrashReportSection;
-import net.minecraft.util.registry.RegistryKeys;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
 

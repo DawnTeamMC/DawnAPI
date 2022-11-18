@@ -5,7 +5,7 @@ import fr.hugman.dawn.mixin.ItemAccessor;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
-import net.minecraft.util.registry.Registries;
+import net.minecraft.registry.Registries;
 
 public class ItemData {
 	@Expose

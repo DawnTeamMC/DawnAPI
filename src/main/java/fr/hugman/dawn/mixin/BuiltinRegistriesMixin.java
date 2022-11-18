@@ -2,8 +2,8 @@ package fr.hugman.dawn.mixin;
 
 import fr.hugman.dawn.registry.DawnRegistryKeys;
 import fr.hugman.dawn.shape.ConfiguredShape;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.RegistryBuilder;
+import net.minecraft.registry.BuiltinRegistries;
+import net.minecraft.registry.RegistryBuilder;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -23,7 +23,7 @@ public class BuiltinRegistriesMixin {
 
 	@Inject(method = "<clinit>",
 			at = @At(value = "FIELD",
-					target = "Lnet/minecraft/util/registry/BuiltinRegistries;REGISTRY_BUILDER:Lnet/minecraft/util/registry/RegistryBuilder;",
+					target = "Lnet/minecraft/registry/BuiltinRegistries;REGISTRY_BUILDER:Lnet/minecraft/registry/RegistryBuilder;",
 					opcode = Opcodes.PUTSTATIC,
 					ordinal = 0,
 					shift = At.Shift.AFTER))

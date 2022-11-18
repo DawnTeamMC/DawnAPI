@@ -5,8 +5,8 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terraform.shapes.api.layer.Layer;
 import com.terraformersmc.terraform.shapes.impl.layer.pathfinder.ExcludeLayer;
 import fr.hugman.dawn.shape.ConfiguredShape;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.util.registry.RegistryEntry;
 
 public record ExcludeShapeProcessor(RegistryEntry<ConfiguredShape> shape) implements ShapeProcessor {
 	public static final Codec<ExcludeShapeProcessor> CODEC = RecordCodecBuilder.create((instance) -> instance.group(

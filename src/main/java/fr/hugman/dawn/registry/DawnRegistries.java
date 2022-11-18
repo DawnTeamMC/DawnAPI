@@ -5,11 +5,11 @@ import fr.hugman.dawn.shape.ShapeType;
 import fr.hugman.dawn.shape.processor.ShapeProcessorType;
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registries;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
-import net.minecraft.util.registry.SimpleDefaultedRegistry;
-import net.minecraft.util.registry.SimpleRegistry;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.SimpleDefaultedRegistry;
+import net.minecraft.registry.SimpleRegistry;
 
 public class DawnRegistries {
 	public static final Registry<ShapeType<?>> SHAPE_TYPE = Registries.create(DawnRegistryKeys.SHAPE_TYPE, registry -> ShapeType.EMPTY);
