@@ -40,6 +40,14 @@ public final class DawnFactory {
 	/*   SIMPLE STUFF   */
 	/*==================*/
 
+	public static Block block(AbstractBlock.Settings settings) {
+		return new Block(settings);
+	}
+
+	public static Item item(Item.Settings settings) {
+		return new Item(settings);
+	}
+
 	public static RegistryKey<Biome> biome(Identifier id) {
 		return RegistryKey.of(RegistryKeys.BIOME, id);
 	}

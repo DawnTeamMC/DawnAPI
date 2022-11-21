@@ -25,16 +25,8 @@ public class Registrar {
 		Registry.register(Registries.BLOCK, id, block);
 	}
 
-	public static void add(Identifier id, AbstractBlock.Settings settings) {
-		add(id, new Block(settings));
-	}
-
 	public static void add(Identifier id, Item item) {
 		Registry.register(Registries.ITEM, id, item);
-	}
-
-	public static void add(Identifier id, Item.Settings settings) {
-		add(id, new Item(settings));
 	}
 
 	public static void add(SoundEvent soundEvent) {
