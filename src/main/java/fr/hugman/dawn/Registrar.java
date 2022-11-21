@@ -17,6 +17,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
+import net.minecraft.world.gen.placementmodifier.PlacementModifierType;
 import net.minecraft.world.gen.trunk.TrunkPlacerType;
 
 public class Registrar {
@@ -56,16 +57,19 @@ public class Registrar {
 		Registry.register(DawnRegistries.SHAPE_TYPE, id, shapeType);
 	}
 
-	public static void add(Identifier id, ShapeProcessorType<?> type) {
-		Registry.register(DawnRegistries.SHAPE_PROCESSOR_TYPE, id, type);
+	public static void add(Identifier id, ShapeProcessorType<?> shapeProcessorType) {
+		Registry.register(DawnRegistries.SHAPE_PROCESSOR_TYPE, id, shapeProcessorType);
 	}
 
-	public static void add(Identifier id, TrunkPlacerType<?> type) {
-		Registry.register(Registries.TRUNK_PLACER_TYPE, id, type);
+	public static void add(Identifier id, TrunkPlacerType<?> trunkPlacerType) {
+		Registry.register(Registries.TRUNK_PLACER_TYPE, id, trunkPlacerType);
 	}
 
-	public static void add(Identifier id, FoliagePlacerType<?> type) {
-		Registry.register(Registries.FOLIAGE_PLACER_TYPE, id, type);
+	public static void add(Identifier id, FoliagePlacerType<?> foliagePlacerType) {
+		Registry.register(Registries.FOLIAGE_PLACER_TYPE, id, foliagePlacerType);
 	}
 
+	public static void add(Identifier id, PlacementModifierType<?> placementModifierType) {
+		Registry.register(Registries.PLACEMENT_MODIFIER_TYPE, id, placementModifierType);
+	}
 }

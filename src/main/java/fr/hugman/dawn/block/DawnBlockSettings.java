@@ -133,6 +133,10 @@ public class DawnBlockSettings extends FabricBlockSettings {
 		return this;
 	}
 
+	public DawnBlockSettings item() {
+		return item(new Item.Settings());
+	}
+
 	// Overrides of vanilla and Fabric methods
 
 	@Override

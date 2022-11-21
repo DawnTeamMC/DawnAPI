@@ -147,6 +147,10 @@ public final class DawnFactory {
 		return fenceGate(isNether, baseBlock, SoundEvents.BLOCK_FENCE_GATE_CLOSE, SoundEvents.BLOCK_FENCE_GATE_OPEN);
 	}
 
+	public static Block wall(Block baseBlock) {
+		return new WallBlock(DawnBlockSettings.copy(baseBlock));
+	}
+
 	public static Block trapdoor(Block baseBlock, SoundEvent closeSound, SoundEvent openSound) {
 		DawnBlockSettings settings = DawnBlockSettings.copy(baseBlock)
 				.strength(3.0f)
