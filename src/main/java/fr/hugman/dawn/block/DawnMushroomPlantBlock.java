@@ -26,7 +26,7 @@ public class DawnMushroomPlantBlock extends MushroomPlantBlock {
 
 	public boolean trySpawningBigMushroom(ServerWorld world, BlockPos pos, BlockState state, Random random) {
 		world.removeBlock(pos, false);
-		ConfiguredFeature<?, ?> feature = world.getRegistryManager().get(RegistryKeys.CONFIGURED_FEATURE_WORLDGEN).get(this.featureKey);
+		ConfiguredFeature<?, ?> feature = world.getRegistryManager().get(RegistryKeys.CONFIGURED_FEATURE).get(this.featureKey);
 		if(feature != null && feature.generate(world, world.getChunkManager().getChunkGenerator(), random, pos)) {
 			return true;
 		}

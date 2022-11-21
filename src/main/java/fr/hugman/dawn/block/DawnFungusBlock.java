@@ -40,7 +40,7 @@ public class DawnFungusBlock extends FungusBlock {
 
 	@Override
 	public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
-		ConfiguredFeature<?, ?> feature = world.getRegistryManager().get(RegistryKeys.CONFIGURED_FEATURE_WORLDGEN).get(this.featureKey);
+		ConfiguredFeature<?, ?> feature = world.getRegistryManager().get(RegistryKeys.CONFIGURED_FEATURE).get(this.featureKey);
 		if(feature != null) feature.generate(world, world.getChunkManager().getChunkGenerator(), random, pos);
 	}
 }

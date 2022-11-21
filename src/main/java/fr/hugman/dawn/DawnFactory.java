@@ -41,15 +41,15 @@ public final class DawnFactory {
 	/*==================*/
 
 	public static RegistryKey<Biome> biome(Identifier id) {
-		return RegistryKey.of(RegistryKeys.BIOME_WORLDGEN, id);
+		return RegistryKey.of(RegistryKeys.BIOME, id);
 	}
 
 	public static RegistryKey<PlacedFeature> placedFeature(Identifier id) {
-		return RegistryKey.of(RegistryKeys.PLACED_FEATURE_WORLDGEN, id);
+		return RegistryKey.of(RegistryKeys.PLACED_FEATURE, id);
 	}
 
 	public static RegistryKey<ConfiguredFeature<?, ?>> configuredFeature(Identifier id) {
-		return RegistryKey.of(RegistryKeys.CONFIGURED_FEATURE_WORLDGEN, id);
+		return RegistryKey.of(RegistryKeys.CONFIGURED_FEATURE, id);
 	}
 
 	public static <S extends Shape> ShapeType<S> shapeType(Codec<S> codec) {
