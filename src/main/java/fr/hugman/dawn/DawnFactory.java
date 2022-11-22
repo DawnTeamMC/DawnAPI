@@ -90,6 +90,7 @@ public final class DawnFactory {
 
 	public static DawnBlockSettings planksSettings(boolean isNether, MapColor color) {
 		DawnBlockSettings settings = DawnBlockSettings.of(isNether ? Material.NETHER_WOOD : Material.WOOD, color)
+				.item()
 				.strength(2.0f, 3.0f)
 				.sounds(isNether ? BlockSoundGroup.NETHER_WOOD : BlockSoundGroup.WOOD);
 		if(isNether) settings.flammability(5, 20);
@@ -98,6 +99,7 @@ public final class DawnFactory {
 
 	public static DawnBlockSettings logSettings(boolean isNether, MapColor woodColor, MapColor barkColor) {
 		DawnBlockSettings settings = DawnBlockSettings.of(isNether ? Material.NETHER_WOOD : Material.WOOD, (state) -> state.get(PillarBlock.AXIS) == Direction.Axis.Y ? woodColor : barkColor)
+				.item()
 				.strength(2.0F)
 				.sounds(isNether ? BlockSoundGroup.NETHER_STEM : BlockSoundGroup.WOOD);
 		if(isNether) settings.flammability(5, 5);
@@ -106,6 +108,7 @@ public final class DawnFactory {
 
 	public static DawnBlockSettings logSettings(boolean isNether, MapColor color) {
 		DawnBlockSettings settings = DawnBlockSettings.of(isNether ? Material.NETHER_WOOD : Material.WOOD, color)
+				.item()
 				.strength(2.0F)
 				.sounds(isNether ? BlockSoundGroup.NETHER_STEM : BlockSoundGroup.WOOD);
 		if(isNether) settings.flammability(5, 5);
@@ -132,7 +135,11 @@ public final class DawnFactory {
 	}
 
 	public static Block woodenButton(boolean isNether) {
-		return new ButtonBlock(DawnBlockSettings.of(Material.DECORATION).strength(0.5f).noCollision().sounds(isNether ? BlockSoundGroup.NETHER_WOOD : BlockSoundGroup.WOOD),
+		return new ButtonBlock(DawnBlockSettings.of(Material.DECORATION)
+				.item()
+				.strength(0.5f)
+				.noCollision()
+				.sounds(isNether ? BlockSoundGroup.NETHER_WOOD : BlockSoundGroup.WOOD),
 				30, true,
 				isNether ? SoundEvents.BLOCK_NETHER_WOOD_BUTTON_CLICK_OFF : SoundEvents.BLOCK_WOODEN_BUTTON_CLICK_OFF,
 				isNether ? SoundEvents.BLOCK_NETHER_WOOD_BUTTON_CLICK_ON : SoundEvents.BLOCK_WOODEN_BUTTON_CLICK_ON);
@@ -181,20 +188,20 @@ public final class DawnFactory {
 
 	public static Block sapling(SaplingGenerator generator) {
 		return new SaplingBlock(generator, DawnBlockSettings.of(Material.PLANT)
+				.item(new DawnItemSettings().compostingChance(0.3f))
 				.sounds(BlockSoundGroup.GRASS)
 				.breakInstantly()
 				.noCollision()
-				.ticksRandomly()
-				.item(new DawnItemSettings().compostingChance(0.3f)));
+				.ticksRandomly());
 	}
 
 	public static Block sapling(SaplingGenerator generator, Predicate<BlockState> saplingSoilPredicate) {
 		return new DawnSaplingBlock(generator, saplingSoilPredicate, DawnBlockSettings.of(Material.PLANT)
+				.item(new DawnItemSettings().compostingChance(0.3f))
 				.sounds(BlockSoundGroup.GRASS)
 				.breakInstantly()
 				.noCollision()
-				.ticksRandomly()
-				.item(new DawnItemSettings().compostingChance(0.3f)));
+				.ticksRandomly());
 	}
 
 	public static Block fungus(RegistryKey<ConfiguredFeature<?, ?>> featureKey, TagKey<Block> canPlantOn, TagKey<Block> canGrowOn) {
