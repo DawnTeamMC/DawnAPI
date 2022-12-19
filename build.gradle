@@ -22,8 +22,8 @@ dependencies {
     modImplementation("com.terraformersmc:modmenu:${modmenu_version}") {
         exclude(group: "net.fabricmc.fabric-api")
     }
-    modImplementation "squeek.appleskin:appleskin-fabric:mc1.19-${appleskin_version}:api"
-    modImplementation("squeek.appleskin:appleskin-fabric:mc1.19-${appleskin_version}") {
+    modImplementation "squeek.appleskin:appleskin-fabric:mc1.19.3-${appleskin_version}:api"
+    modImplementation("squeek.appleskin:appleskin-fabric:mc1.19.3-${appleskin_version}") {
         exclude module: 'modmenu'
     }
 }
