@@ -94,8 +94,8 @@ public class Registrar {
 			}
 			if(chestBoatItem != null) {
 				Identifier itemId = new Identifier(key.getValue().getNamespace(), key.getValue().getPath() + (boatType.isRaft() ? "_chest_raft" : "_chest_boat"));
-				Registry.register(Registries.ITEM, itemId, boatItem);
-				TerraformBoatItemHelper.registerBoatDispenserBehavior(chestBoatItem, key, false);
+				Registry.register(Registries.ITEM, itemId, chestBoatItem);
+				TerraformBoatItemHelper.registerBoatDispenserBehavior(chestBoatItem, key, true);
 			}
 		}
 	}
