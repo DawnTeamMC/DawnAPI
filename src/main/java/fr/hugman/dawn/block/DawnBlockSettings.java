@@ -11,6 +11,7 @@ import net.minecraft.block.Material;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.Item;
+import net.minecraft.resource.featuretoggle.FeatureFlag;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
@@ -103,9 +104,9 @@ public class DawnBlockSettings extends FabricBlockSettings {
 
 	// New methods
 
-	// TODO: add more javadocs
-
 	/**
+	 * Sets the burning and spreading chances of this block.
+	 *
 	 * @see FireBlock#registerDefaultFlammables() Vanilla flammability values
 	 */
 	public DawnBlockSettings flammability(int burn, int spread) {
@@ -114,9 +115,8 @@ public class DawnBlockSettings extends FabricBlockSettings {
 		return this;
 	}
 
-	// TODO: add more javadocs
-
 	/**
+	 * Sets the block that this block will be stripped into when using an axe.
 	 * @see AxeItem Vanilla axe stripping values
 	 */
 	public DawnBlockSettings stripInto(Block block) {
@@ -133,6 +133,10 @@ public class DawnBlockSettings extends FabricBlockSettings {
 		return this;
 	}
 
+	/**
+	 * Provides empty item settings for a {@code BlockItem} to be registered with this block.
+	 * <p>The item will be registered with the same identifier as the block.
+	 */
 	public DawnBlockSettings item() {
 		return item(new Item.Settings());
 	}
@@ -273,6 +277,18 @@ public class DawnBlockSettings extends FabricBlockSettings {
 	@Override
 	public DawnBlockSettings offsetType(Function<BlockState, AbstractBlock.OffsetType> offsetType) {
 		super.offsetType(offsetType);
+		return this;
+	}
+
+	@Override
+	public DawnBlockSettings noBlockBreakParticles() {
+		super.noBlockBreakParticles();
+		return this;
+	}
+
+	@Override
+	public DawnBlockSettings requires(FeatureFlag... features) {
+		super.requires(features);
 		return this;
 	}
 

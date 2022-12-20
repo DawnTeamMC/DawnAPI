@@ -7,7 +7,7 @@ import net.minecraft.block.ComposterBlock;
 import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
+import net.minecraft.resource.featuretoggle.FeatureFlag;
 import net.minecraft.util.Rarity;
 
 /**
@@ -37,9 +37,9 @@ public class DawnItemSettings extends FabricItemSettings {
 
 	// New methods
 
-	//TODO: add more javadocs
-
 	/**
+	 * Sets the fuel time of this item. This is used by furnace-like blocks.
+	 *
 	 * @see AbstractFurnaceBlockEntity#createFuelTimeMap() Vanilla fuel times
 	 */
 	public DawnItemSettings fuelTime(int fuelTime) {
@@ -47,9 +47,8 @@ public class DawnItemSettings extends FabricItemSettings {
 		return this;
 	}
 
-	//TODO: add more javadocs
-
 	/**
+	 * Sets the composting chance of this item. This is used by the composter block.
 	 * @see ComposterBlock#registerDefaultCompostableItems() Vanilla composting chances
 	 */
 	public DawnItemSettings compostingChance(float compostingChance) {
@@ -110,6 +109,12 @@ public class DawnItemSettings extends FabricItemSettings {
 	@Override
 	public DawnItemSettings customDamage(CustomDamageHandler handler) {
 		super.customDamage(handler);
+		return this;
+	}
+
+	@Override
+	public DawnItemSettings requires(FeatureFlag... features) {
+		super.requires(features);
 		return this;
 	}
 }
