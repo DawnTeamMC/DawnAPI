@@ -46,6 +46,12 @@ public class ClientRegistrar {
 	}
 
 	public static void add(SignBlocks signs) {
-		add(signs.sign(), signs.wallSign(), signs.hangingSign(), signs.wallHangingSign());
+		add(signs.sign(), signs.hangingSign());
+	}
+
+	public static void add(SignBlocks... signss) {
+		for(SignBlocks signs : signss) {
+			add(signs);
+		}
 	}
 }
