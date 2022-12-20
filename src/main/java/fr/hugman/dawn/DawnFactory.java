@@ -1,9 +1,17 @@
 package fr.hugman.dawn;
 
 import com.mojang.serialization.Codec;
+import com.terraformersmc.terraform.boat.api.TerraformBoatType;
+import com.terraformersmc.terraform.boat.api.TerraformBoatTypeRegistry;
+import com.terraformersmc.terraform.boat.impl.item.TerraformBoatItem;
+import com.terraformersmc.terraform.sign.block.TerraformHangingSignBlock;
+import com.terraformersmc.terraform.sign.block.TerraformSignBlock;
+import com.terraformersmc.terraform.sign.block.TerraformWallHangingSignBlock;
+import com.terraformersmc.terraform.sign.block.TerraformWallSignBlock;
 import fr.hugman.dawn.block.DawnBlockSettings;
 import fr.hugman.dawn.block.DawnFungusBlock;
 import fr.hugman.dawn.block.DawnSaplingBlock;
+import fr.hugman.dawn.block.SignBlocks;
 import fr.hugman.dawn.item.DawnItemSettings;
 import fr.hugman.dawn.registry.DawnRegistryKeys;
 import fr.hugman.dawn.shape.ConfiguredShape;
@@ -20,6 +28,7 @@ import net.minecraft.item.SpawnEggItem;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
+import net.minecraft.resource.featuretoggle.FeatureFlags;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -36,9 +45,9 @@ import net.minecraft.world.gen.trunk.TrunkPlacerType;
 import java.util.function.Predicate;
 
 public final class DawnFactory {
-	/*==================*/
-	/*   SIMPLE STUFF   */
-	/*==================*/
+	/*=============*/
+	/*   GENERIC   */
+	/*=============*/
 
 	public static Block block(AbstractBlock.Settings settings) {
 		return new Block(settings);
@@ -80,9 +89,11 @@ public final class DawnFactory {
 		return new FoliagePlacerType<>(codec);
 	}
 
-	/*================*/
-	/*   WOOD STUFF   */
-	/*================*/
+
+
+	/*==========*/
+	/*   WOOD   */
+	/*==========*/
 
 	public static Block planks(boolean isNether, MapColor color) {
 		return new Block(DawnFactory.planksSettings(isNether, color));
@@ -115,26 +126,26 @@ public final class DawnFactory {
 		return settings;
 	}
 
-	public static Block stairs(Block baseBlock) {
+	public static StairsBlock stairs(Block baseBlock) {
 		return new StairsBlock(baseBlock.getDefaultState(), DawnBlockSettings.copy(baseBlock));
 	}
 
-	public static Block slab(Block baseBlock) {
+	public static SlabBlock slab(Block baseBlock) {
 		return new SlabBlock(DawnBlockSettings.copy(baseBlock));
 	}
 
-	public static Block pressurePlate(Block baseBlock) {
-		return pressurePlate(baseBlock, PressurePlateBlock.ActivationRule.MOBS, SoundEvents.BLOCK_WOODEN_PRESSURE_PLATE_CLICK_OFF, SoundEvents.BLOCK_WOODEN_PRESSURE_PLATE_CLICK_ON);
-	}
-
-	public static Block pressurePlate(Block baseBlock, PressurePlateBlock.ActivationRule activationRule, SoundEvent depressSound, SoundEvent pressSound) {
+	public static PressurePlateBlock pressurePlate(Block baseBlock, PressurePlateBlock.ActivationRule activationRule, SoundEvent depressSound, SoundEvent pressSound) {
 		DawnBlockSettings settings = DawnBlockSettings.copy(baseBlock)
 				.strength(0.5f)
 				.noCollision();
 		return new PressurePlateBlock(activationRule, settings, depressSound, pressSound);
 	}
 
-	public static Block woodenButton(boolean isNether) {
+	public static PressurePlateBlock pressurePlate(Block baseBlock) {
+		return pressurePlate(baseBlock, PressurePlateBlock.ActivationRule.MOBS, SoundEvents.BLOCK_WOODEN_PRESSURE_PLATE_CLICK_OFF, SoundEvents.BLOCK_WOODEN_PRESSURE_PLATE_CLICK_ON);
+	}
+
+	public static ButtonBlock woodenButton(boolean isNether) {
 		return new ButtonBlock(DawnBlockSettings.of(Material.DECORATION)
 				.item()
 				.strength(0.5f)
@@ -145,28 +156,28 @@ public final class DawnFactory {
 				isNether ? SoundEvents.BLOCK_NETHER_WOOD_BUTTON_CLICK_ON : SoundEvents.BLOCK_WOODEN_BUTTON_CLICK_ON);
 	}
 
-	public static Block fence(boolean isNether, Block baseBlock) {
+	public static FenceBlock fence(boolean isNether, Block baseBlock) {
 		DawnBlockSettings settings = DawnBlockSettings.copy(baseBlock).item(new DawnItemSettings().fuelTime(isNether ? 0 : 300));
 		if(isNether) settings.flammability(5, 20);
 		return new FenceBlock(settings);
 	}
 
 
-	public static Block fenceGate(boolean isNether, Block baseBlock, SoundEvent closeSound, SoundEvent openSound) {
+	public static FenceGateBlock fenceGate(boolean isNether, Block baseBlock, SoundEvent closeSound, SoundEvent openSound) {
 		DawnBlockSettings settings = DawnBlockSettings.copy(baseBlock).item(new DawnItemSettings().fuelTime(isNether ? 0 : 300));
 		if(isNether) settings.flammability(5, 20);
 		return new FenceGateBlock(settings, closeSound, openSound);
 	}
 
-	public static Block fenceGate(boolean isNether, Block baseBlock) {
+	public static FenceGateBlock fenceGate(boolean isNether, Block baseBlock) {
 		return fenceGate(isNether, baseBlock, SoundEvents.BLOCK_FENCE_GATE_CLOSE, SoundEvents.BLOCK_FENCE_GATE_OPEN);
 	}
 
-	public static Block wall(Block baseBlock) {
+	public static WallBlock wall(Block baseBlock) {
 		return new WallBlock(DawnBlockSettings.copy(baseBlock));
 	}
 
-	public static Block trapdoor(Block baseBlock, SoundEvent closeSound, SoundEvent openSound) {
+	public static TrapdoorBlock trapdoor(Block baseBlock, SoundEvent closeSound, SoundEvent openSound) {
 		DawnBlockSettings settings = DawnBlockSettings.copy(baseBlock)
 				.strength(3.0f)
 				.nonOpaque()
@@ -174,19 +185,19 @@ public final class DawnFactory {
 		return new TrapdoorBlock(settings, closeSound, openSound);
 	}
 
-	public static Block woodenTrapdoor(Block baseBlock) {
+	public static TrapdoorBlock woodenTrapdoor(Block baseBlock) {
 		return trapdoor(baseBlock, SoundEvents.BLOCK_WOODEN_TRAPDOOR_CLOSE, SoundEvents.BLOCK_WOODEN_TRAPDOOR_OPEN);
 	}
 
-	public static Block door(Block baseBlock, SoundEvent openSound, SoundEvent closeSound) {
+	public static DoorBlock door(Block baseBlock, SoundEvent openSound, SoundEvent closeSound) {
 		return new DoorBlock(DawnBlockSettings.copy(baseBlock).strength(3.0f).nonOpaque(), openSound, closeSound);
 	}
 
-	public static Block woodenDoor(Block baseBlock) {
+	public static DoorBlock woodenDoor(Block baseBlock) {
 		return door(baseBlock, SoundEvents.BLOCK_WOODEN_DOOR_OPEN, SoundEvents.BLOCK_WOODEN_DOOR_CLOSE);
 	}
 
-	public static Block sapling(SaplingGenerator generator) {
+	public static SaplingBlock sapling(SaplingGenerator generator) {
 		return new SaplingBlock(generator, DawnBlockSettings.of(Material.PLANT)
 				.item(new DawnItemSettings().compostingChance(0.3f))
 				.sounds(BlockSoundGroup.GRASS)
@@ -195,7 +206,7 @@ public final class DawnFactory {
 				.ticksRandomly());
 	}
 
-	public static Block sapling(SaplingGenerator generator, Predicate<BlockState> saplingSoilPredicate) {
+	public static DawnSaplingBlock sapling(SaplingGenerator generator, Predicate<BlockState> saplingSoilPredicate) {
 		return new DawnSaplingBlock(generator, saplingSoilPredicate, DawnBlockSettings.of(Material.PLANT)
 				.item(new DawnItemSettings().compostingChance(0.3f))
 				.sounds(BlockSoundGroup.GRASS)
@@ -204,7 +215,7 @@ public final class DawnFactory {
 				.ticksRandomly());
 	}
 
-	public static Block fungus(RegistryKey<ConfiguredFeature<?, ?>> featureKey, TagKey<Block> canPlantOn, TagKey<Block> canGrowOn) {
+	public static DawnFungusBlock fungus(RegistryKey<ConfiguredFeature<?, ?>> featureKey, TagKey<Block> canPlantOn, TagKey<Block> canGrowOn) {
 		return new DawnFungusBlock(featureKey, canPlantOn, canGrowOn, DawnBlockSettings.of(Material.PLANT)
 				.item(new DawnItemSettings().compostingChance(0.65f))
 				.sounds(BlockSoundGroup.FUNGUS)
@@ -212,15 +223,15 @@ public final class DawnFactory {
 				.noCollision());
 	}
 
-	public static Block potted(Block content) {
+	public static FlowerPotBlock potted(Block content) {
 		return new FlowerPotBlock(content, DawnBlockSettings.of(Material.DECORATION).breakInstantly().nonOpaque().luminance(content.getDefaultState().getLuminance()));
 	}
 
-	public static Block leaves() {
+	public static LeavesBlock leaves() {
 		return leaves(BlockSoundGroup.GRASS);
 	}
 
-	public static Block leaves(BlockSoundGroup soundGroup) {
+	public static LeavesBlock leaves(BlockSoundGroup soundGroup) {
 		return new LeavesBlock(DawnBlockSettings.of(Material.LEAVES)
 				.item(new DawnItemSettings().compostingChance(0.3f))
 				.strength(0.2f)
@@ -233,12 +244,71 @@ public final class DawnFactory {
 				.flammability(30, 60));
 	}
 
+	public static SignBlocks signs(Identifier texturePath, Block basePlanks) {
+		var signTexture = Identifier.of(texturePath.getNamespace(), "entity/signs/" + texturePath.getPath());
+		var hangingSignTexture = Identifier.of(texturePath.getNamespace(), "entity/signs/hanging/" + texturePath.getPath());
+		var hangingSignGuiTexture = Identifier.of(texturePath.getNamespace(), "textures/gui/hanging_signs/" + texturePath.getPath());
+
+		var sign = new TerraformSignBlock(signTexture, signSettings(basePlanks, true));
+		var wallSign = new TerraformWallSignBlock(signTexture, signSettings(basePlanks, false));
+		var hangingSign = new TerraformHangingSignBlock(hangingSignTexture, hangingSignGuiTexture, hangingSignSettings(basePlanks, true));
+		var wallHangingSign = new TerraformWallHangingSignBlock(hangingSignTexture, hangingSignGuiTexture, hangingSignSettings(basePlanks, false));
+
+		return new SignBlocks(sign, wallSign, hangingSign, wallHangingSign);
+	}
+
+	public static DawnBlockSettings signSettings(Block basePlanks, boolean hanging, boolean item) {
+		var settings = DawnBlockSettings.of(basePlanks.getDefaultState().getMaterial(), basePlanks.getDefaultMapColor()).noCollision().strength(1.0F);
+		if(hanging) {
+			settings.sounds(BlockSoundGroup.HANGING_SIGN).requires(FeatureFlags.UPDATE_1_20);
+		}
+		else {
+			settings.sounds(BlockSoundGroup.WOOD);
+		}
+		if(item) {
+			var itemSettings = new DawnItemSettings().maxCount(16);
+			if(hanging) {
+				itemSettings.requires(FeatureFlags.UPDATE_1_20);
+			}
+			settings.item(itemSettings);
+		}
+		return settings;
+	}
+
+	public static DawnBlockSettings signSettings(Block basePlanks, boolean item) {
+		return signSettings(basePlanks, false, item);
+	}
+
+	public static DawnBlockSettings hangingSignSettings(Block basePlanks, boolean item) {
+		return signSettings(basePlanks, true, item);
+	}
+
+	public static TerraformBoatType boat(Identifier id, Item planks, boolean raft) {
+		RegistryKey<TerraformBoatType> key = TerraformBoatTypeRegistry.createKey(id);
+		var builder = new TerraformBoatType.Builder()
+				.item(new TerraformBoatItem(key, false, new Item.Settings().maxCount(1)))
+				.chestItem(new TerraformBoatItem(key, true, new Item.Settings().maxCount(1)))
+				.planks(planks);
+		if(raft) builder.raft();
+		return builder.build();
+	}
+
+	public static TerraformBoatType boat(Identifier id, Item planks) {
+		return boat(id, planks, false);
+	}
+
+	public static TerraformBoatType raft(Identifier id, Item planks) {
+		return boat(id, planks, true);
+	}
+
+
+
 	/*============*/
 	/*   OTHERS   */
 	/*============*/
 
 	// TODO: add this to a new Entity Type builder
-	public static Item spawnEgg(EntityType<? extends MobEntity> entity, int primaryColor, int secondaryColor) {
+	public static SpawnEggItem spawnEgg(EntityType<? extends MobEntity> entity, int primaryColor, int secondaryColor) {
 		return new SpawnEggItem(entity, primaryColor, secondaryColor, new DawnItemSettings());
 	}
 }
