@@ -85,7 +85,7 @@ public class Registrar {
 		else {
 			RegistryKey<TerraformBoatType> key = opt.get();
 			Item boatItem = boatType.getItem();
-			Item chestBoatItem = boatType.getItem();
+			Item chestBoatItem = boatType.getChestItem();
 
 			if(boatItem != null) {
 				Identifier itemId = new Identifier(key.getValue().getNamespace(), key.getValue().getPath() + (boatType.isRaft() ? "_raft" : "_boat"));
