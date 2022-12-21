@@ -23,7 +23,10 @@ import net.minecraft.block.*;
 import net.minecraft.block.sapling.SaplingGenerator;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.item.HangingSignItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemConvertible;
+import net.minecraft.item.SignItem;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
@@ -249,15 +252,17 @@ public final class DawnFactory {
 		var hangingSignTexture = Identifier.of(texturePath.getNamespace(), "entity/signs/hanging/" + texturePath.getPath());
 		var hangingSignGuiTexture = Identifier.of(texturePath.getNamespace(), "textures/gui/hanging_signs/" + texturePath.getPath());
 
-		var sign = new TerraformSignBlock(signTexture, signSettings(basePlanks, true));
-		var wallSign = new TerraformWallSignBlock(signTexture, signSettings(basePlanks, false));
-		var hangingSign = new TerraformHangingSignBlock(hangingSignTexture, hangingSignGuiTexture, hangingSignSettings(basePlanks, true));
-		var wallHangingSign = new TerraformWallHangingSignBlock(hangingSignTexture, hangingSignGuiTexture, hangingSignSettings(basePlanks, false));
+		var sign = new TerraformSignBlock(signTexture, signSettings(basePlanks));
+		var wallSign = new TerraformWallSignBlock(signTexture, signSettings(basePlanks));
+		var hangingSign = new TerraformHangingSignBlock(hangingSignTexture, hangingSignGuiTexture, hangingSignSettings(basePlanks));
+		var wallHangingSign = new TerraformWallHangingSignBlock(hangingSignTexture, hangingSignGuiTexture, hangingSignSettings(basePlanks));
+		var signItem = new SignItem(new DawnItemSettings().maxCount(16), sign, wallSign);
+		var hangingSignItem = new HangingSignItem(hangingSign, wallHangingSign, new DawnItemSettings().maxCount(16).requires(FeatureFlags.UPDATE_1_20));
 
-		return new SignBlocks(sign, wallSign, hangingSign, wallHangingSign);
+		return new SignBlocks(sign, wallSign, hangingSign, wallHangingSign, signItem, hangingSignItem);
 	}
 
-	public static DawnBlockSettings signSettings(Block basePlanks, boolean hanging, boolean item) {
+	public static DawnBlockSettings signSettings(Block basePlanks, boolean hanging) {
 		var settings = DawnBlockSettings.of(basePlanks.getDefaultState().getMaterial(), basePlanks.getDefaultMapColor()).noCollision().strength(1.0F);
 		if(hanging) {
 			settings.sounds(BlockSoundGroup.HANGING_SIGN).requires(FeatureFlags.UPDATE_1_20);
@@ -265,39 +270,32 @@ public final class DawnFactory {
 		else {
 			settings.sounds(BlockSoundGroup.WOOD);
 		}
-		if(item) {
-			var itemSettings = new DawnItemSettings().maxCount(16);
-			if(hanging) {
-				itemSettings.requires(FeatureFlags.UPDATE_1_20);
-			}
-			settings.item(itemSettings);
-		}
 		return settings;
 	}
 
-	public static DawnBlockSettings signSettings(Block basePlanks, boolean item) {
-		return signSettings(basePlanks, false, item);
+	public static DawnBlockSettings signSettings(Block basePlanks) {
+		return signSettings(basePlanks, false);
 	}
 
-	public static DawnBlockSettings hangingSignSettings(Block basePlanks, boolean item) {
-		return signSettings(basePlanks, true, item);
+	public static DawnBlockSettings hangingSignSettings(Block basePlanks) {
+		return signSettings(basePlanks, true);
 	}
 
-	public static TerraformBoatType boat(Identifier id, Item planks, boolean raft) {
+	public static TerraformBoatType boat(Identifier id, ItemConvertible planks, boolean raft) {
 		RegistryKey<TerraformBoatType> key = TerraformBoatTypeRegistry.createKey(id);
 		var builder = new TerraformBoatType.Builder()
 				.item(new TerraformBoatItem(key, false, new Item.Settings().maxCount(1)))
 				.chestItem(new TerraformBoatItem(key, true, new Item.Settings().maxCount(1)))
-				.planks(planks);
+				.planks(planks.asItem());
 		if(raft) builder.raft();
 		return builder.build();
 	}
 
-	public static TerraformBoatType boat(Identifier id, Item planks) {
+	public static TerraformBoatType boat(Identifier id, ItemConvertible planks) {
 		return boat(id, planks, false);
 	}
 
-	public static TerraformBoatType raft(Identifier id, Item planks) {
+	public static TerraformBoatType raft(Identifier id, ItemConvertible planks) {
 		return boat(id, planks, true);
 	}
 
