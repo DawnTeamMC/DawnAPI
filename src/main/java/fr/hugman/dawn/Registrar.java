@@ -76,6 +76,9 @@ public class Registrar {
 		Registrar.add(Identifier.of(id.getNamespace(), id.getPath() + "_wall_sign"), signs.wallSign());
 		Registrar.add(Identifier.of(id.getNamespace(), id.getPath() + "_hanging_sign"), signs.hangingSign());
 		Registrar.add(Identifier.of(id.getNamespace(), id.getPath() + "_wall_hanging_sign"), signs.wallHangingSign());
+
+		Registrar.add(Identifier.of(id.getNamespace(), id.getPath() + "_sign"), signs.signItem());
+		Registrar.add(Identifier.of(id.getNamespace(), id.getPath() + "_hanging_sign"), signs.hangingSignItem());
 	}
 
 	public static void add(Identifier id, TerraformBoatType boatType) {
@@ -89,12 +92,12 @@ public class Registrar {
 
 			if(boatItem != null) {
 				Identifier itemId = new Identifier(key.getValue().getNamespace(), key.getValue().getPath() + (boatType.isRaft() ? "_raft" : "_boat"));
-				Registry.register(Registries.ITEM, itemId, boatItem);
+				Registrar.add(itemId, boatItem);
 				TerraformBoatItemHelper.registerBoatDispenserBehavior(boatItem, key, false);
 			}
 			if(chestBoatItem != null) {
 				Identifier itemId = new Identifier(key.getValue().getNamespace(), key.getValue().getPath() + (boatType.isRaft() ? "_chest_raft" : "_chest_boat"));
-				Registry.register(Registries.ITEM, itemId, chestBoatItem);
+				Registrar.add(itemId, chestBoatItem);
 				TerraformBoatItemHelper.registerBoatDispenserBehavior(chestBoatItem, key, true);
 			}
 		}

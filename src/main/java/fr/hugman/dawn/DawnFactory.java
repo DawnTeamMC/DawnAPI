@@ -23,6 +23,7 @@ import net.minecraft.block.*;
 import net.minecraft.block.sapling.SaplingGenerator;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.item.HangingSignItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
@@ -90,6 +91,22 @@ public final class DawnFactory {
 
 	public static <P extends FoliagePlacer> FoliagePlacerType<P> foliagePlacer(Codec<P> codec) {
 		return new FoliagePlacerType<>(codec);
+	}
+
+	public static TagKey<Block> blockTag(Identifier id) {
+		return TagKey.of(RegistryKeys.BLOCK, id);
+	}
+
+	public static TagKey<Item> itemTag(Identifier id) {
+		return TagKey.of(RegistryKeys.ITEM, id);
+	}
+
+	public static TagKey<Biome> biomeTag(Identifier id) {
+		return TagKey.of(RegistryKeys.BIOME, id);
+	}
+
+	public static TagKey<Fluid> fluidTag(Identifier id) {
+		return TagKey.of(RegistryKeys.FLUID, id);
 	}
 
 
