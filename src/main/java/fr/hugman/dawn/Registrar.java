@@ -10,6 +10,8 @@ import fr.hugman.dawn.shape.Shape;
 import fr.hugman.dawn.shape.ShapeType;
 import fr.hugman.dawn.shape.processor.ShapeProcessorType;
 import net.minecraft.block.Block;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
@@ -56,6 +58,10 @@ public record Registrar(String modId) {
 
 	public static <T extends Entity> void add(Identifier id, EntityType<T> type) {
 		Registry.register(Registries.ENTITY_TYPE, id, type);
+	}
+
+	public static <T extends BlockEntity> void add(Identifier id, BlockEntityType<T> blockEntity) {
+		Registry.register(Registries.BLOCK_ENTITY_TYPE, id, blockEntity);
 	}
 
 	public static void add(Identifier id, Feature<?> feature) {
@@ -145,6 +151,10 @@ public record Registrar(String modId) {
 
 	public <T extends Entity> void add(String name, EntityType<T> type) {
 		add(Identifier.of(this.modId, name), type);
+	}
+
+	public <T extends BlockEntity> void add(String name, BlockEntityType<T> blockEntity) {
+		add(Identifier.of(this.modId, name), blockEntity);
 	}
 
 	public void add(String name, Feature<?> feature) {
