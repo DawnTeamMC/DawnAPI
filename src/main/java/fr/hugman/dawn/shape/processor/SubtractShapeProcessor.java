@@ -4,13 +4,13 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terraform.shapes.api.layer.Layer;
 import com.terraformersmc.terraform.shapes.impl.layer.pathfinder.SubtractLayer;
+import fr.hugman.dawn.registry.DawnRegistries;
 import fr.hugman.dawn.shape.ConfiguredShape;
-import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.math.random.Random;
 
-public record SubtractShapeProcessor(RegistryEntry<ConfiguredShape> shape) implements ShapeProcessor {
+public record SubtractShapeProcessor(ConfiguredShape shape) implements LayerShapeProcessor {
 	public static final Codec<SubtractShapeProcessor> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
-			ConfiguredShape.REGISTRY_CODEC.fieldOf("shape").forGetter(SubtractShapeProcessor::shape)
+			DawnRegistries.CONFIGURED_SHAPE.getEntryCodec().fieldOf("shape").forGetter(SubtractShapeProcessor::shape)
 	).apply(instance, SubtractShapeProcessor::new));
 
 	@Override
@@ -20,6 +20,6 @@ public record SubtractShapeProcessor(RegistryEntry<ConfiguredShape> shape) imple
 
 	@Override
 	public Layer get(Random random) {
-		return new SubtractLayer(this.shape.value().get(random));
+		return new SubtractLayer(this.shape.get(random));
 	}
 }

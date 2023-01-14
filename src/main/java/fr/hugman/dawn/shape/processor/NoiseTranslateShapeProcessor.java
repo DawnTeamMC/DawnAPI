@@ -11,9 +11,9 @@ import net.minecraft.util.math.random.Random;
 
 import java.util.Optional;
 
-public record NoiseTranslateShapeProcessor(FloatProvider magnitude, Optional<Long> seed) implements ShapeProcessor {
+public record NoiseTranslateShapeProcessor(FloatProvider magnitude, Optional<Long> seed) implements LayerShapeProcessor {
 	public static final Codec<NoiseTranslateShapeProcessor> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
-			DawnCodecs.FLOAT.fieldOf("magnitude").orElse(ConstantFloatProvider.create(1.0F)).forGetter(NoiseTranslateShapeProcessor::magnitude),
+			DawnCodecs.FLOAT_PROVIDER.fieldOf("magnitude").orElse(ConstantFloatProvider.create(1.0F)).forGetter(NoiseTranslateShapeProcessor::magnitude),
 			Codec.LONG.optionalFieldOf("seed").forGetter(NoiseTranslateShapeProcessor::seed)
 	).apply(instance, NoiseTranslateShapeProcessor::new));
 

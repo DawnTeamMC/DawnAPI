@@ -2,7 +2,7 @@
   "required": true,
   "package": "fr.hugman.dawn.mixin",
   "compatibilityLevel": "JAVA_17",
-  "mixins": ["BoneMealMixin", "BuiltinRegistriesMixin", "HungerManagerAccessor", "HungerManagerMixin", "ItemAccessor", "RegistryLoaderMixin", "RegistryMixin", "ItemMixin"],
+  "mixins": ["BoneMealMixin", "HungerManagerAccessor", "HungerManagerMixin", "ItemAccessor", "ItemMixin", "RegistryMixin"],
   "injectors": {
     "defaultRequire": 1
   }

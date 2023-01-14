@@ -9,8 +9,8 @@ import net.minecraft.util.math.random.Random;
 
 public record EllipseShape(FloatProvider a, FloatProvider b) implements Shape {
 	public static final Codec<EllipseShape> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
-			DawnCodecs.FLOAT_NON_ZERO.fieldOf("a").forGetter(EllipseShape::a),
-			DawnCodecs.FLOAT_NON_ZERO.fieldOf("b").forGetter(EllipseShape::b)
+			DawnCodecs.NON_ZERO_FLOAT_PROVIDER.fieldOf("a").forGetter(EllipseShape::a),
+			DawnCodecs.NON_ZERO_FLOAT_PROVIDER.fieldOf("b").forGetter(EllipseShape::b)
 	).apply(instance, EllipseShape::new));
 
 	@Override

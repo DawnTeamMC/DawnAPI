@@ -5,6 +5,7 @@ import com.terraformersmc.terraform.boat.api.TerraformBoatTypeRegistry;
 import com.terraformersmc.terraform.boat.api.item.TerraformBoatItemHelper;
 import fr.hugman.dawn.block.SignBlocks;
 import fr.hugman.dawn.registry.DawnRegistries;
+import fr.hugman.dawn.registry.ReloadableResourceManager;
 import fr.hugman.dawn.shape.Shape;
 import fr.hugman.dawn.shape.ShapeType;
 import fr.hugman.dawn.shape.processor.ShapeProcessorType;
@@ -18,6 +19,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.InvalidIdentifierException;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
 import net.minecraft.world.gen.placementmodifier.PlacementModifierType;
@@ -25,8 +27,17 @@ import net.minecraft.world.gen.trunk.TrunkPlacerType;
 
 /**
  * This class is used to register all sorts of features in the game.
+ * It can also be used as an instance to fasten the registration process by taking care of the mod ID once and then passing the object around to use it.
+ *
+ * @author Hugman
+ * @see DawnFactory
+ * @since 4.0.0
  */
-public class Registrar {
+public record Registrar(String modId) {
+	/*==================*/
+	/*  STATIC METHODS  */
+	/*==================*/
+
 	public static void add(Identifier id, Block block) {
 		Registry.register(Registries.BLOCK, id, block);
 	}
@@ -72,13 +83,18 @@ public class Registrar {
 	}
 
 	public static void add(Identifier id, SignBlocks signs) {
-		Registrar.add(Identifier.of(id.getNamespace(), id.getPath() + "_sign"), signs.sign());
-		Registrar.add(Identifier.of(id.getNamespace(), id.getPath() + "_wall_sign"), signs.wallSign());
-		Registrar.add(Identifier.of(id.getNamespace(), id.getPath() + "_hanging_sign"), signs.hangingSign());
-		Registrar.add(Identifier.of(id.getNamespace(), id.getPath() + "_wall_hanging_sign"), signs.wallHangingSign());
+		if(id != null) {
+			Registrar.add(Identifier.of(id.getNamespace(), id.getPath() + "_sign"), signs.sign());
+			Registrar.add(Identifier.of(id.getNamespace(), id.getPath() + "_wall_sign"), signs.wallSign());
+			Registrar.add(Identifier.of(id.getNamespace(), id.getPath() + "_hanging_sign"), signs.hangingSign());
+			Registrar.add(Identifier.of(id.getNamespace(), id.getPath() + "_wall_hanging_sign"), signs.wallHangingSign());
 
-		Registrar.add(Identifier.of(id.getNamespace(), id.getPath() + "_sign"), signs.signItem());
-		Registrar.add(Identifier.of(id.getNamespace(), id.getPath() + "_hanging_sign"), signs.hangingSignItem());
+			Registrar.add(Identifier.of(id.getNamespace(), id.getPath() + "_sign"), signs.signItem());
+			Registrar.add(Identifier.of(id.getNamespace(), id.getPath() + "_hanging_sign"), signs.hangingSignItem());
+		}
+		else {
+			throw new InvalidIdentifierException("The identifier cannot be null.");
+		}
 	}
 
 	public static void add(Identifier id, TerraformBoatType boatType) {
@@ -101,5 +117,69 @@ public class Registrar {
 				TerraformBoatItemHelper.registerBoatDispenserBehavior(chestBoatItem, key, true);
 			}
 		}
+	}
+
+	public static void add(Identifier id, ReloadableResourceManager<?> reloadableResourceManager) {
+		reloadableResourceManager.register(id);
+	}
+
+	/*====================*/
+	/*  INSTANCE METHODS  */
+	/*====================*/
+
+	public Identifier id(String path) {
+		return Identifier.of(this.modId, path);
+	}
+
+	public void add(String name, Block block) {
+		add(Identifier.of(this.modId, name), block);
+	}
+
+	public void add(String name, Item item) {
+		add(Identifier.of(this.modId, name), item);
+	}
+
+	public void add(String name, DefaultParticleType particleType) {
+		add(Identifier.of(this.modId, name), particleType);
+	}
+
+	public <T extends Entity> void add(String name, EntityType<T> type) {
+		add(Identifier.of(this.modId, name), type);
+	}
+
+	public void add(String name, Feature<?> feature) {
+		add(Identifier.of(this.modId, name), feature);
+	}
+
+	public <S extends Shape> void add(String name, ShapeType<S> shapeType) {
+		add(Identifier.of(this.modId, name), shapeType);
+	}
+
+	public void add(String name, ShapeProcessorType<?> shapeProcessorType) {
+		add(Identifier.of(this.modId, name), shapeProcessorType);
+	}
+
+	public void add(String name, TrunkPlacerType<?> trunkPlacerType) {
+		add(Identifier.of(this.modId, name), trunkPlacerType);
+	}
+
+	public void add(String name, FoliagePlacerType<?> foliagePlacerType) {
+		add(Identifier.of(this.modId, name), foliagePlacerType);
+	}
+
+	public void add(String name, PlacementModifierType<?> placementModifierType) {
+		add(Identifier.of(this.modId, name), placementModifierType);
+	}
+
+	public void add(String name, SignBlocks signs) {
+		add(Identifier.of(this.modId, name), signs);
+	}
+
+	public void add(String name, TerraformBoatType boatType) {
+		add(Identifier.of(this.modId, name), boatType);
+	}
+
+	public void add(String name, ReloadableResourceManager<?> reloadableResourceManager) {
+		add(Identifier.of(this.modId, name), reloadableResourceManager);
 	}
 }

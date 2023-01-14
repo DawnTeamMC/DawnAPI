@@ -1,14 +1,22 @@
 package fr.hugman.dawn.shape;
 
 import com.mojang.serialization.Codec;
-import fr.hugman.dawn.Dawn;
 import fr.hugman.dawn.DawnFactory;
 import fr.hugman.dawn.Registrar;
-import net.minecraft.util.Identifier;
+import fr.hugman.dawn.shape.processor.ShapeProcessor;
 
+/**
+ * A shape type is a {@link Shape shape} factory that can be registered and used thanks to its {@link Codec codec}.
+ *
+ * @param codec the codec used to serialize and deserialize the shape
+ * @param <P>   the shape
+ *
+ * @author Hugman
+ * @see ConfiguredShape
+ * @see ShapeProcessor
+ * @since 4.0.0
+ */
 public record ShapeType<P extends Shape>(Codec<P> codec) {
-	public static final Identifier DEFAULT_ID = Dawn.id("empty");
-
 	public static final ShapeType<EmptyShape> EMPTY = DawnFactory.shapeType(EmptyShape.CODEC);
 
 	public static final ShapeType<RectangleShape> RECTANGLE = DawnFactory.shapeType(RectangleShape.CODEC);
@@ -24,20 +32,20 @@ public record ShapeType<P extends Shape>(Codec<P> codec) {
 	public static final ShapeType<EllipsoidShape> ELLIPSOID = DawnFactory.shapeType(EllipsoidShape.CODEC);
 	public static final ShapeType<HemiEllipsoidShape> HEMI_ELLIPSOID = DawnFactory.shapeType(HemiEllipsoidShape.CODEC);
 
-	public static void init() {
-		Registrar.add(DEFAULT_ID, EMPTY);
+	public static void init(Registrar r) {
+		r.add("empty", EMPTY);
 
-		Registrar.add(Dawn.id("rectangle"), RECTANGLE);
-		Registrar.add(Dawn.id("rectangular_prism"), RECTANGULAR_PRISM);
-		Registrar.add(Dawn.id("rectangular_pyramid"), RECTANGULAR_PYRAMID);
+		r.add("rectangle", RECTANGLE);
+		r.add("rectangular_prism", RECTANGULAR_PRISM);
+		r.add("rectangular_pyramid", RECTANGULAR_PYRAMID);
 
-		Registrar.add(Dawn.id("ellipse"), ELLIPSE);
-		Registrar.add(Dawn.id("elliptical_prism"), ELLIPTICAL_PRISM);
-		Registrar.add(Dawn.id("elliptical_pyramid"), ELLIPTICAL_PYRAMID);
+		r.add("ellipse", ELLIPSE);
+		r.add("elliptical_prism", ELLIPTICAL_PRISM);
+		r.add("elliptical_pyramid", ELLIPTICAL_PYRAMID);
 
-		Registrar.add(Dawn.id("triangular_prism"), TRIANGULAR_PRISM);
+		r.add("triangular_prism", TRIANGULAR_PRISM);
 
-		Registrar.add(Dawn.id("ellipsoid"), ELLIPSOID);
-		Registrar.add(Dawn.id("hemi_ellipsoid"), HEMI_ELLIPSOID);
+		r.add("ellipsoid", ELLIPSOID);
+		r.add("hemi_ellipsoid", HEMI_ELLIPSOID);
 	}
 }

@@ -1,13 +1,14 @@
 package fr.hugman.dawn.shape.processor;
 
 import com.mojang.serialization.Codec;
-import fr.hugman.dawn.Dawn;
 import fr.hugman.dawn.DawnFactory;
 import fr.hugman.dawn.Registrar;
-import net.minecraft.util.Identifier;
 
+// TODO: JavaDoc
 public record ShapeProcessorType<P extends ShapeProcessor>(Codec<P> codec) {
-	public static final Identifier DEFAULT_ID = Dawn.id("add");
+	public static final ShapeProcessorType<EmptyShapeProcessor> EMPTY = DawnFactory.shapeProcessorType(EmptyShapeProcessor.CODEC);
+	public static final ShapeProcessorType<ListShapeProcessor> LIST = DawnFactory.shapeProcessorType(ListShapeProcessor.CODEC);
+	public static final ShapeProcessorType<RepeatShapeProcessor> REPEAT = DawnFactory.shapeProcessorType(RepeatShapeProcessor.CODEC);
 
 	public static final ShapeProcessorType<AddShapeProcessor> ADD = DawnFactory.shapeProcessorType(AddShapeProcessor.CODEC);
 	public static final ShapeProcessorType<SubtractShapeProcessor> SUBTRACT = DawnFactory.shapeProcessorType(SubtractShapeProcessor.CODEC);
@@ -19,15 +20,19 @@ public record ShapeProcessorType<P extends ShapeProcessor>(Codec<P> codec) {
 	public static final ShapeProcessorType<ScaleShapeProcessor> SCALE = DawnFactory.shapeProcessorType(ScaleShapeProcessor.CODEC);
 	public static final ShapeProcessorType<NoiseTranslateShapeProcessor> NOISE_TRANSLATE = DawnFactory.shapeProcessorType(NoiseTranslateShapeProcessor.CODEC);
 
-	public static void init() {
-		Registrar.add(DEFAULT_ID, ADD);
-		Registrar.add(Dawn.id("subtract"), SUBTRACT);
-		Registrar.add(Dawn.id("exclude"), EXCLUDE);
-		Registrar.add(Dawn.id("intersect"), INTERSECT);
+	public static void init(Registrar r) {
+		r.add("empty", EMPTY);
+		r.add("list", LIST);
+		r.add("repeat", REPEAT);
 
-		Registrar.add(Dawn.id("translate"), TRANSLATE);
-		Registrar.add(Dawn.id("rotate"), ROTATE);
-		Registrar.add(Dawn.id("scale"), SCALE);
-		Registrar.add(Dawn.id("noise_translate"), NOISE_TRANSLATE);
+		r.add("add", ADD);
+		r.add("subtract", SUBTRACT);
+		r.add("exclude", EXCLUDE);
+		r.add("intersect", INTERSECT);
+
+		r.add("translate", TRANSLATE);
+		r.add("rotate", ROTATE);
+		r.add("scale", SCALE);
+		r.add("noise_translate", NOISE_TRANSLATE);
 	}
 }

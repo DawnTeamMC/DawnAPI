@@ -13,8 +13,6 @@ import fr.hugman.dawn.block.DawnFungusBlock;
 import fr.hugman.dawn.block.DawnSaplingBlock;
 import fr.hugman.dawn.block.SignBlocks;
 import fr.hugman.dawn.item.DawnItemSettings;
-import fr.hugman.dawn.registry.DawnRegistryKeys;
-import fr.hugman.dawn.shape.ConfiguredShape;
 import fr.hugman.dawn.shape.Shape;
 import fr.hugman.dawn.shape.ShapeType;
 import fr.hugman.dawn.shape.processor.ShapeProcessor;
@@ -48,6 +46,13 @@ import net.minecraft.world.gen.trunk.TrunkPlacerType;
 
 import java.util.function.Predicate;
 
+/**
+ * A factory for creating all sorts of features in the game.
+ *
+ * @author Hugman
+ * @see Registrar
+ * @since 4.0.0
+ */
 public final class DawnFactory {
 	/*=============*/
 	/*   GENERIC   */
@@ -79,10 +84,6 @@ public final class DawnFactory {
 
 	public static <P extends ShapeProcessor> ShapeProcessorType<P> shapeProcessorType(Codec<P> codec) {
 		return new ShapeProcessorType<>(codec);
-	}
-
-	public static RegistryKey<ConfiguredShape> configuredShape(Identifier id) {
-		return RegistryKey.of(DawnRegistryKeys.CONFIGURED_SHAPE, id);
 	}
 
 	public static <P extends TrunkPlacer> TrunkPlacerType<P> trunkPlacer(Codec<P> codec) {

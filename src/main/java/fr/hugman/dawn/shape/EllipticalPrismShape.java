@@ -9,9 +9,9 @@ import net.minecraft.util.math.random.Random;
 
 public record EllipticalPrismShape(FloatProvider a, FloatProvider b, FloatProvider height) implements Shape {
 	public static final Codec<EllipticalPrismShape> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
-			DawnCodecs.FLOAT_NON_ZERO.fieldOf("a").forGetter(EllipticalPrismShape::a),
-			DawnCodecs.FLOAT_NON_ZERO.fieldOf("b").forGetter(EllipticalPrismShape::b),
-			DawnCodecs.FLOAT.fieldOf("height").forGetter(EllipticalPrismShape::height)
+			DawnCodecs.NON_ZERO_FLOAT_PROVIDER.fieldOf("a").forGetter(EllipticalPrismShape::a),
+			DawnCodecs.NON_ZERO_FLOAT_PROVIDER.fieldOf("b").forGetter(EllipticalPrismShape::b),
+			DawnCodecs.FLOAT_PROVIDER.fieldOf("height").forGetter(EllipticalPrismShape::height)
 	).apply(instance, EllipticalPrismShape::new));
 
 	@Override

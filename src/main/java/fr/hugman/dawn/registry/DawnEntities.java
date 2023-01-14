@@ -1,6 +1,5 @@
 package fr.hugman.dawn.registry;
 
-import fr.hugman.dawn.Dawn;
 import fr.hugman.dawn.Registrar;
 import fr.hugman.dawn.entity.CustomTNTEntity;
 import fr.hugman.dawn.entity.FlyingBlockEntity;
@@ -23,8 +22,8 @@ public class DawnEntities {
 			.trackedUpdateRate(20)
 			.forceTrackedVelocityUpdates(true).build();
 
-	public static void init() {
-		Registrar.add(Dawn.id("custom_tnt"), CUSTOM_TNT);
-		Registrar.add(Dawn.id("flying_block"), FLYING_BLOCK);
+	public static void init(Registrar r) {
+		r.add("flying_block", FLYING_BLOCK);
+		r.add("custom_tnt", CUSTOM_TNT);
 	}
 }

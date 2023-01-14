@@ -10,11 +10,11 @@ import net.minecraft.util.math.floatprovider.ConstantFloatProvider;
 import net.minecraft.util.math.floatprovider.FloatProvider;
 import net.minecraft.util.math.random.Random;
 
-public record TranslateShapeProcessor(FloatProvider x, FloatProvider y, FloatProvider z) implements ShapeProcessor {
+public record TranslateShapeProcessor(FloatProvider x, FloatProvider y, FloatProvider z) implements LayerShapeProcessor {
 	public static final Codec<TranslateShapeProcessor> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
-			DawnCodecs.FLOAT.fieldOf("x").orElse(ConstantFloatProvider.create(0.0F)).forGetter(TranslateShapeProcessor::x),
-			DawnCodecs.FLOAT.fieldOf("y").orElse(ConstantFloatProvider.create(0.0F)).forGetter(TranslateShapeProcessor::y),
-			DawnCodecs.FLOAT.fieldOf("z").orElse(ConstantFloatProvider.create(0.0F)).forGetter(TranslateShapeProcessor::z)
+			DawnCodecs.FLOAT_PROVIDER.fieldOf("x").orElse(ConstantFloatProvider.create(0.0F)).forGetter(TranslateShapeProcessor::x),
+			DawnCodecs.FLOAT_PROVIDER.fieldOf("y").orElse(ConstantFloatProvider.create(0.0F)).forGetter(TranslateShapeProcessor::y),
+			DawnCodecs.FLOAT_PROVIDER.fieldOf("z").orElse(ConstantFloatProvider.create(0.0F)).forGetter(TranslateShapeProcessor::z)
 	).apply(instance, TranslateShapeProcessor::new));
 
 	@Override

@@ -1,0 +1,71 @@
+{
+  "type": "dawn:ellipsoid",
+  "a": 10,
+  "b": 10,
+  "c": 10,
+  "processors": [
+    {
+      "type": "dawn:repeat",
+      "count": 5,
+      "processors": [
+        {
+          "type": "dawn:subtract",
+          "shape": {
+            "type": "dawn:ellipsoid",
+            "a": {
+              "type": "minecraft:uniform",
+              "value": {
+                "min_inclusive": 2,
+                "max_exclusive": 3
+              }
+            },
+            "b": {
+              "type": "minecraft:uniform",
+              "value": {
+                "min_inclusive": 2,
+                "max_exclusive": 3
+              }
+            },
+            "c": {
+              "type": "minecraft:uniform",
+              "value": {
+                "min_inclusive": 2,
+                "max_exclusive": 3
+              }
+            },
+            "processor": {
+              "type": "dawn:translate",
+              "x": 11,
+              "y": 0,
+              "z": 0
+            }
+          }
+        },
+        {
+          "type": "dawn:rotate",
+          "x": {
+            "type": "minecraft:uniform",
+            "value": {
+              "min_inclusive": 0,
+              "max_exclusive": 360
+            }
+          },
+          "y": {
+            "type": "minecraft:uniform",
+            "value": {
+              "min_inclusive": 0,
+              "max_exclusive": 360
+            }
+          },
+          "z": {
+            "type": "minecraft:uniform",
+            "value": {
+              "min_inclusive": 0,
+              "max_exclusive": 360
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
