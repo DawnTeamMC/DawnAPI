@@ -9,6 +9,6 @@ public class DawnFeatures {
 	public static final Feature<ShapeFeatureConfig> SHAPE = new ShapeFeature(ShapeFeatureConfig.CODEC);
 
 	public static void init(Registrar r) {
-		r.add("processors", SHAPE);
+		r.add("shape", SHAPE);
 	}
 }
