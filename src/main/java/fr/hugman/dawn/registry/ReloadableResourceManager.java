@@ -145,7 +145,7 @@ public class ReloadableResourceManager<R> {
 							idPath = idPath.substring(folderPath.length() + 1, idPath.length() - ".json".length());
 							Identifier resourceId = new Identifier(path.getKey().getNamespace(), idPath);
 							DataResult<R> result = codec.decode(JsonOps.INSTANCE, json).map(Pair::getFirst);
-							result.resultOrPartial(error -> LOGGER.error("Error while decoding resource of type {} at {}: {}", id, path, error))
+							result.resultOrPartial(error -> LOGGER.error("Error while decoding resource of type {} at {}: {}", id, resourceId, error))
 									.ifPresent(resource -> builder.put(resourceId, resource));
 						}
 					} catch(IOException e) {
