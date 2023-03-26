@@ -34,7 +34,7 @@ public class FlyingBlockEntityRenderer extends EntityRenderer<FlyingBlockEntity>
 			World world = entity.getWorldClient();
 			if(blockState != world.getBlockState(entity.getBlockPos()) && blockState.getRenderType() != BlockRenderType.INVISIBLE) {
 				matrixStack.push();
-				BlockPos blockPos = new BlockPos(entity.getX(), entity.getBoundingBox().maxY, entity.getZ());
+				BlockPos blockPos = BlockPos.ofFloored(entity.getX(), entity.getBoundingBox().maxY, entity.getZ());
 				matrixStack.translate(-0.5D, 0.0D, -0.5D);
 				BlockRenderManager blockRenderManager = MinecraftClient.getInstance().getBlockRenderManager();
 				blockRenderManager.getModelRenderer().render(world, blockRenderManager.getModel(blockState), blockState, blockPos, matrixStack, vertexConsumerProvider.getBuffer(RenderLayers.getMovingBlockLayer(blockState)), false, Random.create(), blockState.getRenderingSeed(entity.getFallingBlockPos()), OverlayTexture.DEFAULT_UV);

@@ -269,14 +269,8 @@ public class DawnBlockSettings extends FabricBlockSettings {
 	}
 
 	@Override
-	public DawnBlockSettings offsetType(AbstractBlock.OffsetType offsetType) {
-		super.offsetType(offsetType);
-		return this;
-	}
-
-	@Override
-	public DawnBlockSettings offsetType(Function<BlockState, AbstractBlock.OffsetType> offsetType) {
-		super.offsetType(offsetType);
+	public DawnBlockSettings offset(AbstractBlock.OffsetType offsetType) {
+		super.offset(offsetType);
 		return this;
 	}
 

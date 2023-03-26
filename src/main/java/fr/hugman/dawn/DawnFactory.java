@@ -155,26 +155,28 @@ public final class DawnFactory {
 		return new SlabBlock(DawnBlockSettings.copy(baseBlock));
 	}
 
-	public static PressurePlateBlock pressurePlate(Block baseBlock, PressurePlateBlock.ActivationRule activationRule, SoundEvent depressSound, SoundEvent pressSound) {
+	public static PressurePlateBlock pressurePlate(Block baseBlock, PressurePlateBlock.ActivationRule activationRule, BlockSetType setType) {
 		DawnBlockSettings settings = DawnBlockSettings.copy(baseBlock)
 				.strength(0.5f)
 				.noCollision();
-		return new PressurePlateBlock(activationRule, settings, depressSound, pressSound);
+		return new PressurePlateBlock(activationRule, settings, setType);
 	}
 
 	public static PressurePlateBlock pressurePlate(Block baseBlock) {
-		return pressurePlate(baseBlock, PressurePlateBlock.ActivationRule.MOBS, SoundEvents.BLOCK_WOODEN_PRESSURE_PLATE_CLICK_OFF, SoundEvents.BLOCK_WOODEN_PRESSURE_PLATE_CLICK_ON);
+		return pressurePlate(baseBlock, PressurePlateBlock.ActivationRule.MOBS, BlockSetType.OAK);
 	}
 
-	public static ButtonBlock woodenButton(boolean isNether) {
+	public static ButtonBlock woodenButton(boolean isNether, BlockSetType setType) {
 		return new ButtonBlock(DawnBlockSettings.of(Material.DECORATION)
 				.item()
 				.strength(0.5f)
 				.noCollision()
 				.sounds(isNether ? BlockSoundGroup.NETHER_WOOD : BlockSoundGroup.WOOD),
-				30, true,
-				isNether ? SoundEvents.BLOCK_NETHER_WOOD_BUTTON_CLICK_OFF : SoundEvents.BLOCK_WOODEN_BUTTON_CLICK_OFF,
-				isNether ? SoundEvents.BLOCK_NETHER_WOOD_BUTTON_CLICK_ON : SoundEvents.BLOCK_WOODEN_BUTTON_CLICK_ON);
+				setType, 30, true);
+	}
+
+	public static ButtonBlock woodenButton(boolean isNether) {
+		return woodenButton(isNether, BlockSetType.OAK);
 	}
 
 	public static FenceBlock fence(boolean isNether, Block baseBlock) {
@@ -184,38 +186,38 @@ public final class DawnFactory {
 	}
 
 
-	public static FenceGateBlock fenceGate(boolean isNether, Block baseBlock, SoundEvent closeSound, SoundEvent openSound) {
+	public static FenceGateBlock fenceGate(boolean isNether, Block baseBlock, WoodType woodType) {
 		DawnBlockSettings settings = DawnBlockSettings.copy(baseBlock).item(new DawnItemSettings().fuelTime(isNether ? 0 : 300));
 		if(isNether) settings.flammability(5, 20);
-		return new FenceGateBlock(settings, closeSound, openSound);
+		return new FenceGateBlock(settings, woodType);
 	}
 
 	public static FenceGateBlock fenceGate(boolean isNether, Block baseBlock) {
-		return fenceGate(isNether, baseBlock, SoundEvents.BLOCK_FENCE_GATE_CLOSE, SoundEvents.BLOCK_FENCE_GATE_OPEN);
+		return fenceGate(isNether, baseBlock, WoodType.OAK);
 	}
 
 	public static WallBlock wall(Block baseBlock) {
 		return new WallBlock(DawnBlockSettings.copy(baseBlock));
 	}
 
-	public static TrapdoorBlock trapdoor(Block baseBlock, SoundEvent closeSound, SoundEvent openSound) {
+	public static TrapdoorBlock trapdoor(Block baseBlock, BlockSetType setType) {
 		DawnBlockSettings settings = DawnBlockSettings.copy(baseBlock)
 				.strength(3.0f)
 				.nonOpaque()
 				.allowsSpawning((state, world, pos, type) -> false);
-		return new TrapdoorBlock(settings, closeSound, openSound);
+		return new TrapdoorBlock(settings, setType);
 	}
 
 	public static TrapdoorBlock woodenTrapdoor(Block baseBlock) {
-		return trapdoor(baseBlock, SoundEvents.BLOCK_WOODEN_TRAPDOOR_CLOSE, SoundEvents.BLOCK_WOODEN_TRAPDOOR_OPEN);
+		return trapdoor(baseBlock, BlockSetType.OAK);
 	}
 
-	public static DoorBlock door(Block baseBlock, SoundEvent openSound, SoundEvent closeSound) {
-		return new DoorBlock(DawnBlockSettings.copy(baseBlock).strength(3.0f).nonOpaque(), openSound, closeSound);
+	public static DoorBlock door(Block baseBlock, BlockSetType setType) {
+		return new DoorBlock(DawnBlockSettings.copy(baseBlock).strength(3.0f).nonOpaque(), setType);
 	}
 
 	public static DoorBlock woodenDoor(Block baseBlock) {
-		return door(baseBlock, SoundEvents.BLOCK_WOODEN_DOOR_OPEN, SoundEvents.BLOCK_WOODEN_DOOR_CLOSE);
+		return door(baseBlock, BlockSetType.OAK);
 	}
 
 	public static SaplingBlock sapling(SaplingGenerator generator) {

@@ -63,9 +63,6 @@ public class HealthCommand {
 					if(amount > 0.0F) {
 						livingEntity.heal(amount);
 					}
-					else if(amount < 0.0F) {
-						livingEntity.damage(DamageSource.OUT_OF_WORLD, amount * -1.0f);
-					}
 				}
 				else {
 					if(livingEntity.getHealth() > 0.0F) {

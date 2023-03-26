@@ -8,7 +8,6 @@ import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.FallingBlockEntity;
 import net.minecraft.entity.MovementType;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
@@ -20,8 +19,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtHelper;
-import net.minecraft.network.Packet;
 import net.minecraft.network.listener.ClientPlayPacketListener;
+import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.registry.tag.BlockTags;
@@ -221,7 +220,7 @@ public class FlyingBlockEntity extends Entity {
 				}
 				else {
 					predicate2 = EntityPredicates.EXCEPT_SPECTATOR;
-					damageSource3 = DamageSource.fallingBlock(this);
+					damageSource3 = this.getDamageSources().fallingBlock(this);
 				}
 
 				float f = (float) Math.min(MathHelper.floor((float) i * this.flyHurtAmount), this.flyHurtMax);
