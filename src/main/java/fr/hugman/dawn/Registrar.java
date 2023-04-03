@@ -19,6 +19,7 @@ import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.InvalidIdentifierException;
@@ -86,6 +87,10 @@ public record Registrar(String modId) {
 
 	public static void add(Identifier id, PlacementModifierType<?> placementModifierType) {
 		Registry.register(Registries.PLACEMENT_MODIFIER_TYPE, id, placementModifierType);
+	}
+
+	public static void add(Identifier id, ScreenHandlerType<?> screenHandlerType) {
+		Registry.register(Registries.SCREEN_HANDLER, id, screenHandlerType);
 	}
 
 	public static void add(Identifier id, SignBlocks signs) {
@@ -179,6 +184,10 @@ public record Registrar(String modId) {
 
 	public void add(String name, PlacementModifierType<?> placementModifierType) {
 		add(Identifier.of(this.modId, name), placementModifierType);
+	}
+
+	public void add(String name, ScreenHandlerType<?> screenHandlerType) {
+		add(Identifier.of(this.modId, name), screenHandlerType);
 	}
 
 	public void add(String name, SignBlocks signs) {
