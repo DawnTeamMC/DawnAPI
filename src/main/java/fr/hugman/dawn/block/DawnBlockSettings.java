@@ -7,7 +7,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FireBlock;
 import net.minecraft.block.MapColor;
-import net.minecraft.block.Material;
+import net.minecraft.block.enums.Instrument;
+import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.Item;
@@ -38,8 +39,8 @@ public class DawnBlockSettings extends FabricBlockSettings {
 	@Nullable
 	private Item.Settings itemSettings;
 
-	protected DawnBlockSettings(Material material, MapColor color) {
-		super(material, color);
+	protected DawnBlockSettings() {
+		super();
 	}
 
 	protected DawnBlockSettings(AbstractBlock.Settings settings) {
@@ -74,24 +75,12 @@ public class DawnBlockSettings extends FabricBlockSettings {
 
 	// Factory methods
 
-	public static DawnBlockSettings of(Material material) {
-		return of(material, material.getColor());
-	}
-
-	public static DawnBlockSettings of(Material material, MapColor color) {
-		return new DawnBlockSettings(material, color);
-	}
-
-	public static DawnBlockSettings of(Material material, DyeColor color) {
-		return new DawnBlockSettings(material, color.getMapColor());
-	}
-
-	public static DawnBlockSettings of(Material material, Function<BlockState, MapColor> mapColor) {
-		return new DawnBlockSettings(AbstractBlock.Settings.of(material, mapColor));
+	public static DawnBlockSettings create() {
+		return new DawnBlockSettings();
 	}
 
 	public static DawnBlockSettings copy(AbstractBlock block) {
-		return new DawnBlockSettings(((AbstractBlockAccessor) block).getSettings());
+		return copyOf(((AbstractBlockAccessor) block).getSettings());
 	}
 
 	public static DawnBlockSettings copyOf(AbstractBlock block) {
@@ -283,6 +272,54 @@ public class DawnBlockSettings extends FabricBlockSettings {
 	@Override
 	public DawnBlockSettings requires(FeatureFlag... features) {
 		super.requires(features);
+		return this;
+	}
+
+	@Override
+	public DawnBlockSettings mapColor(Function<BlockState, MapColor> mapColorProvider) {
+		super.mapColor(mapColorProvider);
+		return this;
+	}
+
+	@Override
+	public DawnBlockSettings burnable() {
+		super.burnable();
+		return this;
+	}
+
+	@Override
+	public DawnBlockSettings liquid() {
+		super.liquid();
+		return this;
+	}
+
+	@Override
+	public DawnBlockSettings solid() {
+		super.solid();
+		return this;
+	}
+
+	@Override
+	public DawnBlockSettings notSolid() {
+		super.notSolid();
+		return this;
+	}
+
+	@Override
+	public DawnBlockSettings pistonBehavior(PistonBehavior pistonBehavior) {
+		super.pistonBehavior(pistonBehavior);
+		return this;
+	}
+
+	@Override
+	public DawnBlockSettings instrument(Instrument instrument) {
+		super.instrument(instrument);
+		return this;
+	}
+
+	@Override
+	public DawnBlockSettings replaceable() {
+		super.replaceable();
 		return this;
 	}
 

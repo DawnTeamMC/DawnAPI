@@ -39,7 +39,7 @@ public class AnimalTemptGoal extends Goal {
 			return false;
 		}
 		else {
-			this.closestPlayer = this.entity.world.getClosestPlayer(this.predicate, this.entity);
+			this.closestPlayer = this.entity.getWorld().getClosestPlayer(this.predicate, this.entity);
 			return this.closestPlayer != null;
 		}
 	}

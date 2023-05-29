@@ -56,14 +56,14 @@ public class ExportCommand {
 			source.sendError(Text.translatable("commands." + NAME + ".fail.already_exists", exportFileComponent));
 			return 0;
 		}
-		source.sendFeedback(Text.translatable("commands." + NAME + ".start"), true);
+		source.sendFeedback(() -> Text.translatable("commands." + NAME + ".start"), true);
 
 		try {
 			for(Registry<?> registry : Registries.REGISTRIES) {
 				exportRegistry(registry, expanded, exportPath);
 			}
 			// TODO: where are built-in registries?
-			source.sendFeedback(Text.translatable("commands." + NAME + ".success", exportFileComponent), true);
+			source.sendFeedback(() -> Text.translatable("commands." + NAME + ".success", exportFileComponent), true);
 		} catch(IOException e) {
 			source.sendError(Text.translatable("commands." + NAME + ".fail.unknown"));
 			e.printStackTrace();
