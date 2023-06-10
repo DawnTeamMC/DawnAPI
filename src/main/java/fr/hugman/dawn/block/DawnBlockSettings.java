@@ -56,21 +56,21 @@ public class DawnBlockSettings extends FabricBlockSettings {
 	// Getters
 
 	public int getFlameBurn() {
-		return flameBurn;
+		return this.flameBurn;
 	}
 
 	public int getFlameSpread() {
-		return flameSpread;
+		return this.flameSpread;
 	}
 
 	@Nullable
 	public Block getStripInto() {
-		return stripInto;
+		return this.stripInto;
 	}
 
 	@Nullable
 	public Item.Settings getItemSettings() {
-		return itemSettings;
+		return this.itemSettings;
 	}
 
 	// Factory methods
@@ -94,13 +94,14 @@ public class DawnBlockSettings extends FabricBlockSettings {
 	// New methods
 
 	/**
-	 * Sets the burning and spreading chances of this block.
+	 * Makes the block burnable, sets the burning and spreading chances of this block.
 	 *
 	 * @see FireBlock#registerDefaultFlammables() Vanilla flammability values
 	 */
-	public DawnBlockSettings flammability(int burn, int spread) {
+	public DawnBlockSettings burnable(int burn, int spread) {
 		this.flameBurn = burn;
 		this.flameSpread = spread;
+		this.burnable();
 		return this;
 	}
 
@@ -281,6 +282,7 @@ public class DawnBlockSettings extends FabricBlockSettings {
 		return this;
 	}
 
+	//TODO: what is this?
 	@Override
 	public DawnBlockSettings burnable() {
 		super.burnable();
