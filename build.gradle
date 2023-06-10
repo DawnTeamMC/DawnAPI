@@ -13,19 +13,19 @@ repositories {
 }
 
 dependencies {
-    modImplementation "com.terraformersmc.terraform-api:terraform-shapes-api-v1:${terraform_shapes_version}"
+    modApi "com.terraformersmc.terraform-api:terraform-shapes-api-v1:${terraform_shapes_version}"
     include "com.terraformersmc.terraform-api:terraform-shapes-api-v1:${terraform_shapes_version}"
-    modImplementation "com.terraformersmc.terraform-api:terraform-wood-api-v1:${terraform_wood_version}"
+    modApi "com.terraformersmc.terraform-api:terraform-wood-api-v1:${terraform_wood_version}"
     include "com.terraformersmc.terraform-api:terraform-wood-api-v1:${terraform_wood_version}"
 
-    modImplementation "me.shedaniel.cloth:cloth-config-fabric:${cloth_version}"
+    modApi "me.shedaniel.cloth:cloth-config-fabric:${cloth_version}"
     include "me.shedaniel.cloth:cloth-config-fabric:${cloth_version}"
 
-    modImplementation("com.terraformersmc:modmenu:${modmenu_version}") {
+    modApi("com.terraformersmc:modmenu:${modmenu_version}") {
         exclude(group: "net.fabricmc.fabric-api")
     }
-    modImplementation "squeek.appleskin:appleskin-fabric:mc1.20-${appleskin_version}:api"
-    modImplementation("squeek.appleskin:appleskin-fabric:mc1.20-${appleskin_version}") {
+    modApi "squeek.appleskin:appleskin-fabric:mc1.20-${appleskin_version}:api"
+    modApi("squeek.appleskin:appleskin-fabric:mc1.20-${appleskin_version}") {
         exclude module: 'modmenu'
     }
 }
