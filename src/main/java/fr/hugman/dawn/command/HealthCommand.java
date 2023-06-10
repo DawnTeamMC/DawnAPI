@@ -77,10 +77,11 @@ public class HealthCommand {
 		}
 		final String parameter = sum ? ADD_ARG : SET_ARG;
 		if(targets.size() == 1) {
-			source.sendFeedback(Text.translatable("commands.health." + parameter + ".success.single", amount, targets.iterator().next().getDisplayName()), true);
+			source.sendFeedback(() -> Text.translatable("commands.health." + parameter + ".success.single", amount, targets.iterator().next().getDisplayName()), true);
 		}
 		else {
-			source.sendFeedback(Text.translatable("commands.health." + parameter + ".success.multiple", amount, finalTargetAmount), true);
+			int finalTargetAmount1 = finalTargetAmount;
+			source.sendFeedback(() -> Text.translatable("commands.health." + parameter + ".success.multiple", amount, finalTargetAmount1), true);
 		}
 		return finalTargetAmount;
 	}

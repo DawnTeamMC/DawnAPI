@@ -55,13 +55,13 @@ public class FoodBarCommand {
 
 	private static int queryFood(ServerCommandSource source, ServerPlayerEntity target) {
 		int foodLevel = target.getHungerManager().getFoodLevel();
-		source.sendFeedback(Text.translatable("commands.foodbar.query.food", target.getDisplayName(), foodLevel), false);
+		source.sendFeedback(() -> Text.translatable("commands.foodbar.query.food", target.getDisplayName(), foodLevel), false);
 		return foodLevel;
 	}
 
 	private static int querySaturation(ServerCommandSource source, ServerPlayerEntity target) {
 		float saturationLevel = target.getHungerManager().getSaturationLevel();
-		source.sendFeedback(Text.translatable("commands.foodbar.query.saturation", target.getDisplayName(), saturationLevel), false);
+		source.sendFeedback(() -> Text.translatable("commands.foodbar.query.saturation", target.getDisplayName(), saturationLevel), false);
 		return (int) saturationLevel;
 	}
 

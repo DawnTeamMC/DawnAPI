@@ -85,7 +85,7 @@ public class ExportCommand {
 			source.sendError(Text.translatable("commands." + NAME + ".fail.already_exists", exportFileComponent));
 			return 0;
 		}
-		source.sendFeedback(Text.translatable("commands." + NAME + ".start"), true);
+		source.sendFeedback(() -> Text.translatable("commands." + NAME + ".start"), true);
 
 		try {
 			throw new UnsupportedOperationException("Not implemented yet");
