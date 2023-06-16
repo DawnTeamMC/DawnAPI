@@ -1,4 +1,7 @@
-name: Upload translations to Crowdin
+# Automatically upload translations to Crowdin for every push to the main or dev branch.
+# This allows string to be translated before a new version is released.
+
+name: Upload translations source to Crowdin
 
 on:
   push:
@@ -13,7 +16,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Crowdin push
+      - name: Upload translations source file to Crowdin
         uses: crowdin/github-action@v1
         with:
           upload_sources: true
