@@ -173,13 +173,13 @@ public final class DawnFactory {
 		return pressurePlate(baseBlock, setType, PressurePlateBlock.ActivationRule.MOBS);
 	}
 
-	public static ButtonBlock woodenButton(BlockSetType setType, BlockSoundGroup sounds) {
+	public static ButtonBlock woodenButton(Block baseBlock, BlockSetType setType) {
 		return new ButtonBlock(DawnBlockSettings.create()
 				.item()
 				.strength(0.5f)
 				.noCollision()
 				.pistonBehavior(PistonBehavior.DESTROY)
-				.sounds(sounds),
+				.sounds(baseBlock.getDefaultState().getSoundGroup()),
 				setType, 30, true);
 	}
 
@@ -217,7 +217,7 @@ public final class DawnFactory {
 				.pistonBehavior(PistonBehavior.DESTROY), setType);
 	}
 
-	public static SaplingBlock sapling(SaplingGenerator generator) {
+	public static SaplingBlock sapling(MapColor mapColor, SaplingGenerator generator) {
 		return new SaplingBlock(generator, DawnBlockSettings.create()
 				.item(new DawnItemSettings().compostingChance(0.3f))
 				.mapColor(MapColor.DARK_GREEN)
@@ -257,14 +257,18 @@ public final class DawnFactory {
 				.pistonBehavior(PistonBehavior.DESTROY));
 	}
 
-	public static LeavesBlock leaves() {
-		return leaves(BlockSoundGroup.GRASS);
+	public static LeavesBlock leaves(MapColor mapColor) {
+		return leaves(mapColor, BlockSoundGroup.GRASS);
 	}
 
-	public static LeavesBlock leaves(BlockSoundGroup soundGroup) {
-		return new LeavesBlock(DawnBlockSettings.create()
+	public static LeavesBlock leaves(MapColor mapColor, BlockSoundGroup soundGroup) {
+		return new LeavesBlock(leavesSettings(mapColor, soundGroup));
+	}
+
+	public static DawnBlockSettings leavesSettings(MapColor mapColor, BlockSoundGroup soundGroup) {
+		return DawnBlockSettings.create()
 				.item(new DawnItemSettings().compostingChance(0.3f))
-				.mapColor(MapColor.DARK_GREEN)
+				.mapColor(mapColor)
 				.strength(0.2f)
 				.ticksRandomly()
 				.sounds(soundGroup)
@@ -274,42 +278,34 @@ public final class DawnFactory {
 				.blockVision((state, world, pos) -> false)
 				.burnable(30, 60)
 				.pistonBehavior(PistonBehavior.DESTROY)
-				.solidBlock((state, world, pos) -> false));
+				.solidBlock((state, world, pos) -> false);
 	}
 
-	public static SignBlocks signs(Identifier texturePath, Block basePlanks) {
+
+	public static SignBlocks signs(Identifier texturePath, Block basePlanks, BlockSoundGroup normalSounds, BlockSoundGroup hangingSounds) {
 		var signTexture = Identifier.of(texturePath.getNamespace(), "entity/signs/" + texturePath.getPath());
 		var hangingSignTexture = Identifier.of(texturePath.getNamespace(), "entity/signs/hanging/" + texturePath.getPath());
 		var hangingSignGuiTexture = Identifier.of(texturePath.getNamespace(), "textures/gui/hanging_signs/" + texturePath.getPath());
 
-		var sign = new TerraformSignBlock(signTexture, signSettings(basePlanks));
-		var wallSign = new TerraformWallSignBlock(signTexture, signSettings(basePlanks));
-		var hangingSign = new TerraformHangingSignBlock(hangingSignTexture, hangingSignGuiTexture, hangingSignSettings(basePlanks));
-		var wallHangingSign = new TerraformWallHangingSignBlock(hangingSignTexture, hangingSignGuiTexture, hangingSignSettings(basePlanks));
+		var sign = new TerraformSignBlock(signTexture, signSettings(basePlanks, normalSounds));
+		var wallSign = new TerraformWallSignBlock(signTexture, signSettings(basePlanks, normalSounds).dropsLike(sign));
+		var hangingSign = new TerraformHangingSignBlock(hangingSignTexture, hangingSignGuiTexture, signSettings(basePlanks, hangingSounds));
+		var wallHangingSign = new TerraformWallHangingSignBlock(hangingSignTexture, hangingSignGuiTexture, signSettings(basePlanks, hangingSounds).dropsLike(hangingSign));
 		var signItem = new SignItem(new DawnItemSettings().maxCount(16), sign, wallSign);
 		var hangingSignItem = new HangingSignItem(hangingSign, wallHangingSign, new DawnItemSettings().maxCount(16));
 
 		return new SignBlocks(sign, wallSign, hangingSign, wallHangingSign, signItem, hangingSignItem);
 	}
 
-	public static DawnBlockSettings signSettings(Block basePlanks, boolean hanging) {
-		var settings = DawnBlockSettings.create()
+	public static DawnBlockSettings signSettings(Block basePlanks, BlockSoundGroup soundGroup) {
+		return DawnBlockSettings.create()
+				.sounds(soundGroup)
 				.mapColor(basePlanks.getDefaultMapColor())
 				.solid()
 				.instrument(Instrument.BASS)
 				.noCollision()
 				.strength(1.0F)
 				.burnable();
-		settings.sounds(hanging ? BlockSoundGroup.HANGING_SIGN : BlockSoundGroup.WOOD);
-		return settings;
-	}
-
-	public static DawnBlockSettings signSettings(Block basePlanks) {
-		return signSettings(basePlanks, false);
-	}
-
-	public static DawnBlockSettings hangingSignSettings(Block basePlanks) {
-		return signSettings(basePlanks, true);
 	}
 
 	public static TerraformBoatType boat(Identifier id, ItemConvertible planks, boolean raft) {
