@@ -109,7 +109,7 @@ public class DawnBlockSettings extends FabricBlockSettings {
 	 * Sets the block that this block will be stripped into when using an axe.
 	 * @see AxeItem Vanilla axe stripping values
 	 */
-	public DawnBlockSettings stripInto(Block block) {
+	public DawnBlockSettings stripsInto(Block block) {
 		this.stripInto = block;
 		return this;
 	}
