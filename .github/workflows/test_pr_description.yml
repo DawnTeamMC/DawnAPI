@@ -1,0 +1,16 @@
+name: Publish New Version
+
+# Triggers
+on:
+  pull_request:
+
+jobs:
+  get_changelog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Output PR Description
+        run: |
+          echo "PR Description: ${{ github.event.pull_request.body }}"
