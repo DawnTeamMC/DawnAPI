@@ -1,8 +1,10 @@
-name: Publish New Version
+name: Test
 
 # Triggers
 on:
-  pull_request:
+  release:
+    types:
+      - published
 
 jobs:
   get_changelog:
@@ -11,6 +13,6 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Output PR Description
+      - name: Output Changelog
         run: |
-          echo "PR Description: ${{ github.event.pull_request.body }}"
+          echo "Changelog: ${{ github.event.release.body }}"
