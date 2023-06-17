@@ -40,3 +40,8 @@ jobs:
         run: chmod +x ./gradlew
       - name: Build
         run: ./gradlew build
+      - name: Capture artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: build/libs
