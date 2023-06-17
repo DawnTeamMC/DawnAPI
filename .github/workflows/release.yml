@@ -85,4 +85,14 @@ jobs:
 
     - name: Add job summary
       run: |
-        echo "### Published mod" >> $GITHUB_STEP_SUMMARY
+        echo "# Results" >> $GITHUB_STEP_SUMMARY
+        echo "- Mod ID: ${{ steps.gradle_properties.outputs.mod_id }}" >> $GITHUB_STEP_SUMMARY
+        echo "- Mod Name: ${{ steps.gradle_properties.outputs.mod_name }}" >> $GITHUB_STEP_SUMMARY
+        echo "- Mod Version: ${{ github.event.release.tag_name }}" >> $GITHUB_STEP_SUMMARY
+        echo "- Release Name: ${{ github.event.release.name }}" >> $GITHUB_STEP_SUMMARY
+        echo "- Minecraft Version: ${{ steps.gradle_properties.outputs.minecraft_version }}" >> $GITHUB_STEP_SUMMARY
+        echo "- [CurseForge Link](${{ steps.publish.outputs.curseforge-url }})" >> $GITHUB_STEP_SUMMARY
+        echo "- [Modrinth Link](${{ steps.publish.outputs.modrinth-url }})" >> $GITHUB_STEP_SUMMARY
+        echo "- [GitHub Link](${{ steps.publish.outputs.github-url }})" >> $GITHUB_STEP_SUMMARY
+        echo "# Changelog" >> $GITHUB_STEP_SUMMARY
+        echo "${{ github.event.release.body }}" >> $GITHUB_STEP_SUMMARY
