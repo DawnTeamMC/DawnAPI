@@ -8,8 +8,7 @@ on:
   pull_request:
     types: [review_requested, ready_for_review]
   push:
-    branches:
-      - dev
+    branches: [main, dev]
 
 jobs:
   build:
@@ -17,6 +16,7 @@ jobs:
       matrix:
         java: [ 17 ]
         os: [ ubuntu-20.04 ]
+    name: Build the project (Java ${{ matrix.java }}, on ${{ matrix.os }}))
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout repository
@@ -32,8 +32,3 @@ jobs:
         run: chmod +x ./gradlew
       - name: Build
         run: ./gradlew build
-      - name: Capture build artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: Artifacts
-          path: build/libs/

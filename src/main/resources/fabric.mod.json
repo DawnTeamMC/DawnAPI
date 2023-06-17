@@ -1,9 +1,9 @@
 {
 	"schemaVersion": 1,
-	"name": "${mod_name}",
-	"id": "${mod_id}",
+	"name": "Dawn API",
+	"id": "dawn",
 	"version": "${version}",
-	"icon": "assets/${mod_id}/textures/logo.png",
+	"icon": "assets/dawn/textures/logo.png",
 	"authors": [
 		"Hugman"
 	],
@@ -12,8 +12,8 @@
 	],
 	"contact": {
 		"homepage": "https://dawnteammc.github.io/",
-		"sources": "https://github.com/DawnTeamMC/${github_name}",
-		"issues": "https://github.com/DawnTeamMC/${github_name}/issues"
+		"sources": "https://github.com/DawnTeamMC/DawnAPI",
+		"issues": "https://github.com/DawnTeamMC/DawnAPI/issues"
 	},
 	"environment": "*",
 	"entrypoints": {
@@ -32,7 +32,8 @@
 	],
 	"accessWidener": "dawn.accesswidener",
 	"depends": {
-		"fabric": "*"
+		"minecraft": "1.20.x",
+		"fabric-api": "*"
 	},
 	"suggests": {
 		"appleskin": "*",
@@ -43,11 +44,11 @@
 			"links": {
 				"modmenu.twitter": "https://twitter.com/DawnTeamMC",
 				"modmenu.discord": "https://discord.gg/8ksTVJu",
-				"modmenu.curseforge": "https://www.curseforge.com/minecraft/mc-mods/${curseforge_slug}",
-				"modmenu.modrinth": "https://modrinth.com/mod/${modrinth_slug}",
-				"modmenu.github_releases": "https://github.com/DawnTeamMC/${github_name}/releases/",
+				"modmenu.curseforge": "https://www.curseforge.com/minecraft/mc-mods/dawn",
+				"modmenu.modrinth": "https://modrinth.com/mod/dawn",
+				"modmenu.github_releases": "https://github.com/DawnTeamMC/DawnAPI/releases/",
 				"modmenu.crowdin": "https://crowdin.com/project/dawnteam",
-				"modmenu.wiki": "https://github.com/DawnTeamMC/${github_name}/wiki/"
+				"modmenu.wiki": "https://github.com/DawnTeamMC/DawnAPI/wiki/"
 			},
 			"badges": [
 				"library"
@@ -56,6 +57,17 @@
 		"modupdater": {
 			"strategy": "curseforge",
 			"projectID": 399309
+		},
+		"mc-publish": {
+			"curseforge": 399309,
+			"modrinth": "GuE5FpvB",
+			"loaders": ["fabric", "quilt"],
+			"dependencies": [
+				"fabric-api(optional)",
+				"appleskin(optional)",
+				"modmenu(optional)",
+				"cloth-config(embedded)"
+			]
 		}
 	},
 	"license": "LGPL v3.0"
