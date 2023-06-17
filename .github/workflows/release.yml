@@ -43,8 +43,6 @@ jobs:
         modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
         github-token: ${{ secrets.GITHUB_TOKEN }}
 
-        modrinth-name: ${{ steps.gradle_properties.outputs.curseforge-url }}
-
         changelog: ${{ github.event.release.body }}
         java: 17
 
