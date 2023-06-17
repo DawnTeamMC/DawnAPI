@@ -60,10 +60,10 @@
 		},
 		"mc-publish": {
 			"curseforge": 399309,
-			"modrinth": "GuE5FpvB",
+			"modrinth": "meZK2DCX",
 			"loaders": ["fabric", "quilt"],
 			"dependencies": [
-				"fabric-api(optional)",
+				"fabric-api(required)",
 				"appleskin(optional)",
 				"modmenu(optional)",
 				"cloth-config(embedded)"

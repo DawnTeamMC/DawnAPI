@@ -28,6 +28,13 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew clean build -Pversion=${{ github.event.release.tag_name }}
 
+    - name: Read Gradle properties
+      id: gradle_properties
+      uses: christian-draeger/read-properties@1.1.1
+      with:
+        path: './gradle.properties'
+        properties: 'mod_id mod_name mod_logo mod_color loader_name loader_icon minecraft_version'
+
     - name: Publish mod to GitHub, CurseForge and Modrinth
       id: publish
       uses: Kir-Antipov/mc-publish@v3.3
@@ -36,24 +43,12 @@ jobs:
         modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
         github-token: ${{ secrets.GITHUB_TOKEN }}
 
+        modrinth-name: ${{ steps.gradle_properties.outputs.curseforge-url }}
+
         changelog: ${{ github.event.release.body }}
         java: 17
 
         modrinth-featured: false
-
-    - name: Read Gradle properties
-      id: gradle_properties
-      uses: christian-draeger/read-properties@1.1.1
-      with:
-        path: './gradle.properties'
-        properties: 'mod_logo mod_color loader_name loader_icon minecraft_version'
-
-
-    - name: Read fabric.mod.json properties
-      id: fabric_properties
-      run: |
-        echo "id=$(cat fabric.mod.json | jq -r '.id')" >> $GITHUB_ENV
-        echo "name=$(cat fabric.mod.json | jq -r '.name')" >> $GITHUB_ENV
 
     - name: Send Discord webhook
       uses: Ilshidur/action-discord@0.3.2
@@ -61,22 +56,21 @@ jobs:
         DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         DISCORD_EMBEDS: |
           [{
-            "color": ${{ steps.gradle_properties.outputs.mod_color }},
+            "title": "${{ github.event.release.name }} Released",
+            "color": "${{ steps.gradle_properties.outputs.mod_color }}",
             "thumbnail": {
               "url": "${{ steps.gradle_properties.outputs.mod_logo }}"
             },
-            "title": "${{ github.event.release.name }} Released",
             "url": "${{ steps.publish.outputs.curseforge-url }}",
-            "description": ,
             "fields": [
                 {
                   "name": "Download now:",
                   "value": "[<:curseforge:805066577871110196> CurseForge](${{ steps.publish.outputs.curseforge-url }})\n[<:modrinth:805066578215043092> Modrinth](${{ steps.publish.outputs.modrinth-url }})\n[<:github:805066578164580392> GitHub](${{ steps.publish.outputs.github-url }})",
                   "inline": true
-                },
+                }
             ],
             "footer": {
-              "text": "A ${{ steps.gradle_properties.outputs.loader_name }} Mod"
+              "text": "A ${{ steps.gradle_properties.outputs.loader_name }} Mod",
               "icon_url": "${{ steps.gradle_properties.outputs.loader_icon }}"
             }
           }]
