@@ -60,8 +60,7 @@ jobs:
       env:
         DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         DISCORD_EMBEDS: |
-          ${{ toJSON([
-          {
+          [{
             "color": ${{ steps.gradle_properties.outputs.mod_color }},
             "thumbnail": {
               "url": "${{ steps.gradle_properties.outputs.mod_logo }}"
@@ -80,8 +79,7 @@ jobs:
               "text": "A ${{ steps.gradle_properties.outputs.loader_name }} Mod"
               "icon_url": "${{ steps.gradle_properties.outputs.loader_icon }}"
             }
-          }
-          ])}}
+          }]
 
     - name: Add job summary
       run: |
