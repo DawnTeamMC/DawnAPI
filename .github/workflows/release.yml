@@ -66,7 +66,7 @@ jobs:
             "thumbnail": {
               "url": "${{ steps.gradle_properties.outputs.mod_logo }}"
             },
-            "title": "New release: ${{ github.event.release.tag_name }}",
+            "title": "${{ github.event.release.name }} Released",
             "url": "${{ steps.publish.outputs.curseforge-url }}",
             "description": ,
             "fields": [
