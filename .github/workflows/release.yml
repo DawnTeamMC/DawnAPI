@@ -30,10 +30,10 @@ jobs:
 
     - name: Publish mod to GitHub, CurseForge and Modrinth
       id: publish
-      uses: Kir-Antipov/mc-publish@v3.2
+      uses: Kir-Antipov/mc-publish@v3.3
       with:
         curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
-        modrinth-token: ${{ secrets.CURSEFORGE_TOKEN }}
+        modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
         github-token: ${{ secrets.GITHUB_TOKEN }}
 
         changelog: ${{ github.event.release.body }}
