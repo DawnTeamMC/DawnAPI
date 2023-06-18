@@ -191,7 +191,6 @@ public final class DawnFactory {
 		);
 	}
 
-
 	public static FenceGateBlock fenceGate(Block baseBlock, WoodType woodType) {
 		DawnBlockSettings settings = DawnBlockSettings.copy(baseBlock);
 		return new FenceGateBlock(settings.solid()
@@ -220,7 +219,7 @@ public final class DawnFactory {
 	public static SaplingBlock sapling(MapColor mapColor, SaplingGenerator generator) {
 		return new SaplingBlock(generator, DawnBlockSettings.create()
 				.item(new DawnItemSettings().compostingChance(0.3f))
-				.mapColor(MapColor.DARK_GREEN)
+				.mapColor(mapColor)
 				.sounds(BlockSoundGroup.GRASS)
 				.breakInstantly()
 				.noCollision()
@@ -228,10 +227,10 @@ public final class DawnFactory {
 				.pistonBehavior(PistonBehavior.DESTROY));
 	}
 
-	public static DawnSaplingBlock sapling(SaplingGenerator generator, Predicate<BlockState> saplingSoilPredicate) {
+	public static DawnSaplingBlock sapling(MapColor mapColor, SaplingGenerator generator, Predicate<BlockState> saplingSoilPredicate) {
 		return new DawnSaplingBlock(generator, saplingSoilPredicate, DawnBlockSettings.create()
 				.item(new DawnItemSettings().compostingChance(0.3f))
-				.mapColor(MapColor.DARK_GREEN)
+				.mapColor(mapColor)
 				.sounds(BlockSoundGroup.GRASS)
 				.breakInstantly()
 				.noCollision()
@@ -281,6 +280,21 @@ public final class DawnFactory {
 				.solidBlock((state, world, pos) -> false);
 	}
 
+	public static SignBlocks signs(Identifier texturePath, Block basePlanks) {
+		BlockSoundGroup soundGroup = basePlanks.getDefaultState().getSoundGroup();
+		BlockSoundGroup hangingSoundGroup = BlockSoundGroup.WOOD;
+		if(soundGroup == BlockSoundGroup.CHERRY_WOOD) {
+			hangingSoundGroup = BlockSoundGroup.CHERRY_WOOD_HANGING_SIGN;
+		}
+		else if(soundGroup == BlockSoundGroup.BAMBOO_WOOD) {
+			hangingSoundGroup = BlockSoundGroup.BAMBOO_WOOD_HANGING_SIGN;
+		}
+		else if(soundGroup == BlockSoundGroup.NETHER_WOOD) {
+			hangingSoundGroup = BlockSoundGroup.NETHER_WOOD_HANGING_SIGN;
+		}
+
+		return signs(texturePath, basePlanks, soundGroup, hangingSoundGroup);
+	}
 
 	public static SignBlocks signs(Identifier texturePath, Block basePlanks, BlockSoundGroup normalSounds, BlockSoundGroup hangingSounds) {
 		var signTexture = Identifier.of(texturePath.getNamespace(), "entity/signs/" + texturePath.getPath());
