@@ -302,9 +302,9 @@ public final class DawnFactory {
 		var hangingSignGuiTexture = Identifier.of(texturePath.getNamespace(), "textures/gui/hanging_signs/" + texturePath.getPath());
 
 		var sign = new TerraformSignBlock(signTexture, signSettings(basePlanks, normalSounds));
-		var wallSign = new TerraformWallSignBlock(signTexture, signSettings(basePlanks, normalSounds).dropsLike(sign));
+		var wallSign = new TerraformWallSignBlock(signTexture, signSettings(basePlanks, normalSounds));
 		var hangingSign = new TerraformHangingSignBlock(hangingSignTexture, hangingSignGuiTexture, signSettings(basePlanks, hangingSounds));
-		var wallHangingSign = new TerraformWallHangingSignBlock(hangingSignTexture, hangingSignGuiTexture, signSettings(basePlanks, hangingSounds).dropsLike(hangingSign));
+		var wallHangingSign = new TerraformWallHangingSignBlock(hangingSignTexture, hangingSignGuiTexture, signSettings(basePlanks, hangingSounds));
 		var signItem = new SignItem(new DawnItemSettings().maxCount(16), sign, wallSign);
 		var hangingSignItem = new HangingSignItem(hangingSign, wallHangingSign, new DawnItemSettings().maxCount(16));
 

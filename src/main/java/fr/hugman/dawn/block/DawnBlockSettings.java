@@ -204,7 +204,11 @@ public class DawnBlockSettings extends FabricBlockSettings {
 		return this;
 	}
 
+	/**
+	 * @deprecated this evaluates the loot table (and therefore item registries) instantly, which is not possible in Dawn Team mods because we do not register anything at the same time as construction.
+	 */
 	@Override
+	@Deprecated
 	public DawnBlockSettings dropsLike(Block block) {
 		super.dropsLike(block);
 		return this;
