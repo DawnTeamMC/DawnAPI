@@ -50,10 +50,10 @@ public class MotionCommand {
 		}
 		final String parameter = sum ? ADD_ARG : SET_ARG;
 		if(targets.size() == 1) {
-			source.sendFeedback(Text.translatable("commands.motion." + parameter + ".success.single", x, y, z, targets.iterator().next().getDisplayName()), true);
+			source.sendFeedback(() -> Text.translatable("commands.motion." + parameter + ".success.single", x, y, z, targets.iterator().next().getDisplayName()), true);
 		}
 		else {
-			source.sendFeedback(Text.translatable("commands.motion." + parameter + ".success.multiple", x, y, z, targets.size()), true);
+			source.sendFeedback(() -> Text.translatable("commands.motion." + parameter + ".success.multiple", x, y, z, targets.size()), true);
 		}
 		return targets.size();
 	}

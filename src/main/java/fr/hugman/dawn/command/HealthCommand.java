@@ -6,7 +6,6 @@ import com.mojang.brigadier.tree.LiteralCommandNode;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Text;
@@ -45,11 +44,11 @@ public class HealthCommand {
 	private static int queryHealth(ServerCommandSource source, Entity target) {
 		if(target instanceof LivingEntity livingEntity) {
 			float health = livingEntity.getHealth();
-			source.sendFeedback(Text.translatable("commands.health.query.success", target.getDisplayName(), health), false);
+			source.sendFeedback(() -> Text.translatable("commands.health.query.success", target.getDisplayName(), health), false);
 			return (int) health;
 		}
 		else {
-			source.sendFeedback(Text.translatable("commands.health.query.failed"), false);
+			source.sendFeedback(() -> Text.translatable("commands.health.query.failed"), false);
 			return 0;
 		}
 	}
@@ -78,10 +77,11 @@ public class HealthCommand {
 		}
 		final String parameter = sum ? ADD_ARG : SET_ARG;
 		if(targets.size() == 1) {
-			source.sendFeedback(Text.translatable("commands.health." + parameter + ".success.single", amount, targets.iterator().next().getDisplayName()), true);
+			source.sendFeedback(() -> Text.translatable("commands.health." + parameter + ".success.single", amount, targets.iterator().next().getDisplayName()), true);
 		}
 		else {
-			source.sendFeedback(Text.translatable("commands.health." + parameter + ".success.multiple", amount, finalTargetAmount), true);
+			int finalTargetAmount1 = finalTargetAmount;
+			source.sendFeedback(() -> Text.translatable("commands.health." + parameter + ".success.multiple", amount, finalTargetAmount1), true);
 		}
 		return finalTargetAmount;
 	}

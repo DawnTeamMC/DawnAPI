@@ -1,8 +1,9 @@
 package fr.hugman.dawn.block;
 
 import fr.hugman.dawn.entity.FlyingBlockEntity;
-import net.minecraft.block.*;
-import net.minecraft.entity.FallingBlockEntity;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -18,9 +19,7 @@ public class FlyingBlock extends Block {
 	}
 
 	public static boolean canFlyThrough(BlockState state) {
-		Block block = state.getBlock();
-		Material material = state.getMaterial();
-		return block instanceof AirBlock || block == Blocks.FIRE || material.isLiquid() || material.isReplaceable();
+		return state.isAir() || state.isIn(BlockTags.FIRE) || state.isLiquid() || state.isReplaceable();
 	}
 
 	@Override

@@ -71,26 +71,26 @@ public class CustomTNTEntity extends Entity {
 		}
 		this.move(MovementType.SELF, this.getVelocity());
 		this.setVelocity(this.getVelocity().multiply(0.98D));
-		if(this.onGround) {
+		if(this.isOnGround()) {
 			this.setVelocity(this.getVelocity().multiply(0.7D, -0.5D, 0.7D));
 		}
 		--this.fuse;
 		if(this.fuse <= 0) {
 			this.discard();
-			if(!this.world.isClient) {
+			if(!this.getWorld().isClient) {
 				this.explode();
 			}
 		}
 		else {
 			this.updateWaterState();
-			if(this.world.isClient) {
-				this.world.addParticle(ParticleTypes.SMOKE, this.getX(), this.getY() + 0.5D, this.getZ(), 0.0D, 0.0D, 0.0D);
+			if(this.getWorld().isClient) {
+				this.getWorld().addParticle(ParticleTypes.SMOKE, this.getX(), this.getY() + 0.5D, this.getZ(), 0.0D, 0.0D, 0.0D);
 			}
 		}
 	}
 
 	private void explode() {
-		this.world.createExplosion(this, this.getX(), this.getBodyY(0.0625D), this.getZ(), this.strength, World.ExplosionSourceType.TNT);
+		this.getWorld().createExplosion(this, this.getX(), this.getBodyY(0.0625D), this.getZ(), this.strength, World.ExplosionSourceType.TNT);
 	}
 
 	@Override
@@ -102,7 +102,7 @@ public class CustomTNTEntity extends Entity {
 
 	@Override
 	protected void readCustomDataFromNbt(NbtCompound nbt) {
-		this.state = NbtHelper.toBlockState(this.world.createCommandRegistryWrapper(RegistryKeys.BLOCK), nbt.getCompound("BlockState"));
+		this.state = NbtHelper.toBlockState(this.getWorld().createCommandRegistryWrapper(RegistryKeys.BLOCK), nbt.getCompound("BlockState"));
 		if(this.state.getBlock() == Blocks.AIR) {
 			this.state = Blocks.TNT.getDefaultState();
 		}

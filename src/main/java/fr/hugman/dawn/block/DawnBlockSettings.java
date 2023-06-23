@@ -7,7 +7,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FireBlock;
 import net.minecraft.block.MapColor;
-import net.minecraft.block.Material;
+import net.minecraft.block.enums.Instrument;
+import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.Item;
@@ -38,8 +39,8 @@ public class DawnBlockSettings extends FabricBlockSettings {
 	@Nullable
 	private Item.Settings itemSettings;
 
-	protected DawnBlockSettings(Material material, MapColor color) {
-		super(material, color);
+	protected DawnBlockSettings() {
+		super();
 	}
 
 	protected DawnBlockSettings(AbstractBlock.Settings settings) {
@@ -55,43 +56,31 @@ public class DawnBlockSettings extends FabricBlockSettings {
 	// Getters
 
 	public int getFlameBurn() {
-		return flameBurn;
+		return this.flameBurn;
 	}
 
 	public int getFlameSpread() {
-		return flameSpread;
+		return this.flameSpread;
 	}
 
 	@Nullable
 	public Block getStripInto() {
-		return stripInto;
+		return this.stripInto;
 	}
 
 	@Nullable
 	public Item.Settings getItemSettings() {
-		return itemSettings;
+		return this.itemSettings;
 	}
 
 	// Factory methods
 
-	public static DawnBlockSettings of(Material material) {
-		return of(material, material.getColor());
-	}
-
-	public static DawnBlockSettings of(Material material, MapColor color) {
-		return new DawnBlockSettings(material, color);
-	}
-
-	public static DawnBlockSettings of(Material material, DyeColor color) {
-		return new DawnBlockSettings(material, color.getMapColor());
-	}
-
-	public static DawnBlockSettings of(Material material, Function<BlockState, MapColor> mapColor) {
-		return new DawnBlockSettings(AbstractBlock.Settings.of(material, mapColor));
+	public static DawnBlockSettings create() {
+		return new DawnBlockSettings();
 	}
 
 	public static DawnBlockSettings copy(AbstractBlock block) {
-		return new DawnBlockSettings(((AbstractBlockAccessor) block).getSettings());
+		return copyOf(((AbstractBlockAccessor) block).getSettings());
 	}
 
 	public static DawnBlockSettings copyOf(AbstractBlock block) {
@@ -105,13 +94,14 @@ public class DawnBlockSettings extends FabricBlockSettings {
 	// New methods
 
 	/**
-	 * Sets the burning and spreading chances of this block.
+	 * Makes the block burnable, sets the burning and spreading chances of this block.
 	 *
 	 * @see FireBlock#registerDefaultFlammables() Vanilla flammability values
 	 */
-	public DawnBlockSettings flammability(int burn, int spread) {
+	public DawnBlockSettings burnable(int burn, int spread) {
 		this.flameBurn = burn;
 		this.flameSpread = spread;
+		this.burnable();
 		return this;
 	}
 
@@ -119,7 +109,7 @@ public class DawnBlockSettings extends FabricBlockSettings {
 	 * Sets the block that this block will be stripped into when using an axe.
 	 * @see AxeItem Vanilla axe stripping values
 	 */
-	public DawnBlockSettings stripInto(Block block) {
+	public DawnBlockSettings stripsInto(Block block) {
 		this.stripInto = block;
 		return this;
 	}
@@ -214,7 +204,11 @@ public class DawnBlockSettings extends FabricBlockSettings {
 		return this;
 	}
 
+	/**
+	 * @deprecated this evaluates the loot table (and therefore item registries) instantly, which is not possible in Dawn Team mods because we do not register anything at the same time as construction.
+	 */
 	@Override
+	@Deprecated
 	public DawnBlockSettings dropsLike(Block block) {
 		super.dropsLike(block);
 		return this;
@@ -283,6 +277,55 @@ public class DawnBlockSettings extends FabricBlockSettings {
 	@Override
 	public DawnBlockSettings requires(FeatureFlag... features) {
 		super.requires(features);
+		return this;
+	}
+
+	@Override
+	public DawnBlockSettings mapColor(Function<BlockState, MapColor> mapColorProvider) {
+		super.mapColor(mapColorProvider);
+		return this;
+	}
+
+	//TODO: what is this?
+	@Override
+	public DawnBlockSettings burnable() {
+		super.burnable();
+		return this;
+	}
+
+	@Override
+	public DawnBlockSettings liquid() {
+		super.liquid();
+		return this;
+	}
+
+	@Override
+	public DawnBlockSettings solid() {
+		super.solid();
+		return this;
+	}
+
+	@Override
+	public DawnBlockSettings notSolid() {
+		super.notSolid();
+		return this;
+	}
+
+	@Override
+	public DawnBlockSettings pistonBehavior(PistonBehavior pistonBehavior) {
+		super.pistonBehavior(pistonBehavior);
+		return this;
+	}
+
+	@Override
+	public DawnBlockSettings instrument(Instrument instrument) {
+		super.instrument(instrument);
+		return this;
+	}
+
+	@Override
+	public DawnBlockSettings replaceable() {
+		super.replaceable();
 		return this;
 	}
 

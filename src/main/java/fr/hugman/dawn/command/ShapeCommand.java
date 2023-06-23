@@ -78,7 +78,7 @@ public class ShapeCommand {
 			stateArgument.setBlockState(world, blockPos, Block.NOTIFY_LISTENERS);
 		}
 
-		source.sendFeedback(Text.translatable("commands.shape.fill.success", identifier, i, stateArgument.getBlockState().getBlock().getName()), true);
+		source.sendFeedback(() -> Text.translatable("commands.shape.fill.success", identifier, i, stateArgument.getBlockState().getBlock().getName()), true);
 		return i;
 	}
 }

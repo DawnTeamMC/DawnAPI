@@ -5,8 +5,6 @@ import com.google.gson.annotations.SerializedName;
 import net.fabricmc.fabric.mixin.object.builder.AbstractBlockAccessor;
 import net.fabricmc.fabric.mixin.object.builder.AbstractBlockSettingsAccessor;
 import net.minecraft.block.Block;
-import net.minecraft.block.Material;
-import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.util.Identifier;
 
 public class BlockData {
@@ -21,8 +19,6 @@ public class BlockData {
 	}
 
 	public static class Properties {
-		@Expose
-		protected Properties.MaterialProperties material;
 		@Expose
 		protected float hardness;
 		@Expose
@@ -50,7 +46,6 @@ public class BlockData {
 
 		public Properties(Block block) {
 			AbstractBlockSettingsAccessor settings = (AbstractBlockSettingsAccessor) ((AbstractBlockAccessor) block).getSettings();
-			this.material = new Properties.MaterialProperties(settings.getMaterial());
 			this.hardness = settings.getHardness();
 			this.blastResistance = settings.getResistance();
 			this.randomlyTicks = settings.getRandomTicks();
@@ -60,43 +55,7 @@ public class BlockData {
 			this.opaque = settings.getOpaque();
 			this.isAir = settings.getIsAir();
 			this.isToolRequired = settings.isToolRequired();
-		}
-
-		public static class MaterialProperties {
-			@Expose
-			@SerializedName("is_liquid")
-			protected boolean isLiquid;
-			@Expose
-			@SerializedName("is_solid")
-			protected boolean isSolid;
-			@Expose
-			@SerializedName("blocks_movement")
-			protected boolean blocksMovement;
-			@Expose
-			@SerializedName("is_burnable")
-			protected boolean isBurnable;
-			@Expose
-			@SerializedName("is_replaceable")
-			protected boolean isReplaceable;
-			@Expose
-			@SerializedName("blocks_light")
-			protected boolean blocksLight;
-			@Expose
-			@SerializedName("piston_behavior")
-			protected PistonBehavior pistonBehavior;
-			@Expose
-			protected int color;
-
-			public MaterialProperties(Material material) {
-				this.isLiquid = material.isLiquid();
-				this.isSolid = material.isSolid();
-				this.blocksMovement = material.blocksMovement();
-				this.isBurnable = material.isBurnable();
-				this.isReplaceable = material.isReplaceable();
-				this.blocksLight = material.blocksLight();
-				this.pistonBehavior = material.getPistonBehavior();
-				this.color = material.getColor().color;
-			}
+			this.isToolRequired = settings.isToolRequired();
 		}
 	}
 }

@@ -18,6 +18,8 @@ import fr.hugman.dawn.shape.ShapeType;
 import fr.hugman.dawn.shape.processor.ShapeProcessor;
 import fr.hugman.dawn.shape.processor.ShapeProcessorType;
 import net.minecraft.block.*;
+import net.minecraft.block.enums.Instrument;
+import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.block.sapling.SaplingGenerator;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.MobEntity;
@@ -30,10 +32,7 @@ import net.minecraft.item.SpawnEggItem;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
-import net.minecraft.resource.featuretoggle.FeatureFlags;
 import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.biome.Biome;
@@ -116,34 +115,40 @@ public final class DawnFactory {
 	/*   WOOD   */
 	/*==========*/
 
-	public static Block planks(boolean isNether, MapColor color) {
-		return new Block(DawnFactory.planksSettings(isNether, color));
+	public static Block planks(MapColor color, BlockSoundGroup sounds, boolean flammable) {
+		return new Block(DawnFactory.planksSettings(color, sounds, flammable));
 	}
 
-	public static DawnBlockSettings planksSettings(boolean isNether, MapColor color) {
-		DawnBlockSettings settings = DawnBlockSettings.of(isNether ? Material.NETHER_WOOD : Material.WOOD, color)
+	public static DawnBlockSettings planksSettings(MapColor color, BlockSoundGroup sounds, boolean flammable) {
+		DawnBlockSettings settings = DawnBlockSettings.create()
+				.mapColor(color)
+				.instrument(Instrument.BASS)
 				.item()
 				.strength(2.0f, 3.0f)
-				.sounds(isNether ? BlockSoundGroup.NETHER_WOOD : BlockSoundGroup.WOOD);
-		if(isNether) settings.flammability(5, 20);
+				.sounds(sounds);
+		if(flammable) settings.burnable(5, 20);
 		return settings;
 	}
 
-	public static DawnBlockSettings logSettings(boolean isNether, MapColor woodColor, MapColor barkColor) {
-		DawnBlockSettings settings = DawnBlockSettings.of(isNether ? Material.NETHER_WOOD : Material.WOOD, (state) -> state.get(PillarBlock.AXIS) == Direction.Axis.Y ? woodColor : barkColor)
+	public static DawnBlockSettings logSettings(MapColor woodColor, MapColor barkColor, BlockSoundGroup sounds, boolean flammable) {
+		DawnBlockSettings settings = DawnBlockSettings.create()
+				.mapColor((state) -> state.get(PillarBlock.AXIS) == Direction.Axis.Y ? woodColor : barkColor)
+				.instrument(Instrument.BASS)
 				.item()
 				.strength(2.0F)
-				.sounds(isNether ? BlockSoundGroup.NETHER_STEM : BlockSoundGroup.WOOD);
-		if(isNether) settings.flammability(5, 5);
+				.sounds(sounds);
+		if(flammable) settings.burnable(5, 5);
 		return settings;
 	}
 
-	public static DawnBlockSettings logSettings(boolean isNether, MapColor color) {
-		DawnBlockSettings settings = DawnBlockSettings.of(isNether ? Material.NETHER_WOOD : Material.WOOD, color)
+	public static DawnBlockSettings logSettings(MapColor color, BlockSoundGroup sounds, boolean flammable) {
+		DawnBlockSettings settings = DawnBlockSettings.create()
+				.mapColor(color)
+				.instrument(Instrument.BASS)
 				.item()
 				.strength(2.0F)
-				.sounds(isNether ? BlockSoundGroup.NETHER_STEM : BlockSoundGroup.WOOD);
-		if(isNether) settings.flammability(5, 5);
+				.sounds(sounds);
+		if(flammable) settings.burnable(5, 5);
 		return settings;
 	}
 
@@ -155,49 +160,45 @@ public final class DawnFactory {
 		return new SlabBlock(DawnBlockSettings.copy(baseBlock));
 	}
 
-	public static PressurePlateBlock pressurePlate(Block baseBlock, PressurePlateBlock.ActivationRule activationRule, BlockSetType setType) {
+	public static PressurePlateBlock pressurePlate(Block baseBlock, BlockSetType setType, PressurePlateBlock.ActivationRule activationRule) {
 		DawnBlockSettings settings = DawnBlockSettings.copy(baseBlock)
 				.strength(0.5f)
+				.pistonBehavior(PistonBehavior.DESTROY)
+				.requiresTool()
 				.noCollision();
 		return new PressurePlateBlock(activationRule, settings, setType);
 	}
 
-	public static PressurePlateBlock pressurePlate(Block baseBlock) {
-		return pressurePlate(baseBlock, PressurePlateBlock.ActivationRule.MOBS, BlockSetType.OAK);
+	public static PressurePlateBlock pressurePlate(Block baseBlock, BlockSetType setType) {
+		return pressurePlate(baseBlock, setType, PressurePlateBlock.ActivationRule.MOBS);
 	}
 
-	public static ButtonBlock woodenButton(boolean isNether, BlockSetType setType) {
-		return new ButtonBlock(DawnBlockSettings.of(Material.DECORATION)
+	public static ButtonBlock woodenButton(Block baseBlock, BlockSetType setType) {
+		return new ButtonBlock(DawnBlockSettings.create()
 				.item()
 				.strength(0.5f)
 				.noCollision()
-				.sounds(isNether ? BlockSoundGroup.NETHER_WOOD : BlockSoundGroup.WOOD),
+				.pistonBehavior(PistonBehavior.DESTROY)
+				.sounds(baseBlock.getDefaultState().getSoundGroup()),
 				setType, 30, true);
 	}
 
-	public static ButtonBlock woodenButton(boolean isNether) {
-		return woodenButton(isNether, BlockSetType.OAK);
+	public static FenceBlock fence(Block baseBlock) {
+		DawnBlockSettings settings = DawnBlockSettings.copy(baseBlock);
+		return new FenceBlock(settings
+				.solid()
+				.item(new DawnItemSettings().fuelTime(settings.getFlameBurn() > 0 ? 300 : 0))
+		);
 	}
 
-	public static FenceBlock fence(boolean isNether, Block baseBlock) {
-		DawnBlockSettings settings = DawnBlockSettings.copy(baseBlock).item(new DawnItemSettings().fuelTime(isNether ? 0 : 300));
-		if(isNether) settings.flammability(5, 20);
-		return new FenceBlock(settings);
-	}
-
-
-	public static FenceGateBlock fenceGate(boolean isNether, Block baseBlock, WoodType woodType) {
-		DawnBlockSettings settings = DawnBlockSettings.copy(baseBlock).item(new DawnItemSettings().fuelTime(isNether ? 0 : 300));
-		if(isNether) settings.flammability(5, 20);
-		return new FenceGateBlock(settings, woodType);
-	}
-
-	public static FenceGateBlock fenceGate(boolean isNether, Block baseBlock) {
-		return fenceGate(isNether, baseBlock, WoodType.OAK);
+	public static FenceGateBlock fenceGate(Block baseBlock, WoodType woodType) {
+		DawnBlockSettings settings = DawnBlockSettings.copy(baseBlock);
+		return new FenceGateBlock(settings.solid()
+				.item(new DawnItemSettings().fuelTime(settings.getFlameBurn() > 0 ? 300 : 0)), woodType);
 	}
 
 	public static WallBlock wall(Block baseBlock) {
-		return new WallBlock(DawnBlockSettings.copy(baseBlock));
+		return new WallBlock(DawnBlockSettings.copy(baseBlock).solid());
 	}
 
 	public static TrapdoorBlock trapdoor(Block baseBlock, BlockSetType setType) {
@@ -208,55 +209,65 @@ public final class DawnFactory {
 		return new TrapdoorBlock(settings, setType);
 	}
 
-	public static TrapdoorBlock woodenTrapdoor(Block baseBlock) {
-		return trapdoor(baseBlock, BlockSetType.OAK);
-	}
-
 	public static DoorBlock door(Block baseBlock, BlockSetType setType) {
-		return new DoorBlock(DawnBlockSettings.copy(baseBlock).strength(3.0f).nonOpaque(), setType);
+		return new DoorBlock(DawnBlockSettings.copy(baseBlock)
+				.strength(3.0f)
+				.nonOpaque()
+				.pistonBehavior(PistonBehavior.DESTROY), setType);
 	}
 
-	public static DoorBlock woodenDoor(Block baseBlock) {
-		return door(baseBlock, BlockSetType.OAK);
-	}
-
-	public static SaplingBlock sapling(SaplingGenerator generator) {
-		return new SaplingBlock(generator, DawnBlockSettings.of(Material.PLANT)
+	public static SaplingBlock sapling(MapColor mapColor, SaplingGenerator generator) {
+		return new SaplingBlock(generator, DawnBlockSettings.create()
 				.item(new DawnItemSettings().compostingChance(0.3f))
+				.mapColor(mapColor)
 				.sounds(BlockSoundGroup.GRASS)
 				.breakInstantly()
 				.noCollision()
-				.ticksRandomly());
+				.ticksRandomly()
+				.pistonBehavior(PistonBehavior.DESTROY));
 	}
 
-	public static DawnSaplingBlock sapling(SaplingGenerator generator, Predicate<BlockState> saplingSoilPredicate) {
-		return new DawnSaplingBlock(generator, saplingSoilPredicate, DawnBlockSettings.of(Material.PLANT)
+	public static DawnSaplingBlock sapling(MapColor mapColor, SaplingGenerator generator, Predicate<BlockState> saplingSoilPredicate) {
+		return new DawnSaplingBlock(generator, saplingSoilPredicate, DawnBlockSettings.create()
 				.item(new DawnItemSettings().compostingChance(0.3f))
+				.mapColor(mapColor)
 				.sounds(BlockSoundGroup.GRASS)
 				.breakInstantly()
 				.noCollision()
-				.ticksRandomly());
+				.ticksRandomly()
+				.pistonBehavior(PistonBehavior.DESTROY));
 	}
 
-	public static DawnFungusBlock fungus(RegistryKey<ConfiguredFeature<?, ?>> featureKey, TagKey<Block> canPlantOn, TagKey<Block> canGrowOn) {
-		return new DawnFungusBlock(featureKey, canPlantOn, canGrowOn, DawnBlockSettings.of(Material.PLANT)
+	public static DawnFungusBlock fungus(MapColor mapColor, RegistryKey<ConfiguredFeature<?, ?>> featureKey, TagKey<Block> canPlantOn, TagKey<Block> canGrowOn) {
+		return new DawnFungusBlock(featureKey, canPlantOn, canGrowOn, DawnBlockSettings.create()
 				.item(new DawnItemSettings().compostingChance(0.65f))
+				.mapColor(mapColor)
 				.sounds(BlockSoundGroup.FUNGUS)
+				.pistonBehavior(PistonBehavior.DESTROY)
 				.breakInstantly()
 				.noCollision());
 	}
 
 	public static FlowerPotBlock potted(Block content) {
-		return new FlowerPotBlock(content, DawnBlockSettings.of(Material.DECORATION).breakInstantly().nonOpaque().luminance(content.getDefaultState().getLuminance()));
+		return new FlowerPotBlock(content, DawnBlockSettings.create()
+				.breakInstantly()
+				.nonOpaque()
+				.luminance(content.getDefaultState().getLuminance())
+				.pistonBehavior(PistonBehavior.DESTROY));
 	}
 
-	public static LeavesBlock leaves() {
-		return leaves(BlockSoundGroup.GRASS);
+	public static LeavesBlock leaves(MapColor mapColor) {
+		return leaves(mapColor, BlockSoundGroup.GRASS);
 	}
 
-	public static LeavesBlock leaves(BlockSoundGroup soundGroup) {
-		return new LeavesBlock(DawnBlockSettings.of(Material.LEAVES)
+	public static LeavesBlock leaves(MapColor mapColor, BlockSoundGroup soundGroup) {
+		return new LeavesBlock(leavesSettings(mapColor, soundGroup));
+	}
+
+	public static DawnBlockSettings leavesSettings(MapColor mapColor, BlockSoundGroup soundGroup) {
+		return DawnBlockSettings.create()
 				.item(new DawnItemSettings().compostingChance(0.3f))
+				.mapColor(mapColor)
 				.strength(0.2f)
 				.ticksRandomly()
 				.sounds(soundGroup)
@@ -264,41 +275,51 @@ public final class DawnFactory {
 				.allowsSpawning((state, world, pos, type) -> type == EntityType.OCELOT || type == EntityType.PARROT)
 				.suffocates((state, world, pos) -> false)
 				.blockVision((state, world, pos) -> false)
-				.flammability(30, 60));
+				.burnable(30, 60)
+				.pistonBehavior(PistonBehavior.DESTROY)
+				.solidBlock((state, world, pos) -> false);
 	}
 
 	public static SignBlocks signs(Identifier texturePath, Block basePlanks) {
+		BlockSoundGroup soundGroup = basePlanks.getDefaultState().getSoundGroup();
+		BlockSoundGroup hangingSoundGroup = BlockSoundGroup.WOOD;
+		if(soundGroup == BlockSoundGroup.CHERRY_WOOD) {
+			hangingSoundGroup = BlockSoundGroup.CHERRY_WOOD_HANGING_SIGN;
+		}
+		else if(soundGroup == BlockSoundGroup.BAMBOO_WOOD) {
+			hangingSoundGroup = BlockSoundGroup.BAMBOO_WOOD_HANGING_SIGN;
+		}
+		else if(soundGroup == BlockSoundGroup.NETHER_WOOD) {
+			hangingSoundGroup = BlockSoundGroup.NETHER_WOOD_HANGING_SIGN;
+		}
+
+		return signs(texturePath, basePlanks, soundGroup, hangingSoundGroup);
+	}
+
+	public static SignBlocks signs(Identifier texturePath, Block basePlanks, BlockSoundGroup normalSounds, BlockSoundGroup hangingSounds) {
 		var signTexture = Identifier.of(texturePath.getNamespace(), "entity/signs/" + texturePath.getPath());
 		var hangingSignTexture = Identifier.of(texturePath.getNamespace(), "entity/signs/hanging/" + texturePath.getPath());
 		var hangingSignGuiTexture = Identifier.of(texturePath.getNamespace(), "textures/gui/hanging_signs/" + texturePath.getPath());
 
-		var sign = new TerraformSignBlock(signTexture, signSettings(basePlanks));
-		var wallSign = new TerraformWallSignBlock(signTexture, signSettings(basePlanks));
-		var hangingSign = new TerraformHangingSignBlock(hangingSignTexture, hangingSignGuiTexture, hangingSignSettings(basePlanks));
-		var wallHangingSign = new TerraformWallHangingSignBlock(hangingSignTexture, hangingSignGuiTexture, hangingSignSettings(basePlanks));
+		var sign = new TerraformSignBlock(signTexture, signSettings(basePlanks, normalSounds));
+		var wallSign = new TerraformWallSignBlock(signTexture, signSettings(basePlanks, normalSounds));
+		var hangingSign = new TerraformHangingSignBlock(hangingSignTexture, hangingSignGuiTexture, signSettings(basePlanks, hangingSounds));
+		var wallHangingSign = new TerraformWallHangingSignBlock(hangingSignTexture, hangingSignGuiTexture, signSettings(basePlanks, hangingSounds));
 		var signItem = new SignItem(new DawnItemSettings().maxCount(16), sign, wallSign);
-		var hangingSignItem = new HangingSignItem(hangingSign, wallHangingSign, new DawnItemSettings().maxCount(16).requires(FeatureFlags.UPDATE_1_20));
+		var hangingSignItem = new HangingSignItem(hangingSign, wallHangingSign, new DawnItemSettings().maxCount(16));
 
 		return new SignBlocks(sign, wallSign, hangingSign, wallHangingSign, signItem, hangingSignItem);
 	}
 
-	public static DawnBlockSettings signSettings(Block basePlanks, boolean hanging) {
-		var settings = DawnBlockSettings.of(basePlanks.getDefaultState().getMaterial(), basePlanks.getDefaultMapColor()).noCollision().strength(1.0F);
-		if(hanging) {
-			settings.sounds(BlockSoundGroup.HANGING_SIGN).requires(FeatureFlags.UPDATE_1_20);
-		}
-		else {
-			settings.sounds(BlockSoundGroup.WOOD);
-		}
-		return settings;
-	}
-
-	public static DawnBlockSettings signSettings(Block basePlanks) {
-		return signSettings(basePlanks, false);
-	}
-
-	public static DawnBlockSettings hangingSignSettings(Block basePlanks) {
-		return signSettings(basePlanks, true);
+	public static DawnBlockSettings signSettings(Block basePlanks, BlockSoundGroup soundGroup) {
+		return DawnBlockSettings.create()
+				.sounds(soundGroup)
+				.mapColor(basePlanks.getDefaultMapColor())
+				.solid()
+				.instrument(Instrument.BASS)
+				.noCollision()
+				.strength(1.0F)
+				.burnable();
 	}
 
 	public static TerraformBoatType boat(Identifier id, ItemConvertible planks, boolean raft) {
