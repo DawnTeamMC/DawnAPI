@@ -12,6 +12,7 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtHelper;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
@@ -20,13 +21,22 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.crash.CrashReportSection;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 public class CustomTNTEntity extends Entity {
 	private static final TrackedData<Integer> FUSE = DataTracker.registerData(CustomTNTEntity.class, TrackedDataHandlerRegistry.INTEGER);
 	private static final TrackedData<Float> STRENGTH = DataTracker.registerData(CustomTNTEntity.class, TrackedDataHandlerRegistry.FLOAT);
-	private BlockState state = Blocks.SAND.getDefaultState();
-	private int fuse = 80;
-	private float strength = 4.0F;
+	private static final TrackedData<BlockState> BLOCK_STATE = DataTracker.registerData(CustomTNTEntity.class, TrackedDataHandlerRegistry.BLOCK_STATE);
+
+	public static final String FUSE_NBT_KEY = "fuse";
+	public static final String STRENGTH_NBT_KEY = "strength";
+	private static final String BLOCK_STATE_NBT_KEY = "block_state";
+
+	private static final int DEFAULT_FUSE = 80;
+	private static final float DEFAULT_STRENGTH = 4.0F;
+	private static final BlockState DEFAULT_STATE = Blocks.TNT.getDefaultState();
+
+	@Nullable
 	private LivingEntity causingEntity;
 
 	public CustomTNTEntity(EntityType<? extends CustomTNTEntity> type, World worldIn) {
@@ -36,12 +46,11 @@ public class CustomTNTEntity extends Entity {
 
 	public CustomTNTEntity(World world, double x, double y, double z, BlockState state, int fuse, float strength, LivingEntity igniter) {
 		this(DawnEntities.CUSTOM_TNT, world);
-		this.state = state;
-		this.updatePosition(x, y, z);
-		float f = (float) (Math.random() * (double) ((float) Math.PI * 2F));
-		this.setVelocity(-((float) Math.sin(f)) * 0.02F, 0.2F, -((float) Math.cos(f)) * 0.02F);
-		this.setFuse(fuse);
-		this.setStrength(strength);
+		this.setPosition(x, y, z);
+		double d = world.random.nextDouble() * 6.2831854820251465;
+		this.setVelocity(-Math.sin(d) * 0.02, 0.2D, -Math.cos(d) * 0.02);
+		this.setFuse(DEFAULT_FUSE);
+		this.setStrength(DEFAULT_STRENGTH);
 		this.prevX = x;
 		this.prevY = y;
 		this.prevZ = z;
@@ -49,9 +58,10 @@ public class CustomTNTEntity extends Entity {
 	}
 
 	@Override
-	protected void initDataTracker() {
-		this.dataTracker.startTracking(FUSE, fuse);
-		this.dataTracker.startTracking(STRENGTH, strength);
+	protected void initDataTracker(DataTracker.Builder builder) {
+		builder.add(FUSE, DEFAULT_FUSE);
+		builder.add(STRENGTH, DEFAULT_STRENGTH);
+		builder.add(BLOCK_STATE, DEFAULT_STATE);
 	}
 
 	@Override
@@ -74,8 +84,10 @@ public class CustomTNTEntity extends Entity {
 		if(this.isOnGround()) {
 			this.setVelocity(this.getVelocity().multiply(0.7D, -0.5D, 0.7D));
 		}
-		--this.fuse;
-		if(this.fuse <= 0) {
+
+		int i = this.getFuse() - 1;
+		this.setFuse(i);
+		if(i <= 0) {
 			this.discard();
 			if(!this.getWorld().isClient) {
 				this.explode();
@@ -90,84 +102,52 @@ public class CustomTNTEntity extends Entity {
 	}
 
 	private void explode() {
-		this.getWorld().createExplosion(this, this.getX(), this.getBodyY(0.0625D), this.getZ(), this.strength, World.ExplosionSourceType.TNT);
+		this.getWorld().createExplosion(this, this.getX(), this.getBodyY(0.0625D), this.getZ(), this.getStrength(), World.ExplosionSourceType.TNT);
 	}
 
 	@Override
-	protected void writeCustomDataToNbt(NbtCompound compound) {
-		compound.put("BlockState", NbtHelper.fromBlockState(this.state));
-		compound.putShort("Fuse", (short) this.getFuse());
-		compound.putFloat("Strength", this.getStrength());
+	protected void writeCustomDataToNbt(NbtCompound nbt) {
+		nbt.put(BLOCK_STATE_NBT_KEY, NbtHelper.fromBlockState(this.getBlockState()));
+		nbt.putShort(FUSE_NBT_KEY, (short) this.getFuse());
+		nbt.putFloat(STRENGTH_NBT_KEY, this.getStrength());
 	}
 
 	@Override
 	protected void readCustomDataFromNbt(NbtCompound nbt) {
-		this.state = NbtHelper.toBlockState(this.getWorld().createCommandRegistryWrapper(RegistryKeys.BLOCK), nbt.getCompound("BlockState"));
-		if(this.state.getBlock() == Blocks.AIR) {
-			this.state = Blocks.TNT.getDefaultState();
+		this.setFuse(nbt.getShort(FUSE_NBT_KEY));
+		this.setStrength(nbt.getFloat(STRENGTH_NBT_KEY));
+		if (nbt.contains(BLOCK_STATE_NBT_KEY, NbtElement.COMPOUND_TYPE)) {
+			this.setBlockState(NbtHelper.toBlockState(this.getWorld().createCommandRegistryWrapper(RegistryKeys.BLOCK), nbt.getCompound(BLOCK_STATE_NBT_KEY)));
 		}
-		this.setFuse(nbt.getShort("Fuse"));
-		this.setStrength(nbt.getFloat("Strength"));
 	}
 
-	public LivingEntity getCausingEntity() {
+
+	@Nullable
+	public LivingEntity getOwner() {
 		return this.causingEntity;
 	}
 
+	public void setFuse(int fuse) {
+		this.dataTracker.set(FUSE, fuse);
+	}
+
 	public int getFuse() {
-		return this.fuse;
-	}
-
-	public void setFuse(int fuseIn) {
-		this.dataTracker.set(FUSE, fuseIn);
-		this.fuse = fuseIn;
-	}
-
-	public BlockState getBlockState() {
-		return this.state;
-	}
-
-	public float getStrength() {
-		return this.strength;
-	}
-
-	public void setStrength(float strengthIn) {
-		this.dataTracker.set(STRENGTH, strengthIn);
-		this.strength = strengthIn;
-	}
-
-	@Override
-	public void onTrackedDataSet(TrackedData<?> key) {
-		if(FUSE.equals(key)) {
-			this.fuse = this.getFuseDataManager();
-		}
-	}
-
-	public int getFuseDataManager() {
 		return this.dataTracker.get(FUSE);
 	}
 
-	@Override
-	public void populateCrashReport(CrashReportSection category) {
-		super.populateCrashReport(category);
-		category.add("Imitating BlockState", this.state.toString());
+	public void setBlockState(BlockState state) {
+		this.dataTracker.set(BLOCK_STATE, state);
 	}
 
-	@Override
-	public void onSpawnPacket(EntitySpawnS2CPacket packet) {
-		super.onSpawnPacket(packet);
-		this.state = Block.getStateFromRawId(packet.getEntityData());
-		this.intersectionChecked = true;
-		double d = packet.getX();
-		double e = packet.getY();
-		double f = packet.getZ();
-		this.setPosition(d, e + (double) ((1.0F - this.getHeight()) / 2.0F), f);
-		this.setFuse(0);
-		this.setStrength(0);
+	public BlockState getBlockState() {
+		return this.dataTracker.get(BLOCK_STATE);
 	}
 
-	@Override
-	public Packet<ClientPlayPacketListener> createSpawnPacket() {
-		return new EntitySpawnS2CPacket(this, Block.getRawIdFromState(this.getBlockState()));
+	public float getStrength() {
+		return this.dataTracker.get(STRENGTH);
+	}
+
+	public void setStrength(float strength) {
+		this.dataTracker.set(STRENGTH, strength);
 	}
 }

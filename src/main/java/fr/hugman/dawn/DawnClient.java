@@ -1,7 +1,6 @@
 package fr.hugman.dawn;
 
 import fr.hugman.dawn.client.render.entity.CustomTNTEntityRenderer;
-import fr.hugman.dawn.client.render.entity.FlyingBlockEntityRenderer;
 import fr.hugman.dawn.registry.DawnEntities;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
@@ -17,6 +16,5 @@ public class DawnClient implements ClientModInitializer {
 
 	private void registerEntityRenders() {
 		EntityRendererRegistry.register(DawnEntities.CUSTOM_TNT, CustomTNTEntityRenderer::new);
-		EntityRendererRegistry.register(DawnEntities.FLYING_BLOCK, FlyingBlockEntityRenderer::new);
 	}
 }

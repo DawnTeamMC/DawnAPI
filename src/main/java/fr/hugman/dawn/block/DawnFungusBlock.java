@@ -19,12 +19,14 @@ public class DawnFungusBlock extends FungusBlock {
 	private final Predicate<BlockState> canPlantOn;
 	private final Predicate<BlockState> canGrowOn;
 
+	//TODO: codec and register block type
+
 	public DawnFungusBlock(RegistryKey<ConfiguredFeature<?, ?>> featureKey, TagKey<Block> canPlantOn, TagKey<Block> canGrowOn, Settings settings) {
 		this(featureKey, s -> s.isIn(canPlantOn), s -> s.isIn(canGrowOn), settings);
 	}
 
 	public DawnFungusBlock(RegistryKey<ConfiguredFeature<?, ?>> featureKey, Predicate<BlockState> canPlantOn, Predicate<BlockState> canGrowOn, Settings settings) {
-		super(settings, null, null);
+		super(null, null, settings);
 		this.featureKey = featureKey;
 		this.canPlantOn = canPlantOn;
 		this.canGrowOn = canGrowOn;

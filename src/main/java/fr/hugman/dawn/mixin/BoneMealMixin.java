@@ -19,7 +19,7 @@ import java.util.ArrayList;
 @Mixin(BoneMealItem.class)
 public class BoneMealMixin {
 	@Inject(method = "useOnBlock", at = @At("HEAD"), cancellable = true)
-	public void promenade$useOnBlock(ItemUsageContext context, CallbackInfoReturnable<ActionResult> cir) {
+	public void dawn$useOnBlock(ItemUsageContext context, CallbackInfoReturnable<ActionResult> cir) {
 		World world = context.getWorld();
 		BlockPos pos = context.getBlockPos();
 		ItemStack stack = context.getStack();

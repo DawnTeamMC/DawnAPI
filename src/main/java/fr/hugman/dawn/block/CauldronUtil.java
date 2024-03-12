@@ -64,7 +64,7 @@ public final class CauldronUtil {
 	public static void addBottleInteractions(Map<Item, CauldronBehavior> map, Block cauldron, Item bottle) {
 		CauldronBehavior pourBottleBehavior = CauldronInteractionBuilder.create().cauldron(cauldron).addLevel(1).item(Items.GLASS_BOTTLE).sound(SoundEvents.ITEM_BOTTLE_EMPTY).build();
 
-		CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.put(bottle, pourBottleBehavior); // Pour bottle into empty cauldron
+		CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.map().put(bottle, pourBottleBehavior); // Pour bottle into empty cauldron
 		map.put(bottle, pourBottleBehavior); // Pour bottle into same cauldron
 
 		map.put(Items.GLASS_BOTTLE, CauldronInteractionBuilder.create().addLevel(-1).item(bottle).sound(SoundEvents.ITEM_BOTTLE_FILL).build()); // Fill bottle from cauldron
@@ -73,7 +73,7 @@ public final class CauldronUtil {
 	public static void addBucketInteractions(Map<Item, CauldronBehavior> map, Block cauldron, Item bucket) {
 		CauldronBehavior pourBucketBehavior = CauldronInteractionBuilder.create().cauldron(cauldron).addLevel(3).item(Items.BUCKET).sound(SoundEvents.ITEM_BUCKET_EMPTY).build();
 
-		CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.put(bucket, pourBucketBehavior); // Pour bucket into any empty cauldron
+		CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.map().put(bucket, pourBucketBehavior); // Pour bucket into any empty cauldron
 		map.put(bucket, pourBucketBehavior); // Pour bucket into same cauldron
 
 		map.put(Items.BUCKET, CauldronInteractionBuilder.create().addLevel(-3).item(bucket).sound(SoundEvents.ITEM_BUCKET_FILL).build()); // Fill bucket from cauldron

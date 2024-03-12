@@ -22,9 +22,6 @@
     ],
     "client": [
       "fr.hugman.dawn.DawnClient"
-    ],
-    "appleskin": [
-      "fr.hugman.dawn.compat.DawnASCompat"
     ]
   },
   "mixins": [
@@ -32,11 +29,9 @@
   ],
   "accessWidener": "dawn.accesswidener",
   "depends": {
-    "minecraft": "1.20.x",
     "fabric-api": "*"
   },
   "suggests": {
-    "appleskin": "*",
     "modmenu": "*"
   },
   "custom": {
@@ -68,6 +63,10 @@
       "dependencies": [
         "cloth-config(embedded)"
       ]
+    },
+    "loom:injected_interfaces": {
+      "net/minecraft/class_1792\u0024class_1793": ["fr/hugman/dawn/item/settings/DawnItemSettings"],
+      "net/minecraft/class_4970\u0024class_2251": ["fr/hugman/dawn/block/settings/DawnBlockSettings"]
     }
   },
   "license": "LGPL v3.0"

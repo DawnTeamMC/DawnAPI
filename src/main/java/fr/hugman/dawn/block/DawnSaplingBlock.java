@@ -1,7 +1,7 @@
 package fr.hugman.dawn.block;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.block.sapling.SaplingGenerator;
+import net.minecraft.block.SaplingGenerator;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 
@@ -9,6 +9,8 @@ import java.util.function.Predicate;
 
 public class DawnSaplingBlock extends net.minecraft.block.SaplingBlock {
 	private final Predicate<BlockState> predicate;
+
+	//TODO: codec and register block type
 
 	public DawnSaplingBlock(SaplingGenerator saplingGenerator, Predicate<BlockState> predicate, Settings settings) {
 		super(saplingGenerator, settings);

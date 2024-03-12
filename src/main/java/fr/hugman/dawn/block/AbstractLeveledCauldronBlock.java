@@ -10,7 +10,7 @@ import net.minecraft.state.property.IntProperty;
 import java.util.Map;
 
 public abstract class AbstractLeveledCauldronBlock extends AbstractCauldronBlock {
-	public AbstractLeveledCauldronBlock(Map<Item, CauldronBehavior> behaviorMap, Settings settings) {
+	public AbstractLeveledCauldronBlock(CauldronBehavior.CauldronBehaviorMap behaviorMap, Settings settings) {
 		super(settings, behaviorMap);
 		this.setDefaultState(this.stateManager.getDefaultState().with(getLevelProperty(), 1));
 	}

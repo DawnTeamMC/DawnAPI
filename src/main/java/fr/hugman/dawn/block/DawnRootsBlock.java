@@ -10,6 +10,8 @@ import java.util.function.Predicate;
 public class DawnRootsBlock extends RootsBlock {
 	private final Predicate<BlockState> canPlantOn;
 
+	//TODO: codec and register block type
+
 	public DawnRootsBlock(Predicate<BlockState> canPlantOn, Settings settings) {
 		super(settings);
 		this.canPlantOn = canPlantOn;

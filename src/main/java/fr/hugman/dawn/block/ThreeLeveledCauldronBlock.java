@@ -1,5 +1,7 @@
 package fr.hugman.dawn.block;
 
+import com.mojang.serialization.MapCodec;
+import net.minecraft.block.AbstractCauldronBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.cauldron.CauldronBehavior;
@@ -15,8 +17,15 @@ import java.util.Map;
 public class ThreeLeveledCauldronBlock extends AbstractLeveledCauldronBlock {
 	public static final IntProperty LEVEL = Properties.LEVEL_3;
 
-	public ThreeLeveledCauldronBlock(Map<Item, CauldronBehavior> behaviorMap, Settings settings) {
+	//TODO: codec and register block type
+
+	public ThreeLeveledCauldronBlock(CauldronBehavior.CauldronBehaviorMap behaviorMap, Settings settings) {
 		super(behaviorMap, settings);
+	}
+
+	@Override
+	protected MapCodec<? extends AbstractCauldronBlock> getCodec() {
+		return null;
 	}
 
 	@Override

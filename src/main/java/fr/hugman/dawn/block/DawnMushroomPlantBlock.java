@@ -14,8 +14,10 @@ import net.minecraft.world.gen.feature.ConfiguredFeature;
 public class DawnMushroomPlantBlock extends MushroomPlantBlock {
 	private final RegistryKey<ConfiguredFeature<?, ?>> featureKey;
 
+	//TODO: codec and register block type
+
 	public DawnMushroomPlantBlock(RegistryKey<ConfiguredFeature<?, ?>> featureKey, Settings settings) {
-		super(settings, null);
+		super(null, settings);
 		this.featureKey = featureKey;
 	}
 

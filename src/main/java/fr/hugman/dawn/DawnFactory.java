@@ -8,11 +8,9 @@ import com.terraformersmc.terraform.sign.block.TerraformHangingSignBlock;
 import com.terraformersmc.terraform.sign.block.TerraformSignBlock;
 import com.terraformersmc.terraform.sign.block.TerraformWallHangingSignBlock;
 import com.terraformersmc.terraform.sign.block.TerraformWallSignBlock;
-import fr.hugman.dawn.block.DawnBlockSettings;
 import fr.hugman.dawn.block.DawnFungusBlock;
 import fr.hugman.dawn.block.DawnSaplingBlock;
 import fr.hugman.dawn.block.SignBlocks;
-import fr.hugman.dawn.item.DawnItemSettings;
 import fr.hugman.dawn.shape.Shape;
 import fr.hugman.dawn.shape.ShapeType;
 import fr.hugman.dawn.shape.processor.ShapeProcessor;
@@ -20,7 +18,6 @@ import fr.hugman.dawn.shape.processor.ShapeProcessorType;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.Instrument;
 import net.minecraft.block.piston.PistonBehavior;
-import net.minecraft.block.sapling.SaplingGenerator;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.fluid.Fluid;
@@ -119,8 +116,8 @@ public final class DawnFactory {
 		return new Block(DawnFactory.planksSettings(color, sounds, flammable));
 	}
 
-	public static DawnBlockSettings planksSettings(MapColor color, BlockSoundGroup sounds, boolean flammable) {
-		DawnBlockSettings settings = DawnBlockSettings.create()
+	public static AbstractBlock.Settings planksSettings(MapColor color, BlockSoundGroup sounds, boolean flammable) {
+		AbstractBlock.Settings settings = AbstractBlock.Settings.create()
 				.mapColor(color)
 				.instrument(Instrument.BASS)
 				.item()
@@ -130,8 +127,8 @@ public final class DawnFactory {
 		return settings;
 	}
 
-	public static DawnBlockSettings logSettings(MapColor woodColor, MapColor barkColor, BlockSoundGroup sounds, boolean flammable) {
-		DawnBlockSettings settings = DawnBlockSettings.create()
+	public static AbstractBlock.Settings logSettings(MapColor woodColor, MapColor barkColor, BlockSoundGroup sounds, boolean flammable) {
+		AbstractBlock.Settings settings = AbstractBlock.Settings.create()
 				.mapColor((state) -> state.get(PillarBlock.AXIS) == Direction.Axis.Y ? woodColor : barkColor)
 				.instrument(Instrument.BASS)
 				.item()
@@ -141,8 +138,8 @@ public final class DawnFactory {
 		return settings;
 	}
 
-	public static DawnBlockSettings logSettings(MapColor color, BlockSoundGroup sounds, boolean flammable) {
-		DawnBlockSettings settings = DawnBlockSettings.create()
+	public static AbstractBlock.Settings logSettings(MapColor color, BlockSoundGroup sounds, boolean flammable) {
+		AbstractBlock.Settings settings = AbstractBlock.Settings.create()
 				.mapColor(color)
 				.instrument(Instrument.BASS)
 				.item()
@@ -153,72 +150,67 @@ public final class DawnFactory {
 	}
 
 	public static StairsBlock stairs(Block baseBlock) {
-		return new StairsBlock(baseBlock.getDefaultState(), DawnBlockSettings.copy(baseBlock));
+		return new StairsBlock(baseBlock.getDefaultState(), AbstractBlock.Settings.copy(baseBlock));
 	}
 
 	public static SlabBlock slab(Block baseBlock) {
-		return new SlabBlock(DawnBlockSettings.copy(baseBlock));
+		return new SlabBlock(AbstractBlock.Settings.copy(baseBlock));
 	}
 
-	public static PressurePlateBlock pressurePlate(Block baseBlock, BlockSetType setType, PressurePlateBlock.ActivationRule activationRule) {
-		DawnBlockSettings settings = DawnBlockSettings.copy(baseBlock)
+	public static PressurePlateBlock pressurePlate(Block baseBlock, BlockSetType setType) {
+		AbstractBlock.Settings settings = AbstractBlock.Settings.copy(baseBlock)
 				.strength(0.5f)
 				.pistonBehavior(PistonBehavior.DESTROY)
 				.requiresTool()
 				.noCollision();
-		return new PressurePlateBlock(activationRule, settings, setType);
-	}
-
-	public static PressurePlateBlock pressurePlate(Block baseBlock, BlockSetType setType) {
-		return pressurePlate(baseBlock, setType, PressurePlateBlock.ActivationRule.MOBS);
+		return new PressurePlateBlock(setType, settings);
 	}
 
 	public static ButtonBlock woodenButton(Block baseBlock, BlockSetType setType) {
-		return new ButtonBlock(DawnBlockSettings.create()
-				.item()
-				.strength(0.5f)
-				.noCollision()
-				.pistonBehavior(PistonBehavior.DESTROY)
-				.sounds(baseBlock.getDefaultState().getSoundGroup()),
-				setType, 30, true);
+		return new ButtonBlock(setType, 30, AbstractBlock.Settings.create()
+                .item()
+                .strength(0.5f)
+                .noCollision()
+                .pistonBehavior(PistonBehavior.DESTROY)
+                .sounds(baseBlock.getDefaultState().getSoundGroup()));
 	}
 
 	public static FenceBlock fence(Block baseBlock) {
-		DawnBlockSettings settings = DawnBlockSettings.copy(baseBlock);
+		AbstractBlock.Settings settings = AbstractBlock.Settings.copy(baseBlock);
 		return new FenceBlock(settings
 				.solid()
-				.item(new DawnItemSettings().fuelTime(settings.getFlameBurn() > 0 ? 300 : 0))
+				.item(new Item.Settings().fuelTime(settings.getFlameBurn() > 0 ? 300 : 0))
 		);
 	}
 
 	public static FenceGateBlock fenceGate(Block baseBlock, WoodType woodType) {
-		DawnBlockSettings settings = DawnBlockSettings.copy(baseBlock);
-		return new FenceGateBlock(settings.solid()
-				.item(new DawnItemSettings().fuelTime(settings.getFlameBurn() > 0 ? 300 : 0)), woodType);
+		AbstractBlock.Settings settings = AbstractBlock.Settings.copy(baseBlock);
+		return new FenceGateBlock(woodType, settings.solid()
+                        .item(new Item.Settings().fuelTime(settings.getFlameBurn() > 0 ? 300 : 0)));
 	}
 
 	public static WallBlock wall(Block baseBlock) {
-		return new WallBlock(DawnBlockSettings.copy(baseBlock).solid());
+		return new WallBlock(AbstractBlock.Settings.copy(baseBlock).solid());
 	}
 
 	public static TrapdoorBlock trapdoor(Block baseBlock, BlockSetType setType) {
-		DawnBlockSettings settings = DawnBlockSettings.copy(baseBlock)
+		AbstractBlock.Settings settings = AbstractBlock.Settings.copy(baseBlock)
 				.strength(3.0f)
 				.nonOpaque()
 				.allowsSpawning((state, world, pos, type) -> false);
-		return new TrapdoorBlock(settings, setType);
+		return new TrapdoorBlock(setType, settings);
 	}
 
 	public static DoorBlock door(Block baseBlock, BlockSetType setType) {
-		return new DoorBlock(DawnBlockSettings.copy(baseBlock)
-				.strength(3.0f)
-				.nonOpaque()
-				.pistonBehavior(PistonBehavior.DESTROY), setType);
+		return new DoorBlock(setType, AbstractBlock.Settings.copy(baseBlock)
+                        .strength(3.0f)
+                        .nonOpaque()
+                        .pistonBehavior(PistonBehavior.DESTROY));
 	}
 
 	public static SaplingBlock sapling(MapColor mapColor, SaplingGenerator generator) {
-		return new SaplingBlock(generator, DawnBlockSettings.create()
-				.item(new DawnItemSettings().compostingChance(0.3f))
+		return new SaplingBlock(generator, AbstractBlock.Settings.create()
+				.item(new Item.Settings().compostingChance(0.3f))
 				.mapColor(mapColor)
 				.sounds(BlockSoundGroup.GRASS)
 				.breakInstantly()
@@ -228,8 +220,8 @@ public final class DawnFactory {
 	}
 
 	public static DawnSaplingBlock sapling(MapColor mapColor, SaplingGenerator generator, Predicate<BlockState> saplingSoilPredicate) {
-		return new DawnSaplingBlock(generator, saplingSoilPredicate, DawnBlockSettings.create()
-				.item(new DawnItemSettings().compostingChance(0.3f))
+		return new DawnSaplingBlock(generator, saplingSoilPredicate, AbstractBlock.Settings.create()
+				.item(new Item.Settings().compostingChance(0.3f))
 				.mapColor(mapColor)
 				.sounds(BlockSoundGroup.GRASS)
 				.breakInstantly()
@@ -239,8 +231,8 @@ public final class DawnFactory {
 	}
 
 	public static DawnFungusBlock fungus(MapColor mapColor, RegistryKey<ConfiguredFeature<?, ?>> featureKey, TagKey<Block> canPlantOn, TagKey<Block> canGrowOn) {
-		return new DawnFungusBlock(featureKey, canPlantOn, canGrowOn, DawnBlockSettings.create()
-				.item(new DawnItemSettings().compostingChance(0.65f))
+		return new DawnFungusBlock(featureKey, canPlantOn, canGrowOn, AbstractBlock.Settings.create()
+				.item(new Item.Settings().compostingChance(0.65f))
 				.mapColor(mapColor)
 				.sounds(BlockSoundGroup.FUNGUS)
 				.pistonBehavior(PistonBehavior.DESTROY)
@@ -249,10 +241,10 @@ public final class DawnFactory {
 	}
 
 	public static FlowerPotBlock potted(Block content) {
-		return new FlowerPotBlock(content, DawnBlockSettings.create()
+		return new FlowerPotBlock(content, AbstractBlock.Settings.create()
 				.breakInstantly()
 				.nonOpaque()
-				.luminance(content.getDefaultState().getLuminance())
+				.luminance(state -> content.getDefaultState().getLuminance())
 				.pistonBehavior(PistonBehavior.DESTROY));
 	}
 
@@ -264,9 +256,9 @@ public final class DawnFactory {
 		return new LeavesBlock(leavesSettings(mapColor, soundGroup));
 	}
 
-	public static DawnBlockSettings leavesSettings(MapColor mapColor, BlockSoundGroup soundGroup) {
-		return DawnBlockSettings.create()
-				.item(new DawnItemSettings().compostingChance(0.3f))
+	public static AbstractBlock.Settings leavesSettings(MapColor mapColor, BlockSoundGroup soundGroup) {
+		return AbstractBlock.Settings.create()
+				.item(new Item.Settings().compostingChance(0.3f))
 				.mapColor(mapColor)
 				.strength(0.2f)
 				.ticksRandomly()
@@ -305,14 +297,14 @@ public final class DawnFactory {
 		var wallSign = new TerraformWallSignBlock(signTexture, signSettings(basePlanks, normalSounds));
 		var hangingSign = new TerraformHangingSignBlock(hangingSignTexture, hangingSignGuiTexture, signSettings(basePlanks, hangingSounds));
 		var wallHangingSign = new TerraformWallHangingSignBlock(hangingSignTexture, hangingSignGuiTexture, signSettings(basePlanks, hangingSounds));
-		var signItem = new SignItem(new DawnItemSettings().maxCount(16), sign, wallSign);
-		var hangingSignItem = new HangingSignItem(hangingSign, wallHangingSign, new DawnItemSettings().maxCount(16));
+		var signItem = new SignItem(new Item.Settings().maxCount(16), sign, wallSign);
+		var hangingSignItem = new HangingSignItem(hangingSign, wallHangingSign, new Item.Settings().maxCount(16));
 
 		return new SignBlocks(sign, wallSign, hangingSign, wallHangingSign, signItem, hangingSignItem);
 	}
 
-	public static DawnBlockSettings signSettings(Block basePlanks, BlockSoundGroup soundGroup) {
-		return DawnBlockSettings.create()
+	public static AbstractBlock.Settings signSettings(Block basePlanks, BlockSoundGroup soundGroup) {
+		return AbstractBlock.Settings.create()
 				.sounds(soundGroup)
 				.mapColor(basePlanks.getDefaultMapColor())
 				.solid()
@@ -348,6 +340,6 @@ public final class DawnFactory {
 
 	// TODO: add this to a new Entity Type builder
 	public static SpawnEggItem spawnEgg(EntityType<? extends MobEntity> entity, int primaryColor, int secondaryColor) {
-		return new SpawnEggItem(entity, primaryColor, secondaryColor, new DawnItemSettings());
+		return new SpawnEggItem(entity, primaryColor, secondaryColor, new Item.Settings());
 	}
 }
