@@ -18,8 +18,6 @@ public class EnchantmentData {
 
 	public static class Properties {
 		@Expose
-		protected int rarity;
-		@Expose
 		@SerializedName("max_level")
 		protected int maxLevel;
 		@Expose
@@ -39,7 +37,6 @@ public class EnchantmentData {
 		protected boolean isAvailableForRandomSelection;
 
 		public Properties(Enchantment enchantment) {
-			this.rarity = enchantment.getRarity().getWeight();
 			this.maxLevel = enchantment.getMaxLevel();
 			this.minLevel = enchantment.getMinLevel();
 			this.isTreasure = enchantment.isTreasure();

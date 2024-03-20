@@ -7,8 +7,6 @@
     "BlockSettingsMixin",
     "BoneMealMixin",
     "HungerManagerAccessor",
-    "HungerManagerMixin",
-    "ItemAccessor",
     "ItemMixin",
     "ItemSettingsMixin",
     "RegistryMixin"
