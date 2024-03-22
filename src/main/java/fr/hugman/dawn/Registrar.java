@@ -14,6 +14,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ai.brain.sensor.SensorType;
 import net.minecraft.item.Item;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.registry.Registries;
@@ -91,6 +92,10 @@ public record Registrar(String modId) {
 
 	public static void add(Identifier id, ScreenHandlerType<?> screenHandlerType) {
 		Registry.register(Registries.SCREEN_HANDLER, id, screenHandlerType);
+	}
+
+	public static void add(Identifier id, SensorType<?> sensorType) {
+		Registry.register(Registries.SENSOR_TYPE, id, sensorType);
 	}
 
 	public static void add(Identifier id, SignBlocks signs) {
@@ -188,6 +193,10 @@ public record Registrar(String modId) {
 
 	public void add(String name, ScreenHandlerType<?> screenHandlerType) {
 		add(Identifier.of(this.modId, name), screenHandlerType);
+	}
+
+	public void add(String name, SensorType<?> sensorType) {
+		add(Identifier.of(this.modId, name), sensorType);
 	}
 
 	public void add(String name, SignBlocks signs) {
