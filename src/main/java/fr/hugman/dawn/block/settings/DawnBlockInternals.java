@@ -74,8 +74,16 @@ public class DawnBlockInternals {
             this.stripInto = block;
         }
 
+        public Block getStripInto() {
+            return stripInto;
+        }
+
         public void itemSettings(Item.Settings settings) {
             this.itemSettings = settings;
+        }
+
+        public Item.Settings getItemSettings() {
+            return itemSettings;
         }
     }
 }
