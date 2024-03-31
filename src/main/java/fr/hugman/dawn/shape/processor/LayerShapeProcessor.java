@@ -6,10 +6,10 @@ import net.minecraft.util.math.random.Random;
 
 // TODO: JavaDoc
 public interface LayerShapeProcessor extends ShapeProcessor {
-	@Override
-	default Shape process(Shape shape, Random random) {
-		return shape.applyLayer(get(random));
-	}
+    @Override
+    default Shape process(Shape shape, Random random) {
+        return shape.applyLayer(get(random));
+    }
 
-	Layer get(Random random);
+    Layer get(Random random);
 }

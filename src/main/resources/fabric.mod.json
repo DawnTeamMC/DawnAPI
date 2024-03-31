@@ -65,8 +65,12 @@
       ]
     },
     "loom:injected_interfaces": {
-      "net/minecraft/class_1792\u0024class_1793": ["fr/hugman/dawn/item/settings/DawnItemSettings"],
-      "net/minecraft/class_4970\u0024class_2251": ["fr/hugman/dawn/block/settings/DawnBlockSettings"]
+      "net/minecraft/class_1792\u0024class_1793": [
+        "fr/hugman/dawn/item/settings/DawnItemSettings"
+      ],
+      "net/minecraft/class_4970\u0024class_2251": [
+        "fr/hugman/dawn/block/settings/DawnBlockSettings"
+      ]
     }
   },
   "license": "LGPL v3.0"

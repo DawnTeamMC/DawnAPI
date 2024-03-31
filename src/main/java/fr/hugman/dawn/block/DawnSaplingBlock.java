@@ -8,18 +8,18 @@ import net.minecraft.world.BlockView;
 import java.util.function.Predicate;
 
 public class DawnSaplingBlock extends net.minecraft.block.SaplingBlock {
-	private final Predicate<BlockState> predicate;
+    private final Predicate<BlockState> predicate;
 
-	//TODO: codec and register block type
+    //TODO: codec and register block type
 
-	public DawnSaplingBlock(SaplingGenerator saplingGenerator, Predicate<BlockState> predicate, Settings settings) {
-		super(saplingGenerator, settings);
-		this.predicate = predicate;
-	}
+    public DawnSaplingBlock(SaplingGenerator saplingGenerator, Predicate<BlockState> predicate, Settings settings) {
+        super(saplingGenerator, settings);
+        this.predicate = predicate;
+    }
 
-	@Override
-	protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
-		if(predicate != null) return predicate.test(floor);
-		return super.canPlantOnTop(floor, world, pos);
-	}
+    @Override
+    protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
+        if (predicate != null) return predicate.test(floor);
+        return super.canPlantOnTop(floor, world, pos);
+    }
 }

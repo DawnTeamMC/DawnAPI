@@ -1,9 +1,7 @@
 package fr.hugman.dawn.mixin;
 
 import fr.hugman.dawn.block.settings.DawnBlockInternals;
-import fr.hugman.dawn.item.settings.DawnItemInternals;
 import net.minecraft.block.Block;
-import net.minecraft.item.Item;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

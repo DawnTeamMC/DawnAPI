@@ -21,15 +21,15 @@ import net.minecraft.util.math.random.Random;
  * @since 4.0.0
  */
 public interface Shape {
-	MapCodec<Shape> MAP_CODEC = DawnRegistries.SHAPE_TYPE.getCodec().dispatchMap(Shape::getType, ShapeType::codec);
-	Codec<Shape> CODEC = MAP_CODEC.codec();
+    MapCodec<Shape> MAP_CODEC = DawnRegistries.SHAPE_TYPE.getCodec().dispatchMap(Shape::getType, ShapeType::codec);
+    Codec<Shape> CODEC = MAP_CODEC.codec();
 
-	ShapeType<?> getType();
+    ShapeType<?> getType();
 
-	/**
-	 * Returns the shape as the Shape object from the <a href="https://github.com/TerraformersMC/Terraform">Terraform shapes API</a>.
-	 *
-	 * @param random the random instance
-	 */
-	com.terraformersmc.terraform.shapes.api.Shape get(Random random);
+    /**
+     * Returns the shape as the Shape object from the <a href="https://github.com/TerraformersMC/Terraform">Terraform shapes API</a>.
+     *
+     * @param random the random instance
+     */
+    com.terraformersmc.terraform.shapes.api.Shape get(Random random);
 }

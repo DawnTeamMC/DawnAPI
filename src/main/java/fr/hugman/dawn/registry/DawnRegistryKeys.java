@@ -8,6 +8,6 @@ import net.minecraft.registry.RegistryKey;
 
 
 public class DawnRegistryKeys {
-	public static final RegistryKey<Registry<ShapeType<?>>> SHAPE_TYPE = RegistryKey.ofRegistry(Dawn.id("shape_type"));
-	public static final RegistryKey<Registry<ShapeProcessorType<?>>> SHAPE_PROCESSOR_TYPE = RegistryKey.ofRegistry(Dawn.id("shape_processor_type"));
+    public static final RegistryKey<Registry<ShapeType<?>>> SHAPE_TYPE = RegistryKey.ofRegistry(Dawn.id("shape_type"));
+    public static final RegistryKey<Registry<ShapeProcessorType<?>>> SHAPE_PROCESSOR_TYPE = RegistryKey.ofRegistry(Dawn.id("shape_processor_type"));
 }

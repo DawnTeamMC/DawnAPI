@@ -9,12 +9,12 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 
 @Environment(EnvType.CLIENT)
 public class DawnClient implements ClientModInitializer {
-	@Override
-	public void onInitializeClient() {
-		registerEntityRenders();
-	}
+    @Override
+    public void onInitializeClient() {
+        registerEntityRenders();
+    }
 
-	private void registerEntityRenders() {
-		EntityRendererRegistry.register(DawnEntities.CUSTOM_TNT, CustomTNTEntityRenderer::new);
-	}
+    private void registerEntityRenders() {
+        EntityRendererRegistry.register(DawnEntities.CUSTOM_TNT, CustomTNTEntityRenderer::new);
+    }
 }

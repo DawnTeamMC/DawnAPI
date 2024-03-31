@@ -35,7 +35,7 @@ public class DawnBlockInternals {
                 FlammableBlockRegistry.getDefaultInstance().add(block, data.flameBurn, data.flameSpread);
             if (data.stripInto != null)
                 StrippableBlockRegistry.register(block, data.stripInto);
-            if(data.itemSettings != null)
+            if (data.itemSettings != null)
                 itemData.put(block, data.itemSettings);
         }
     }

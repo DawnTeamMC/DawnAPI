@@ -1,6 +1,4 @@
 accessWidener v1 named
-accessible method net/minecraft/world/gen/trunk/TrunkPlacerType     <init> (Lcom/mojang/serialization/Codec;)V
-accessible method net/minecraft/world/gen/foliage/FoliagePlacerType <init> (Lcom/mojang/serialization/Codec;)V
 
 accessible    method    net/minecraft/command/argument/RegistryKeyArgumentType    getRegistryEntry    (Lcom/mojang/brigadier/context/CommandContext;Ljava/lang/String;Lnet/minecraft/registry/RegistryKey;Lcom/mojang/brigadier/exceptions/DynamicCommandExceptionType;)Lnet/minecraft/registry/entry/RegistryEntry$Reference;
 accessible    method    net/minecraft/registry/Registries    create    (Lnet/minecraft/registry/RegistryKey;Lnet/minecraft/registry/Registries$Initializer;)Lnet/minecraft/registry/Registry;

@@ -16,27 +16,27 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 
 public class ShapeFeature extends Feature<ShapeFeatureConfig> {
-	public ShapeFeature(Codec<ShapeFeatureConfig> configCodec) {
-		super(configCodec);
-	}
+    public ShapeFeature(Codec<ShapeFeatureConfig> configCodec) {
+        super(configCodec);
+    }
 
-	@Override
-	public boolean generate(FeatureContext<ShapeFeatureConfig> context) {
-		Random random = context.getRandom();
-		ShapeFeatureConfig config = context.getConfig();
-		StructureWorldAccess world = context.getWorld();
-		BlockPos pos = context.getOrigin();
+    @Override
+    public boolean generate(FeatureContext<ShapeFeatureConfig> context) {
+        Random random = context.getRandom();
+        ShapeFeatureConfig config = context.getConfig();
+        StructureWorldAccess world = context.getWorld();
+        BlockPos pos = context.getOrigin();
 
-		Shape shape = config.shape().get(random);
+        Shape shape = config.shape().get(random);
 
-		shape = shape.applyLayer(new RotateLayer(Quaternion.of(0, 0, 0, 1)))
-				.applyLayer(new TranslateLayer(Position.of(pos)));
+        shape = shape.applyLayer(new RotateLayer(Quaternion.of(0, 0, 0, 1)))
+                .applyLayer(new TranslateLayer(Position.of(pos)));
 
-		if(AirValidator.of((TestableWorld) world).validate(shape)) {
-			shape = shape.applyLayer(new TranslateLayer(Position.of(0, config.yOffset().get(random), 0)));
-			shape.fill(StateProviderFiller.of(world, config.state()));
-			return true;
-		}
-		return false;
-	}
+        if (AirValidator.of((TestableWorld) world).validate(shape)) {
+            shape = shape.applyLayer(new TranslateLayer(Position.of(0, config.yOffset().get(random), 0)));
+            shape.fill(StateProviderFiller.of(world, config.state()));
+            return true;
+        }
+        return false;
+    }
 }

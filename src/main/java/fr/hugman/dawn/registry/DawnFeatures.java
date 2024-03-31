@@ -6,9 +6,9 @@ import fr.hugman.dawn.world.gen.feature.ShapeFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 
 public class DawnFeatures {
-	public static final Feature<ShapeFeatureConfig> SHAPE = new ShapeFeature(ShapeFeatureConfig.CODEC);
+    public static final Feature<ShapeFeatureConfig> SHAPE = new ShapeFeature(ShapeFeatureConfig.CODEC);
 
-	public static void init(Registrar r) {
-		r.add("shape", SHAPE);
-	}
+    public static void init(Registrar r) {
+        r.add("shape", SHAPE);
+    }
 }

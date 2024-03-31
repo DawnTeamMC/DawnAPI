@@ -20,17 +20,17 @@ import net.minecraft.util.math.random.Random;
  * @since 4.0.0
  */
 public record ConfiguredShape(Shape shape, ShapeProcessor processor) {
-	public static final Codec<ConfiguredShape> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
-			Shape.MAP_CODEC.forGetter(ConfiguredShape::shape),
-			ShapeProcessor.MAP_CODEC.forGetter(ConfiguredShape::processor)
-	).apply(instance, ConfiguredShape::new));
+    public static final Codec<ConfiguredShape> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
+            Shape.MAP_CODEC.forGetter(ConfiguredShape::shape),
+            ShapeProcessor.MAP_CODEC.forGetter(ConfiguredShape::processor)
+    ).apply(instance, ConfiguredShape::new));
 
-	/**
-	 * Returns the processed shape as the Shape object from the Terraform shapes API.
-	 *
-	 * @param random the random instance
-	 */
-	public com.terraformersmc.terraform.shapes.api.Shape get(Random random) {
-		return this.processor.process(this.shape.get(random), random);
-	}
+    /**
+     * Returns the processed shape as the Shape object from the Terraform shapes API.
+     *
+     * @param random the random instance
+     */
+    public com.terraformersmc.terraform.shapes.api.Shape get(Random random) {
+        return this.processor.process(this.shape.get(random), random);
+    }
 }
