@@ -3,7 +3,6 @@ package fr.hugman.dawn;
 import com.terraformersmc.terraform.boat.api.TerraformBoatType;
 import com.terraformersmc.terraform.boat.api.TerraformBoatTypeRegistry;
 import com.terraformersmc.terraform.boat.api.item.TerraformBoatItemHelper;
-import fr.hugman.dawn.block.SignBlocks;
 import fr.hugman.dawn.registry.DawnRegistries;
 import fr.hugman.dawn.registry.ReloadableResourceManager;
 import fr.hugman.dawn.shape.Shape;
@@ -16,14 +15,13 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.brain.sensor.SensorType;
 import net.minecraft.item.Item;
-import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.InvalidIdentifierException;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
 import net.minecraft.world.gen.placementmodifier.PlacementModifierType;
@@ -54,7 +52,7 @@ public record Registrar(String modId) {
         Registry.register(Registries.SOUND_EVENT, soundEvent.getId(), soundEvent);
     }
 
-    public static void add(Identifier id, DefaultParticleType particleType) {
+    public static void add(Identifier id, SimpleParticleType particleType) {
         Registry.register(Registries.PARTICLE_TYPE, id, particleType);
     }
 
@@ -98,20 +96,6 @@ public record Registrar(String modId) {
         Registry.register(Registries.SENSOR_TYPE, id, sensorType);
     }
 
-    public static void add(Identifier id, SignBlocks signs) {
-        if (id != null) {
-            Registrar.add(Identifier.of(id.getNamespace(), id.getPath() + "_sign"), signs.sign());
-            Registrar.add(Identifier.of(id.getNamespace(), id.getPath() + "_wall_sign"), signs.wallSign());
-            Registrar.add(Identifier.of(id.getNamespace(), id.getPath() + "_hanging_sign"), signs.hangingSign());
-            Registrar.add(Identifier.of(id.getNamespace(), id.getPath() + "_wall_hanging_sign"), signs.wallHangingSign());
-
-            Registrar.add(Identifier.of(id.getNamespace(), id.getPath() + "_sign"), signs.signItem());
-            Registrar.add(Identifier.of(id.getNamespace(), id.getPath() + "_hanging_sign"), signs.hangingSignItem());
-        } else {
-            throw new InvalidIdentifierException("The identifier cannot be null.");
-        }
-    }
-
     public static void add(Identifier id, TerraformBoatType boatType) {
         Registry.register(TerraformBoatTypeRegistry.INSTANCE, id, boatType);
         var opt = TerraformBoatTypeRegistry.INSTANCE.getKey(boatType);
@@ -123,12 +107,12 @@ public record Registrar(String modId) {
             Item chestBoatItem = boatType.getChestItem();
 
             if (boatItem != null) {
-                Identifier itemId = new Identifier(key.getValue().getNamespace(), key.getValue().getPath() + (boatType.isRaft() ? "_raft" : "_boat"));
+                Identifier itemId = Identifier.of(key.getValue().getNamespace(), key.getValue().getPath() + (boatType.isRaft() ? "_raft" : "_boat"));
                 Registrar.add(itemId, boatItem);
                 TerraformBoatItemHelper.registerBoatDispenserBehavior(boatItem, key, false);
             }
             if (chestBoatItem != null) {
-                Identifier itemId = new Identifier(key.getValue().getNamespace(), key.getValue().getPath() + (boatType.isRaft() ? "_chest_raft" : "_chest_boat"));
+                Identifier itemId = Identifier.of(key.getValue().getNamespace(), key.getValue().getPath() + (boatType.isRaft() ? "_chest_raft" : "_chest_boat"));
                 Registrar.add(itemId, chestBoatItem);
                 TerraformBoatItemHelper.registerBoatDispenserBehavior(chestBoatItem, key, true);
             }
@@ -155,7 +139,7 @@ public record Registrar(String modId) {
         add(Identifier.of(this.modId, name), item);
     }
 
-    public void add(String name, DefaultParticleType particleType) {
+    public void add(String name, SimpleParticleType particleType) {
         add(Identifier.of(this.modId, name), particleType);
     }
 
@@ -197,10 +181,6 @@ public record Registrar(String modId) {
 
     public void add(String name, SensorType<?> sensorType) {
         add(Identifier.of(this.modId, name), sensorType);
-    }
-
-    public void add(String name, SignBlocks signs) {
-        add(Identifier.of(this.modId, name), signs);
     }
 
     public void add(String name, TerraformBoatType boatType) {

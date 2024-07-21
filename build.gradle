@@ -1,8 +1,8 @@
 plugins {
-    id 'fabric-loom' version '1.6-SNAPSHOT'
+    id 'fabric-loom' version '1.7-SNAPSHOT'
 }
 
-apply from: 'https://dawnteammc.github.io/resources/gradle_scripts/fabric-mod/java-17.gradle'
+apply from: 'https://dawnteammc.github.io/resources/gradle_scripts/fabric-mod/java-21.gradle'
 
 repositories {
     maven { url 'https://maven.terraformersmc.com/' } // Required for Mod Menu and Terraform APIs

@@ -4,19 +4,18 @@ import com.mojang.serialization.MapCodec;
 import com.terraformersmc.terraform.boat.api.TerraformBoatType;
 import com.terraformersmc.terraform.boat.api.TerraformBoatTypeRegistry;
 import com.terraformersmc.terraform.boat.impl.item.TerraformBoatItem;
-import com.terraformersmc.terraform.sign.block.TerraformHangingSignBlock;
-import com.terraformersmc.terraform.sign.block.TerraformSignBlock;
-import com.terraformersmc.terraform.sign.block.TerraformWallHangingSignBlock;
-import com.terraformersmc.terraform.sign.block.TerraformWallSignBlock;
+import com.terraformersmc.terraform.sign.api.block.TerraformHangingSignBlock;
+import com.terraformersmc.terraform.sign.api.block.TerraformSignBlock;
+import com.terraformersmc.terraform.sign.api.block.TerraformWallHangingSignBlock;
+import com.terraformersmc.terraform.sign.api.block.TerraformWallSignBlock;
 import fr.hugman.dawn.block.DawnFungusBlock;
 import fr.hugman.dawn.block.DawnSaplingBlock;
-import fr.hugman.dawn.block.SignBlocks;
 import fr.hugman.dawn.shape.Shape;
 import fr.hugman.dawn.shape.ShapeType;
 import fr.hugman.dawn.shape.processor.ShapeProcessor;
 import fr.hugman.dawn.shape.processor.ShapeProcessorType;
 import net.minecraft.block.*;
-import net.minecraft.block.enums.Instrument;
+import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.MobEntity;
@@ -115,7 +114,7 @@ public final class DawnFactory {
     public static AbstractBlock.Settings planksSettings(MapColor color, BlockSoundGroup sounds, boolean flammable) {
         AbstractBlock.Settings settings = AbstractBlock.Settings.create()
                 .mapColor(color)
-                .instrument(Instrument.BASS)
+                .instrument(NoteBlockInstrument.BASS)
                 .item()
                 .strength(2.0f, 3.0f)
                 .sounds(sounds);
@@ -126,7 +125,7 @@ public final class DawnFactory {
     public static AbstractBlock.Settings logSettings(MapColor woodColor, MapColor barkColor, BlockSoundGroup sounds, boolean flammable) {
         AbstractBlock.Settings settings = AbstractBlock.Settings.create()
                 .mapColor((state) -> state.get(PillarBlock.AXIS) == Direction.Axis.Y ? woodColor : barkColor)
-                .instrument(Instrument.BASS)
+                .instrument(NoteBlockInstrument.BASS)
                 .item()
                 .strength(2.0F)
                 .sounds(sounds);
@@ -137,7 +136,7 @@ public final class DawnFactory {
     public static AbstractBlock.Settings logSettings(MapColor color, BlockSoundGroup sounds, boolean flammable) {
         AbstractBlock.Settings settings = AbstractBlock.Settings.create()
                 .mapColor(color)
-                .instrument(Instrument.BASS)
+                .instrument(NoteBlockInstrument.BASS)
                 .item()
                 .strength(2.0F)
                 .sounds(sounds);
@@ -268,33 +267,18 @@ public final class DawnFactory {
                 .solidBlock((state, world, pos) -> false);
     }
 
-    public static SignBlocks signs(Identifier texturePath, Block basePlanks) {
-        BlockSoundGroup soundGroup = basePlanks.getDefaultState().getSoundGroup();
-        BlockSoundGroup hangingSoundGroup = BlockSoundGroup.WOOD;
-        if (soundGroup == BlockSoundGroup.CHERRY_WOOD) {
-            hangingSoundGroup = BlockSoundGroup.CHERRY_WOOD_HANGING_SIGN;
-        } else if (soundGroup == BlockSoundGroup.BAMBOO_WOOD) {
-            hangingSoundGroup = BlockSoundGroup.BAMBOO_WOOD_HANGING_SIGN;
-        } else if (soundGroup == BlockSoundGroup.NETHER_WOOD) {
-            hangingSoundGroup = BlockSoundGroup.NETHER_WOOD_HANGING_SIGN;
-        }
-
-        return signs(texturePath, basePlanks, soundGroup, hangingSoundGroup);
+    public static Block sign(boolean hanging, boolean wall, Identifier texturePath, Block basePlanks, BlockSoundGroup soundGroup) {
+        return sign(hanging, wall, texturePath, DawnFactory.signSettings(basePlanks, soundGroup));
     }
 
-    public static SignBlocks signs(Identifier texturePath, Block basePlanks, BlockSoundGroup normalSounds, BlockSoundGroup hangingSounds) {
+    public static Block sign(boolean hanging, boolean wall, Identifier texturePath, AbstractBlock.Settings settings) {
+        if (hanging) {
+            var hangingSignTexture = Identifier.of(texturePath.getNamespace(), "entity/signs/hanging/" + texturePath.getPath());
+            var hangingSignGuiTexture = Identifier.of(texturePath.getNamespace(), "textures/gui/hanging_signs/" + texturePath.getPath());
+            return wall ? new TerraformWallHangingSignBlock(hangingSignTexture, hangingSignGuiTexture, settings) : new TerraformHangingSignBlock(hangingSignTexture, hangingSignGuiTexture, settings);
+        }
         var signTexture = Identifier.of(texturePath.getNamespace(), "entity/signs/" + texturePath.getPath());
-        var hangingSignTexture = Identifier.of(texturePath.getNamespace(), "entity/signs/hanging/" + texturePath.getPath());
-        var hangingSignGuiTexture = Identifier.of(texturePath.getNamespace(), "textures/gui/hanging_signs/" + texturePath.getPath());
-
-        var sign = new TerraformSignBlock(signTexture, signSettings(basePlanks, normalSounds));
-        var wallSign = new TerraformWallSignBlock(signTexture, signSettings(basePlanks, normalSounds));
-        var hangingSign = new TerraformHangingSignBlock(hangingSignTexture, hangingSignGuiTexture, signSettings(basePlanks, hangingSounds));
-        var wallHangingSign = new TerraformWallHangingSignBlock(hangingSignTexture, hangingSignGuiTexture, signSettings(basePlanks, hangingSounds));
-        var signItem = new SignItem(new Item.Settings().maxCount(16), sign, wallSign);
-        var hangingSignItem = new HangingSignItem(hangingSign, wallHangingSign, new Item.Settings().maxCount(16));
-
-        return new SignBlocks(sign, wallSign, hangingSign, wallHangingSign, signItem, hangingSignItem);
+        return wall ? new TerraformWallSignBlock(signTexture, settings) : new TerraformSignBlock(signTexture, settings);
     }
 
     public static AbstractBlock.Settings signSettings(Block basePlanks, BlockSoundGroup soundGroup) {
@@ -302,7 +286,7 @@ public final class DawnFactory {
                 .sounds(soundGroup)
                 .mapColor(basePlanks.getDefaultMapColor())
                 .solid()
-                .instrument(Instrument.BASS)
+                .instrument(NoteBlockInstrument.BASS)
                 .noCollision()
                 .strength(1.0F)
                 .burnable();

@@ -62,8 +62,6 @@ public class DataSerialization {
             return entry -> new BlockData(entry.getKey().getValue(), (Block) entry.getValue());
         else if (registry == Registries.ITEM)
             return entry -> new ItemData(entry.getKey().getValue(), (Item) entry.getValue());
-        else if (registry == Registries.ENCHANTMENT)
-            return entry -> new EnchantmentData(entry.getKey().getValue(), (Enchantment) entry.getValue());
         else if (registry == Registries.ENTITY_TYPE)
             return entry -> new EntityTypeData(entry.getKey().getValue(), (EntityType<?>) entry.getValue());
         else return e -> e.getKey().getValue();
