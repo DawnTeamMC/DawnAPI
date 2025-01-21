@@ -3,11 +3,11 @@
 # 🌙 Dawn API
 [![Latest release](https://img.shields.io/github/release/DawnTeamMC/DawnAPI.svg)](https://github.com/DawnTeamMC/DawnAPI/releases/latest)
 [![CurseForge downloads](http://cf.way2muchnoise.eu/full_399309_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/dawn)
-[![License (LGPL v3.0)](https://img.shields.io/badge/code%20license-LGPL%20v3.0-green.svg?style=flat-square)](https://www.gnu.org/licenses/lgpl-3.0.en.html)
+[![License (Polyform Shield 1.0.0)](https://img.shields.io/badge/code%20license-Polyform%20Shield%201.0.0-green.svg?style=flat-square)](https://polyformproject.org/licenses/shield/1.0.0/)
 [![GitHub stars](https://img.shields.io/github/stars/DawnTeamMC/DawnAPI.svg?style=flat-square)]()
 
 [![Discord user count](https://img.shields.io/discord/504608980799062036.svg?logoColor=FFFFFF&logo=discord&color=7289DA&style=flat-square)](https://discord.gg/8ksTVJu)
-[![Twitter followers](https://img.shields.io/twitter/follow/DawnTeamMC.svg?logo=twitter&label=twitter&style=flat-square)](https://twitter.com/DawnTeamMC)
+[![X (formerly Twitter) Follow](https://img.shields.io/twitter/follow/DawnTeamMC)](https://twitter.com/DawnTeamMC)
 
 The Dawn API is a library mod for the latest version of Minecraft that adds utility classes for constructing a typical mod for the Dawn Team.  
 It is designed to be handy and ease with the creation of any feature in the game through builder classes, and a variety of tools for data fixing.
@@ -86,3 +86,8 @@ By supporting Hugman, you can get access to the following:
 **We do not want to lock any in-game feature of the Dawn Team mods behind a paywall, because we believe that any Minecraft mod should forever remain free to download and fully exploit/use.**  
 Supporting via Patreon is a more of way to help Hugman to continue to improve the mods and show the gratitude you might have towards Hugman's work.
 Some money you donate may be used to pay for new features, such as music or art, but not all of it.
+
+## 📜 License
+
+Except where otherwise stated (see [third-party license notices](thirdparty/NOTICE.txt)), the content of this repository is provided
+under the [Polyform Shield 1.0.0](LICENSE.md) license by [Hugman](https://github.com/Hugman76).
